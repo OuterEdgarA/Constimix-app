@@ -7,6 +7,18 @@ import 'package:constimix_app/core/models/user_role.dart';
 import 'package:constimix_app/features/admin/admin_hub_screen.dart';
 
 void main() {
+  testWidgets('system admin no longer shows the scheduler editor mock card',
+      (tester) async {
+    await tester.pumpWidget(const ConstiMixApp());
+    await tester.tap(find.text('Sign in'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Admin').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Scheduler editor'), findsNothing);
+    expect(find.text('Semester admin'), findsOneWidget);
+    expect(find.widgetWithText(ListTile, 'Sign out'), findsOneWidget);
+  });
   testWidgets('admin can open account admin screen', (tester) async {
     await tester.pumpWidget(const ConstiMixApp());
 
@@ -81,5 +93,31 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Step 1 - Account data'), findsNothing);
     expect(find.text('Student account'), findsOneWidget);
+  });
+  testWidgets('L4 account card shows its CURP username only once',
+      (tester) async {
+    tester.view.physicalSize = const Size(1200, 1800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    final student = MockRepository.users.firstWhere(
+      (user) => user.role == UserRole.level4Student,
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: AccountAdminScreen(currentUser: MockRepository.users.first),
+      ),
+    );
+
+    final tileFinder = find.ancestor(
+      of: find.text(student.displayName),
+      matching: find.byType(ListTile),
+    );
+    final tile = tester.widget<ListTile>(tileFinder.first);
+    final subtitle = tile.subtitle! as Text;
+    final occurrences =
+        RegExp(RegExp.escape(student.curp!)).allMatches(subtitle.data!).length;
+    expect(occurrences, 1);
   });
 }

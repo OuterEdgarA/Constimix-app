@@ -1,5 +1,7 @@
-﻿import 'package:flutter/material.dart';
+import 'dart:math';
 
+import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../core/models/app_user.dart';
 import '../../core/services/auth_service.dart';
 import '../enrollment/enrollment_wizard_screen.dart';
@@ -32,6 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -43,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Icon(Icons.school, color: scheme.primary, size: 56),
             const SizedBox(height: 16),
             Text(
-              'ConstiMix',
+              '#YoSoyConstiMix',
               style: Theme.of(context).textTheme.headlineLarge,
               textAlign: TextAlign.center,
             ),
@@ -57,9 +60,9 @@ class _SignInScreenState extends State<SignInScreen> {
             TextField(
               controller: _usernameController,
               textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                labelText: 'Username or CURP',
-                prefixIcon: Icon(Icons.person_outline),
+              decoration: InputDecoration(
+                labelText: l10n.usernameOrCurp,
+                prefixIcon: const Icon(Icons.person_outline),
               ),
             ),
             const SizedBox(height: 12),
@@ -67,9 +70,9 @@ class _SignInScreenState extends State<SignInScreen> {
               controller: _passwordController,
               obscureText: true,
               onSubmitted: (_) => _signIn(),
-              decoration: const InputDecoration(
-                labelText: 'Password or registration',
-                prefixIcon: Icon(Icons.lock_outline),
+              decoration: InputDecoration(
+                labelText: l10n.passwordOrRegistration,
+                prefixIcon: const Icon(Icons.lock_outline),
               ),
             ),
             if (_error != null) ...[
@@ -80,17 +83,17 @@ class _SignInScreenState extends State<SignInScreen> {
             FilledButton.icon(
               onPressed: _signIn,
               icon: const Icon(Icons.login),
-              label: const Text('Sign in'),
+              label: Text(l10n.signIn),
             ),
             const SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: _openStudentSignUp,
               icon: const Icon(Icons.assignment_ind_outlined),
-              label: const Text('Student sign up'),
+              label: Text(l10n.studentSignUp),
             ),
             const SizedBox(height: 24),
             Text(
-              'Demo admin: EVAZQUEZ / evazquezv',
+              'Demo: EVAZQUEZ / evazquezv',
               style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.center,
             ),
@@ -115,7 +118,8 @@ class _SignInScreenState extends State<SignInScreen> {
     );
 
     if (user == null) {
-      setState(() => _error = 'Invalid credentials.');
+      final l10n = AppLocalizations.of(context)!;
+      setState(() => _error = l10n.invalidCredentials);
       return;
     }
 

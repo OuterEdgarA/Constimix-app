@@ -148,6 +148,223 @@ void main() {
     expect(find.byKey(const ValueKey('assignment-semester-5')), findsOneWidget);
   });
 
+  test('schedule conflicts are isolated by cycle half and group deactivation',
+      () {
+    MockRepository.setActiveCycle('cycle-26-26');
+    const algebra = SchoolSubject(
+      idMateria: '9020',
+      isExtracurricular: false,
+      area: 0,
+      semester: 5,
+      group: 'A',
+      keyCode: 'ALGEBRA-CONFLICT',
+      name: 'ALGEBRA CONFLICT TEST',
+      evaluationType: 'Number Evaluation',
+    );
+    const geometry = SchoolSubject(
+      idMateria: '9021',
+      isExtracurricular: false,
+      area: 0,
+      semester: 5,
+      group: 'A',
+      keyCode: 'GEOMETRY-CONFLICT',
+      name: 'GEOMETRY CONFLICT TEST',
+      evaluationType: 'Number Evaluation',
+    );
+    MockRepository.saveSubject(algebra);
+    MockRepository.saveSubject(geometry);
+    MockRepository.replaceSubjectAssignments(
+      subject: algebra,
+      semester: 5,
+      periodHalf: 'First half',
+      assignments: const [
+        CycleSubjectAssignment(
+          id: 'conflict-h1',
+          subjectId: '9020',
+          cycleId: 'cycle-26-26',
+          subjectName: 'ALGEBRA CONFLICT TEST',
+          teacherName: 'HERNANDEZ JOSE',
+          teacherUserId: 'u-teacher-1',
+          semester: 5,
+          group: 'D',
+          evaluationMode: 'Number Evaluation',
+          periodHalf: 'First half',
+          day: 'Saturday',
+          timeRange: '08:00 - 09:30',
+        ),
+      ],
+    );
+
+    expect(
+      MockRepository.assignmentTimeIsAvailable(
+        semester: 5,
+        group: 'D',
+        periodHalf: 'First half',
+        day: 'Saturday',
+        timeRange: '08:00 - 09:30',
+        exceptSubjectId: geometry.idMateria,
+      ),
+      isFalse,
+    );
+    expect(
+      MockRepository.assignmentTimeIsAvailable(
+        semester: 5,
+        group: 'D',
+        periodHalf: 'Second half',
+        day: 'Saturday',
+        timeRange: '08:00 - 09:30',
+        exceptSubjectId: geometry.idMateria,
+      ),
+      isTrue,
+    );
+
+    MockRepository.replaceSubjectAssignments(
+      subject: geometry,
+      semester: 5,
+      periodHalf: 'Second half',
+      assignments: const [
+        CycleSubjectAssignment(
+          id: 'conflict-h2',
+          subjectId: '9021',
+          cycleId: 'cycle-26-26',
+          subjectName: 'GEOMETRY CONFLICT TEST',
+          teacherName: 'VAZQUEZ EVA',
+          teacherUserId: 'u-admin-1',
+          semester: 5,
+          group: 'D',
+          evaluationMode: 'Number Evaluation',
+          periodHalf: 'Second half',
+          day: 'Saturday',
+          timeRange: '08:00 - 09:30',
+        ),
+      ],
+    );
+
+    expect(MockRepository.assignmentsForSubject(algebra), hasLength(1));
+    expect(MockRepository.assignmentsForSubject(geometry), hasLength(1));
+    expect(MockRepository.setGroupActive(5, 'D', false), isTrue);
+    expect(MockRepository.assignmentsForSubject(algebra), isEmpty);
+    expect(MockRepository.assignmentsForSubject(geometry), isEmpty);
+    expect(MockRepository.setGroupActive(5, 'D', true), isTrue);
+  });
+
+  testWidgets('assignment UI disables a conflicting hour in the same half',
+      (tester) async {
+    MockRepository.setActiveCycle('cycle-26-26');
+    const occupiedSubject = SchoolSubject(
+      idMateria: '9023',
+      isExtracurricular: false,
+      area: 0,
+      semester: 4,
+      group: 'A',
+      keyCode: 'OCCUPIED-HOUR',
+      name: 'OCCUPIED HOUR TEST',
+      evaluationType: 'Number Evaluation',
+    );
+    const targetSubject = SchoolSubject(
+      idMateria: '9024',
+      isExtracurricular: false,
+      area: 0,
+      semester: 4,
+      group: 'A',
+      keyCode: 'TARGET-HOUR',
+      name: 'TARGET HOUR TEST',
+      evaluationType: 'Number Evaluation',
+    );
+    MockRepository.saveSubject(occupiedSubject);
+    MockRepository.saveSubject(targetSubject);
+    MockRepository.replaceSubjectAssignments(
+      subject: occupiedSubject,
+      semester: 4,
+      periodHalf: 'First half',
+      assignments: const [
+        CycleSubjectAssignment(
+          id: 'occupied-hour-h1',
+          subjectId: '9023',
+          cycleId: 'cycle-26-26',
+          subjectName: 'OCCUPIED HOUR TEST',
+          teacherName: 'HERNANDEZ JOSE',
+          teacherUserId: 'u-teacher-1',
+          semester: 4,
+          group: 'A',
+          evaluationMode: 'Number Evaluation',
+          periodHalf: 'First half',
+          day: 'Saturday',
+          timeRange: '08:00 - 09:30',
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: SubjectAssignmentScreen(subject: targetSubject),
+      ),
+    );
+    tester
+        .widget<FilledButton>(
+          find.widgetWithText(FilledButton, 'Next').first,
+        )
+        .onPressed!
+        .call();
+    await tester.pump();
+    await tester.enterText(
+      find.widgetWithText(TextFormField, 'Slot A - Group A'),
+      MockRepository.users.first.displayName,
+    );
+    tester
+        .widget<FilledButton>(find.widgetWithText(FilledButton, 'Assign').first)
+        .onPressed!
+        .call();
+    await tester.pump();
+
+    final hourField = find.byKey(
+      const ValueKey(
+        'time-A-4-First half-Saturday-09:30 - 11:00',
+      ),
+    );
+    final hourDropdown = tester.widget<DropdownButton<String>>(
+      find.descendant(
+        of: hourField,
+        matching: find.byType(DropdownButton<String>),
+      ),
+    );
+    final occupiedHour = hourDropdown.items!.firstWhere(
+      (item) => item.value == '08:00 - 09:30',
+    );
+    expect(occupiedHour.enabled, isFalse);
+    expect(hourDropdown.value, '09:30 - 11:00');
+  });
+  testWidgets('editing from the list opens the subject creator',
+      (tester) async {
+    MockRepository.setActiveCycle('cycle-26-26');
+    const subject = SchoolSubject(
+      idMateria: '9022',
+      isExtracurricular: false,
+      area: 0,
+      semester: 2,
+      group: 'A',
+      keyCode: 'AUTO-OPEN',
+      name: 'AUTO OPEN SUBJECT CREATOR',
+      evaluationType: 'Letter Evaluation',
+    );
+    MockRepository.saveSubject(subject);
+
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: SemesterAdminScreen())),
+    );
+    await tester.tap(find.text('Subject list'));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Search subjects'),
+      'AUTO OPEN SUBJECT CREATOR',
+    );
+    await tester.pump();
+    await tester.tap(find.widgetWithText(OutlinedButton, 'Edit'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Editing 9022'), findsOneWidget);
+    expect(find.text('IDmateria'), findsOneWidget);
+  });
   test('assigning a subject activates its empty group', () {
     MockRepository.setActiveCycle('cycle-26-26');
     expect(MockRepository.setGroupActive(2, 'D', false), isTrue);
@@ -191,20 +408,28 @@ void main() {
       const MaterialApp(home: CycleEditorScreen()),
     );
 
-    expect(find.text('Cycle date range *'), findsOneWidget);
-    expect(find.text('First half ending date *'), findsOneWidget);
-    expect(find.text('Second half beginning date *'), findsOneWidget);
+    expect(find.text('Cycle name'), findsOneWidget);
+    expect(find.text('Cycle date range'), findsOneWidget);
+    expect(find.text('Select date range *'), findsOneWidget);
+    expect(find.text('First half ending date'), findsOneWidget);
+    expect(find.text('Second half beginning date'), findsOneWidget);
+    final disabledDate = tester.widget<OutlinedButton>(
+      find.widgetWithText(OutlinedButton, 'Select date *').first,
+    );
+    expect(disabledDate.onPressed, isNull);
 
     tester.widget<Stepper>(find.byType(Stepper)).onStepTapped!.call(1);
     await tester.pump();
-    expect(find.text('First half platform tests *'), findsOneWidget);
-    expect(find.text('Second half presential tests *'), findsOneWidget);
+    expect(find.text('First half'), findsOneWidget);
+    expect(find.text('Second half'), findsOneWidget);
+    expect(find.text('Platform *'), findsNWidgets(2));
+    expect(find.text('Presential *'), findsNWidgets(2));
 
     tester.widget<Stepper>(find.byType(Stepper)).onStepTapped!.call(2);
     await tester.pump();
     expect(find.text('Recess time: 11:20'), findsOneWidget);
-    expect(find.text('R1 date range (optional)'), findsOneWidget);
-    expect(find.text('RE date range (optional)'), findsOneWidget);
+    expect(find.text('R1 (optional)'), findsOneWidget);
+    expect(find.text('RE (optional)'), findsOneWidget);
     final create = find.widgetWithText(FilledButton, 'Create cycle').first;
     expect(tester.widget<FilledButton>(create).onPressed, isNull);
   });

@@ -9,7 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_map: 7.0.2
+  flutter_localizations:
+   sdk: flutter
+  intl: any
+  http: 1.6.0
+  latlong2: 0.9.1
+  pdf: 3.13.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -17,3 +23,4 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true

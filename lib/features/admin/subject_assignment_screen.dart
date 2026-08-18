@@ -64,7 +64,9 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
     final initialSemester = existing.isNotEmpty
         ? existing.first.semester
         : widget.subject.semester.clamp(1, 6);
-    _loadSemester(initialSemester);
+    final initialHalf =
+        existing.isNotEmpty ? existing.first.periodHalf : _periodHalves.first;
+    _loadSchedule(initialSemester, initialHalf);
   }
 
   @override
@@ -169,6 +171,20 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        DropdownButtonFormField<String>(
+          key: ValueKey('assignment-half-$_periodHalf'),
+          initialValue: _periodHalf,
+          decoration: const InputDecoration(labelText: 'Period half'),
+          items: [
+            for (final value in _periodHalves)
+              DropdownMenuItem(value: value, child: Text(value)),
+          ],
+          onChanged: (value) {
+            if (value == null || value == _periodHalf) return;
+            setState(() => _loadSchedule(_semester, value));
+          },
+        ),
+        const SizedBox(height: 12),
         DropdownButtonFormField<int>(
           key: ValueKey('assignment-semester-$_semester'),
           initialValue: _semester,
@@ -179,13 +195,13 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
           ],
           onChanged: (value) {
             if (value == null || value == _semester) return;
-            setState(() => _loadSemester(value));
+            setState(() => _loadSchedule(value, _periodHalf));
           },
         ),
         const SizedBox(height: 16),
         for (final group in _groups) ...[
           _TeacherSlotField(
-            key: ValueKey('teacher-slot-$group-$_semester'),
+            key: ValueKey('teacher-slot-$group-$_semester-$_periodHalf'),
             group: group,
             semester: _semester,
             slot: _slots[group]!,
@@ -202,65 +218,91 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        DropdownButtonFormField<String>(
-          initialValue: _periodHalf,
-          decoration: const InputDecoration(labelText: 'Period half'),
-          items: [
-            for (final value in _periodHalves)
-              DropdownMenuItem(value: value, child: Text(value)),
-          ],
-          onChanged: (value) {
-            if (value != null) setState(() => _periodHalf = value);
-          },
-        ),
+        _ReadOnlyField(label: 'Period half', value: _periodHalf),
         const SizedBox(height: 16),
         for (final slot in assigned) ...[
-          Card(
-            margin: EdgeInsets.zero,
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    _slotTitle(slot.group, _semester),
-                    style: Theme.of(context).textTheme.titleSmall,
+          _scheduleSlotCard(slot),
+          const SizedBox(height: 12),
+        ],
+      ],
+    );
+  }
+
+  Widget _scheduleSlotCard(_AssignmentSlotDraft slot) {
+    final availableDays = _availableDays(slot);
+    final availableRanges = _availableRanges(slot, slot.day);
+    final hasAvailability = availableDays.isNotEmpty;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              _slotTitle(slot.group, _semester),
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            const SizedBox(height: 4),
+            Text(slot.teacherName),
+            const SizedBox(height: 12),
+            DropdownButtonFormField<String>(
+              key: ValueKey(
+                'day-${slot.group}-$_semester-$_periodHalf-${slot.day}',
+              ),
+              initialValue: slot.day,
+              decoration: InputDecoration(
+                labelText: 'Day',
+                helperText:
+                    hasAvailability ? null : 'Every hour range is in use.',
+              ),
+              items: [
+                for (final day in _days)
+                  DropdownMenuItem(
+                    value: day,
+                    enabled: availableDays.contains(day),
+                    child: Text(day),
                   ),
-                  const SizedBox(height: 4),
-                  Text(slot.teacherName),
-                  const SizedBox(height: 12),
-                  DropdownButtonFormField<String>(
-                    initialValue: slot.day,
-                    decoration: const InputDecoration(labelText: 'Day'),
-                    items: [
-                      for (final day in _days)
-                        DropdownMenuItem(value: day, child: Text(day)),
-                    ],
-                    onChanged: (value) {
-                      if (value != null) setState(() => slot.day = value);
-                    },
+              ],
+              onChanged: hasAvailability
+                  ? (value) {
+                      if (value == null) return;
+                      setState(() {
+                        slot.day = value;
+                        final ranges = _availableRanges(slot, value);
+                        if (!ranges.contains(slot.timeRange)) {
+                          slot.timeRange = ranges.first;
+                        }
+                      });
+                    }
+                  : null,
+            ),
+            const SizedBox(height: 12),
+            DropdownButtonFormField<String>(
+              key: ValueKey(
+                'time-${slot.group}-$_semester-$_periodHalf-${slot.day}-${slot.timeRange}',
+              ),
+              initialValue: slot.timeRange,
+              decoration: const InputDecoration(labelText: 'Hour range'),
+              items: [
+                for (final range in _timeRanges)
+                  DropdownMenuItem(
+                    value: range,
+                    enabled: availableRanges.contains(range),
+                    child: Text(range),
                   ),
-                  const SizedBox(height: 12),
-                  DropdownButtonFormField<String>(
-                    initialValue: slot.timeRange,
-                    decoration: const InputDecoration(labelText: 'Hour range'),
-                    items: [
-                      for (final range in _timeRanges)
-                        DropdownMenuItem(value: range, child: Text(range)),
-                    ],
-                    onChanged: (value) {
+              ],
+              onChanged: availableRanges.isEmpty
+                  ? null
+                  : (value) {
                       if (value != null) {
                         setState(() => slot.timeRange = value);
                       }
                     },
-                  ),
-                ],
-              ),
             ),
-          ),
-          const SizedBox(height: 12),
-        ],
-      ],
+          ],
+        ),
+      ),
     );
   }
 
@@ -269,7 +311,14 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
       setState(() => _currentStep = 1);
       return;
     }
-    if (_validateTeacherSlots()) setState(() => _currentStep = 2);
+    if (_validateTeacherSlots()) {
+      setState(() {
+        for (final slot in _assignedSlots) {
+          _normalizeSlotSchedule(slot);
+        }
+        _currentStep = 2;
+      });
+    }
   }
 
   bool _validateTeacherSlots() {
@@ -301,16 +350,29 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
     return true;
   }
 
+  bool _validateSchedule() {
+    for (final slot in _assignedSlots) {
+      if (!_timeIsAvailable(slot, slot.day, slot.timeRange)) {
+        _showMessage(
+          'Choose an available day and hour for Slot ${slot.group}.',
+        );
+        return false;
+      }
+    }
+    return true;
+  }
+
   void _saveAssignments() {
-    if (!_validateTeacherSlots()) return;
+    if (!_validateTeacherSlots() || !_validateSchedule()) return;
     final cycle = MockRepository.activeCycle;
     if (cycle == null) {
       _showMessage('Select an active cycle before assigning a subject.');
       return;
     }
+    final halfId = _periodHalf == 'First half' ? 'H1' : 'H2';
     final assignments = _assignedSlots.map(
       (slot) => CycleSubjectAssignment(
-        id: '${cycle.id}-${widget.subject.idMateria}-$_semester-${slot.group}',
+        id: '${cycle.id}-${widget.subject.idMateria}-$_semester-$halfId-${slot.group}',
         subjectId: widget.subject.idMateria,
         cycleId: cycle.id,
         subjectName: widget.subject.name,
@@ -327,26 +389,24 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
     MockRepository.replaceSubjectAssignments(
       subject: widget.subject,
       semester: _semester,
+      periodHalf: _periodHalf,
       assignments: assignments,
     );
     Navigator.of(context).pop(true);
   }
 
-  void _loadSemester(int semester) {
+  void _loadSchedule(int semester, String periodHalf) {
     _disposeSlots();
     _semester = semester;
+    _periodHalf = periodHalf;
     final existing = {
-      for (final assignment in MockRepository.assignmentsForSubjectSemester(
+      for (final assignment in MockRepository.assignmentsForSubjectSemesterHalf(
         widget.subject,
         semester,
+        periodHalf,
       ))
         assignment.group: assignment,
     };
-    if (existing.isNotEmpty) {
-      _periodHalf = existing.values.first.periodHalf;
-    } else {
-      _periodHalf = _periodHalves.first;
-    }
     _slots = {
       for (final group in _groups)
         group: _AssignmentSlotDraft(
@@ -354,6 +414,48 @@ class _SubjectAssignmentScreenState extends State<SubjectAssignmentScreen> {
           assignment: existing[group],
         ),
     };
+    for (final slot in _assignedSlots) {
+      _normalizeSlotSchedule(slot);
+    }
+  }
+
+  List<String> _availableDays(_AssignmentSlotDraft slot) {
+    return _days
+        .where(
+          (day) => _timeRanges.any(
+            (range) => _timeIsAvailable(slot, day, range),
+          ),
+        )
+        .toList(growable: false);
+  }
+
+  List<String> _availableRanges(_AssignmentSlotDraft slot, String day) {
+    return _timeRanges
+        .where((range) => _timeIsAvailable(slot, day, range))
+        .toList(growable: false);
+  }
+
+  bool _timeIsAvailable(
+    _AssignmentSlotDraft slot,
+    String day,
+    String timeRange,
+  ) {
+    return MockRepository.assignmentTimeIsAvailable(
+      semester: _semester,
+      group: slot.group,
+      periodHalf: _periodHalf,
+      day: day,
+      timeRange: timeRange,
+      exceptSubjectId: widget.subject.idMateria,
+    );
+  }
+
+  void _normalizeSlotSchedule(_AssignmentSlotDraft slot) {
+    final days = _availableDays(slot);
+    if (days.isEmpty) return;
+    if (!days.contains(slot.day)) slot.day = days.first;
+    final ranges = _availableRanges(slot, slot.day);
+    if (!ranges.contains(slot.timeRange)) slot.timeRange = ranges.first;
   }
 
   void _disposeSlots() {

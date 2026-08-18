@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 import '../../core/data/mock_repository.dart';
 import '../../core/models/app_user.dart';
@@ -10,6 +12,235 @@ import '../../core/models/student_enrollment.dart';
 import '../../core/models/student_grade_entry.dart';
 import '../../core/models/user_role.dart';
 import '../../shared/widgets/section_header.dart';
+import 'registry_screen.dart';
+
+StudentGradeEntry? _latestGradeForReport(
+  CycleSubjectAssignment assignment,
+  String registration,
+) {
+  final grades = MockRepository.gradesForStudentAssignment(
+    assignment: assignment,
+    registration: registration,
+  );
+  const priority = ['RE', 'R3', 'R2', 'R1', 'Final evaluation'];
+  for (final evaluation in priority) {
+    for (final grade in grades) {
+      if (grade.evaluationType == evaluation) return grade;
+    }
+  }
+  return null;
+}
+
+List<StudentEnrollment> _studentsForGradeReport(
+  CycleSubjectAssignment assignment,
+  AppUser currentUser,
+) {
+  if (currentUser.role == UserRole.level4Student) {
+    return MockRepository.currentEnrollments
+        .where((student) => student.registration == currentUser.registration)
+        .toList(growable: false);
+  }
+  return MockRepository.studentsForAssignment(assignment);
+}
+
+String _gradeTextForReport(
+  CycleSubjectAssignment assignment,
+  StudentEnrollment student,
+) {
+  final latest = _latestGradeForReport(assignment, student.registration);
+  return latest == null
+      ? 'Not graded'
+      : _displayGrade(latest.finalGrade, assignment.usesLetterGrades);
+}
+
+String _statusTextForReport(
+  CycleSubjectAssignment assignment,
+  StudentEnrollment student,
+) {
+  if (_latestGradeForReport(assignment, student.registration) == null) {
+    return 'Not graded';
+  }
+  final pending = MockRepository.pendingSubjectStage(
+    assignment: assignment,
+    registration: student.registration,
+  );
+  return pending == null ? 'Passed' : 'Pending $pending';
+}
+
+pw.Widget _pdfCell(
+  String text, {
+  bool header = false,
+  pw.Alignment alignment = pw.Alignment.centerLeft,
+}) {
+  return pw.Container(
+    alignment: alignment,
+    padding: const pw.EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+    color: header ? PdfColor.fromHex('458CAD') : null,
+    child: pw.Text(
+      text,
+      style: pw.TextStyle(
+        color: header ? PdfColors.white : PdfColors.black,
+        fontWeight: header ? pw.FontWeight.bold : pw.FontWeight.normal,
+        fontSize: 9,
+      ),
+    ),
+  );
+}
+
+/// Builds the role-filtered grade report used by the Grades PDF actions.
+Future<Uint8List> buildGradePdfReport({
+  required List<CycleSubjectAssignment> assignments,
+  required AppUser currentUser,
+}) async {
+  final document = pw.Document();
+  final cycleName = MockRepository.activeCycle?.name ?? 'No active cycle';
+  document.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      margin: const pw.EdgeInsets.fromLTRB(32, 42, 32, 42),
+      header: (_) => pw.Container(
+        padding: const pw.EdgeInsets.only(bottom: 8),
+        decoration: pw.BoxDecoration(
+          border: pw.Border(
+            bottom: pw.BorderSide(
+              color: PdfColor.fromHex('458CAD'),
+              width: 2,
+            ),
+          ),
+        ),
+        child: pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+          children: [
+            pw.Text(
+              'CONSTIMIX GRADE REPORT',
+              style: pw.TextStyle(
+                color: PdfColor.fromHex('458CAD'),
+                fontWeight: pw.FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
+            pw.Text(cycleName, style: const pw.TextStyle(fontSize: 9)),
+          ],
+        ),
+      ),
+      footer: (context) => pw.Container(
+        padding: const pw.EdgeInsets.only(top: 7),
+        decoration: pw.BoxDecoration(
+          border: pw.Border(
+            top: pw.BorderSide(
+              color: PdfColor.fromHex('99BD41'),
+              width: 2,
+            ),
+          ),
+        ),
+        child: pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+          children: [
+            pw.Text(currentUser.displayName),
+            pw.Text(
+              'Page ${context.pageNumber} of ${context.pagesCount}',
+            ),
+          ],
+        ),
+      ),
+      build: (_) => [
+        if (assignments.isEmpty)
+          pw.Padding(
+            padding: const pw.EdgeInsets.only(top: 24),
+            child: pw.Text('No graded subjects are available.'),
+          ),
+        for (final assignment in assignments) ...[
+          pw.SizedBox(height: 14),
+          pw.Text(
+            assignment.subjectName,
+            style: const pw.TextStyle(
+              fontSize: 14,
+              fontWeight: pw.FontWeight.bold,
+            ),
+          ),
+          pw.SizedBox(height: 3),
+          pw.Text(
+            'Semester ${assignment.semester} | Group ${assignment.group} | '
+            '${assignment.teacherName}',
+            style: const pw.TextStyle(fontSize: 9),
+          ),
+          pw.SizedBox(height: 8),
+          pw.Table(
+            border: pw.TableBorder.all(color: PdfColors.grey400, width: 0.5),
+            columnWidths: const {
+              0: pw.FlexColumnWidth(3.2),
+              1: pw.FlexColumnWidth(1.8),
+              2: pw.FlexColumnWidth(1),
+              3: pw.FlexColumnWidth(1.4),
+            },
+            children: [
+              pw.TableRow(
+                children: [
+                  _pdfCell('Student', header: true),
+                  _pdfCell('Registration', header: true),
+                  _pdfCell('Grade', header: true),
+                  _pdfCell('Status', header: true),
+                ],
+              ),
+              for (final student
+                  in _studentsForGradeReport(assignment, currentUser))
+                pw.TableRow(
+                  children: [
+                    _pdfCell(student.fullStudentName),
+                    _pdfCell(student.registration),
+                    _pdfCell(
+                      _gradeTextForReport(assignment, student),
+                      alignment: pw.Alignment.center,
+                    ),
+                    _pdfCell(_statusTextForReport(assignment, student)),
+                  ],
+                ),
+            ],
+          ),
+        ],
+      ],
+    ),
+  );
+  return document.save();
+}
+
+Future<String> saveGradePdfReport(
+  Uint8List bytes, {
+  required String baseName,
+}) async {
+  final candidates = <Directory>[];
+  final home =
+      Platform.environment['USERPROFILE'] ?? Platform.environment['HOME'];
+  if (home != null) {
+    candidates.add(Directory('$home${Platform.pathSeparator}Downloads'));
+  }
+  if (Platform.isAndroid) {
+    candidates.add(Directory('/storage/emulated/0/Download'));
+  }
+  candidates.add(Directory.systemTemp);
+
+  Directory destination = Directory.systemTemp;
+  for (final candidate in candidates) {
+    try {
+      if (!await candidate.exists()) await candidate.create(recursive: true);
+      destination = candidate;
+      break;
+    } on FileSystemException {
+      continue;
+    }
+  }
+  final safeName = baseName
+      .replaceAll(RegExp(r'[^A-Za-z0-9_-]+'), '_')
+      .replaceAll(RegExp(r'_+'), '_')
+      .replaceAll(RegExp(r'^_|_$'), '');
+  final timestamp = DateTime.now().millisecondsSinceEpoch;
+  final file = File(
+    '${destination.path}${Platform.pathSeparator}'
+    '${safeName.isEmpty ? 'grade_report' : safeName}_$timestamp.pdf',
+  );
+  await file.writeAsBytes(bytes, flush: true);
+  return file.path;
+}
 
 class GradesScreen extends StatefulWidget {
   const GradesScreen({super.key, required this.currentUser});
@@ -20,17 +251,47 @@ class GradesScreen extends StatefulWidget {
   State<GradesScreen> createState() => _GradesScreenState();
 }
 
+enum _L4GradeView { subjects, pending }
+
 class _GradesScreenState extends State<GradesScreen> {
   final _searchController = TextEditingController();
   final Set<int> _semesterFilters = {};
   final Set<String> _groupFilters = {};
   bool _showSuggestions = false;
+  _L4GradeView _l4View = _L4GradeView.subjects;
 
-  List<CycleSubjectAssignment> get _assignments {
-    return MockRepository.subjectAssignmentsFor(widget.currentUser);
-  }
+  bool get _isStudent => widget.currentUser.role == UserRole.level4Student;
+  bool get _isTeacher => widget.currentUser.role == UserRole.level3Teacher;
+  bool get _isIsolated => _isStudent || _isTeacher;
+  bool get _showsGradeAction =>
+      widget.currentUser.role == UserRole.level1Admin || _isTeacher;
+  bool get _gradeActionEnabled =>
+      widget.currentUser.role == UserRole.level1Admin ||
+      (_isTeacher && MockRepository.gradingPeriodActive);
 
-  List<CycleSubjectAssignment> get _filteredAssignments {
+  List<CycleSubjectAssignment> get _assignments =>
+      MockRepository.subjectAssignmentsFor(widget.currentUser);
+
+  List<CycleSubjectAssignment> get _visibleAssignments {
+    if (_isStudent) {
+      final registration = widget.currentUser.registration;
+      if (registration == null) return const [];
+      return _assignments.where((assignment) {
+        if (!MockRepository.studentHasGrade(
+          assignment: assignment,
+          registration: registration,
+        )) {
+          return false;
+        }
+        final pending = MockRepository.pendingSubjectStage(
+          assignment: assignment,
+          registration: registration,
+        );
+        return _l4View == _L4GradeView.pending ? pending != null : true;
+      }).toList(growable: false);
+    }
+    if (_isTeacher) return _assignments;
+
     final query = _searchController.text;
     return _assignments.where((assignment) {
       final semesterMatches = _semesterFilters.isEmpty ||
@@ -43,7 +304,7 @@ class _GradesScreenState extends State<GradesScreen> {
 
   List<CycleSubjectAssignment> get _suggestions {
     final query = _searchController.text.trim();
-    if (!_showSuggestions || query.isEmpty) return const [];
+    if (_isIsolated || !_showSuggestions || query.isEmpty) return const [];
     return _assignments
         .where((assignment) => assignment.matchesSearch(query))
         .take(3)
@@ -60,15 +321,18 @@ class _GradesScreenState extends State<GradesScreen> {
   Widget build(BuildContext context) {
     final cycleName =
         MockRepository.activeCycle?.name.toUpperCase() ?? 'NO CYCLE SELECTED';
-    final canGrade = widget.currentUser.role.canGrade;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         SectionHeader(
-          title: canGrade ? 'Grades' : 'Grade registry',
-          subtitle: 'Cycle subject assignments',
+          title: 'Grades',
+          subtitle: _isStudent
+              ? 'Your graded subjects'
+              : _isTeacher
+                  ? 'Your assigned subjects'
+                  : 'Cycle subject assignments',
           trailing: IconButton(
-            tooltip: 'Download grade PDF table',
+            tooltip: 'Download graded subject PDFs',
             onPressed: _showPdfNotice,
             icon: const Icon(Icons.picture_as_pdf_outlined),
           ),
@@ -80,85 +344,136 @@ class _GradesScreenState extends State<GradesScreen> {
           readOnly: true,
           decoration: const InputDecoration(labelText: 'Current active cycle'),
         ),
-        const SizedBox(height: 16),
-        Text('Semester', style: Theme.of(context).textTheme.labelLarge),
-        const SizedBox(height: 8),
-        _MultiFilterChips<int>(
-          values: const [1, 2, 3, 4, 5, 6],
-          selectedValues: _semesterFilters,
-          label: (value) => '$value',
-          onToggle: (value) => setState(() {
-            if (!_semesterFilters.add(value)) _semesterFilters.remove(value);
-          }),
-        ),
-        const SizedBox(height: 14),
-        Text('Group', style: Theme.of(context).textTheme.labelLarge),
-        const SizedBox(height: 8),
-        _MultiFilterChips<String>(
-          values: const ['A', 'B', 'C', 'D'],
-          selectedValues: _groupFilters,
-          label: (value) => value,
-          onToggle: (value) => setState(() {
-            if (!_groupFilters.add(value)) _groupFilters.remove(value);
-          }),
-        ),
-        const SizedBox(height: 14),
-        TextField(
-          controller: _searchController,
-          onChanged: (_) => setState(() => _showSuggestions = true),
-          decoration: InputDecoration(
-            labelText: 'Search subjects',
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: IconButton(
-              tooltip: 'Clear search',
-              onPressed: () => setState(() {
-                _searchController.clear();
-                _showSuggestions = false;
-              }),
-              icon: const Icon(Icons.close),
-            ),
-          ),
-        ),
-        if (_showSuggestions && _searchController.text.trim().isNotEmpty) ...[
-          const SizedBox(height: 4),
-          Material(
-            elevation: 3,
-            borderRadius: BorderRadius.circular(8),
-            child: _suggestions.isEmpty
-                ? const Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text('No matches'),
-                  )
-                : Column(
-                    children: [
-                      for (final assignment in _suggestions)
-                        ListTile(
-                          leading: const Icon(Icons.menu_book_outlined),
-                          title: Text(assignment.subjectName),
-                          subtitle: Text(
-                            '${assignment.teacherName} | '
-                            '${assignment.semester}${assignment.group}',
-                          ),
-                          onTap: () => _openGradingTool(assignment),
-                        ),
-                    ],
-                  ),
+        if (_isStudent) ...[
+          const SizedBox(height: 16),
+          SegmentedButton<_L4GradeView>(
+            showSelectedIcon: false,
+            segments: const [
+              ButtonSegment(
+                value: _L4GradeView.subjects,
+                label: Text('Graded'),
+                icon: Icon(Icons.fact_check_outlined),
+              ),
+              ButtonSegment(
+                value: _L4GradeView.pending,
+                label: Text('Pending'),
+                icon: Icon(Icons.pending_actions_outlined),
+              ),
+            ],
+            selected: {_l4View},
+            onSelectionChanged: (selection) {
+              setState(() => _l4View = selection.first);
+            },
           ),
         ],
+        if (!_isIsolated) ...[
+          const SizedBox(height: 16),
+          Text('Semester', style: Theme.of(context).textTheme.labelLarge),
+          const SizedBox(height: 8),
+          _MultiFilterChips<int>(
+            values: const [1, 2, 3, 4, 5, 6],
+            selectedValues: _semesterFilters,
+            label: (value) => '$value',
+            onToggle: (value) => setState(() {
+              if (!_semesterFilters.add(value)) {
+                _semesterFilters.remove(value);
+              }
+            }),
+          ),
+          const SizedBox(height: 14),
+          Text('Group', style: Theme.of(context).textTheme.labelLarge),
+          const SizedBox(height: 8),
+          _MultiFilterChips<String>(
+            values: const ['A', 'B', 'C', 'D'],
+            selectedValues: _groupFilters,
+            label: (value) => value,
+            onToggle: (value) => setState(() {
+              if (!_groupFilters.add(value)) _groupFilters.remove(value);
+            }),
+          ),
+          const SizedBox(height: 14),
+          TextField(
+            controller: _searchController,
+            onChanged: (_) => setState(() => _showSuggestions = true),
+            decoration: InputDecoration(
+              labelText: 'Search subjects',
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: IconButton(
+                tooltip: 'Clear search',
+                onPressed: () => setState(() {
+                  _searchController.clear();
+                  _showSuggestions = false;
+                }),
+                icon: const Icon(Icons.close),
+              ),
+            ),
+          ),
+          if (_showSuggestions && _searchController.text.trim().isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Material(
+              elevation: 3,
+              borderRadius: BorderRadius.circular(8),
+              child: _suggestions.isEmpty
+                  ? const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('No matches'),
+                    )
+                  : Column(
+                      children: [
+                        for (final assignment in _suggestions)
+                          ListTile(
+                            leading: const Icon(Icons.menu_book_outlined),
+                            title: Text(assignment.subjectName),
+                            subtitle: Text(
+                              '${assignment.teacherName} | '
+                              '${assignment.semester}${assignment.group}',
+                            ),
+                            onTap: () => _openPrimaryAction(assignment),
+                          ),
+                      ],
+                    ),
+            ),
+          ],
+        ],
         const SizedBox(height: 20),
-        Text('Subjects', style: Theme.of(context).textTheme.headlineSmall),
+        Text(
+          _isStudent && _l4View == _L4GradeView.pending
+              ? 'Pending subjects'
+              : 'Subjects',
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
         const SizedBox(height: 10),
         if (MockRepository.activeCycle == null)
           const _EmptyState(message: 'No active cycle')
-        else if (_filteredAssignments.isEmpty)
-          const _EmptyState(message: 'No assigned subjects')
+        else if (_visibleAssignments.isEmpty)
+          _EmptyState(
+            message: _isStudent && _l4View == _L4GradeView.pending
+                ? 'No pending subjects'
+                : _isStudent
+                    ? 'No graded subjects'
+                    : 'No assigned subjects',
+          )
         else
-          for (final assignment in _filteredAssignments) ...[
+          for (final assignment in _visibleAssignments) ...[
             _SubjectAssignmentCard(
               assignment: assignment,
-              canGrade: canGrade,
-              onGrade: () => _openGradingTool(assignment),
-              onRegistry: _showPdfNotice,
+              graded: _isStudent
+                  ? true
+                  : MockRepository.isAssignmentGraded(assignment),
+              pendingStage: _isStudent
+                  ? MockRepository.pendingSubjectStage(
+                      assignment: assignment,
+                      registration: widget.currentUser.registration!,
+                    )
+                  : null,
+              primaryLabel: _showsGradeAction ? 'Grade' : 'View',
+              primaryIcon: _showsGradeAction
+                  ? Icons.edit_note_outlined
+                  : Icons.picture_as_pdf_outlined,
+              onPrimary: !_showsGradeAction || _gradeActionEnabled
+                  ? () => _openPrimaryAction(assignment)
+                  : null,
+              onRegistry: () => _openRegistry(assignment),
             ),
             const SizedBox(height: 8),
           ],
@@ -166,13 +481,22 @@ class _GradesScreenState extends State<GradesScreen> {
     );
   }
 
-  Future<void> _openGradingTool(CycleSubjectAssignment assignment) async {
+  Future<void> _openPrimaryAction(
+    CycleSubjectAssignment assignment,
+  ) async {
     setState(() {
       _searchController.text = assignment.subjectName;
       _showSuggestions = false;
     });
-    if (!widget.currentUser.role.canGrade) {
-      _showPdfNotice();
+    if (!_showsGradeAction) {
+      await Navigator.of(context).push<void>(
+        MaterialPageRoute(
+          builder: (_) => _SubjectGradeReportScreen(
+            assignment: assignment,
+            currentUser: widget.currentUser,
+          ),
+        ),
+      );
       return;
     }
     await Navigator.of(context).push<void>(
@@ -183,9 +507,183 @@ class _GradesScreenState extends State<GradesScreen> {
     if (mounted) setState(() {});
   }
 
-  void _showPdfNotice() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Grade PDF table export is display only.')),
+  Future<void> _openRegistry(CycleSubjectAssignment assignment) async {
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute(
+        builder: (_) => RegistryScreen(
+          assignment: assignment,
+          currentUser: widget.currentUser,
+        ),
+      ),
+    );
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _showPdfNotice() async {
+    final reportable = _isStudent
+        ? _assignments
+            .where(
+              (assignment) => MockRepository.studentHasGrade(
+                assignment: assignment,
+                registration: widget.currentUser.registration!,
+              ),
+            )
+            .toList(growable: false)
+        : _assignments
+            .where(MockRepository.isAssignmentGraded)
+            .toList(growable: false);
+    if (reportable.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No graded subjects to download.')),
+      );
+      return;
+    }
+    try {
+      final bytes = await buildGradePdfReport(
+        assignments: reportable,
+        currentUser: widget.currentUser,
+      );
+      final path = await saveGradePdfReport(
+        bytes,
+        baseName: 'constimix_grade_report',
+      );
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('PDF saved to $path')),
+      );
+    } on FileSystemException catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not save PDF: ${error.message}')),
+      );
+    }
+  }
+}
+
+class _SubjectGradeReportScreen extends StatelessWidget {
+  const _SubjectGradeReportScreen({
+    required this.assignment,
+    required this.currentUser,
+  });
+
+  final CycleSubjectAssignment assignment;
+  final AppUser currentUser;
+
+  Future<void> _download(BuildContext context) async {
+    try {
+      final bytes = await buildGradePdfReport(
+        assignments: [assignment],
+        currentUser: currentUser,
+      );
+      final path = await saveGradePdfReport(
+        bytes,
+        baseName: '${assignment.subjectName}_grade_report',
+      );
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('PDF saved to $path')),
+      );
+    } on FileSystemException catch (error) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not save PDF: ${error.message}')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final students = _studentsForGradeReport(assignment, currentUser);
+    return Scaffold(
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: const Text('Subject PDF'),
+        actions: [
+          IconButton(
+            tooltip: 'Download PDF',
+            onPressed: () => _download(context),
+            icon: const Icon(Icons.download_outlined),
+          ),
+        ],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Icon(
+            Icons.picture_as_pdf_outlined,
+            size: 48,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            assignment.subjectName,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Semester ${assignment.semester} | Group ${assignment.group}',
+            textAlign: TextAlign.center,
+          ),
+          Text(assignment.teacherName, textAlign: TextAlign.center),
+          const Divider(height: 28),
+          if (students.isEmpty)
+            const _EmptyState(message: 'No students in this report')
+          else
+            for (final student in students) ...[
+              _GradeReportRow(
+                student: student,
+                assignment: assignment,
+              ),
+              const SizedBox(height: 8),
+            ],
+        ],
+      ),
+    );
+  }
+}
+
+class _GradeReportRow extends StatelessWidget {
+  const _GradeReportRow({
+    required this.student,
+    required this.assignment,
+  });
+
+  final StudentEnrollment student;
+  final CycleSubjectAssignment assignment;
+
+  @override
+  Widget build(BuildContext context) {
+    final latest = _latestGradeForReport(assignment, student.registration);
+    final pending = MockRepository.pendingSubjectStage(
+      assignment: assignment,
+      registration: student.registration,
+    );
+    return ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(6),
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.outlineVariant,
+        ),
+      ),
+      title: Text(student.fullStudentName),
+      subtitle: Text(student.registration),
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            latest == null
+                ? 'Not graded'
+                : _displayGrade(
+                    latest.finalGrade,
+                    assignment.usesLetterGrades,
+                  ),
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          if (pending != null) Text('Pending: $pending'),
+        ],
+      ),
     );
   }
 }
@@ -223,14 +721,20 @@ class _MultiFilterChips<T> extends StatelessWidget {
 class _SubjectAssignmentCard extends StatelessWidget {
   const _SubjectAssignmentCard({
     required this.assignment,
-    required this.canGrade,
-    required this.onGrade,
+    required this.graded,
+    required this.pendingStage,
+    required this.primaryLabel,
+    required this.primaryIcon,
+    required this.onPrimary,
     required this.onRegistry,
   });
 
   final CycleSubjectAssignment assignment;
-  final bool canGrade;
-  final VoidCallback onGrade;
+  final bool graded;
+  final String? pendingStage;
+  final String primaryLabel;
+  final IconData primaryIcon;
+  final VoidCallback? onPrimary;
   final VoidCallback onRegistry;
 
   @override
@@ -242,9 +746,16 @@ class _SubjectAssignmentCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              assignment.subjectName,
-              style: Theme.of(context).textTheme.titleMedium,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    assignment.subjectName,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                _GradingStatus(graded: graded, pendingStage: pendingStage),
+              ],
             ),
             const SizedBox(height: 4),
             Text(assignment.teacherName),
@@ -254,9 +765,9 @@ class _SubjectAssignmentCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: FilledButton.icon(
-                    onPressed: canGrade ? onGrade : null,
-                    icon: const Icon(Icons.edit_note_outlined),
-                    label: const Text('Grade'),
+                    onPressed: onPrimary,
+                    icon: Icon(primaryIcon),
+                    label: Text(primaryLabel),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -270,6 +781,49 @@ class _SubjectAssignmentCard extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _GradingStatus extends StatelessWidget {
+  const _GradingStatus({
+    required this.graded,
+    required this.pendingStage,
+  });
+
+  final bool graded;
+  final String? pendingStage;
+
+  @override
+  Widget build(BuildContext context) {
+    final isPending = pendingStage != null;
+    final background = isPending
+        ? const Color(0xFFFFE2A8)
+        : graded
+            ? const Color(0xFFDDF3E4)
+            : const Color(0xFFFFF1C7);
+    final foreground = isPending
+        ? const Color(0xFF754B00)
+        : graded
+            ? const Color(0xFF245C36)
+            : const Color(0xFF725A00);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Text(
+        isPending
+            ? 'Pending $pendingStage'
+            : graded
+                ? 'Graded'
+                : 'Not graded',
+        style: TextStyle(
+          color: foreground,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
@@ -350,6 +904,15 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
   @override
   void initState() {
     super.initState();
+    final savedActivitiesCount =
+        MockRepository.activitiesCountForAssignment(widget.assignment);
+    if (MockRepository.isAssignmentGraded(widget.assignment) &&
+        savedActivitiesCount != null) {
+      _activitiesCountController.text =
+          savedActivitiesCount == savedActivitiesCount.truncateToDouble()
+              ? savedActivitiesCount.toInt().toString()
+              : savedActivitiesCount.toString();
+    }
     _activitiesCountController.addListener(_activitiesCountChanged);
     _activitiesPercentageController.addListener(_refresh);
     _testPercentageController.addListener(_refresh);
@@ -395,13 +958,6 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
       appBar: AppBar(
         leading: const BackButton(),
         title: const Text('Grading tool'),
-        actions: [
-          IconButton(
-            tooltip: 'Download grade PDF table',
-            onPressed: _showPdfNotice,
-            icon: const Icon(Icons.picture_as_pdf_outlined),
-          ),
-        ],
       ),
       body: Stepper(
         currentStep: _step,
@@ -522,7 +1078,6 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
               Expanded(
                 child: TextFormField(
                   controller: _activitiesPercentageController,
-                  enabled: _activitiesCount != 0,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: const [_DecimalInputFormatter()],
@@ -538,7 +1093,6 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
               Expanded(
                 child: TextFormField(
                   controller: _testPercentageController,
-                  enabled: _activitiesCount != 0,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: const [_DecimalInputFormatter()],
@@ -749,6 +1303,11 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
     }
 
     final uploaded = MockRepository.saveStudentGrades(entries);
+    MockRepository.saveActivitiesCountForAssignment(
+      widget.assignment,
+      _activitiesCount,
+    );
+    MockRepository.markAssignmentGraded(widget.assignment);
     if (!mounted) return;
     setState(() {});
     ScaffoldMessenger.of(context).showSnackBar(

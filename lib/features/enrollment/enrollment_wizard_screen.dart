@@ -1,9 +1,11 @@
-import 'dart:math' as math;
+import 'package:flutter_map/flutter_map.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../core/data/mock_repository.dart';
+import '../../core/models/cycle_subject_assignment.dart';
 import '../../core/models/student_enrollment.dart';
 import '../../core/services/address_suggestion_service.dart';
 import '../../core/services/phone_code_service.dart';
@@ -105,11 +107,20 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   bool _hasInternet = false;
   bool _hasNoEquipment = false;
   bool _canReadAndWrite = false;
+  bool _credentialsAcknowledged = false;
   bool _isActive = true;
+  final Set<String> _transferredSubjectIds = {};
 
   bool get _isTutorMyself => _tutorRelation == 'Myself';
   bool get _isAdvancedSemester => _semester >= 5;
-  bool get _isLastStep => _currentStep == 5;
+  bool get _canManageTransferredSubjects =>
+      widget.initialEnrollment != null && widget.canManageActivation;
+  int get _lastStepIndex => _canManageTransferredSubjects ? 6 : 5;
+  bool get _isLastStep => _currentStep == _lastStepIndex;
+  List<CycleSubjectAssignment> get _transferableSubjects =>
+      MockRepository.transferableSubjectsForStudent(
+        widget.initialEnrollment!.copyWith(semester: _semester, group: _group),
+      );
 
   @override
   void initState() {
@@ -164,7 +175,9 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
               title: widget.initialEnrollment == null
                   ? 'Student enrollment'
                   : 'Edit student enrollment',
-              subtitle: 'Complete the six steps to create a level 4 account.'),
+              subtitle: _canManageTransferredSubjects
+                  ? 'Review all seven steps before saving.'
+                  : 'Complete the six steps to create a level 4 account.'),
           const SizedBox(height: 16),
           Stepper(
             currentStep: _currentStep,
@@ -195,6 +208,12 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
                   title: const Text('Additional info'),
                   isActive: _currentStep == 5,
                   content: _additionalInfoStep()),
+              if (_canManageTransferredSubjects)
+                Step(
+                  title: const Text('Transferred subjects'),
+                  isActive: _currentStep == 6,
+                  content: _transferredSubjectsStep(),
+                ),
             ],
           ),
         ],
@@ -214,7 +233,9 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       padding: const EdgeInsets.only(top: 16),
       child: Row(children: [
         FilledButton.icon(
-          onPressed: _isLastStep ? _saveEnrollment : _nextStep,
+          onPressed: _isLastStep
+              ? (_credentialsAcknowledged ? _saveEnrollment : null)
+              : _nextStep,
           icon: Icon(_isLastStep ? Icons.save_outlined : Icons.arrow_forward),
           label: Text(_isLastStep ? 'Save' : 'Next'),
         ),
@@ -253,6 +274,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
           if (value == null) return;
           setState(() {
             final wasAdvanced = _isAdvancedSemester;
+            if (_semester != value) _transferredSubjectIds.clear();
             _semester = value;
             if (_isAdvancedSemester) {
               if (!wasAdvanced) _area = null;
@@ -564,7 +586,76 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
               setState(() => _canReadAndWrite = value ?? false),
           title: const Text('Able to read and write'),
           controlAffinity: ListTileControlAffinity.leading),
+      const Divider(height: 28),
+      Text(
+        'L4 account credentials',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      const SizedBox(height: 12),
+      _CredentialField(
+        label: 'CURP',
+        value: _studentCurpController.text.trim().toUpperCase(),
+        onCopy: () => _copyCredential(
+          'CURP',
+          _studentCurpController.text.trim().toUpperCase(),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _CredentialField(
+        label: 'Registration',
+        value: _registration,
+        onCopy: () => _copyCredential('Registration', _registration),
+      ),
+      const SizedBox(height: 8),
+      CheckboxListTile(
+        value: _credentialsAcknowledged,
+        onChanged: (value) => setState(
+          () => _credentialsAcknowledged = value ?? false,
+        ),
+        title: const Text('I acknowledge these L4 account credentials'),
+        subtitle:
+            const Text('CURP is the username; registration is the password.'),
+        controlAffinity: ListTileControlAffinity.leading,
+      ),
     ]);
+  }
+
+  Widget _transferredSubjectsStep() {
+    final subjects = _transferableSubjects;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Subjects passed at another institution',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 6),
+        const Text(
+          'Selected subjects receive a final grade of 10 and remain editable in the grading tool.',
+        ),
+        const SizedBox(height: 12),
+        if (subjects.isEmpty)
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 18),
+            child: Text('No subjects are available for this semester.'),
+          )
+        else
+          for (final subject in subjects)
+            CheckboxListTile(
+              value: _transferredSubjectIds.contains(subject.subjectId),
+              title: Text(subject.subjectName),
+              subtitle: Text('Semester ${subject.semester}'),
+              controlAffinity: ListTileControlAffinity.trailing,
+              onChanged: (selected) => setState(() {
+                if (selected ?? false) {
+                  _transferredSubjectIds.add(subject.subjectId);
+                } else {
+                  _transferredSubjectIds.remove(subject.subjectId);
+                }
+              }),
+            ),
+      ],
+    );
   }
 
   void _loadInitialEnrollment() {
@@ -589,6 +680,11 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     _hasNoEquipment = enrollment.hasNoEquipmentAccess;
     _canReadAndWrite = enrollment.canReadAndWrite;
     _isActive = enrollment.isActive;
+    _transferredSubjectIds
+      ..clear()
+      ..addAll(MockRepository.transferredSubjectIdsFor(
+        enrollment.registration,
+      ));
     _sameTutorAddress = enrollment.tutorRelation == 'Myself' ||
         enrollment.tutorDomicile == enrollment.studentDomicile;
 
@@ -638,7 +734,9 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   void _nextStep() {
-    if (_currentStep < 5) setState(() => _currentStep += 1);
+    if (_currentStep < _lastStepIndex) {
+      setState(() => _currentStep += 1);
+    }
   }
 
   void _previousStep() {
@@ -653,7 +751,10 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         _hasInternet ||
         _hasNoEquipment;
     final valid = _formKey.currentState?.validate() ?? false;
-    if (!valid || !hasEquipment || !_canReadAndWrite) {
+    if (!valid ||
+        !hasEquipment ||
+        !_canReadAndWrite ||
+        !_credentialsAcknowledged) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Complete every required field before saving.')));
       return;
@@ -700,10 +801,23 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     );
 
     MockRepository.saveStudentEnrollment(enrollment);
+    if (_canManageTransferredSubjects) {
+      MockRepository.setTransferredPassedSubjects(
+        enrollment,
+        _transferredSubjectIds,
+      );
+    }
     widget.onSaved?.call();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Student saved with registration $_registration.')));
     if (widget.standalone) Navigator.of(context).pop();
+  }
+
+  void _copyCredential(String label, String value) {
+    Clipboard.setData(ClipboardData(text: value));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$label copied.')),
+    );
   }
 
   void _syncTutorFromStudent() {
@@ -790,6 +904,35 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     if (text.isEmpty) return 'Required';
     if (text.length != 18) return 'CURP must be 18 characters';
     return null;
+  }
+}
+
+class _CredentialField extends StatelessWidget {
+  const _CredentialField({
+    required this.label,
+    required this.value,
+    required this.onCopy,
+  });
+
+  final String label;
+  final String value;
+  final VoidCallback onCopy;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      key: ValueKey('credential-$label-$value'),
+      initialValue: value,
+      readOnly: true,
+      decoration: InputDecoration(
+        labelText: label,
+        suffixIcon: IconButton(
+          tooltip: 'Copy $label',
+          onPressed: value.isEmpty ? null : onCopy,
+          icon: const Icon(Icons.copy_outlined),
+        ),
+      ),
+    );
   }
 }
 
@@ -942,10 +1085,12 @@ class _AutocompleteTextFieldState extends State<_AutocompleteTextField> {
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
                     child: Text('OpenStreetMap selector',
                         style: Theme.of(context).textTheme.titleLarge)),
-                _OpenStreetMapPicker(onSelected: (location) {
-                  widget.controller.text = location;
-                  Navigator.of(context).pop();
-                }),
+                _OpenStreetMapPicker(
+                    addressService: widget.addressSuggestionService,
+                    onSelected: (location) {
+                      widget.controller.text = location;
+                      Navigator.of(context).pop();
+                    }),
                 const Divider(),
                 for (final option in AddressSuggestionService.suggestions)
                   ListTile(
@@ -1022,253 +1167,244 @@ class UpperCaseTextFormatter extends TextInputFormatter {
 }
 
 class _OpenStreetMapPicker extends StatefulWidget {
-  const _OpenStreetMapPicker({required this.onSelected});
+  const _OpenStreetMapPicker({
+    required this.onSelected,
+    required this.addressService,
+  });
 
   final ValueChanged<String> onSelected;
+  final AddressSuggestionService addressService;
 
   @override
   State<_OpenStreetMapPicker> createState() => _OpenStreetMapPickerState();
 }
 
 class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
-  static const int _zoom = 16;
+  static const _xalapa = LatLng(19.5438, -96.9102);
+
+  final MapController _mapController = MapController();
   final TextEditingController _searchController =
       TextEditingController(text: 'xalapa');
 
-  Offset _pin = const Offset(0.5, 0.5);
-  double _latitude = 19.5438;
-  double _longitude = -96.9102;
-  String _selectedAddress = 'Xalapa-Enriquez, Xalapa, Veracruz, 91133, Mexico';
+  LatLng _selectedPoint = _xalapa;
+  String _selectedAddress = 'Xalapa-Enriquez, Xalapa, Veracruz, Mexico';
+  bool _isLoading = false;
+  String? _lookupError;
 
   @override
   void dispose() {
+    _mapController.dispose();
     _searchController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final tile = _tileFor(_latitude, _longitude, _zoom);
-    final tileUrl =
-        'https://tile.openstreetmap.org/$_zoom/${tile.x}/${tile.y}.png';
+    final colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       child: DecoratedBox(
         decoration: BoxDecoration(
-            color: const Color(0xFF0C0C0C),
-            borderRadius: BorderRadius.circular(8)),
+          color: colorScheme.surface,
+          border: Border.all(color: colorScheme.outlineVariant),
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Row(children: [
-              Expanded(
-                child: TextField(
-                  controller: _searchController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search, color: Colors.white70),
-                    hintText: 'Search location',
-                    hintStyle: TextStyle(color: Colors.white54),
-                    filled: true,
-                    fillColor: Color(0xFF111111),
-                    border: OutlineInputBorder(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'Search location',
+                      ),
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (_) => _searchLocation(),
+                    ),
                   ),
-                  onSubmitted: (_) => _searchLocation(),
-                ),
+                  const SizedBox(width: 8),
+                  IconButton.filledTonal(
+                    tooltip: 'Search',
+                    onPressed: _isLoading ? null : _searchLocation,
+                    icon: const Icon(Icons.search),
+                  ),
+                  const SizedBox(width: 8),
+                  IconButton.filledTonal(
+                    tooltip: 'Center on Xalapa',
+                    onPressed: _centerOnXalapa,
+                    icon: const Icon(Icons.my_location),
+                  ),
+                ],
               ),
-              const SizedBox(width: 8),
-              IconButton.filledTonal(
-                  tooltip: 'Search',
-                  onPressed: _searchLocation,
-                  icon: const Icon(Icons.search)),
-              const SizedBox(width: 8),
-              IconButton.filledTonal(
-                  tooltip: 'Center on Xalapa',
-                  onPressed: _centerOnXalapa,
-                  icon: const Icon(Icons.my_location)),
-            ]),
-            const SizedBox(height: 8),
-            AspectRatio(
-              aspectRatio: 1.22,
-              child: LayoutBuilder(builder: (context, constraints) {
-                return GestureDetector(
-                  onTapDown: (details) {
-                    final width = constraints.maxWidth;
-                    final height = constraints.maxHeight;
-                    setState(() {
-                      _pin = Offset(
-                          (details.localPosition.dx / width).clamp(0, 1),
-                          (details.localPosition.dy / height).clamp(0, 1));
-                      _updateAddressFromPin();
-                    });
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: Stack(fit: StackFit.expand, children: [
-                      Image.network(tileUrl,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              CustomPaint(
-                                  painter: _OpenStreetMapFallbackPainter())),
-                      Positioned(
-                        left: (_pin.dx * constraints.maxWidth) - 18,
-                        top: (_pin.dy * constraints.maxHeight) - 42,
-                        child: const Icon(Icons.location_on,
-                            color: Color(0xFF2E9FE6),
-                            size: 44,
-                            shadows: [
-                              Shadow(
+              const SizedBox(height: 8),
+              AspectRatio(
+                aspectRatio: 1.22,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: FlutterMap(
+                    key: const ValueKey('openstreetmap-interactive-map'),
+                    mapController: _mapController,
+                    options: MapOptions(
+                      initialCenter: _selectedPoint,
+                      initialZoom: 16,
+                      minZoom: 2,
+                      maxZoom: 19,
+                      onTap: (_, point) => _selectPoint(point),
+                    ),
+                    children: [
+                      TileLayer(
+                        urlTemplate: const String.fromEnvironment(
+                          'MAP_TILE_URL',
+                          defaultValue:
+                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        ),
+                        userAgentPackageName:
+                            'mx.edu.constitucion1917.yosoyconstimix',
+                        maxNativeZoom: 19,
+                      ),
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: _selectedPoint,
+                            width: 48,
+                            height: 48,
+                            alignment: Alignment.topCenter,
+                            child: const Icon(
+                              Icons.location_on,
+                              color: Color(0xFF2E9FE6),
+                              size: 44,
+                              shadows: [
+                                Shadow(
                                   blurRadius: 4,
                                   color: Colors.black54,
-                                  offset: Offset(0, 2))
-                            ]),
-                      ),
-                      Positioned(
-                        right: 8,
-                        bottom: 8,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.9),
-                              borderRadius: BorderRadius.circular(3)),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 2),
-                            child: Text('LEAFLET | (C) OPENSTREETMAP',
-                                style: TextStyle(
-                                    color: Color(0xFF0078B8), fontSize: 12)),
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ]),
+                      const RichAttributionWidget(
+                        attributions: [
+                          TextSourceAttribution('OpenStreetMap contributors'),
+                        ],
+                      ),
+                    ],
                   ),
-                );
-              }),
-            ),
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  color: const Color(0xFF111111),
-                  border: Border.all(color: const Color(0xFF222222))),
-              child: Row(children: [
-                const Icon(Icons.place_outlined, color: Colors.white54),
-                const SizedBox(width: 8),
-                Expanded(
-                    child: Text(_selectedAddress,
-                        style: const TextStyle(color: Colors.white70))),
-              ]),
-            ),
-            const SizedBox(height: 8),
-            FilledButton.icon(
-                onPressed: () => widget.onSelected(_selectedAddress),
+                ),
+              ),
+              if (_isLoading) const LinearProgressIndicator(minHeight: 3),
+              if (_lookupError != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    _lookupError!,
+                    style: TextStyle(color: colorScheme.error),
+                  ),
+                ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: colorScheme.surfaceContainerLow,
+                  border: Border.all(color: colorScheme.outlineVariant),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.place_outlined, color: colorScheme.primary),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text(_selectedAddress)),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              FilledButton.icon(
+                onPressed: _isLoading
+                    ? null
+                    : () => widget.onSelected(_selectedAddress),
                 icon: const Icon(Icons.add_location_alt_outlined),
-                label: const Text('Use this location')),
-          ]),
+                label: const Text('Use this location'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _searchLocation() {
+  Future<void> _searchLocation() async {
     final query = _searchController.text.trim();
+    if (query.isEmpty) return;
     setState(() {
-      _pin = const Offset(0.5, 0.5);
-      if (query.toLowerCase().contains('20 de noviembre') ||
-          query.toLowerCase().contains('modelo')) {
-        _latitude = 19.5273;
-        _longitude = -96.9228;
-        _selectedAddress = AddressSuggestionService.schoolAddress;
-      } else if (query.isNotEmpty) {
-        _latitude = 19.5438;
-        _longitude = -96.9102;
-        _selectedAddress = '$query, Xalapa, Veracruz, Mexico';
-      } else {
-        _searchController.text = 'xalapa';
-        _latitude = 19.5438;
-        _longitude = -96.9102;
-        _selectedAddress = 'Xalapa-Enriquez, Xalapa, Veracruz, 91133, Mexico';
-      }
+      _isLoading = true;
+      _lookupError = null;
     });
+    try {
+      final result = await widget.addressService.searchLocation(query);
+      if (!mounted) return;
+      if (result == null) {
+        setState(() => _lookupError = 'No matching location was found.');
+        return;
+      }
+      final point = LatLng(result.latitude, result.longitude);
+      setState(() {
+        _selectedPoint = point;
+        _selectedAddress = result.displayName;
+      });
+      _mapController.move(point, 16);
+    } on AddressLookupException catch (error) {
+      if (mounted) setState(() => _lookupError = error.message);
+    } on Exception {
+      if (mounted) {
+        setState(() => _lookupError = 'The location service is unavailable.');
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _selectPoint(LatLng point) async {
+    setState(() {
+      _selectedPoint = point;
+      _selectedAddress = 'Selected point ${point.latitude.toStringAsFixed(5)}, '
+          '${point.longitude.toStringAsFixed(5)}';
+      _isLoading = true;
+      _lookupError = null;
+    });
+    try {
+      final result = await widget.addressService.reverseLocation(
+        latitude: point.latitude,
+        longitude: point.longitude,
+      );
+      if (!mounted || point != _selectedPoint) return;
+      if (result != null) {
+        setState(() => _selectedAddress = result.displayName);
+      }
+    } on AddressLookupException catch (error) {
+      if (mounted) setState(() => _lookupError = error.message);
+    } on Exception {
+      if (mounted) {
+        setState(() => _lookupError = 'The address could not be resolved.');
+      }
+    } finally {
+      if (mounted && point == _selectedPoint) {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 
   void _centerOnXalapa() {
     setState(() {
       _searchController.text = 'xalapa';
-      _pin = const Offset(0.5, 0.5);
-      _latitude = 19.5438;
-      _longitude = -96.9102;
-      _selectedAddress = 'Xalapa-Enriquez, Xalapa, Veracruz, 91133, Mexico';
+      _selectedPoint = _xalapa;
+      _selectedAddress = 'Xalapa-Enriquez, Xalapa, Veracruz, Mexico';
+      _lookupError = null;
     });
+    _mapController.move(_xalapa, 16);
   }
-
-  void _updateAddressFromPin() {
-    final latitude = _coordinateValue(_latitude, _pin.dy, invert: true);
-    final longitude = _coordinateValue(_longitude, _pin.dx);
-    _selectedAddress =
-        'OpenStreetMap point ${latitude.toStringAsFixed(5)}, ${longitude.toStringAsFixed(5)}';
-  }
-
-  double _coordinateValue(double origin, double ratio, {bool invert = false}) {
-    final signedRatio = invert ? 0.5 - ratio : ratio - 0.5;
-    return origin + (signedRatio * 0.018);
-  }
-
-  _TileCoordinate _tileFor(double latitude, double longitude, int zoom) {
-    final latRad = latitude * math.pi / 180;
-    final scale = math.pow(2, zoom).toDouble();
-    final x = ((longitude + 180) / 360 * scale).floor();
-    final y =
-        ((1 - math.log(math.tan(latRad) + 1 / math.cos(latRad)) / math.pi) /
-                2 *
-                scale)
-            .floor();
-    return _TileCoordinate(x, y);
-  }
-}
-
-class _TileCoordinate {
-  const _TileCoordinate(this.x, this.y);
-  final int x;
-  final int y;
-}
-
-class _OpenStreetMapFallbackPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final background = Paint()..color = const Color(0xFFE8E8E8);
-    final majorRoad = Paint()
-      ..color = const Color(0xFFD8E68B)
-      ..strokeWidth = 12
-      ..strokeCap = StrokeCap.round;
-    final minorRoad = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 5
-      ..strokeCap = StrokeCap.round;
-    final outline = Paint()
-      ..color = const Color(0xFFC8C8C8)
-      ..strokeWidth = 7
-      ..strokeCap = StrokeCap.round;
-    canvas.drawRect(Offset.zero & size, background);
-    canvas.drawLine(Offset(-20, size.height * 0.78),
-        Offset(size.width * 0.85, -10), majorRoad);
-    canvas.drawLine(Offset(size.width * 0.25, size.height + 20),
-        Offset(size.width + 20, size.height * 0.25), majorRoad);
-    for (var i = 0; i < 7; i++) {
-      final y = size.height * (0.15 + (i * 0.12));
-      canvas.drawLine(Offset(-10, y), Offset(size.width + 10, y - 42), outline);
-      canvas.drawLine(
-          Offset(-10, y), Offset(size.width + 10, y - 42), minorRoad);
-    }
-    for (var i = 0; i < 6; i++) {
-      final x = size.width * (0.08 + (i * 0.18));
-      canvas.drawLine(
-          Offset(x, -10), Offset(x + 55, size.height + 10), outline);
-      canvas.drawLine(
-          Offset(x, -10), Offset(x + 55, size.height + 10), minorRoad);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

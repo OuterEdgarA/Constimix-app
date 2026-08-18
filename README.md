@@ -23,3 +23,8 @@ flutter run
 ```
 
 The current scaffold intentionally uses only the Flutter SDK so the first bootstrap is low-friction.
+
+## Localization
+
+The staged Spanish (Mexico) localization setup is documented in
+[docs/localization_es_mx.md](docs/localization_es_mx.md).

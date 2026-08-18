@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import '../l10n/app_localizations.dart';
 import '../core/models/app_user.dart';
 import '../core/services/auth_service.dart';
 import '../features/auth/sign_in_screen.dart';
@@ -16,14 +17,28 @@ class ConstiMixApp extends StatefulWidget {
 class _ConstiMixAppState extends State<ConstiMixApp> {
   final AuthService _authService = AuthService.seeded();
   AppUser? _currentUser;
+  ThemeMode _themeMode = ThemeMode.light;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Constitución de 1917 Mixta app movil',
       debugShowCheckedModeBanner: false,
+
+      locale: const Locale('es', 'MX'),
+
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
+      ],
+
+      supportedLocales: AppLocalizations.supportedLocales,
+
+      onGenerateTitle: (context) =>
+        AppLocalizations.of(context)!.appTitle,
+
       theme: buildConstiMixTheme(Brightness.light),
       darkTheme: buildConstiMixTheme(Brightness.dark),
+      themeMode: _themeMode,
       home: _currentUser == null
           ? SignInScreen(
               authService: _authService,
@@ -32,6 +47,10 @@ class _ConstiMixAppState extends State<ConstiMixApp> {
           : DashboardShell(
               currentUser: _currentUser!,
               onSignedOut: () => setState(() => _currentUser = null),
+              isDarkMode: _themeMode == ThemeMode.dark,
+              onThemeChanged: (isDark) => setState(
+                () => _themeMode = isDark ? ThemeMode.dark : ThemeMode.light,
+              ),
             ),
     );
   }

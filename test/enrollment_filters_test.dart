@@ -75,6 +75,66 @@ void main() {
       isTrue,
     );
   });
+  testWidgets('past enrollment table can select a historical cycle',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(900, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    MockRepository.setActiveCycle('cycle-26-26');
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: EnrollmentTableScreen())),
+    );
+
+    await tester.tap(find.text('Past Enrollment'));
+    await tester.pump();
+    expect(find.text('Enrollment cycle'), findsOneWidget);
+    expect(
+        find.byKey(const ValueKey('past-cycle-cycle-26-26')), findsOneWidget);
+
+    tester
+        .widget<DropdownButtonFormField<String>>(
+          find.byKey(const ValueKey('past-cycle-cycle-26-26')),
+        )
+        .onChanged!
+        .call('cycle-23-24');
+    await tester.pump();
+
+    expect(
+        find.byKey(const ValueKey('past-cycle-cycle-23-24')), findsOneWidget);
+    expect(find.text('260000000001'), findsOneWidget);
+    expect(find.text('1 A'), findsOneWidget);
+  });
+  testWidgets('final step requires acknowledgement of L4 credentials',
+      (tester) async {
+    final enrollment = MockRepository.studentEnrollments.first;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: EnrollmentWizardScreen(initialEnrollment: enrollment),
+        ),
+      ),
+    );
+
+    tester.widget<Stepper>(find.byType(Stepper)).onStepTapped!.call(5);
+    await tester.pump();
+
+    expect(find.text('L4 account credentials'), findsOneWidget);
+    expect(find.text(enrollment.studentCurp), findsWidgets);
+    expect(find.text(enrollment.registration), findsWidgets);
+    expect(find.byTooltip('Copy CURP'), findsOneWidget);
+    expect(find.byTooltip('Copy Registration'), findsOneWidget);
+
+    final save = find.widgetWithText(FilledButton, 'Save').first;
+    expect(tester.widget<FilledButton>(save).onPressed, isNull);
+
+    final acknowledgement = find.widgetWithText(
+      CheckboxListTile,
+      'I acknowledge these L4 account credentials',
+    );
+    tester.widget<CheckboxListTile>(acknowledgement).onChanged!.call(true);
+    await tester.pump();
+
+    expect(tester.widget<FilledButton>(save).onPressed, isNotNull);
+  });
   testWidgets('advanced semester area updates its disabled group in real time',
       (tester) async {
     await tester.pumpWidget(

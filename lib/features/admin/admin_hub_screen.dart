@@ -9,9 +9,14 @@ import 'semester_admin_screen.dart';
 import '../../shared/widgets/section_header.dart';
 
 class AdminHubScreen extends StatefulWidget {
-  const AdminHubScreen({super.key, required this.currentUser});
+  const AdminHubScreen({
+    super.key,
+    required this.currentUser,
+    required this.onSignedOut,
+  });
 
   final AppUser currentUser;
+  final VoidCallback onSignedOut;
 
   @override
   State<AdminHubScreen> createState() => _AdminHubScreenState();
@@ -33,11 +38,6 @@ class _AdminHubScreenState extends State<AdminHubScreen> {
         icon: Icons.manage_accounts_outlined,
         title: 'Account admin',
         subtitle: 'Create staff accounts and review existing users.',
-      ),
-      _AdminAction(
-        icon: Icons.edit_calendar_outlined,
-        title: 'Scheduler editor',
-        subtitle: 'Assign subjects, teachers, tests, and special test windows.',
       ),
       _AdminAction(
         icon: Icons.school_outlined,
@@ -90,6 +90,17 @@ class _AdminHubScreenState extends State<AdminHubScreen> {
           ),
           const SizedBox(height: 8),
         ],
+        Card(
+          child: ListTile(
+            leading: Icon(
+              Icons.logout,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            title: const Text('Sign out'),
+            subtitle: const Text('Return to the sign-in screen.'),
+            onTap: widget.onSignedOut,
+          ),
+        ),
       ],
     );
   }
@@ -1047,6 +1058,18 @@ class _AccountCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final curp = user.curp?.trim();
+    final usernameMatchesCurp = curp != null &&
+        curp.isNotEmpty &&
+        user.username.toUpperCase() == curp.toUpperCase();
+    final details = [
+      user.role.label,
+      if (!usernameMatchesCurp) user.username,
+      if (curp != null && curp.isNotEmpty) curp,
+      if (user.registration case final registration?) registration,
+      if (!user.isActive) 'Disabled',
+    ].join(' - ');
+
     return Container(
       margin: EdgeInsets.zero,
       decoration: BoxDecoration(
@@ -1056,13 +1079,7 @@ class _AccountCard extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(child: Text('L${user.role.clearanceLevel}')),
         title: Text(user.displayName),
-        subtitle: Text(
-          '${user.role.label} - ${user.username}\n'
-          '${user.curp ?? 'No CURP'}'
-          '${user.registration == null ? '' : ' - ${user.registration}'}'
-          '${user.isActive ? '' : ' - Disabled'}',
-        ),
-        isThreeLine: true,
+        subtitle: Text(details),
         trailing: showManage
             ? FilledButton.tonalIcon(
                 onPressed: onManage,

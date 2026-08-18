@@ -75,6 +75,76 @@ void main() {
     expect(find.text('Evaluation data'), findsOneWidget);
   });
 
+  testWidgets('teacher gets isolated reports and registry access',
+      (tester) async {
+    MockRepository.setActiveCycle('cycle-26-26');
+    MockRepository.setGradingPeriodActive(false);
+    final teacher = MockRepository.users.firstWhere(
+      (user) => user.id == 'u-teacher-1',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(body: GradesScreen(currentUser: teacher)),
+      ),
+    );
+
+    expect(find.text('Search subjects'), findsNothing);
+    expect(find.byType(FilterChip), findsNothing);
+    final grade = find.widgetWithText(FilledButton, 'Grade').first;
+    expect(find.widgetWithText(FilledButton, 'View'), findsNothing);
+    final registry = find.widgetWithText(OutlinedButton, 'Registry').first;
+    expect(tester.widget<FilledButton>(grade).onPressed, isNull);
+    expect(tester.widget<OutlinedButton>(registry).onPressed, isNotNull);
+
+    tester.widget<OutlinedButton>(registry).onPressed!.call();
+    await tester.pumpAndSettle();
+    expect(find.text('PHYSICS registry'), findsOneWidget);
+    expect(find.text('07/07/2026'), findsWidgets);
+  });
+  testWidgets('saving the grading tool marks the subject as graded',
+      (tester) async {
+    MockRepository.setActiveCycle('cycle-26-26');
+    final assignment = MockRepository.activeSubjectAssignments.firstWhere(
+      (item) => item.subjectName == 'PHYSICS',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: GradesScreen(currentUser: MockRepository.users.first),
+        ),
+      ),
+    );
+
+    expect(find.text('Not graded'), findsWidgets);
+    await tester.tap(find.widgetWithText(FilledButton, 'Grade').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Next'));
+    await tester.pump();
+    tester
+        .widget<FilledButton>(
+          find.widgetWithText(FilledButton, 'Show table'),
+        )
+        .onPressed!
+        .call();
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Submitted activities'),
+      '0',
+    );
+    await tester.enterText(find.widgetWithText(TextField, 'Test grade'), '9');
+    tester
+        .widget<FilledButton>(
+          find.widgetWithText(FilledButton, 'Save grades'),
+        )
+        .onPressed!
+        .call();
+    await tester.pump();
+
+    expect(MockRepository.isAssignmentGraded(assignment), isTrue);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.text('Graded'), findsWidgets);
+  });
   testWidgets('activation button is hidden for a populated group',
       (tester) async {
     MockRepository.setActiveCycle('cycle-26-26');

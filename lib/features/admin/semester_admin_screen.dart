@@ -3,14 +3,24 @@ import 'package:flutter/services.dart';
 
 import '../../core/data/mock_repository.dart';
 import '../../core/models/academic_cycle.dart';
+import '../../core/models/app_user.dart';
+import '../../core/models/user_role.dart';
 import '../../core/models/school_subject.dart';
 import '../../core/models/student_enrollment.dart';
 import '../../shared/widgets/section_header.dart';
 import '../enrollment/enrollment_wizard_screen.dart';
+import '../profile/limited_profile_screen.dart';
 import 'subject_assignment_screen.dart';
 
 class SemesterAdminScreen extends StatefulWidget {
-  const SemesterAdminScreen({super.key});
+  const SemesterAdminScreen({
+    super.key,
+    this.currentUser,
+    this.onSignedOut,
+  });
+
+  final AppUser? currentUser;
+  final VoidCallback? onSignedOut;
 
   @override
   State<SemesterAdminScreen> createState() => _SemesterAdminScreenState();
@@ -20,6 +30,9 @@ class _SemesterAdminScreenState extends State<SemesterAdminScreen> {
   final _scrollController = ScrollController();
   final _subjectCreatorKey = GlobalKey<_SubjectCreatorCardState>();
 
+  bool get _limitedAccess =>
+      widget.currentUser?.role == UserRole.level2SemesterAdmin;
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -28,63 +41,99 @@ class _SemesterAdminScreenState extends State<SemesterAdminScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      controller: _scrollController,
-      padding: const EdgeInsets.all(16),
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            IconButton(
-              tooltip: 'Back to system admin',
-              onPressed: () => Navigator.of(context).maybePop(),
-              icon: const Icon(Icons.arrow_back),
+    return ColoredBox(
+      key: const ValueKey('semester-admin-background'),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: ListView(
+        controller: _scrollController,
+        padding: const EdgeInsets.all(16),
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (!_limitedAccess) ...[
+                IconButton(
+                  tooltip: 'Back to system admin',
+                  onPressed: () => Navigator.of(context).maybePop(),
+                  icon: const Icon(Icons.arrow_back),
+                ),
+                const SizedBox(width: 4),
+              ],
+              const Expanded(
+                child: SectionHeader(
+                  title: 'Semester admin',
+                  subtitle: 'Manage subjects, groups, and academic cycles.',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          if (_limitedAccess) ...[
+            LimitedProfileScreen(
+              user: widget.currentUser!,
+              embedded: true,
             ),
-            const SizedBox(width: 4),
-            const Expanded(
-              child: SectionHeader(
-                title: 'Semester admin',
-                subtitle: 'Manage subjects, groups, and academic cycles.',
+            const SizedBox(height: 12),
+          ],
+          if (!_limitedAccess) ...[
+            _SubjectCreatorCard(
+              key: _subjectCreatorKey,
+              onChanged: () => setState(() {}),
+            ),
+            const SizedBox(height: 12),
+          ],
+          _SubjectListCard(
+            onEdit: _editSubject,
+            onAssigned: () => setState(() {}),
+            readOnly: _limitedAccess,
+          ),
+          const SizedBox(height: 12),
+          _ExtracurricularListCard(
+            onEdit: _editSubject,
+            readOnly: _limitedAccess,
+          ),
+          const SizedBox(height: 12),
+          _GroupAdminCard(onChanged: () => setState(() {})),
+          const SizedBox(height: 12),
+          if (!_limitedAccess)
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.date_range_outlined),
+                title: const Text('Cycle manager'),
+                subtitle: Text(
+                  MockRepository.activeCycle?.name ?? 'No cycle selected',
+                ),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () async {
+                  await Navigator.of(context).push<void>(
+                    MaterialPageRoute(
+                        builder: (_) => const CycleManagerScreen()),
+                  );
+                  if (mounted) setState(() {});
+                },
+              ),
+            ),
+          if (widget.onSignedOut != null) ...[
+            const SizedBox(height: 12),
+            Card(
+              child: ListTile(
+                leading: Icon(
+                  Icons.logout,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                title: const Text('Sign out'),
+                subtitle: const Text('Return to the sign-in screen.'),
+                onTap: widget.onSignedOut,
               ),
             ),
           ],
-        ),
-        const SizedBox(height: 16),
-        _SubjectCreatorCard(
-          key: _subjectCreatorKey,
-          onChanged: () => setState(() {}),
-        ),
-        const SizedBox(height: 12),
-        _SubjectListCard(
-          onEdit: _editSubject,
-          onAssigned: () => setState(() {}),
-        ),
-        const SizedBox(height: 12),
-        _ExtracurricularListCard(onEdit: _editSubject),
-        const SizedBox(height: 12),
-        _GroupAdminCard(onChanged: () => setState(() {})),
-        const SizedBox(height: 12),
-        Card(
-          child: ListTile(
-            leading: const Icon(Icons.date_range_outlined),
-            title: const Text('Cycle manager'),
-            subtitle: Text(
-              MockRepository.activeCycle?.name ?? 'No cycle selected',
-            ),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () async {
-              await Navigator.of(context).push<void>(
-                MaterialPageRoute(builder: (_) => const CycleManagerScreen()),
-              );
-              if (mounted) setState(() {});
-            },
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   void _editSubject(SchoolSubject subject) {
+    if (_limitedAccess) return;
     _subjectCreatorKey.currentState?.loadSubject(subject);
     _scrollController.animateTo(
       0,
@@ -113,6 +162,7 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
   final _keyController = TextEditingController();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _expansionController = ExpansibleController();
 
   SchoolSubject? _editingSubject;
   bool _isExtracurricular = false;
@@ -162,6 +212,7 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
   Widget build(BuildContext context) {
     return Card(
       child: ExpansionTile(
+        controller: _expansionController,
         initiallyExpanded: false,
         leading: const Icon(Icons.menu_book_outlined),
         title: const Text('Subject creator'),
@@ -395,6 +446,11 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
           ? null
           : DateTimeRange(start: subject.startDate!, end: subject.endDate!);
     });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && !_expansionController.isExpanded) {
+        _expansionController.expand();
+      }
+    });
   }
 
   void _clearForm() {
@@ -417,10 +473,12 @@ class _SubjectListCard extends StatefulWidget {
   const _SubjectListCard({
     required this.onEdit,
     required this.onAssigned,
+    this.readOnly = false,
   });
 
   final ValueChanged<SchoolSubject> onEdit;
   final VoidCallback onAssigned;
+  final bool readOnly;
 
   @override
   State<_SubjectListCard> createState() => _SubjectListCardState();
@@ -518,10 +576,12 @@ class _SubjectListCardState extends State<_SubjectListCard> {
                             subtitle: Text(
                               '${subject.idMateria} | ${subject.keyCode}',
                             ),
-                            onTap: () {
-                              setState(() => _showSuggestions = false);
-                              widget.onEdit(subject);
-                            },
+                            onTap: widget.readOnly
+                                ? null
+                                : () {
+                                    setState(() => _showSuggestions = false);
+                                    widget.onEdit(subject);
+                                  },
                           ),
                       ],
                     ),
@@ -540,8 +600,12 @@ class _SubjectListCardState extends State<_SubjectListCard> {
                       return _SubjectListItem(
                         subject: subject,
                         assigned: MockRepository.isSubjectAssigned(subject),
-                        onEdit: () => widget.onEdit(subject),
-                        onAssign: () => _openAssignment(subject),
+                        onEdit: widget.readOnly
+                            ? null
+                            : () => widget.onEdit(subject),
+                        onAssign: widget.readOnly
+                            ? null
+                            : () => _openAssignment(subject),
                       );
                     },
                   ),
@@ -564,9 +628,13 @@ class _SubjectListCardState extends State<_SubjectListCard> {
 }
 
 class _ExtracurricularListCard extends StatefulWidget {
-  const _ExtracurricularListCard({required this.onEdit});
+  const _ExtracurricularListCard({
+    required this.onEdit,
+    this.readOnly = false,
+  });
 
   final ValueChanged<SchoolSubject> onEdit;
+  final bool readOnly;
 
   @override
   State<_ExtracurricularListCard> createState() =>
@@ -618,7 +686,9 @@ class _ExtracurricularListCardState extends State<_ExtracurricularListCard> {
                       final subject = _subjects[index];
                       return _ExtracurricularListItem(
                         subject: subject,
-                        onEdit: () => widget.onEdit(subject),
+                        onEdit: widget.readOnly
+                            ? null
+                            : () => widget.onEdit(subject),
                       );
                     },
                   ),
@@ -667,14 +737,14 @@ class _SubjectListItem extends StatelessWidget {
   const _SubjectListItem({
     required this.subject,
     required this.assigned,
-    required this.onEdit,
-    required this.onAssign,
+    this.onEdit,
+    this.onAssign,
   });
 
   final SchoolSubject subject;
   final bool assigned;
-  final VoidCallback onEdit;
-  final VoidCallback onAssign;
+  final VoidCallback? onEdit;
+  final VoidCallback? onAssign;
 
   @override
   Widget build(BuildContext context) {
@@ -703,26 +773,28 @@ class _SubjectListItem extends StatelessWidget {
             '${subject.keyCode} | Semester ${subject.semester} | '
             '${subject.evaluationType}',
           ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: onEdit,
-                  icon: const Icon(Icons.edit_outlined),
-                  label: const Text('Edit'),
+          if (onEdit != null || onAssign != null) ...[
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: onEdit,
+                    icon: const Icon(Icons.edit_outlined),
+                    label: const Text('Edit'),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: FilledButton.tonalIcon(
-                  onPressed: onAssign,
-                  icon: const Icon(Icons.person_add_alt_outlined),
-                  label: const Text('Assign'),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: FilledButton.tonalIcon(
+                    onPressed: onAssign,
+                    icon: const Icon(Icons.person_add_alt_outlined),
+                    label: const Text('Assign'),
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ],
       ),
     );
@@ -732,11 +804,11 @@ class _SubjectListItem extends StatelessWidget {
 class _ExtracurricularListItem extends StatelessWidget {
   const _ExtracurricularListItem({
     required this.subject,
-    required this.onEdit,
+    this.onEdit,
   });
 
   final SchoolSubject subject;
-  final VoidCallback onEdit;
+  final VoidCallback? onEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -767,11 +839,12 @@ class _ExtracurricularListItem extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
-            tooltip: 'Edit extracurricular subject',
-            onPressed: onEdit,
-            icon: const Icon(Icons.edit_outlined),
-          ),
+          if (onEdit != null)
+            IconButton(
+              tooltip: 'Edit extracurricular subject',
+              onPressed: onEdit,
+              icon: const Icon(Icons.edit_outlined),
+            ),
         ],
       ),
     );
@@ -1337,12 +1410,12 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
   DateTimeRange? _dateRange;
   DateTime? _firstHalfEndDate;
   DateTime? _secondHalfStartDate;
-  DateTimeRange? _firstHalfPlatformTests;
-  DateTimeRange? _firstHalfPresentialTests;
-  DateTimeRange? _secondHalfPlatformTests;
-  DateTimeRange? _secondHalfPresentialTests;
+  DateTime? _firstHalfPlatformTest;
+  DateTime? _firstHalfPresentialTest;
+  DateTime? _secondHalfPlatformTest;
+  DateTime? _secondHalfPresentialTest;
   TimeOfDay _recessTime = const TimeOfDay(hour: 11, minute: 20);
-  final Map<String, DateTimeRange?> _specialTestRanges = {
+  final Map<String, DateTime?> _specialTestDates = {
     for (final test in _specialTests) test: null,
   };
 
@@ -1357,13 +1430,14 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
   bool get _cycleDatesComplete =>
       _dateRange != null &&
       _firstHalfEndDate != null &&
-      _secondHalfStartDate != null;
+      _secondHalfStartDate != null &&
+      !_firstHalfEndDate!.isAfter(_secondHalfStartDate!);
 
   bool get _regularTestsComplete =>
-      _firstHalfPlatformTests != null &&
-      _firstHalfPresentialTests != null &&
-      _secondHalfPlatformTests != null &&
-      _secondHalfPresentialTests != null;
+      _firstHalfPlatformTest != null &&
+      _firstHalfPresentialTest != null &&
+      _secondHalfPlatformTest != null &&
+      _secondHalfPresentialTest != null;
 
   bool get _requiredFieldsComplete =>
       _cycleDatesComplete && _regularTestsComplete;
@@ -1373,22 +1447,17 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
     super.initState();
     final cycle = widget.cycle;
     if (cycle == null) return;
-    _dateRange = DateTimeRange(
-      start: cycle.startDate,
-      end: cycle.endDate,
-    );
+    _dateRange = DateTimeRange(start: cycle.startDate, end: cycle.endDate);
     _firstHalfEndDate = cycle.firstHalfEndDate;
     _secondHalfStartDate = cycle.secondHalfStartDate;
-    _firstHalfPlatformTests = _toMaterialRange(cycle.firstHalfPlatformTests);
-    _firstHalfPresentialTests =
-        _toMaterialRange(cycle.firstHalfPresentialTests);
-    _secondHalfPlatformTests = _toMaterialRange(cycle.secondHalfPlatformTests);
-    _secondHalfPresentialTests =
-        _toMaterialRange(cycle.secondHalfPresentialTests);
+    _firstHalfPlatformTest = cycle.firstHalfPlatformTests.start;
+    _firstHalfPresentialTest = cycle.firstHalfPresentialTests.start;
+    _secondHalfPlatformTest = cycle.secondHalfPlatformTests.start;
+    _secondHalfPresentialTest = cycle.secondHalfPresentialTests.start;
     _recessTime = _parseTime(cycle.recessTime);
     for (final entry in cycle.specialTestRanges.entries) {
-      if (_specialTestRanges.containsKey(entry.key)) {
-        _specialTestRanges[entry.key] = _toMaterialRange(entry.value);
+      if (_specialTestDates.containsKey(entry.key)) {
+        _specialTestDates[entry.key] = entry.value.start;
       }
     }
   }
@@ -1403,6 +1472,14 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          TextFormField(
+            key: ValueKey(_cycleName),
+            initialValue:
+                _cycleName.isEmpty ? 'Select a date range' : _cycleName,
+            readOnly: true,
+            decoration: const InputDecoration(labelText: 'Cycle name'),
+          ),
+          const SizedBox(height: 12),
           Stepper(
             currentStep: _currentStep,
             onStepTapped: (step) => setState(() => _currentStep = step),
@@ -1414,7 +1491,7 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
                 content: _cycleDatesStep(),
               ),
               Step(
-                title: const Text('Regular test dates'),
+                title: const Text('Regular tests'),
                 isActive: _currentStep >= 1,
                 content: _regularTestsStep(),
               ),
@@ -1478,30 +1555,31 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _rangeButton(
-          label: 'Cycle date range *',
-          value: _dateRange,
-          onChanged: (value) => _dateRange = value,
-        ),
-        const SizedBox(height: 12),
-        TextFormField(
-          key: ValueKey(_cycleName),
-          initialValue: _cycleName.isEmpty ? 'Select a date range' : _cycleName,
-          readOnly: true,
-          decoration: const InputDecoration(labelText: 'Cycle name'),
-        ),
-        const SizedBox(height: 12),
+        _sectionLabel('Cycle date range'),
+        _rangeButton(value: _dateRange),
+        const SizedBox(height: 16),
+        _sectionLabel('First half ending date'),
         _dateButton(
-          label: 'First half ending date *',
           value: _firstHalfEndDate,
+          placeholder: 'Select date *',
           onChanged: (value) => _firstHalfEndDate = value,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
+        _sectionLabel('Second half beginning date'),
         _dateButton(
-          label: 'Second half beginning date *',
           value: _secondHalfStartDate,
+          placeholder: 'Select date *',
           onChanged: (value) => _secondHalfStartDate = value,
         ),
+        if (_firstHalfEndDate != null &&
+            _secondHalfStartDate != null &&
+            _firstHalfEndDate!.isAfter(_secondHalfStartDate!)) ...[
+          const SizedBox(height: 8),
+          Text(
+            'The first half must end before the second half begins.',
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+        ],
       ],
     );
   }
@@ -1510,28 +1588,34 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _rangeButton(
-          label: 'First half platform tests *',
-          value: _firstHalfPlatformTests,
-          onChanged: (value) => _firstHalfPlatformTests = value,
+        _sectionLabel('First half'),
+        _dateButton(
+          value: _firstHalfPlatformTest,
+          placeholder: 'Platform *',
+          selectedPrefix: 'Platform',
+          onChanged: (value) => _firstHalfPlatformTest = value,
         ),
         const SizedBox(height: 12),
-        _rangeButton(
-          label: 'First half presential tests *',
-          value: _firstHalfPresentialTests,
-          onChanged: (value) => _firstHalfPresentialTests = value,
+        _dateButton(
+          value: _firstHalfPresentialTest,
+          placeholder: 'Presential *',
+          selectedPrefix: 'Presential',
+          onChanged: (value) => _firstHalfPresentialTest = value,
+        ),
+        const SizedBox(height: 16),
+        _sectionLabel('Second half'),
+        _dateButton(
+          value: _secondHalfPlatformTest,
+          placeholder: 'Platform *',
+          selectedPrefix: 'Platform',
+          onChanged: (value) => _secondHalfPlatformTest = value,
         ),
         const SizedBox(height: 12),
-        _rangeButton(
-          label: 'Second half platform tests *',
-          value: _secondHalfPlatformTests,
-          onChanged: (value) => _secondHalfPlatformTests = value,
-        ),
-        const SizedBox(height: 12),
-        _rangeButton(
-          label: 'Second half presential tests *',
-          value: _secondHalfPresentialTests,
-          onChanged: (value) => _secondHalfPresentialTests = value,
+        _dateButton(
+          value: _secondHalfPresentialTest,
+          placeholder: 'Presential *',
+          selectedPrefix: 'Presential',
+          onChanged: (value) => _secondHalfPresentialTest = value,
         ),
       ],
     );
@@ -1547,16 +1631,13 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
           label: Text('Recess time: ${_formatTime(_recessTime)}'),
         ),
         const SizedBox(height: 16),
-        Text(
-          'Special test date ranges',
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-        const SizedBox(height: 8),
+        _sectionLabel('Special tests'),
         for (final test in _specialTests) ...[
-          _rangeButton(
-            label: '$test date range (optional)',
-            value: _specialTestRanges[test],
-            onChanged: (value) => _specialTestRanges[test] = value,
+          _dateButton(
+            value: _specialTestDates[test],
+            placeholder: '$test (optional)',
+            selectedPrefix: test,
+            onChanged: (value) => _specialTestDates[test] = value,
           ),
           if (test != _specialTests.last) const SizedBox(height: 12),
         ],
@@ -1564,47 +1645,75 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
     );
   }
 
-  Widget _dateButton({
-    required String label,
-    required DateTime? value,
-    required ValueChanged<DateTime> onChanged,
-  }) {
-    return OutlinedButton.icon(
-      onPressed: () async {
-        final selected = await _selectDate(value);
-        if (selected != null) setState(() => onChanged(selected));
-      },
-      icon: const Icon(Icons.event_outlined),
-      label: Text(value == null ? label : '$label: ${_formatDate(value)}'),
+  Widget _sectionLabel(String label) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(label, style: Theme.of(context).textTheme.titleSmall),
+          const Divider(),
+        ],
+      ),
     );
   }
 
-  Widget _rangeButton({
-    required String label,
-    required DateTimeRange? value,
-    required ValueChanged<DateTimeRange> onChanged,
+  Widget _dateButton({
+    required DateTime? value,
+    required String placeholder,
+    required ValueChanged<DateTime> onChanged,
+    String? selectedPrefix,
   }) {
+    final enabled = _dateRange != null;
+    final valueLabel = value == null
+        ? placeholder
+        : selectedPrefix == null
+            ? _formatDate(value)
+            : '$selectedPrefix: ${_formatDate(value)}';
+    return OutlinedButton.icon(
+      onPressed: enabled
+          ? () async {
+              final selected = await _selectDate(value);
+              if (selected != null) setState(() => onChanged(selected));
+            }
+          : null,
+      icon: const Icon(Icons.event_outlined),
+      label: Text(valueLabel),
+    );
+  }
+
+  Widget _rangeButton({required DateTimeRange? value}) {
     return OutlinedButton.icon(
       onPressed: () async {
-        final selected = await _selectRange(value);
-        if (selected != null) setState(() => onChanged(selected));
+        final selected = await _selectCycleRange(value);
+        if (selected == null) return;
+        setState(() {
+          _dateRange = selected;
+          _clearDatesOutsideCycle();
+        });
       },
       icon: const Icon(Icons.date_range_outlined),
-      label: Text(value == null ? label : '$label: ${_formatRange(value)}'),
+      label: Text(
+        value == null ? 'Select date range *' : _formatRange(value),
+      ),
     );
   }
 
   Future<DateTime?> _selectDate(DateTime? current) {
-    final now = DateTime.now();
+    final range = _dateRange;
+    if (range == null) return Future.value(null);
+    var initial = current ?? range.start;
+    if (initial.isBefore(range.start)) initial = range.start;
+    if (initial.isAfter(range.end)) initial = range.end;
     return showDatePicker(
       context: context,
-      firstDate: DateTime(now.year - 10),
-      lastDate: DateTime(now.year + 15),
-      initialDate: current ?? _dateRange?.start ?? now,
+      firstDate: range.start,
+      lastDate: range.end,
+      initialDate: initial,
     );
   }
 
-  Future<DateTimeRange?> _selectRange(DateTimeRange? current) {
+  Future<DateTimeRange?> _selectCycleRange(DateTimeRange? current) {
     final now = DateTime.now();
     return showDateRangePicker(
       context: context,
@@ -1612,6 +1721,24 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
       lastDate: DateTime(now.year + 15),
       initialDateRange: current,
     );
+  }
+
+  void _clearDatesOutsideCycle() {
+    final range = _dateRange;
+    if (range == null) return;
+    bool outside(DateTime? value) =>
+        value != null &&
+        (value.isBefore(range.start) || value.isAfter(range.end));
+
+    if (outside(_firstHalfEndDate)) _firstHalfEndDate = null;
+    if (outside(_secondHalfStartDate)) _secondHalfStartDate = null;
+    if (outside(_firstHalfPlatformTest)) _firstHalfPlatformTest = null;
+    if (outside(_firstHalfPresentialTest)) _firstHalfPresentialTest = null;
+    if (outside(_secondHalfPlatformTest)) _secondHalfPlatformTest = null;
+    if (outside(_secondHalfPresentialTest)) _secondHalfPresentialTest = null;
+    for (final test in _specialTests) {
+      if (outside(_specialTestDates[test])) _specialTestDates[test] = null;
+    }
   }
 
   Future<void> _pickRecessTime() async {
@@ -1634,27 +1761,22 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
         endDate: range.end,
         firstHalfEndDate: _firstHalfEndDate!,
         secondHalfStartDate: _secondHalfStartDate!,
-        firstHalfPlatformTests: _toAcademicRange(_firstHalfPlatformTests!),
-        firstHalfPresentialTests: _toAcademicRange(_firstHalfPresentialTests!),
-        secondHalfPlatformTests: _toAcademicRange(_secondHalfPlatformTests!),
-        secondHalfPresentialTests:
-            _toAcademicRange(_secondHalfPresentialTests!),
+        firstHalfPlatformTests: _singleDayRange(_firstHalfPlatformTest!),
+        firstHalfPresentialTests: _singleDayRange(_firstHalfPresentialTest!),
+        secondHalfPlatformTests: _singleDayRange(_secondHalfPlatformTest!),
+        secondHalfPresentialTests: _singleDayRange(_secondHalfPresentialTest!),
         recessTime: _formatTime(_recessTime),
         specialTestRanges: {
-          for (final entry in _specialTestRanges.entries)
-            if (entry.value != null) entry.key: _toAcademicRange(entry.value!),
+          for (final entry in _specialTestDates.entries)
+            if (entry.value != null) entry.key: _singleDayRange(entry.value!),
         },
       ),
     );
     Navigator.of(context).pop();
   }
 
-  static DateTimeRange _toMaterialRange(AcademicDateRange range) {
-    return DateTimeRange(start: range.start, end: range.end);
-  }
-
-  static AcademicDateRange _toAcademicRange(DateTimeRange range) {
-    return AcademicDateRange(start: range.start, end: range.end);
+  static AcademicDateRange _singleDayRange(DateTime date) {
+    return AcademicDateRange(start: date, end: date);
   }
 
   static TimeOfDay _parseTime(String value) {

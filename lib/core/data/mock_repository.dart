@@ -3,6 +3,7 @@ import '../models/app_user.dart';
 import '../models/community_post.dart';
 import '../models/cycle_subject_assignment.dart';
 import '../models/enrollment_draft.dart';
+import '../models/registry_tab_record.dart';
 import '../models/schedule_item.dart';
 import '../models/school_subject.dart';
 import '../models/student_enrollment.dart';
@@ -170,6 +171,9 @@ class MockRepository {
       semester: 3,
       group: 'B',
       evaluationMode: 'Number Evaluation',
+      periodHalf: 'Second half',
+      day: 'Tuesday',
+      timeRange: '09:30 - 11:00',
     ),
     const CycleSubjectAssignment(
       id: 'assignment-math-26',
@@ -181,6 +185,9 @@ class MockRepository {
       semester: 3,
       group: 'B',
       evaluationMode: 'Letter Evaluation',
+      periodHalf: 'Second half',
+      day: 'Thursday',
+      timeRange: '11:20 - 12:50',
     ),
     const CycleSubjectAssignment(
       id: 'assignment-spanish-23',
@@ -192,10 +199,30 @@ class MockRepository {
       semester: 1,
       group: 'A',
       evaluationMode: 'Letter Evaluation',
+      day: 'Monday',
+      timeRange: '08:00 - 09:30',
     ),
   ];
   static final List<StudentGradeEntry> _studentGrades = [];
   static final List<StudentGradeEntry> _pendingGradeUploads = [];
+  static final List<StudentEnrollment> _pendingEnrollmentUploads = [];
+  static final Map<String, Set<String>> _transferredSubjectIds = {};
+  static final Set<String> _gradedAssignments = {};
+  static final Map<String, double> _assignmentActivitiesCounts = {};
+  static final List<RegistryTabRecord> _registryTabs = [];
+  static final List<RegistryTabRecord> _pendingRegistryUploads = [];
+  static final List<CommunityPost> _communityPosts = [
+    CommunityPost(
+      id: 'post-1',
+      title: 'Welcome to #YoSoyConstiMix',
+      body:
+          'School announcements, events, links, and approved updates appear here first.',
+      author: _users[0],
+      createdAt: DateTime(2026, 7, 14),
+      status: PostStatus.published,
+      cycleId: 'cycle-26-26',
+    ),
+  ];
   static final Map<String, int> _groupSizeLimits = {};
   static final Map<String, bool> _groupActivationOverrides = {};
   static String? _activeCycleId = 'cycle-26-26';
@@ -221,6 +248,12 @@ class MockRepository {
   static List<StudentEnrollment> get pastEnrollments => _activeEnrollmentStore
       .where((enrollment) => !enrollment.isActive)
       .toList(growable: false);
+
+  static List<StudentEnrollment> enrollmentsForCycle(String cycleId) {
+    return List.unmodifiable(
+      _cycleEnrollments[cycleId] ?? const <StudentEnrollment>[],
+    );
+  }
 
   static bool usernameExists(String username, {String? exceptUserId}) {
     final normalized = username.trim().toUpperCase();
@@ -304,6 +337,21 @@ class MockRepository {
     return updated;
   }
 
+  static AppUser? updateLimitedProfile({
+    required String userId,
+    required String password,
+    required int profileAvatarIndex,
+  }) {
+    final index = _users.indexWhere((user) => user.id == userId);
+    if (index == -1) return null;
+    final updated = _users[index].copyWith(
+      password: password,
+      profileAvatarIndex: profileAvatarIndex,
+    );
+    _users[index] = updated;
+    return updated;
+  }
+
   static AppUser? setUserActive(String userId, bool isActive) {
     final index = _users.indexWhere((user) => user.id == userId);
     if (index == -1) return null;
@@ -382,8 +430,30 @@ class MockRepository {
     } else {
       _activeEnrollmentStore[index] = enrollment;
     }
+    if (isOnline) {
+      _pendingEnrollmentUploads.removeWhere(
+        (item) => item.registration == enrollment.registration,
+      );
+    } else {
+      final pendingIndex = _pendingEnrollmentUploads.indexWhere(
+        (item) => item.registration == enrollment.registration,
+      );
+      if (pendingIndex == -1) {
+        _pendingEnrollmentUploads.add(enrollment);
+      } else {
+        _pendingEnrollmentUploads[pendingIndex] = enrollment;
+      }
+    }
     _upsertStudentUser(enrollment);
     return enrollment;
+  }
+
+  static int get pendingEnrollmentUploadCount =>
+      _pendingEnrollmentUploads.length;
+
+  static void uploadPendingEnrollments() {
+    if (!isOnline) return;
+    _pendingEnrollmentUploads.clear();
   }
 
   static void _upsertStudentUser(StudentEnrollment enrollment) {
@@ -524,6 +594,15 @@ class MockRepository {
       if (activeGroups <= 1) return false;
     }
     _groupActivationOverrides[_groupKey(semester, group)] = isActive;
+    if (!isActive) {
+      final cycleId = _activeCycleId;
+      _subjectAssignments.removeWhere(
+        (assignment) =>
+            assignment.cycleId == cycleId &&
+            assignment.semester == semester &&
+            assignment.group == group,
+      );
+    }
     return true;
   }
 
@@ -566,10 +645,26 @@ class MockRepository {
 
   static AcademicCycle saveCycle(AcademicCycle cycle) {
     final index = _cycles.indexWhere((item) => item.id == cycle.id);
+    final previous = index == -1 ? null : _cycles[index];
+    final periodBoundsChanged = previous != null &&
+        (!_sameDay(previous.startDate, cycle.startDate) ||
+            !_sameDay(previous.endDate, cycle.endDate));
+    if (periodBoundsChanged) {
+      _registryTabs.removeWhere((item) => item.cycleId == cycle.id);
+      _pendingRegistryUploads.removeWhere((item) => item.cycleId == cycle.id);
+    }
     if (index == -1) {
       _cycles.add(cycle);
     } else {
       _cycles[index] = cycle;
+    }
+    for (var postIndex = 0;
+        postIndex < _communityPosts.length;
+        postIndex += 1) {
+      final post = _communityPosts[postIndex];
+      if (post.cycleId == null && !post.createdAt.isAfter(cycle.endDate)) {
+        _communityPosts[postIndex] = post.copyWith(cycleId: cycle.id);
+      }
     }
     return cycle;
   }
@@ -590,29 +685,136 @@ class MockRepository {
     _gradingPeriodActive = activeCycle == null ? false : isActive;
   }
 
-  static List<CommunityPost> posts(AppUser currentUser) => [
-        CommunityPost(
-          id: 'post-1',
-          title: 'Welcome to ConstiMix',
-          body:
-              'School announcements, events, links, and approved updates appear here first.',
-          author: users.first,
-          createdAt: DateTime.now().subtract(const Duration(days: 1)),
-          status: PostStatus.published,
-        ),
-        CommunityPost(
-          id: 'post-2',
-          title: 'Enrollment window',
-          body:
-              'Students can prepare contact information, tutor details, and social security data before re-enrollment opens.',
-          author: users[1],
-          createdAt: DateTime.now().subtract(const Duration(hours: 4)),
-          status: currentUser.role.canReviewPosts
-              ? PostStatus.pendingReview
-              : PostStatus.published,
-        ),
-      ];
+  static List<CommunityPost> posts(AppUser currentUser) {
+    purgeCommunityPosts(DateTime.now());
+    return _communityPosts
+        .where((post) => post.status == PostStatus.published)
+        .toList(growable: false)
+      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+  }
 
+  static List<CommunityPost> pendingCommunityPosts() {
+    purgeCommunityPosts(DateTime.now());
+    return _communityPosts
+        .where((post) => post.status == PostStatus.pendingReview)
+        .toList(growable: false)
+      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+  }
+
+  static CommunityPost submitCommunityPost({
+    required AppUser author,
+    required String title,
+    required String body,
+    String linkUrl = '',
+    String attachmentPath = '',
+    String attachmentName = '',
+    DateTime? createdAt,
+  }) {
+    final timestamp = createdAt ?? DateTime.now();
+    String? cycleId;
+    final active = activeCycle;
+    if (active != null &&
+        !timestamp.isBefore(active.startDate) &&
+        !timestamp.isAfter(active.endDate)) {
+      cycleId = active.id;
+    } else {
+      final upcoming = _cycles
+          .where((cycle) => !cycle.endDate.isBefore(timestamp))
+          .toList()
+        ..sort((a, b) => a.endDate.compareTo(b.endDate));
+      if (upcoming.isNotEmpty) cycleId = upcoming.first.id;
+    }
+    final post = CommunityPost(
+      id: 'post-${DateTime.now().microsecondsSinceEpoch}',
+      title: title.trim(),
+      body: body.trim(),
+      author: author,
+      createdAt: timestamp,
+      status: author.role.canPublishWithoutApproval
+          ? PostStatus.published
+          : PostStatus.pendingReview,
+      linkUrl: linkUrl.trim(),
+      attachmentPath: attachmentPath.trim(),
+      attachmentName: attachmentName.trim(),
+      cycleId: cycleId,
+    );
+    _communityPosts.add(post);
+    return post;
+  }
+
+  static CommunityPost? updateCommunityPost({
+    required String postId,
+    required AppUser editor,
+    required String title,
+    required String body,
+    String linkUrl = '',
+    String attachmentPath = '',
+    String attachmentName = '',
+  }) {
+    final index = _communityPosts.indexWhere((post) => post.id == postId);
+    if (index == -1) return null;
+    final current = _communityPosts[index];
+    final isL1 = editor.role == UserRole.level1Admin;
+    final isApprovedAuthor = current.status == PostStatus.published &&
+        current.author.id == editor.id &&
+        const {
+          UserRole.level2SemesterAdmin,
+          UserRole.level3Teacher,
+          UserRole.level4Student,
+        }.contains(editor.role);
+    if (!isL1 && !isApprovedAuthor) return null;
+
+    final updated = current.copyWith(
+      title: title.trim(),
+      body: body.trim(),
+      status: isL1 ? current.status : PostStatus.pendingReview,
+      linkUrl: linkUrl.trim(),
+      attachmentPath: attachmentPath.trim(),
+      attachmentName: attachmentName.trim(),
+    );
+    _communityPosts[index] = updated;
+    return updated;
+  }
+
+  static void approveCommunityPost(String postId) {
+    _setCommunityPostStatus(postId, PostStatus.published);
+  }
+
+  static void rejectCommunityPost(String postId) {
+    _setCommunityPostStatus(postId, PostStatus.rejected);
+  }
+
+  static void _setCommunityPostStatus(String postId, PostStatus status) {
+    final index = _communityPosts.indexWhere((post) => post.id == postId);
+    if (index != -1) {
+      _communityPosts[index] = _communityPosts[index].copyWith(status: status);
+    }
+  }
+
+  static void purgeCommunityPosts(DateTime now) {
+    final today = DateTime(now.year, now.month, now.day);
+    _communityPosts.removeWhere((post) {
+      final cycleId = post.cycleId;
+      if (cycleId == null) return false;
+      AcademicCycle? cycle;
+      for (final item in _cycles) {
+        if (item.id == cycleId) {
+          cycle = item;
+          break;
+        }
+      }
+      if (cycle == null) return false;
+      final end = DateTime(
+        cycle.endDate.year,
+        cycle.endDate.month,
+        cycle.endDate.day,
+      );
+      return today.isAfter(end);
+    });
+  }
+
+  static bool _sameDay(DateTime a, DateTime b) =>
+      a.year == b.year && a.month == b.month && a.day == b.day;
   static final Map<String, List<ScheduleItem>> _schedulesByCycle = {
     'cycle-26-26': const [
       ScheduleItem(
@@ -692,25 +894,69 @@ class MockRepository {
         .toList(growable: false);
   }
 
+  static List<CycleSubjectAssignment> assignmentsForSubjectSemesterHalf(
+    SchoolSubject subject,
+    int semester,
+    String periodHalf,
+  ) {
+    return assignmentsForSubjectSemester(subject, semester)
+        .where((assignment) => assignment.periodHalf == periodHalf)
+        .toList(growable: false);
+  }
+
+  static bool assignmentTimeIsAvailable({
+    required int semester,
+    required String group,
+    required String periodHalf,
+    required String day,
+    required String timeRange,
+    String? exceptSubjectId,
+  }) {
+    final cycleId = _activeCycleId;
+    if (cycleId == null) return false;
+    return !_subjectAssignments.any(
+      (assignment) =>
+          assignment.cycleId == cycleId &&
+          assignment.semester == semester &&
+          assignment.group == group &&
+          assignment.periodHalf == periodHalf &&
+          assignment.day == day &&
+          assignment.timeRange == timeRange &&
+          assignment.subjectId != exceptSubjectId,
+    );
+  }
+
   static void replaceSubjectAssignments({
     required SchoolSubject subject,
     required int semester,
+    String? periodHalf,
     required Iterable<CycleSubjectAssignment> assignments,
   }) {
     final cycleId = _activeCycleId;
     if (cycleId == null) return;
     final replacements = assignments.toList(growable: false);
+    final targetHalf = periodHalf ??
+        (replacements.isEmpty ? null : replacements.first.periodHalf);
     _subjectAssignments.removeWhere(
       (assignment) =>
           assignment.cycleId == cycleId &&
           assignment.subjectId == subject.idMateria &&
-          assignment.semester == semester,
+          assignment.semester == semester &&
+          (targetHalf == null || assignment.periodHalf == targetHalf),
     );
     _subjectAssignments.addAll(replacements);
     for (final assignment in replacements) {
       _groupActivationOverrides[
           _groupKey(assignment.semester, assignment.group)] = true;
     }
+  }
+
+  static List<CycleSubjectAssignment> get activeSubjectAssignments {
+    final cycleId = _activeCycleId;
+    if (cycleId == null) return const [];
+    return _subjectAssignments
+        .where((assignment) => assignment.cycleId == cycleId)
+        .toList(growable: false);
   }
 
   static List<CycleSubjectAssignment> subjectAssignmentsFor(
@@ -723,8 +969,128 @@ class MockRepository {
       if (currentUser.role == UserRole.level3Teacher) {
         return assignment.teacherUserId == currentUser.id;
       }
+      if (currentUser.role == UserRole.level4Student) {
+        return assignment.semester == currentUser.semester &&
+            assignment.group == currentUser.group;
+      }
       return true;
     }).toList(growable: false);
+  }
+
+  static List<CycleSubjectAssignment> transferableSubjectsForStudent(
+    StudentEnrollment student,
+  ) {
+    final bySubject = <String, CycleSubjectAssignment>{};
+    for (final assignment in activeSubjectAssignments) {
+      if (assignment.semester == student.semester) {
+        bySubject.putIfAbsent(assignment.subjectId, () => assignment);
+      }
+    }
+    final result = bySubject.values.toList()
+      ..sort((a, b) => a.subjectName.compareTo(b.subjectName));
+    return result;
+  }
+
+  static Set<String> transferredSubjectIdsFor(String registration) =>
+      Set.unmodifiable(
+        _transferredSubjectIds[registration] ?? const <String>{},
+      );
+
+  static void setTransferredPassedSubjects(
+    StudentEnrollment student,
+    Set<String> subjectIds,
+  ) {
+    final previous =
+        _transferredSubjectIds[student.registration] ?? const <String>{};
+    final removed = previous.difference(subjectIds);
+    if (removed.isNotEmpty) {
+      bool shouldRemove(StudentGradeEntry grade) {
+        if (grade.registration != student.registration ||
+            grade.evaluationType != 'Final evaluation') {
+          return false;
+        }
+        return _subjectAssignments.any(
+          (assignment) =>
+              assignment.id == grade.assignmentId &&
+              removed.contains(assignment.subjectId),
+        );
+      }
+
+      _studentGrades.removeWhere(shouldRemove);
+      _pendingGradeUploads.removeWhere(shouldRemove);
+    }
+
+    _transferredSubjectIds[student.registration] = Set.of(subjectIds);
+    final now = DateTime.now();
+    for (final assignment in activeSubjectAssignments) {
+      if (!subjectIds.contains(assignment.subjectId) ||
+          assignment.semester != student.semester ||
+          assignment.group != student.group) {
+        continue;
+      }
+      saveStudentGrades([
+        StudentGradeEntry(
+          cycleId: assignment.cycleId,
+          assignmentId: assignment.id,
+          registration: student.registration,
+          evaluationType: 'Final evaluation',
+          evaluationDate: now,
+          absences: 0,
+          activitiesSubmitted: 0,
+          testGrade: 10,
+          finalGrade: 10,
+        ),
+      ]);
+      markAssignmentGraded(assignment);
+    }
+  }
+
+  static List<StudentGradeEntry> gradesForStudentAssignment({
+    required CycleSubjectAssignment assignment,
+    required String registration,
+  }) {
+    final byEvaluation = <String, StudentGradeEntry>{};
+    for (final grade in [
+      ..._pendingGradeUploads.reversed,
+      ..._studentGrades.reversed,
+    ]) {
+      if (grade.cycleId == assignment.cycleId &&
+          grade.assignmentId == assignment.id &&
+          grade.registration == registration) {
+        byEvaluation.putIfAbsent(grade.evaluationType, () => grade);
+      }
+    }
+    return byEvaluation.values.toList(growable: false);
+  }
+
+  static bool studentHasGrade({
+    required CycleSubjectAssignment assignment,
+    required String registration,
+  }) =>
+      gradesForStudentAssignment(
+        assignment: assignment,
+        registration: registration,
+      ).isNotEmpty;
+
+  static String? pendingSubjectStage({
+    required CycleSubjectAssignment assignment,
+    required String registration,
+  }) {
+    final grades = {
+      for (final grade in gradesForStudentAssignment(
+        assignment: assignment,
+        registration: registration,
+      ))
+        grade.evaluationType: grade.finalGrade,
+    };
+    final finalGrade = grades['Final evaluation'];
+    if (finalGrade == null || finalGrade > 5) return null;
+    for (final stage in const ['R1', 'R2', 'R3', 'RE']) {
+      final grade = grades[stage];
+      if (grade == null) return stage;
+      if (grade > 5) return null;
+    }
+    return 'RE failed';
   }
 
   static List<StudentEnrollment> studentsForAssignment(
@@ -753,6 +1119,165 @@ class MockRepository {
       }
     }
     return null;
+  }
+
+  static bool isAssignmentGraded(CycleSubjectAssignment assignment) {
+    return _gradedAssignments.contains(
+      '${assignment.cycleId}|${assignment.id}',
+    );
+  }
+
+  static void markAssignmentGraded(CycleSubjectAssignment assignment) {
+    _gradedAssignments.add('${assignment.cycleId}|${assignment.id}');
+  }
+
+  static double? activitiesCountForAssignment(
+    CycleSubjectAssignment assignment,
+  ) {
+    return _assignmentActivitiesCounts[
+        '${assignment.cycleId}|${assignment.id}'];
+  }
+
+  static void saveActivitiesCountForAssignment(
+    CycleSubjectAssignment assignment,
+    double activitiesCount,
+  ) {
+    _assignmentActivitiesCounts['${assignment.cycleId}|${assignment.id}'] =
+        activitiesCount;
+  }
+
+  static String registryIdForAssignment(
+    CycleSubjectAssignment assignment,
+  ) {
+    return '${assignment.cycleId}|${assignment.subjectId}|'
+        '${assignment.teacherUserId}|${assignment.semester}|'
+        '${assignment.group}|${assignment.periodHalf}';
+  }
+
+  static List<DateTime> registryDatesForAssignment(
+    CycleSubjectAssignment assignment,
+  ) {
+    AcademicCycle? cycle;
+    for (final item in _cycles) {
+      if (item.id == assignment.cycleId) {
+        cycle = item;
+        break;
+      }
+    }
+    if (cycle == null) return const [];
+    final start = assignment.periodHalf == 'Second half'
+        ? cycle.secondHalfStartDate
+        : cycle.startDate;
+    final end = assignment.periodHalf == 'Second half'
+        ? cycle.endDate
+        : cycle.firstHalfEndDate;
+    final scheduledDays = _subjectAssignments
+        .where(
+          (item) =>
+              item.cycleId == assignment.cycleId &&
+              item.subjectId == assignment.subjectId &&
+              item.teacherUserId == assignment.teacherUserId &&
+              item.semester == assignment.semester &&
+              item.group == assignment.group &&
+              item.periodHalf == assignment.periodHalf,
+        )
+        .map((item) => item.day)
+        .toSet();
+    if (scheduledDays.isEmpty) scheduledDays.add(assignment.day);
+    const weekdayNumbers = {
+      'Monday': DateTime.monday,
+      'Tuesday': DateTime.tuesday,
+      'Wednesday': DateTime.wednesday,
+      'Thursday': DateTime.thursday,
+      'Friday': DateTime.friday,
+      'Saturday': DateTime.saturday,
+      'Sunday': DateTime.sunday,
+    };
+    final dates = <DateTime>{};
+    final firstDate = DateTime(start.year, start.month, start.day);
+    final lastDate = DateTime(end.year, end.month, end.day);
+    for (final day in scheduledDays) {
+      final weekday = weekdayNumbers[day];
+      if (weekday == null) continue;
+      final offset = (weekday - firstDate.weekday + 7) % 7;
+      var date = firstDate.add(Duration(days: offset));
+      while (!date.isAfter(lastDate)) {
+        dates.add(date);
+        date = date.add(const Duration(days: 7));
+      }
+    }
+    final sorted = dates.toList()..sort();
+    return sorted;
+  }
+
+  static bool registryCanEdit({
+    required CycleSubjectAssignment assignment,
+    required AppUser currentUser,
+    required DateTime tabDate,
+    required DateTime now,
+  }) {
+    if (currentUser.role == UserRole.level1Admin) return true;
+    if (currentUser.role != UserRole.level3Teacher ||
+        currentUser.id != assignment.teacherUserId) {
+      return false;
+    }
+    final date = DateTime(tabDate.year, tabDate.month, tabDate.day);
+    final today = DateTime(now.year, now.month, now.day);
+    return !today.isBefore(date) &&
+        !today.isAfter(date.add(const Duration(days: 3)));
+  }
+
+  static RegistryTabRecord? registryTab({
+    required String assignmentId,
+    required DateTime date,
+  }) {
+    final key = _registryKey(assignmentId, date);
+    for (final record in _pendingRegistryUploads.reversed) {
+      if (record.key == key) return record;
+    }
+    for (final record in _registryTabs.reversed) {
+      if (record.key == key) return record;
+    }
+    return null;
+  }
+
+  static bool saveRegistryTab(RegistryTabRecord record) {
+    if (isOnline) {
+      _pendingRegistryUploads.removeWhere((item) => item.key == record.key);
+      _upsertRegistry(_registryTabs, record);
+      return true;
+    }
+    _upsertRegistry(_pendingRegistryUploads, record);
+    return false;
+  }
+
+  static int get pendingRegistryUploadCount => _pendingRegistryUploads.length;
+
+  static void uploadPendingRegistries() {
+    if (!isOnline) return;
+    for (final record
+        in List<RegistryTabRecord>.from(_pendingRegistryUploads)) {
+      _upsertRegistry(_registryTabs, record);
+    }
+    _pendingRegistryUploads.clear();
+  }
+
+  static void _upsertRegistry(
+    List<RegistryTabRecord> destination,
+    RegistryTabRecord record,
+  ) {
+    final index = destination.indexWhere((item) => item.key == record.key);
+    if (index == -1) {
+      destination.add(record);
+    } else {
+      destination[index] = record;
+    }
+  }
+
+  static String _registryKey(String assignmentId, DateTime date) {
+    return '$assignmentId|${date.year.toString().padLeft(4, '0')}-'
+        '${date.month.toString().padLeft(2, '0')}-'
+        '${date.day.toString().padLeft(2, '0')}';
   }
 
   static bool saveStudentGrades(Iterable<StudentGradeEntry> entries) {

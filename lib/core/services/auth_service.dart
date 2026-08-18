@@ -13,7 +13,8 @@ class AuthService {
       if (!user.isActive) continue;
       final studentLogin = user.role == UserRole.level4Student &&
           user.curp?.toLowerCase() == normalized &&
-          user.registration == password;
+          (user.registration == password ||
+              (user.password != null && user.password == password));
       final storedPassword = user.password;
       final staffLogin = user.username.toLowerCase() == normalized &&
           (storedPassword == null

@@ -1,0 +1,12 @@
+    {
+      "@@locale": "en",
+      "appTitle": "Constitución de 1917 Mixta",
+      "save": "Save",
+      "cancel": "Cancel",
+      "gradesTitle": "Grades",
+      "usernameOrCurp": "Username or CURP",
+      "passwordOrRegistration": "Password or registration",
+      "signIn": "Sign in",
+      "studentSignUp": "Student sign up",
+      "invalidCredentials": "Invalid credentials."
+    }

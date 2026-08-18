@@ -1,6 +1,6 @@
 {
-    "name": "constimix_app",
-    "short_name": "constimix_app",
+    "name": "#YoSoyConstiMix",
+    "short_name": "#YoSoyConstiMix",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,0 +1,8 @@
+[mcp_servers.repowise]
+command = "repowise"
+args = ["mcp"]
+cwd = "C:\\Users\\edgar\\Documents\\Codex\\2026-07-07\\computadora-plugin-computer-use-openai-bundled\\constimix_app"
+startup_timeout_sec = 20
+
+[features]
+hooks = true

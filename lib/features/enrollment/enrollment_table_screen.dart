@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/data/mock_repository.dart';
+import '../../core/models/academic_cycle.dart';
 import '../../core/models/student_enrollment.dart';
 import '../../shared/widgets/section_header.dart';
 import 'enrollment_wizard_screen.dart';
@@ -8,7 +9,12 @@ import 'enrollment_wizard_screen.dart';
 enum _EnrollmentTableKind { current, past }
 
 class EnrollmentTableScreen extends StatefulWidget {
-  const EnrollmentTableScreen({super.key});
+  const EnrollmentTableScreen({
+    super.key,
+    this.canManageActivation = false,
+  });
+
+  final bool canManageActivation;
 
   @override
   State<EnrollmentTableScreen> createState() => _EnrollmentTableScreenState();
@@ -22,6 +28,14 @@ class _EnrollmentTableScreenState extends State<EnrollmentTableScreen> {
   final Set<int> _semesterFilters = {};
   final Set<String> _groupFilters = {};
   bool _showSuggestions = false;
+  String? _pastCycleId;
+
+  @override
+  void initState() {
+    super.initState();
+    _pastCycleId = MockRepository.activeCycle?.id ??
+        (MockRepository.cycles.isEmpty ? null : MockRepository.cycles.last.id);
+  }
 
   @override
   void dispose() {
@@ -68,6 +82,32 @@ class _EnrollmentTableScreenState extends State<EnrollmentTableScreen> {
             },
           ),
         ),
+        if (_selectedTable == _EnrollmentTableKind.past) ...[
+          const SizedBox(height: 16),
+          _label(context, 'Enrollment cycle'),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            key: ValueKey('past-cycle-${_pastCycleId ?? 'none'}'),
+            initialValue: _pastCycleId,
+            isExpanded: true,
+            menuMaxHeight: 320,
+            decoration: const InputDecoration(
+              labelText: 'Select cycle',
+              prefixIcon: Icon(Icons.date_range_outlined),
+            ),
+            items: [
+              for (final cycle in _cycleOptions)
+                DropdownMenuItem(
+                  value: cycle.id,
+                  child: Text(cycle.name),
+                ),
+            ],
+            onChanged: (value) => setState(() {
+              _pastCycleId = value;
+              _showSuggestions = false;
+            }),
+          ),
+        ],
         const SizedBox(height: 16),
         _label(context, 'Apply a semester filter'),
         const SizedBox(height: 8),
@@ -136,10 +176,22 @@ class _EnrollmentTableScreenState extends State<EnrollmentTableScreen> {
     return Text(text, style: Theme.of(context).textTheme.labelLarge);
   }
 
+  List<AcademicCycle> get _cycleOptions {
+    final cycles = MockRepository.cycles.toList()
+      ..sort((a, b) => b.startDate.compareTo(a.startDate));
+    return cycles;
+  }
+
   List<StudentEnrollment> get _sourceStudents {
-    return _selectedTable == _EnrollmentTableKind.current
-        ? MockRepository.currentEnrollments
-        : MockRepository.pastEnrollments;
+    if (_selectedTable == _EnrollmentTableKind.current) {
+      return MockRepository.currentEnrollments;
+    }
+    final cycleId = _pastCycleId;
+    if (cycleId == null) return const [];
+    if (cycleId == MockRepository.activeCycle?.id) {
+      return MockRepository.pastEnrollments;
+    }
+    return MockRepository.enrollmentsForCycle(cycleId);
   }
 
   List<StudentEnrollment> get _filteredStudents {
@@ -163,11 +215,42 @@ class _EnrollmentTableScreenState extends State<EnrollmentTableScreen> {
   }
 
   Future<void> _openStudent(StudentEnrollment student) async {
+    final historicalCycle = _selectedTable == _EnrollmentTableKind.past &&
+        _pastCycleId != MockRepository.activeCycle?.id;
+    if (historicalCycle) {
+      await showDialog<void>(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          title: Text(student.fullStudentName),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Registration: ${student.registration}'),
+              const SizedBox(height: 6),
+              Text('CURP: ${student.studentCurp}'),
+              const SizedBox(height: 6),
+              Text('Semester ${student.semester} | Group ${student.group}'),
+              const SizedBox(height: 6),
+              Text('Email: ${student.studentEmail}'),
+            ],
+          ),
+          actions: [
+            FilledButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: const Text('Close'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
     await Navigator.of(context).push<void>(
       MaterialPageRoute(
         builder: (_) => EnrollmentWizardScreen(
           standalone: true,
           initialEnrollment: student,
+          canManageActivation: widget.canManageActivation,
           onSaved: () => setState(() {}),
         ),
       ),
