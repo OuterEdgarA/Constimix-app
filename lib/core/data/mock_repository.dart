@@ -108,12 +108,48 @@ class MockRepository {
       name: 'Periodo 23-24',
       startDate: DateTime(2023, 8, 1),
       endDate: DateTime(2024, 7, 15),
+      firstHalfEndDate: DateTime(2023, 12, 15),
+      secondHalfStartDate: DateTime(2024, 1, 8),
+      firstHalfPlatformTests: AcademicDateRange(
+        start: DateTime(2023, 11, 1),
+        end: DateTime(2023, 11, 7),
+      ),
+      firstHalfPresentialTests: AcademicDateRange(
+        start: DateTime(2023, 11, 20),
+        end: DateTime(2023, 11, 25),
+      ),
+      secondHalfPlatformTests: AcademicDateRange(
+        start: DateTime(2024, 5, 1),
+        end: DateTime(2024, 5, 7),
+      ),
+      secondHalfPresentialTests: AcademicDateRange(
+        start: DateTime(2024, 5, 20),
+        end: DateTime(2024, 5, 25),
+      ),
     ),
     AcademicCycle(
       id: 'cycle-26-26',
       name: 'Periodo 26-26',
       startDate: DateTime(2026, 1, 1),
       endDate: DateTime(2026, 12, 31),
+      firstHalfEndDate: DateTime(2026, 6, 30),
+      secondHalfStartDate: DateTime(2026, 7, 1),
+      firstHalfPlatformTests: AcademicDateRange(
+        start: DateTime(2026, 3, 1),
+        end: DateTime(2026, 3, 7),
+      ),
+      firstHalfPresentialTests: AcademicDateRange(
+        start: DateTime(2026, 4, 1),
+        end: DateTime(2026, 4, 7),
+      ),
+      secondHalfPlatformTests: AcademicDateRange(
+        start: DateTime(2026, 9, 1),
+        end: DateTime(2026, 9, 7),
+      ),
+      secondHalfPresentialTests: AcademicDateRange(
+        start: DateTime(2026, 10, 1),
+        end: DateTime(2026, 10, 7),
+      ),
     ),
   ];
   static final Map<String, List<StudentEnrollment>> _cycleEnrollments = {
@@ -126,6 +162,7 @@ class MockRepository {
   static final List<CycleSubjectAssignment> _subjectAssignments = [
     const CycleSubjectAssignment(
       id: 'assignment-physics-26',
+      subjectId: 'seed-physics',
       cycleId: 'cycle-26-26',
       subjectName: 'PHYSICS',
       teacherName: 'HERNANDEZ JOSE',
@@ -136,6 +173,7 @@ class MockRepository {
     ),
     const CycleSubjectAssignment(
       id: 'assignment-math-26',
+      subjectId: 'seed-math',
       cycleId: 'cycle-26-26',
       subjectName: 'MATHEMATICS',
       teacherName: 'VAZQUEZ EVA',
@@ -146,6 +184,7 @@ class MockRepository {
     ),
     const CycleSubjectAssignment(
       id: 'assignment-spanish-23',
+      subjectId: 'seed-spanish',
       cycleId: 'cycle-23-24',
       subjectName: 'SPANISH',
       teacherName: 'BERNAL ROXANA',
@@ -611,6 +650,68 @@ class MockRepository {
   static List<ScheduleItem> get schedules => List.unmodifiable(
         _schedulesByCycle[_activeCycleId] ?? const <ScheduleItem>[],
       );
+
+  static List<CycleSubjectAssignment> assignmentsForSubject(
+    SchoolSubject subject,
+  ) {
+    final cycleId = _activeCycleId;
+    if (cycleId == null) return const [];
+    return _subjectAssignments
+        .where(
+          (assignment) =>
+              assignment.cycleId == cycleId &&
+              assignment.subjectId == subject.idMateria,
+        )
+        .toList(growable: false);
+  }
+
+  static bool isSubjectAssigned(SchoolSubject subject) {
+    return assignmentsForSubject(subject).isNotEmpty;
+  }
+
+  static CycleSubjectAssignment saveSubjectAssignment(
+    CycleSubjectAssignment assignment,
+  ) {
+    final index = _subjectAssignments.indexWhere(
+      (item) => item.id == assignment.id,
+    );
+    if (index == -1) {
+      _subjectAssignments.add(assignment);
+    } else {
+      _subjectAssignments[index] = assignment;
+    }
+    return assignment;
+  }
+
+  static List<CycleSubjectAssignment> assignmentsForSubjectSemester(
+    SchoolSubject subject,
+    int semester,
+  ) {
+    return assignmentsForSubject(subject)
+        .where((assignment) => assignment.semester == semester)
+        .toList(growable: false);
+  }
+
+  static void replaceSubjectAssignments({
+    required SchoolSubject subject,
+    required int semester,
+    required Iterable<CycleSubjectAssignment> assignments,
+  }) {
+    final cycleId = _activeCycleId;
+    if (cycleId == null) return;
+    final replacements = assignments.toList(growable: false);
+    _subjectAssignments.removeWhere(
+      (assignment) =>
+          assignment.cycleId == cycleId &&
+          assignment.subjectId == subject.idMateria &&
+          assignment.semester == semester,
+    );
+    _subjectAssignments.addAll(replacements);
+    for (final assignment in replacements) {
+      _groupActivationOverrides[
+          _groupKey(assignment.semester, assignment.group)] = true;
+    }
+  }
 
   static List<CycleSubjectAssignment> subjectAssignmentsFor(
     AppUser currentUser,

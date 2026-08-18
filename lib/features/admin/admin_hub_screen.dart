@@ -299,6 +299,7 @@ class _AccountAdminScreenState extends State<AccountAdminScreen> {
   UserRole _selectedRole = UserRole.level2SemesterAdmin;
   bool _credentialsReady = false;
   bool _showSuggestions = false;
+  final Set<UserRole> _roleFilters = {};
   String _generatedUsername = '';
   String _generatedPassword = '';
 
@@ -321,49 +322,63 @@ class _AccountAdminScreenState extends State<AccountAdminScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const SectionHeader(
-            title: 'Staff Account Sign Up',
-            subtitle: 'Create level 1, level 2, and level 3 staff accounts.',
+          Card(
+            child: ExpansionTile(
+              initiallyExpanded: true,
+              leading: const Icon(Icons.person_add_alt_outlined),
+              title: const Text('Staff Account Sign Up'),
+              subtitle:
+                  const Text('Create level 1, level 2, and level 3 accounts.'),
+              childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
+              children: [
+                _accountDataStep(),
+                const SizedBox(height: 12),
+                _credentialsStep(),
+              ],
+            ),
           ),
-          const SizedBox(height: 16),
-          _accountDataStep(),
-          const SizedBox(height: 12),
-          _credentialsStep(),
-          const SizedBox(height: 16),
-          const Divider(),
           const SizedBox(height: 12),
           _StudentAccountShortcut(onOpen: _openStudentSignup),
-          const SizedBox(height: 24),
-          const SectionHeader(
-            title: 'Accounts table',
-            subtitle: 'Search and manage staff or student accounts.',
-          ),
           const SizedBox(height: 12),
-          _AccountSearchBox(
-            controller: _searchController,
-            focusNode: _searchFocusNode,
-            suggestions: _suggestions,
-            showSuggestions: _showSuggestions,
-            onChanged: (_) => setState(() => _showSuggestions = true),
-            onClear: () => setState(() {
-              _searchController.clear();
-              _showSuggestions = false;
-            }),
-            onCloseSuggestions: () => setState(() => _showSuggestions = false),
-            onSuggestionSelected: _openManagedUser,
+          Card(
+            child: ExpansionTile(
+              initiallyExpanded: true,
+              leading: const Icon(Icons.manage_accounts_outlined),
+              title: const Text('Accounts table'),
+              subtitle: const Text('Search and manage accounts.'),
+              childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
+              children: [
+                _roleFilterChips(),
+                const SizedBox(height: 12),
+                _AccountSearchBox(
+                  controller: _searchController,
+                  focusNode: _searchFocusNode,
+                  suggestions: _suggestions,
+                  showSuggestions: _showSuggestions,
+                  onChanged: (_) => setState(() => _showSuggestions = true),
+                  onClear: () => setState(() {
+                    _searchController.clear();
+                    _showSuggestions = false;
+                  }),
+                  onCloseSuggestions: () =>
+                      setState(() => _showSuggestions = false),
+                  onSuggestionSelected: _openManagedUser,
+                ),
+                const SizedBox(height: 12),
+                if (users.isEmpty)
+                  const _EmptyAccounts()
+                else
+                  for (final user in users) ...[
+                    _AccountCard(
+                      user: user,
+                      showManage: user.id != widget.currentUser.id,
+                      onManage: () => _openManagedUser(user),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+              ],
+            ),
           ),
-          const SizedBox(height: 12),
-          if (users.isEmpty)
-            const _EmptyAccounts()
-          else
-            for (final user in users) ...[
-              _AccountCard(
-                user: user,
-                showManage: user.id != widget.currentUser.id,
-                onManage: () => _openManagedUser(user),
-              ),
-              const SizedBox(height: 8),
-            ],
         ],
       ),
     );
@@ -372,7 +387,11 @@ class _AccountAdminScreenState extends State<AccountAdminScreen> {
   List<AppUser> get _filteredUsers {
     final query = _searchController.text;
     return MockRepository.users
-        .where((user) => user.matchesSearch(query))
+        .where(
+          (user) =>
+              (_roleFilters.isEmpty || _roleFilters.contains(user.role)) &&
+              user.matchesSearch(query),
+        )
         .toList(growable: false);
   }
 
@@ -380,82 +399,104 @@ class _AccountAdminScreenState extends State<AccountAdminScreen> {
     final query = _searchController.text.trim();
     if (!_showSuggestions || query.isEmpty) return const [];
     return MockRepository.users
-        .where((user) => user.matchesSearch(query))
+        .where(
+          (user) =>
+              (_roleFilters.isEmpty || _roleFilters.contains(user.role)) &&
+              user.matchesSearch(query),
+        )
         .take(3)
         .toList(growable: false);
   }
 
+  Widget _roleFilterChips() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          for (final role in UserRole.values)
+            FilterChip(
+              label: Text('L${role.clearanceLevel}'),
+              selected: _roleFilters.contains(role),
+              onSelected: (_) => setState(() {
+                if (!_roleFilters.add(role)) _roleFilters.remove(role);
+              }),
+            ),
+        ],
+      ),
+    );
+  }
+
   Widget _accountDataStep() {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _accountFormKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('Step 1 - Account data',
-                  style: Theme.of(context).textTheme.titleMedium),
-              const SizedBox(height: 12),
-              SegmentedButton<UserRole>(
-                segments: const [
-                  ButtonSegment(
-                    value: UserRole.level1Admin,
-                    label: Text('L1-Sys Admin'),
-                  ),
-                  ButtonSegment(
-                    value: UserRole.level2SemesterAdmin,
-                    label: Text('L2-Semester Admin'),
-                  ),
-                  ButtonSegment(
-                    value: UserRole.level3Teacher,
-                    label: Text('L3-Teacher'),
-                  ),
-                ],
-                selected: {_selectedRole},
-                onSelectionChanged: (selection) => setState(() {
-                  _selectedRole = selection.first;
-                  _credentialsReady = false;
-                }),
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _fatherSurnameController,
-                decoration: const InputDecoration(labelText: 'Father surname'),
-                validator: _requiredText,
-                onChanged: (_) => _blockCredentials(),
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _motherSurnameController,
-                decoration: const InputDecoration(labelText: 'Mother surname'),
-                validator: _requiredText,
-                onChanged: (_) => _blockCredentials(),
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
-                validator: _requiredText,
-                onChanged: (_) => _blockCredentials(),
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _curpController,
-                decoration: const InputDecoration(labelText: 'CURP'),
-                inputFormatters: [UpperCaseTextFormatter()],
-                textCapitalization: TextCapitalization.characters,
-                validator: _curpValidator,
-                onChanged: (_) => _blockCredentials(),
-              ),
-              const SizedBox(height: 16),
-              FilledButton.icon(
-                onPressed: _generateCredentials,
-                icon: const Icon(Icons.arrow_forward),
-                label: const Text('Next'),
-              ),
-            ],
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Form(
+        key: _accountFormKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text('Step 1 - Account data',
+                style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 12),
+            SegmentedButton<UserRole>(
+              segments: const [
+                ButtonSegment(
+                  value: UserRole.level1Admin,
+                  label: Text('L1'),
+                ),
+                ButtonSegment(
+                  value: UserRole.level2SemesterAdmin,
+                  label: Text('L2'),
+                ),
+                ButtonSegment(
+                  value: UserRole.level3Teacher,
+                  label: Text('L3'),
+                ),
+              ],
+              selected: {_selectedRole},
+              onSelectionChanged: (selection) => setState(() {
+                _selectedRole = selection.first;
+                _credentialsReady = false;
+              }),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _fatherSurnameController,
+              decoration: const InputDecoration(labelText: 'Father surname'),
+              validator: _requiredText,
+              onChanged: (_) => _blockCredentials(),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _motherSurnameController,
+              decoration: const InputDecoration(labelText: 'Mother surname'),
+              validator: _requiredText,
+              onChanged: (_) => _blockCredentials(),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _nameController,
+              decoration: const InputDecoration(labelText: 'Name'),
+              validator: _requiredText,
+              onChanged: (_) => _blockCredentials(),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _curpController,
+              decoration: const InputDecoration(labelText: 'CURP'),
+              inputFormatters: [UpperCaseTextFormatter()],
+              textCapitalization: TextCapitalization.characters,
+              validator: _curpValidator,
+              onChanged: (_) => _blockCredentials(),
+            ),
+            const SizedBox(height: 16),
+            FilledButton.icon(
+              onPressed: _generateCredentials,
+              icon: const Icon(Icons.arrow_forward),
+              label: const Text('Next'),
+            ),
+          ],
         ),
       ),
     );
@@ -463,54 +504,52 @@ class _AccountAdminScreenState extends State<AccountAdminScreen> {
 
   Widget _credentialsStep() {
     final blocked = !_credentialsReady;
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: AbsorbPointer(
-          absorbing: blocked,
-          child: Opacity(
-            opacity: blocked ? 0.55 : 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text('Step 2 - Account credentials',
-                    style: Theme.of(context).textTheme.titleMedium),
-                const SizedBox(height: 12),
-                TextFormField(
-                  key: ValueKey('generated-username-$_generatedUsername'),
-                  readOnly: true,
-                  initialValue: _generatedUsername,
-                  decoration:
-                      const InputDecoration(labelText: 'Generated Username'),
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  key: ValueKey('generated-password-$_generatedPassword'),
-                  readOnly: true,
-                  initialValue: _generatedPassword,
-                  decoration:
-                      const InputDecoration(labelText: 'Generated password'),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    TextButton.icon(
-                      onPressed: _backToAccountData,
-                      icon: const Icon(Icons.arrow_back),
-                      label: const Text('Back'),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: AbsorbPointer(
+        absorbing: blocked,
+        child: Opacity(
+          opacity: blocked ? 0.55 : 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('Step 2 - Account credentials',
+                  style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 12),
+              TextFormField(
+                key: ValueKey('generated-username-$_generatedUsername'),
+                readOnly: true,
+                initialValue: _generatedUsername,
+                decoration:
+                    const InputDecoration(labelText: 'Generated Username'),
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                key: ValueKey('generated-password-$_generatedPassword'),
+                readOnly: true,
+                initialValue: _generatedPassword,
+                decoration:
+                    const InputDecoration(labelText: 'Generated password'),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  TextButton.icon(
+                    onPressed: _backToAccountData,
+                    icon: const Icon(Icons.arrow_back),
+                    label: const Text('Back'),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: _createAccount,
+                      icon: const Icon(Icons.person_add_alt),
+                      label: const Text('Create account'),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: FilledButton.icon(
-                        onPressed: _createAccount,
-                        icon: const Icon(Icons.person_add_alt),
-                        label: const Text('Create account'),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -1008,8 +1047,12 @@ class _AccountCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       margin: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: ListTile(
         leading: CircleAvatar(child: Text('L${user.role.clearanceLevel}')),
         title: Text(user.displayName),

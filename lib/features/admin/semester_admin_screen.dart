@@ -7,6 +7,7 @@ import '../../core/models/school_subject.dart';
 import '../../core/models/student_enrollment.dart';
 import '../../shared/widgets/section_header.dart';
 import '../enrollment/enrollment_wizard_screen.dart';
+import 'subject_assignment_screen.dart';
 
 class SemesterAdminScreen extends StatefulWidget {
   const SemesterAdminScreen({super.key});
@@ -16,9 +17,19 @@ class SemesterAdminScreen extends StatefulWidget {
 }
 
 class _SemesterAdminScreenState extends State<SemesterAdminScreen> {
+  final _scrollController = ScrollController();
+  final _subjectCreatorKey = GlobalKey<_SubjectCreatorCardState>();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
+      controller: _scrollController,
       padding: const EdgeInsets.all(16),
       children: [
         Row(
@@ -39,7 +50,17 @@ class _SemesterAdminScreenState extends State<SemesterAdminScreen> {
           ],
         ),
         const SizedBox(height: 16),
-        _SubjectCreatorCard(onChanged: () => setState(() {})),
+        _SubjectCreatorCard(
+          key: _subjectCreatorKey,
+          onChanged: () => setState(() {}),
+        ),
+        const SizedBox(height: 12),
+        _SubjectListCard(
+          onEdit: _editSubject,
+          onAssigned: () => setState(() {}),
+        ),
+        const SizedBox(height: 12),
+        _ExtracurricularListCard(onEdit: _editSubject),
         const SizedBox(height: 12),
         _GroupAdminCard(onChanged: () => setState(() {})),
         const SizedBox(height: 12),
@@ -62,10 +83,22 @@ class _SemesterAdminScreenState extends State<SemesterAdminScreen> {
       ],
     );
   }
+
+  void _editSubject(SchoolSubject subject) {
+    _subjectCreatorKey.currentState?.loadSubject(subject);
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
 }
 
 class _SubjectCreatorCard extends StatefulWidget {
-  const _SubjectCreatorCard({required this.onChanged});
+  const _SubjectCreatorCard({
+    super.key,
+    required this.onChanged,
+  });
 
   final VoidCallback onChanged;
 
@@ -74,13 +107,15 @@ class _SubjectCreatorCard extends StatefulWidget {
 }
 
 class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
+  static const _allGroups = 'All groups';
+
   final _formKey = GlobalKey<FormState>();
   final _keyController = TextEditingController();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
+
   SchoolSubject? _editingSubject;
   bool _isExtracurricular = false;
-  int _area = 0;
   int _semester = 1;
   String _evaluationType = 'Number Evaluation';
   DateTimeRange? _dateRange;
@@ -88,12 +123,15 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
   String get _idMateria =>
       _editingSubject?.idMateria ??
       MockRepository.previewNextSubjectId(_isExtracurricular);
+
   bool get _keyInUse =>
+      !_isExtracurricular &&
       _keyController.text.trim().isNotEmpty &&
       MockRepository.subjectKeyExists(
         _keyController.text,
         exceptId: _editingSubject?.idMateria,
       );
+
   bool get _nameInUse =>
       _nameController.text.trim().isNotEmpty &&
       MockRepository.subjectNameExists(
@@ -124,7 +162,7 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
   Widget build(BuildContext context) {
     return Card(
       child: ExpansionTile(
-        initiallyExpanded: true,
+        initiallyExpanded: false,
         leading: const Icon(Icons.menu_book_outlined),
         title: const Text('Subject creator'),
         subtitle: Text(
@@ -151,56 +189,37 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
                   title: const Text('Extracurricular'),
                   subtitle: const Text('Special course or event'),
                   onChanged: _editingSubject == null
-                      ? (value) => setState(() {
+                      ? (value) {
+                          setState(() {
                             _isExtracurricular = value ?? false;
-                            _area = _isExtracurricular ? 6 : 0;
-                            _semester = _isExtracurricular ? 0 : 1;
                             _dateRange = null;
-                          })
+                            _keyController.text =
+                                _isExtracurricular ? _idMateria : '';
+                          });
+                        }
                       : null,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: DropdownButtonFormField<int>(
-                        initialValue: _area,
-                        decoration: const InputDecoration(labelText: 'Area'),
-                        items: [
-                          for (var value = 0; value <= 6; value++)
-                            DropdownMenuItem(
-                                value: value, child: Text('$value')),
-                        ],
-                        onChanged: _isExtracurricular
-                            ? null
-                            : (value) => setState(() => _area = value ?? 0),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: DropdownButtonFormField<int>(
-                        initialValue: _semester,
-                        decoration:
-                            const InputDecoration(labelText: 'Semester'),
-                        items: [
-                          if (_isExtracurricular)
-                            const DropdownMenuItem(value: 0, child: Text('0'))
-                          else
-                            for (var value = 1; value <= 6; value++)
-                              DropdownMenuItem(
-                                value: value,
-                                child: Text('$value'),
-                              ),
-                        ],
-                        onChanged: _isExtracurricular
-                            ? null
-                            : (value) => setState(() => _semester = value ?? 1),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
+                if (!_isExtracurricular) ...[
+                  DropdownButtonFormField<int>(
+                    key: ValueKey('subject-semester-$_semester'),
+                    initialValue: _semester,
+                    decoration: const InputDecoration(labelText: 'Semester'),
+                    items: [
+                      for (var semester = 1; semester <= 6; semester++)
+                        DropdownMenuItem(
+                          value: semester,
+                          child: Text('$semester'),
+                        ),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) setState(() => _semester = value);
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                ],
                 TextFormField(
                   controller: _keyController,
+                  readOnly: _isExtracurricular,
                   textCapitalization: TextCapitalization.characters,
                   inputFormatters: const [_UpperCaseTextFormatter()],
                   decoration: InputDecoration(
@@ -238,25 +257,28 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
                   ),
                   validator: _required,
                 ),
-                const SizedBox(height: 12),
-                DropdownButtonFormField<String>(
-                  initialValue: _evaluationType,
-                  decoration:
-                      const InputDecoration(labelText: 'Evaluation type'),
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'Number Evaluation',
-                      child: Text('Number Evaluation'),
+                if (!_isExtracurricular) ...[
+                  const SizedBox(height: 12),
+                  DropdownButtonFormField<String>(
+                    key: ValueKey(_evaluationType),
+                    initialValue: _evaluationType,
+                    decoration:
+                        const InputDecoration(labelText: 'Evaluation type'),
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'Number Evaluation',
+                        child: Text('Number Evaluation'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Letter Evaluation',
+                        child: Text('Letter Evaluation'),
+                      ),
+                    ],
+                    onChanged: (value) => setState(
+                      () => _evaluationType = value ?? 'Number Evaluation',
                     ),
-                    DropdownMenuItem(
-                      value: 'Letter Evaluation',
-                      child: Text('Letter Evaluation'),
-                    ),
-                  ],
-                  onChanged: (value) => setState(
-                    () => _evaluationType = value ?? 'Number Evaluation',
                   ),
-                ),
+                ],
                 if (_isExtracurricular) ...[
                   const SizedBox(height: 12),
                   OutlinedButton.icon(
@@ -299,22 +321,6 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
               ],
             ),
           ),
-          if (MockRepository.subjects.isNotEmpty) ...[
-            const Divider(height: 32),
-            for (final subject in MockRepository.subjects)
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text('${subject.idMateria} - ${subject.name}'),
-                subtitle: Text(
-                  '${subject.keyCode} | Area ${subject.area} | Semester ${subject.semester}',
-                ),
-                trailing: IconButton(
-                  tooltip: 'Edit subject',
-                  onPressed: () => _editSubject(subject),
-                  icon: const Icon(Icons.edit_outlined),
-                ),
-              ),
-          ],
         ],
       ),
     );
@@ -331,6 +337,17 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
     if (range != null) setState(() => _dateRange = range);
   }
 
+  String _formatRange(DateTimeRange range) {
+    String date(DateTime value) => '${value.day.toString().padLeft(2, '0')}/'
+        '${value.month.toString().padLeft(2, '0')}/${value.year}';
+    return '${date(range.start)} - ${date(range.end)}';
+  }
+
+  String? _required(Object? value) {
+    if (value == null || value.toString().trim().isEmpty) return 'Required';
+    return null;
+  }
+
   void _saveSubject() {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     if (_isExtracurricular && _dateRange == null) {
@@ -342,11 +359,14 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
     final subject = SchoolSubject(
       idMateria: _idMateria,
       isExtracurricular: _isExtracurricular,
-      area: _isExtracurricular ? 6 : _area,
+      area: 0,
       semester: _isExtracurricular ? 0 : _semester,
-      keyCode: _keyController.text.trim().toUpperCase(),
+      group: _isExtracurricular ? _allGroups : 'A',
+      keyCode: _isExtracurricular
+          ? _idMateria
+          : _keyController.text.trim().toUpperCase(),
       name: _nameController.text.trim().toUpperCase(),
-      evaluationType: _evaluationType,
+      evaluationType: _isExtracurricular ? 'Not applicable' : _evaluationType,
       startDate: _dateRange?.start,
       endDate: _dateRange?.end,
       description: _descriptionController.text.trim(),
@@ -359,14 +379,16 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
     _clearForm();
   }
 
-  void _editSubject(SchoolSubject subject) {
+  void loadSubject(SchoolSubject subject) {
     setState(() {
       _editingSubject = subject;
       _isExtracurricular = subject.isExtracurricular;
-      _area = subject.area;
-      _semester = subject.semester;
-      _evaluationType = subject.evaluationType;
-      _keyController.text = subject.keyCode;
+      _semester = subject.isExtracurricular ? 1 : subject.semester;
+      _evaluationType = subject.isExtracurricular
+          ? 'Number Evaluation'
+          : subject.evaluationType;
+      _keyController.text =
+          subject.isExtracurricular ? subject.idMateria : subject.keyCode;
       _nameController.text = subject.name;
       _descriptionController.text = subject.description;
       _dateRange = subject.startDate == null || subject.endDate == null
@@ -379,7 +401,6 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
     setState(() {
       _editingSubject = null;
       _isExtracurricular = false;
-      _area = 0;
       _semester = 1;
       _evaluationType = 'Number Evaluation';
       _dateRange = null;
@@ -387,6 +408,402 @@ class _SubjectCreatorCardState extends State<_SubjectCreatorCard> {
       _nameController.clear();
       _descriptionController.clear();
     });
+  }
+}
+
+enum _SubjectListFilter { notAssigned, assigned, all }
+
+class _SubjectListCard extends StatefulWidget {
+  const _SubjectListCard({
+    required this.onEdit,
+    required this.onAssigned,
+  });
+
+  final ValueChanged<SchoolSubject> onEdit;
+  final VoidCallback onAssigned;
+
+  @override
+  State<_SubjectListCard> createState() => _SubjectListCardState();
+}
+
+class _SubjectListCardState extends State<_SubjectListCard> {
+  final _searchController = TextEditingController();
+  _SubjectListFilter _filter = _SubjectListFilter.all;
+  bool _showSuggestions = false;
+
+  List<SchoolSubject> get _regularSubjects => MockRepository.subjects
+      .where((subject) => !subject.isExtracurricular)
+      .toList(growable: false);
+
+  List<SchoolSubject> get _filteredSubjects {
+    return _regularSubjects.where((subject) {
+      final assigned = MockRepository.isSubjectAssigned(subject);
+      final statusMatches = switch (_filter) {
+        _SubjectListFilter.notAssigned => !assigned,
+        _SubjectListFilter.assigned => assigned,
+        _SubjectListFilter.all => true,
+      };
+      return statusMatches && subject.matchesSearch(_searchController.text);
+    }).toList(growable: false);
+  }
+
+  List<SchoolSubject> get _suggestions {
+    final query = _searchController.text.trim();
+    if (!_showSuggestions || query.isEmpty) return const [];
+    return _regularSubjects
+        .where((subject) => subject.matchesSearch(query))
+        .take(3)
+        .toList(growable: false);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ExpansionTile(
+        initiallyExpanded: false,
+        leading: const Icon(Icons.library_books_outlined),
+        title: const Text('Subject list'),
+        subtitle: Text('${_regularSubjects.length} subjects'),
+        childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
+        children: [
+          SegmentedButton<_SubjectListFilter>(
+            showSelectedIcon: false,
+            segments: const [
+              ButtonSegment(
+                value: _SubjectListFilter.notAssigned,
+                label: Text('Not assigned'),
+              ),
+              ButtonSegment(
+                value: _SubjectListFilter.assigned,
+                label: Text('Assigned'),
+              ),
+              ButtonSegment(
+                value: _SubjectListFilter.all,
+                label: Text('All subjects'),
+              ),
+            ],
+            selected: {_filter},
+            onSelectionChanged: (selection) {
+              setState(() => _filter = selection.first);
+            },
+          ),
+          const SizedBox(height: 12),
+          _SubjectSearchField(
+            controller: _searchController,
+            onChanged: () => setState(() => _showSuggestions = true),
+            onClear: () => setState(() => _showSuggestions = false),
+          ),
+          if (_showSuggestions && _searchController.text.trim().isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Material(
+              elevation: 3,
+              borderRadius: BorderRadius.circular(8),
+              child: _suggestions.isEmpty
+                  ? const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('No matches'),
+                    )
+                  : Column(
+                      children: [
+                        for (final subject in _suggestions)
+                          ListTile(
+                            leading: const Icon(Icons.menu_book_outlined),
+                            title: Text(subject.name),
+                            subtitle: Text(
+                              '${subject.idMateria} | ${subject.keyCode}',
+                            ),
+                            onTap: () {
+                              setState(() => _showSuggestions = false);
+                              widget.onEdit(subject);
+                            },
+                          ),
+                      ],
+                    ),
+            ),
+          ],
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 500,
+            child: _filteredSubjects.isEmpty
+                ? const Center(child: Text('No subjects to show'))
+                : ListView.separated(
+                    itemCount: _filteredSubjects.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 8),
+                    itemBuilder: (context, index) {
+                      final subject = _filteredSubjects[index];
+                      return _SubjectListItem(
+                        subject: subject,
+                        assigned: MockRepository.isSubjectAssigned(subject),
+                        onEdit: () => widget.onEdit(subject),
+                        onAssign: () => _openAssignment(subject),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _openAssignment(SchoolSubject subject) async {
+    await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) => SubjectAssignmentScreen(subject: subject),
+      ),
+    );
+    if (!mounted) return;
+    setState(() {});
+    widget.onAssigned();
+  }
+}
+
+class _ExtracurricularListCard extends StatefulWidget {
+  const _ExtracurricularListCard({required this.onEdit});
+
+  final ValueChanged<SchoolSubject> onEdit;
+
+  @override
+  State<_ExtracurricularListCard> createState() =>
+      _ExtracurricularListCardState();
+}
+
+class _ExtracurricularListCardState extends State<_ExtracurricularListCard> {
+  final _searchController = TextEditingController();
+
+  List<SchoolSubject> get _subjects => MockRepository.subjects
+      .where(
+        (subject) =>
+            subject.isExtracurricular &&
+            subject.matchesSearch(_searchController.text),
+      )
+      .toList(growable: false);
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ExpansionTile(
+        initiallyExpanded: false,
+        leading: const Icon(Icons.event_note_outlined),
+        title: const Text('Extracurricular list'),
+        subtitle: const Text('Courses and special events'),
+        childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
+        children: [
+          _SubjectSearchField(
+            controller: _searchController,
+            label: 'Search extracurriculars',
+            onChanged: () => setState(() {}),
+            onClear: () => setState(() {}),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 360,
+            child: _subjects.isEmpty
+                ? const Center(child: Text('No extracurricular subjects'))
+                : ListView.separated(
+                    itemCount: _subjects.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 8),
+                    itemBuilder: (context, index) {
+                      final subject = _subjects[index];
+                      return _ExtracurricularListItem(
+                        subject: subject,
+                        onEdit: () => widget.onEdit(subject),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SubjectSearchField extends StatelessWidget {
+  const _SubjectSearchField({
+    required this.controller,
+    required this.onChanged,
+    required this.onClear,
+    this.label = 'Search subjects',
+  });
+
+  final TextEditingController controller;
+  final VoidCallback onChanged;
+  final VoidCallback onClear;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      onChanged: (_) => onChanged(),
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: const Icon(Icons.search),
+        suffixIcon: IconButton(
+          tooltip: 'Clear search',
+          onPressed: () {
+            controller.clear();
+            onClear();
+          },
+          icon: const Icon(Icons.close),
+        ),
+      ),
+    );
+  }
+}
+
+class _SubjectListItem extends StatelessWidget {
+  const _SubjectListItem({
+    required this.subject,
+    required this.assigned,
+    required this.onEdit,
+    required this.onAssign,
+  });
+
+  final SchoolSubject subject;
+  final bool assigned;
+  final VoidCallback onEdit;
+  final VoidCallback onAssign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '${subject.idMateria} - ${subject.name}',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+              _AssignmentStatus(assigned: assigned),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '${subject.keyCode} | Semester ${subject.semester} | '
+            '${subject.evaluationType}',
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: onEdit,
+                  icon: const Icon(Icons.edit_outlined),
+                  label: const Text('Edit'),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: FilledButton.tonalIcon(
+                  onPressed: onAssign,
+                  icon: const Icon(Icons.person_add_alt_outlined),
+                  label: const Text('Assign'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ExtracurricularListItem extends StatelessWidget {
+  const _ExtracurricularListItem({
+    required this.subject,
+    required this.onEdit,
+  });
+
+  final SchoolSubject subject;
+  final VoidCallback onEdit;
+
+  @override
+  Widget build(BuildContext context) {
+    final start = subject.startDate;
+    final end = subject.endDate;
+    final date = start == null || end == null
+        ? 'No date selected'
+        : '${_date(start)} - ${_date(end)}';
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${subject.idMateria} - ${subject.name}',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 4),
+                const Text('All semesters'),
+                Text(date),
+              ],
+            ),
+          ),
+          IconButton(
+            tooltip: 'Edit extracurricular subject',
+            onPressed: onEdit,
+            icon: const Icon(Icons.edit_outlined),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static String _date(DateTime value) =>
+      '${value.day.toString().padLeft(2, '0')}/'
+      '${value.month.toString().padLeft(2, '0')}/${value.year}';
+}
+
+class _AssignmentStatus extends StatelessWidget {
+  const _AssignmentStatus({required this.assigned});
+
+  final bool assigned;
+
+  @override
+  Widget build(BuildContext context) {
+    final background =
+        assigned ? const Color(0xFFDDF3E4) : const Color(0xFFFFF1C7);
+    final foreground =
+        assigned ? const Color(0xFF245C36) : const Color(0xFF725A00);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        assigned ? 'Assigned' : 'Not assigned',
+        style: TextStyle(color: foreground),
+      ),
+    );
   }
 }
 
@@ -399,7 +816,7 @@ class _GroupAdminCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ExpansionTile(
-        initiallyExpanded: true,
+        initiallyExpanded: false,
         leading: const Icon(Icons.groups_outlined),
         title: const Text('Group admin'),
         subtitle: const Text('Review capacity and assigned students.'),
@@ -914,7 +1331,20 @@ class CycleEditorScreen extends StatefulWidget {
 }
 
 class _CycleEditorScreenState extends State<CycleEditorScreen> {
+  static const _specialTests = ['R1', 'R2', 'R3', 'R4', 'TS', 'RE'];
+
+  int _currentStep = 0;
   DateTimeRange? _dateRange;
+  DateTime? _firstHalfEndDate;
+  DateTime? _secondHalfStartDate;
+  DateTimeRange? _firstHalfPlatformTests;
+  DateTimeRange? _firstHalfPresentialTests;
+  DateTimeRange? _secondHalfPlatformTests;
+  DateTimeRange? _secondHalfPresentialTests;
+  TimeOfDay _recessTime = const TimeOfDay(hour: 11, minute: 20);
+  final Map<String, DateTimeRange?> _specialTestRanges = {
+    for (final test in _specialTests) test: null,
+  };
 
   String get _cycleName {
     final range = _dateRange;
@@ -924,15 +1354,42 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
     return 'Periodo $start-$end';
   }
 
+  bool get _cycleDatesComplete =>
+      _dateRange != null &&
+      _firstHalfEndDate != null &&
+      _secondHalfStartDate != null;
+
+  bool get _regularTestsComplete =>
+      _firstHalfPlatformTests != null &&
+      _firstHalfPresentialTests != null &&
+      _secondHalfPlatformTests != null &&
+      _secondHalfPresentialTests != null;
+
+  bool get _requiredFieldsComplete =>
+      _cycleDatesComplete && _regularTestsComplete;
+
   @override
   void initState() {
     super.initState();
     final cycle = widget.cycle;
-    if (cycle != null) {
-      _dateRange = DateTimeRange(
-        start: cycle.startDate,
-        end: cycle.endDate,
-      );
+    if (cycle == null) return;
+    _dateRange = DateTimeRange(
+      start: cycle.startDate,
+      end: cycle.endDate,
+    );
+    _firstHalfEndDate = cycle.firstHalfEndDate;
+    _secondHalfStartDate = cycle.secondHalfStartDate;
+    _firstHalfPlatformTests = _toMaterialRange(cycle.firstHalfPlatformTests);
+    _firstHalfPresentialTests =
+        _toMaterialRange(cycle.firstHalfPresentialTests);
+    _secondHalfPlatformTests = _toMaterialRange(cycle.secondHalfPlatformTests);
+    _secondHalfPresentialTests =
+        _toMaterialRange(cycle.secondHalfPresentialTests);
+    _recessTime = _parseTime(cycle.recessTime);
+    for (final entry in cycle.specialTestRanges.entries) {
+      if (_specialTestRanges.containsKey(entry.key)) {
+        _specialTestRanges[entry.key] = _toMaterialRange(entry.value);
+      }
     }
   }
 
@@ -946,50 +1403,227 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          OutlinedButton.icon(
-            onPressed: _pickRange,
-            icon: const Icon(Icons.calendar_month_outlined),
-            label: Text(
-              _dateRange == null
-                  ? 'Select cycle date range'
-                  : _formatRange(_dateRange!),
-            ),
-          ),
-          const SizedBox(height: 12),
-          TextFormField(
-            key: ValueKey(_cycleName),
-            initialValue:
-                _cycleName.isEmpty ? 'Select a date range' : _cycleName,
-            readOnly: true,
-            decoration: const InputDecoration(labelText: 'Cycle name'),
-          ),
-          const SizedBox(height: 20),
-          FilledButton.icon(
-            onPressed: _dateRange == null ? null : _save,
-            icon: Icon(
-              widget.cycle == null ? Icons.add_outlined : Icons.save_outlined,
-            ),
-            label: Text(
-              widget.cycle == null ? 'Create cycle' : 'Save data',
-            ),
+          Stepper(
+            currentStep: _currentStep,
+            onStepTapped: (step) => setState(() => _currentStep = step),
+            controlsBuilder: _buildControls,
+            steps: [
+              Step(
+                title: const Text('Cycle and halves'),
+                isActive: _currentStep >= 0,
+                content: _cycleDatesStep(),
+              ),
+              Step(
+                title: const Text('Regular test dates'),
+                isActive: _currentStep >= 1,
+                content: _regularTestsStep(),
+              ),
+              Step(
+                title: const Text('Recess and special tests'),
+                isActive: _currentStep >= 2,
+                content: _specialTestsStep(),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Future<void> _pickRange() async {
+  Widget _buildControls(BuildContext context, ControlsDetails details) {
+    final isLast = _currentStep == 2;
+    final canContinue = switch (_currentStep) {
+      0 => _cycleDatesComplete,
+      1 => _regularTestsComplete,
+      _ => _requiredFieldsComplete,
+    };
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: Row(
+        children: [
+          FilledButton.icon(
+            onPressed: canContinue
+                ? isLast
+                    ? _save
+                    : () => setState(() => _currentStep += 1)
+                : null,
+            icon: Icon(
+              isLast
+                  ? widget.cycle == null
+                      ? Icons.add_outlined
+                      : Icons.save_outlined
+                  : Icons.arrow_forward,
+            ),
+            label: Text(
+              isLast
+                  ? widget.cycle == null
+                      ? 'Create cycle'
+                      : 'Save data'
+                  : 'Next',
+            ),
+          ),
+          const SizedBox(width: 8),
+          TextButton(
+            onPressed: _currentStep == 0
+                ? null
+                : () => setState(() => _currentStep -= 1),
+            child: const Text('Back'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _cycleDatesStep() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _rangeButton(
+          label: 'Cycle date range *',
+          value: _dateRange,
+          onChanged: (value) => _dateRange = value,
+        ),
+        const SizedBox(height: 12),
+        TextFormField(
+          key: ValueKey(_cycleName),
+          initialValue: _cycleName.isEmpty ? 'Select a date range' : _cycleName,
+          readOnly: true,
+          decoration: const InputDecoration(labelText: 'Cycle name'),
+        ),
+        const SizedBox(height: 12),
+        _dateButton(
+          label: 'First half ending date *',
+          value: _firstHalfEndDate,
+          onChanged: (value) => _firstHalfEndDate = value,
+        ),
+        const SizedBox(height: 12),
+        _dateButton(
+          label: 'Second half beginning date *',
+          value: _secondHalfStartDate,
+          onChanged: (value) => _secondHalfStartDate = value,
+        ),
+      ],
+    );
+  }
+
+  Widget _regularTestsStep() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _rangeButton(
+          label: 'First half platform tests *',
+          value: _firstHalfPlatformTests,
+          onChanged: (value) => _firstHalfPlatformTests = value,
+        ),
+        const SizedBox(height: 12),
+        _rangeButton(
+          label: 'First half presential tests *',
+          value: _firstHalfPresentialTests,
+          onChanged: (value) => _firstHalfPresentialTests = value,
+        ),
+        const SizedBox(height: 12),
+        _rangeButton(
+          label: 'Second half platform tests *',
+          value: _secondHalfPlatformTests,
+          onChanged: (value) => _secondHalfPlatformTests = value,
+        ),
+        const SizedBox(height: 12),
+        _rangeButton(
+          label: 'Second half presential tests *',
+          value: _secondHalfPresentialTests,
+          onChanged: (value) => _secondHalfPresentialTests = value,
+        ),
+      ],
+    );
+  }
+
+  Widget _specialTestsStep() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        OutlinedButton.icon(
+          onPressed: _pickRecessTime,
+          icon: const Icon(Icons.schedule_outlined),
+          label: Text('Recess time: ${_formatTime(_recessTime)}'),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Special test date ranges',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        const SizedBox(height: 8),
+        for (final test in _specialTests) ...[
+          _rangeButton(
+            label: '$test date range (optional)',
+            value: _specialTestRanges[test],
+            onChanged: (value) => _specialTestRanges[test] = value,
+          ),
+          if (test != _specialTests.last) const SizedBox(height: 12),
+        ],
+      ],
+    );
+  }
+
+  Widget _dateButton({
+    required String label,
+    required DateTime? value,
+    required ValueChanged<DateTime> onChanged,
+  }) {
+    return OutlinedButton.icon(
+      onPressed: () async {
+        final selected = await _selectDate(value);
+        if (selected != null) setState(() => onChanged(selected));
+      },
+      icon: const Icon(Icons.event_outlined),
+      label: Text(value == null ? label : '$label: ${_formatDate(value)}'),
+    );
+  }
+
+  Widget _rangeButton({
+    required String label,
+    required DateTimeRange? value,
+    required ValueChanged<DateTimeRange> onChanged,
+  }) {
+    return OutlinedButton.icon(
+      onPressed: () async {
+        final selected = await _selectRange(value);
+        if (selected != null) setState(() => onChanged(selected));
+      },
+      icon: const Icon(Icons.date_range_outlined),
+      label: Text(value == null ? label : '$label: ${_formatRange(value)}'),
+    );
+  }
+
+  Future<DateTime?> _selectDate(DateTime? current) {
     final now = DateTime.now();
-    final selected = await showDateRangePicker(
+    return showDatePicker(
       context: context,
       firstDate: DateTime(now.year - 10),
       lastDate: DateTime(now.year + 15),
-      initialDateRange: _dateRange,
+      initialDate: current ?? _dateRange?.start ?? now,
     );
-    if (selected != null) setState(() => _dateRange = selected);
+  }
+
+  Future<DateTimeRange?> _selectRange(DateTimeRange? current) {
+    final now = DateTime.now();
+    return showDateRangePicker(
+      context: context,
+      firstDate: DateTime(now.year - 10),
+      lastDate: DateTime(now.year + 15),
+      initialDateRange: current,
+    );
+  }
+
+  Future<void> _pickRecessTime() async {
+    final selected = await showTimePicker(
+      context: context,
+      initialTime: _recessTime,
+    );
+    if (selected != null) setState(() => _recessTime = selected);
   }
 
   void _save() {
+    if (!_requiredFieldsComplete) return;
     final range = _dateRange!;
     MockRepository.saveCycle(
       AcademicCycle(
@@ -998,9 +1632,43 @@ class _CycleEditorScreenState extends State<CycleEditorScreen> {
         name: _cycleName,
         startDate: range.start,
         endDate: range.end,
+        firstHalfEndDate: _firstHalfEndDate!,
+        secondHalfStartDate: _secondHalfStartDate!,
+        firstHalfPlatformTests: _toAcademicRange(_firstHalfPlatformTests!),
+        firstHalfPresentialTests: _toAcademicRange(_firstHalfPresentialTests!),
+        secondHalfPlatformTests: _toAcademicRange(_secondHalfPlatformTests!),
+        secondHalfPresentialTests:
+            _toAcademicRange(_secondHalfPresentialTests!),
+        recessTime: _formatTime(_recessTime),
+        specialTestRanges: {
+          for (final entry in _specialTestRanges.entries)
+            if (entry.value != null) entry.key: _toAcademicRange(entry.value!),
+        },
       ),
     );
     Navigator.of(context).pop();
+  }
+
+  static DateTimeRange _toMaterialRange(AcademicDateRange range) {
+    return DateTimeRange(start: range.start, end: range.end);
+  }
+
+  static AcademicDateRange _toAcademicRange(DateTimeRange range) {
+    return AcademicDateRange(start: range.start, end: range.end);
+  }
+
+  static TimeOfDay _parseTime(String value) {
+    final parts = value.split(':');
+    if (parts.length != 2) return const TimeOfDay(hour: 11, minute: 20);
+    return TimeOfDay(
+      hour: int.tryParse(parts.first) ?? 11,
+      minute: int.tryParse(parts.last) ?? 20,
+    );
+  }
+
+  static String _formatTime(TimeOfDay value) {
+    return '${value.hour.toString().padLeft(2, '0')}:'
+        '${value.minute.toString().padLeft(2, '0')}';
   }
 }
 
@@ -1014,10 +1682,6 @@ class _UpperCaseTextFormatter extends TextInputFormatter {
   ) {
     return newValue.copyWith(text: newValue.text.toUpperCase());
   }
-}
-
-String? _required(String? value) {
-  return value == null || value.trim().isEmpty ? 'Required' : null;
 }
 
 String _formatDate(DateTime date) {

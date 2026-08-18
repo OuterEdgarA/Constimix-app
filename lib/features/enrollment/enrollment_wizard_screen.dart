@@ -56,6 +56,12 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     'Doctorado'
   ];
   static const _civilStatuses = ['Single', 'Married', 'Widowed', 'Free Union'];
+  static const _areas = [
+    'Physics',
+    'Biological',
+    'Economics',
+    'Humanities',
+  ];
 
   final _formKey = GlobalKey<FormState>();
   late final String _registration;
@@ -83,6 +89,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   int _currentStep = 0;
   int _semester = 1;
   String _group = 'A';
+  String? _area;
   String? _medicalProvider;
   String? _genre;
   String? _bloodType;
@@ -245,31 +252,66 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         onChanged: (value) {
           if (value == null) return;
           setState(() {
+            final wasAdvanced = _isAdvancedSemester;
             _semester = value;
-            final groups = _groupOptionsForSemester();
-            _group = groups.contains(_group) ? _group : groups.first;
+            if (_isAdvancedSemester) {
+              if (!wasAdvanced) _area = null;
+              if (_area != null) _group = _groupForArea(_area!);
+            } else {
+              _area = null;
+              final groups = _groupOptionsForSemester();
+              _group = groups.contains(_group) ? _group : groups.first;
+            }
           });
         },
         validator: _requiredDropdown,
       ),
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
-        key: ValueKey('group-$_semester-$_group-${groupOptions.join()}'),
-        initialValue: _group,
-        decoration: const InputDecoration(labelText: 'Group'),
+        key: ValueKey(
+          'group-$_semester-$_group-${groupOptions.join()}-${_area ?? 'none'}',
+        ),
+        initialValue: _isAdvancedSemester && _area == null ? null : _group,
+        decoration: InputDecoration(
+          labelText: 'Group',
+          helperText: _isAdvancedSemester
+              ? 'Group is assigned from the selected area.'
+              : null,
+        ),
         items: [
           for (final group in groupOptions)
             DropdownMenuItem(value: group, child: Text(group))
         ],
-        onChanged: (value) {
-          if (value == null) return;
-          setState(() => _group = value);
-        },
+        onChanged: _isAdvancedSemester
+            ? null
+            : (value) {
+                if (value == null) return;
+                setState(() => _group = value);
+              },
         validator: _requiredDropdown,
       ),
       if (_isAdvancedSemester) ...[
         const SizedBox(height: 12),
-        _ReadOnlyField(label: 'Area', value: _areaForGroup(_group))
+        DropdownButtonFormField<String>(
+          key: ValueKey('area-$_semester-${_area ?? 'none'}'),
+          initialValue: _area,
+          decoration: const InputDecoration(
+            labelText: 'Area',
+            helperText: 'Choose an area to assign the group.',
+          ),
+          items: [
+            for (final area in _areas)
+              DropdownMenuItem(value: area, child: Text(area)),
+          ],
+          onChanged: (value) {
+            if (value == null) return;
+            setState(() {
+              _area = value;
+              _group = _groupForArea(value);
+            });
+          },
+          validator: _requiredDropdown,
+        ),
       ],
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
@@ -531,6 +573,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
 
     _semester = enrollment.semester;
     _group = enrollment.group;
+    _area = _semester >= 5 ? _areaForGroup(_group) : null;
     _medicalProvider = enrollment.medicalProvider;
     _genre = enrollment.genre;
     _bloodType = enrollment.bloodType;
@@ -581,6 +624,16 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       'C' => 'Economics',
       'D' => 'Humanities',
       _ => '',
+    };
+  }
+
+  String _groupForArea(String area) {
+    return switch (area) {
+      'Physics' => 'A',
+      'Biological' => 'B',
+      'Economics' => 'C',
+      'Humanities' => 'D',
+      _ => 'A',
     };
   }
 

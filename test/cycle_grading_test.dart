@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:constimix_app/core/data/mock_repository.dart';
+import 'package:constimix_app/core/models/cycle_subject_assignment.dart';
+import 'package:constimix_app/core/models/school_subject.dart';
 import 'package:constimix_app/core/models/student_grade_entry.dart';
 import 'package:constimix_app/features/academics/grades_screen.dart';
 import 'package:constimix_app/features/admin/semester_admin_screen.dart';
@@ -116,5 +118,84 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Grade details'), findsOneWidget);
     expect(find.widgetWithText(FilledButton, 'OK'), findsOneWidget);
+  });
+
+  test('one subject supports multiple teachers across groups', () {
+    MockRepository.setActiveCycle('cycle-26-26');
+    const subject = SchoolSubject(
+      idMateria: '9001',
+      isExtracurricular: false,
+      area: 0,
+      semester: 1,
+      group: 'A',
+      keyCode: 'ESP-TEST',
+      name: 'SPANISH TEST',
+      evaluationType: 'Number Evaluation',
+    );
+    MockRepository.saveSubject(subject);
+    expect(MockRepository.isSubjectAssigned(subject), isFalse);
+
+    for (final assignment in const [
+      CycleSubjectAssignment(
+        id: 'spanish-test-a',
+        subjectId: '9001',
+        cycleId: 'cycle-26-26',
+        subjectName: 'SPANISH TEST',
+        teacherName: 'CARLOS GONZALES',
+        teacherUserId: 'teacher-carlos',
+        semester: 1,
+        group: 'A',
+        evaluationMode: 'Number Evaluation',
+      ),
+      CycleSubjectAssignment(
+        id: 'spanish-test-b',
+        subjectId: '9001',
+        cycleId: 'cycle-26-26',
+        subjectName: 'SPANISH TEST',
+        teacherName: 'CARLOS GONZALES',
+        teacherUserId: 'teacher-carlos',
+        semester: 1,
+        group: 'B',
+        evaluationMode: 'Number Evaluation',
+      ),
+      CycleSubjectAssignment(
+        id: 'spanish-test-c',
+        subjectId: '9001',
+        cycleId: 'cycle-26-26',
+        subjectName: 'SPANISH TEST',
+        teacherName: 'SANDRA GUZMAN',
+        teacherUserId: 'teacher-sandra',
+        semester: 1,
+        group: 'C',
+        evaluationMode: 'Number Evaluation',
+      ),
+      CycleSubjectAssignment(
+        id: 'spanish-test-d',
+        subjectId: '9001',
+        cycleId: 'cycle-26-26',
+        subjectName: 'SPANISH TEST',
+        teacherName: 'SANDRA GUZMAN',
+        teacherUserId: 'teacher-sandra',
+        semester: 1,
+        group: 'D',
+        evaluationMode: 'Number Evaluation',
+      ),
+    ]) {
+      MockRepository.saveSubjectAssignment(assignment);
+    }
+
+    final assignments = MockRepository.assignmentsForSubject(subject);
+    expect(assignments, hasLength(4));
+    expect(
+      MockRepository.subjectAssignmentsFor(MockRepository.users.first).where(
+        (assignment) => assignment.subjectId == subject.idMateria,
+      ),
+      hasLength(4),
+    );
+    expect(MockRepository.isSubjectAssigned(subject), isTrue);
+    expect(
+      assignments.where((item) => item.teacherName == 'CARLOS GONZALES'),
+      hasLength(2),
+    );
   });
 }
