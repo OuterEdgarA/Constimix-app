@@ -1,8 +1,8 @@
 {
-  "last_sync_commit": "e1abf4e67c3edaa643afc7bf4e46450f3db1b4c6",
+  "last_sync_commit": "167ef538a8dc147b498bf5debf48a4f723fd2180",
   "docs_mode": "deterministic",
   "docs_enabled": false,
-  "total_pages": 170,
+  "total_pages": 173,
   "run_mode": "standard",
   "git_tier": "full",
   "include_submodules": false,
@@ -34,17 +34,17 @@
   },
   "knowledge_graph": {
     "version": "1.0.0",
-    "node_count": 331,
+    "node_count": 339,
     "layer_count": 7,
     "tour_steps": 12,
     "has_summaries": true,
-    "fingerprint": "7268ab6ecc1c1a33"
+    "fingerprint": "a9cb9e77f85c9eca"
   },
   "config_fingerprint": "3b17bbe50094b67729a3293dea14fa7cba966f156e56e5c0ee8811b03b26e20f",
   "health_analyzer_version": 1,
   "last_full_rescore_at": 1787075278.0,
   "store_format_version": 2,
   "written_by_version": "0.42.0",
-  "last_docs_commit": "e1abf4e67c3edaa643afc7bf4e46450f3db1b4c6",
+  "last_docs_commit": "167ef538a8dc147b498bf5debf48a4f723fd2180",
   "renderer_fingerprint": "86dad22a253142b3657f0ba46bfbf33c73308ea93e8c60c0a57fdeeceb484028:9a51bd73f8500333af22ab47eca710386c9116a557f804fd1af07a5cdbe09800"
 }

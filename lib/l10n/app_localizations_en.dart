@@ -34,4 +34,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidCredentials => 'Invalid credentials.';
+
+  @override
+  String get navHome => 'Home';
+
+  @override
+  String get navBoard => 'Board';
+
+  @override
+  String get navEnroll => 'Enroll';
+
+  @override
+  String get navSchedule => 'Schedule';
+
+  @override
+  String get navGrades => 'Grades';
+
+  @override
+  String get navProfile => 'Profile';
+
+  @override
+  String get navAdmin => 'Admin';
+
+  @override
+  String get useLightMode => 'Use light mode';
+
+  @override
+  String get useDarkMode => 'Use dark mode';
 }

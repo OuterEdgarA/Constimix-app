@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../l10n/app_localizations.dart';
 import '../../core/data/mock_repository.dart';
 import '../../core/models/app_user.dart';
 import '../../core/models/user_role.dart';
@@ -38,9 +38,9 @@ class _DashboardShellState extends State<DashboardShell> {
   final SyncQueue _syncQueue = SyncQueue();
   int _selectedIndex = 0;
 
-  late final List<_Destination> _destinations = [
+  List<_Destination> _buildDestinations(AppLocalizations l10n) => [
     _Destination(
-      label: 'Home',
+      label: l10n.navHome,
       icon: Icons.dashboard_outlined,
       selectedIcon: Icons.dashboard,
       builder: (_) => _HomeScreen(
@@ -49,26 +49,26 @@ class _DashboardShellState extends State<DashboardShell> {
       ),
     ),
     _Destination(
-      label: 'Board',
+      label: l10n.navBoard,
       icon: Icons.forum_outlined,
       selectedIcon: Icons.forum,
       builder: (_) => CommunityBoardScreen(currentUser: widget.currentUser),
     ),
     if (widget.currentUser.role.canManageEnrollment)
       _Destination(
-        label: 'Enroll',
+        label: l10n.navEnroll,
         icon: Icons.app_registration_outlined,
         selectedIcon: Icons.app_registration,
         builder: (_) => const EnrollmentTableScreen(canManageActivation: true),
       ),
     _Destination(
-      label: 'Schedule',
+      label: l10n.navSchedule,
       icon: Icons.calendar_month_outlined,
       selectedIcon: Icons.calendar_month,
       builder: (_) => ScheduleScreen(currentUser: widget.currentUser),
     ),
     _Destination(
-      label: 'Grades',
+      label: l10n.navGrades,
       icon: Icons.fact_check_outlined,
       selectedIcon: Icons.fact_check,
       builder: (_) => GradesScreen(currentUser: widget.currentUser),
@@ -76,7 +76,7 @@ class _DashboardShellState extends State<DashboardShell> {
     if (widget.currentUser.role == UserRole.level3Teacher ||
         widget.currentUser.role == UserRole.level4Student)
       _Destination(
-        label: 'Profile',
+        label: l10n.navProfile,
         icon: Icons.person_outline,
         selectedIcon: Icons.person,
         builder: (_) => LimitedProfileScreen(
@@ -89,7 +89,7 @@ class _DashboardShellState extends State<DashboardShell> {
     if (widget.currentUser.role == UserRole.level1Admin ||
         widget.currentUser.role == UserRole.level2SemesterAdmin)
       _Destination(
-        label: 'Admin',
+        label: l10n.navAdmin,
         icon: Icons.admin_panel_settings_outlined,
         selectedIcon: Icons.admin_panel_settings,
         builder: (_) => widget.currentUser.role == UserRole.level1Admin
@@ -106,14 +106,16 @@ class _DashboardShellState extends State<DashboardShell> {
 
   @override
   Widget build(BuildContext context) {
-    final selected = _destinations[_selectedIndex];
+    final l10n = AppLocalizations.of(context)!;
+    final destinations = _buildDestinations(l10n);
+    final selected = destinations[_selectedIndex];
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('#YoSoyConstiMix'),
         actions: [
           Tooltip(
-            message: widget.isDarkMode ? 'Use light mode' : 'Use dark mode',
+            message: widget.isDarkMode ? l10n.useLightMode : l10n.useDarkMode,
             child: Switch.adaptive(
               value: widget.isDarkMode,
               onChanged: widget.onThemeChanged,
@@ -129,7 +131,7 @@ class _DashboardShellState extends State<DashboardShell> {
           setState(() => _selectedIndex = index);
         },
         destinations: [
-          for (final destination in _destinations)
+          for (final destination in destinations)
             NavigationDestination(
               icon: Icon(destination.icon),
               selectedIcon: Icon(destination.selectedIcon),

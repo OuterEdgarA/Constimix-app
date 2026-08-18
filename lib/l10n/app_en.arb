@@ -8,5 +8,14 @@
       "passwordOrRegistration": "Password or registration",
       "signIn": "Sign in",
       "studentSignUp": "Student sign up",
-      "invalidCredentials": "Invalid credentials."
+      "invalidCredentials": "Invalid credentials.",
+      "navHome": "Home",
+      "navBoard": "Board",
+      "navEnroll": "Enroll",
+      "navSchedule": "Schedule",
+      "navGrades": "Grades",
+      "navProfile": "Profile",
+      "navAdmin": "Admin",
+      "useLightMode": "Use light mode",
+      "useDarkMode": "Use dark mode"
     }

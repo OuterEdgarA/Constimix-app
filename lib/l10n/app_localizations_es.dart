@@ -34,6 +34,33 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get invalidCredentials => 'Invalid credentials.';
+
+  @override
+  String get navHome => 'Home';
+
+  @override
+  String get navBoard => 'Board';
+
+  @override
+  String get navEnroll => 'Enroll';
+
+  @override
+  String get navSchedule => 'Schedule';
+
+  @override
+  String get navGrades => 'Grades';
+
+  @override
+  String get navProfile => 'Profile';
+
+  @override
+  String get navAdmin => 'Admin';
+
+  @override
+  String get useLightMode => 'Use light mode';
+
+  @override
+  String get useDarkMode => 'Use dark mode';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -66,4 +93,31 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get invalidCredentials => 'Credenciales incorrectas.';
+
+  @override
+  String get navHome => 'Inicio';
+
+  @override
+  String get navBoard => 'Comunidad';
+
+  @override
+  String get navEnroll => 'Matrícula';
+
+  @override
+  String get navSchedule => 'Horario';
+
+  @override
+  String get navGrades => 'Calificaciones';
+
+  @override
+  String get navProfile => 'Perfil';
+
+  @override
+  String get navAdmin => 'Administrador';
+
+  @override
+  String get useLightMode => 'Usar modo claro';
+
+  @override
+  String get useDarkMode => 'Usar modo oscuro';
 }

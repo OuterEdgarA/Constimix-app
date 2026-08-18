@@ -8,5 +8,16 @@
       "passwordOrRegistration": "Contraseña o Matrícula",
       "signIn": "Iniciar Sesión",
       "studentSignUp": "Registro",
-      "invalidCredentials": "Credenciales incorrectas."
+      "invalidCredentials": "Credenciales incorrectas.",
+      "studentSignUp": "Registro",
+      "invalidCredentials": "Credenciales incorrectas.",
+      "navHome": "Inicio",
+      "navBoard": "Comunidad",
+      "navEnroll": "Matrícula",
+      "navSchedule": "Horario",
+      "navGrades": "Calificaciones",
+      "navProfile": "Perfil",
+      "navAdmin": "Administrador",
+      "useLightMode": "Usar modo claro",
+      "useDarkMode": "Usar modo oscuro"
     }

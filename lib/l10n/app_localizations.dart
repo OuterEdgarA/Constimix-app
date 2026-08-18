@@ -152,6 +152,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid credentials.'**
   String get invalidCredentials;
+
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// No description provided for @navBoard.
+  ///
+  /// In en, this message translates to:
+  /// **'Board'**
+  String get navBoard;
+
+  /// No description provided for @navEnroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Enroll'**
+  String get navEnroll;
+
+  /// No description provided for @navSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule'**
+  String get navSchedule;
+
+  /// No description provided for @navGrades.
+  ///
+  /// In en, this message translates to:
+  /// **'Grades'**
+  String get navGrades;
+
+  /// No description provided for @navProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get navProfile;
+
+  /// No description provided for @navAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get navAdmin;
+
+  /// No description provided for @useLightMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Use light mode'**
+  String get useLightMode;
+
+  /// No description provided for @useDarkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Use dark mode'**
+  String get useDarkMode;
 }
 
 class _AppLocalizationsDelegate
