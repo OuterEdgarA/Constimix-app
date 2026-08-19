@@ -163,5 +163,70 @@
             "type": "String"
           }
         }
-      }
+      },
+      "studentEnrollment": "Student enrollment",
+      "editStudentEnrollment": "Edit student enrollment",
+      "reviewSevenStepsBeforeSaving": "Review all seven steps before saving.",
+      "completeSixStepsToCreateLevel4": "Complete the six steps to create a level 4 account.",
+      
+      "schoolData": "School data",
+      "studentData": "Student data",
+      "studentContact": "Student contact",
+      "tutorData": "Tutor data",
+      "tutorContact": "Tutor contact",
+      "additionalInfo": "Additional info",
+      "transferredSubjects": "Transferred subjects",
+      
+      "next": "Next",
+      "back": "Back",
+      "disableUser": "Disable user",
+      "enableUser": "Enable user",
+      "studentAccountEnabled": "Student account enabled.",
+      "studentAccountDisabled": "Student account disabled.",
+      "completeRequiredFieldsBeforeSaving": "Complete every required field before saving.",
+      
+      "studentSavedWithRegistration": "Student saved with registration {registration}.",
+      "@studentSavedWithRegistration": {
+        "placeholders": {
+          "registration": {
+            "type": "String"
+          }
+        }
+      },
+      "registration": "Registration",
+      "semester": "Semester",
+      "group": "Group",
+      "groupAssignedFromArea": "Group is assigned from the selected area.",
+      "area": "Area",
+      "chooseAreaToAssignGroup": "Choose an area to assign the group.",
+      
+      "areaPhysics": "Physics",
+      "areaBiological": "Biological",
+      "areaEconomics": "Economics",
+      "areaHumanities": "Humanities",
+      
+      "medicalProvider": "Medical provider",
+      "medicalProviderPrivate": "Private",
+      "medicalProviderMarineMilitary": "Marine/Military",
+      
+      "selectEquipmentAccess": "Select the ones you have access to",
+      "equipmentCellphone": "Cellphone",
+      "equipmentTablet": "Tablet",
+      "equipmentComputer": "Laptop/PC",
+      "equipmentInternet": "Internet",
+      "equipmentNone": "None",
+      "studentFatherSurname": "Student father surname",
+      "studentMotherSurname": "Student mother surname",
+      "studentName": "Student name",
+      "studentCurp": "Student CURP",
+      
+      "sex": "Sex",
+      "sexMale": "Male",
+      "sexFemale": "Female",
+      
+      "bloodType": "Blood type",
+      "placeOfBirth": "Place of birth",
+      
+      "curpMustBe18Characters": "CURP must be 18 characters",
+      "openMapSelector": "Open map selector"  
     }

@@ -292,4 +292,157 @@ class AppLocalizationsEn extends AppLocalizations {
   String emailValue(String email) {
     return 'Email: $email';
   }
+
+  @override
+  String get studentEnrollment => 'Student enrollment';
+
+  @override
+  String get editStudentEnrollment => 'Edit student enrollment';
+
+  @override
+  String get reviewSevenStepsBeforeSaving =>
+      'Review all seven steps before saving.';
+
+  @override
+  String get completeSixStepsToCreateLevel4 =>
+      'Complete the six steps to create a level 4 account.';
+
+  @override
+  String get schoolData => 'School data';
+
+  @override
+  String get studentData => 'Student data';
+
+  @override
+  String get studentContact => 'Student contact';
+
+  @override
+  String get tutorData => 'Tutor data';
+
+  @override
+  String get tutorContact => 'Tutor contact';
+
+  @override
+  String get additionalInfo => 'Additional info';
+
+  @override
+  String get transferredSubjects => 'Transferred subjects';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get disableUser => 'Disable user';
+
+  @override
+  String get enableUser => 'Enable user';
+
+  @override
+  String get studentAccountEnabled => 'Student account enabled.';
+
+  @override
+  String get studentAccountDisabled => 'Student account disabled.';
+
+  @override
+  String get completeRequiredFieldsBeforeSaving =>
+      'Complete every required field before saving.';
+
+  @override
+  String studentSavedWithRegistration(String registration) {
+    return 'Student saved with registration $registration.';
+  }
+
+  @override
+  String get registration => 'Registration';
+
+  @override
+  String get semester => 'Semester';
+
+  @override
+  String get group => 'Group';
+
+  @override
+  String get groupAssignedFromArea =>
+      'Group is assigned from the selected area.';
+
+  @override
+  String get area => 'Area';
+
+  @override
+  String get chooseAreaToAssignGroup => 'Choose an area to assign the group.';
+
+  @override
+  String get areaPhysics => 'Physics';
+
+  @override
+  String get areaBiological => 'Biological';
+
+  @override
+  String get areaEconomics => 'Economics';
+
+  @override
+  String get areaHumanities => 'Humanities';
+
+  @override
+  String get medicalProvider => 'Medical provider';
+
+  @override
+  String get medicalProviderPrivate => 'Private';
+
+  @override
+  String get medicalProviderMarineMilitary => 'Marine/Military';
+
+  @override
+  String get selectEquipmentAccess => 'Select the ones you have access to';
+
+  @override
+  String get equipmentCellphone => 'Cellphone';
+
+  @override
+  String get equipmentTablet => 'Tablet';
+
+  @override
+  String get equipmentComputer => 'Laptop/PC';
+
+  @override
+  String get equipmentInternet => 'Internet';
+
+  @override
+  String get equipmentNone => 'None';
+
+  @override
+  String get studentFatherSurname => 'Student father surname';
+
+  @override
+  String get studentMotherSurname => 'Student mother surname';
+
+  @override
+  String get studentName => 'Student name';
+
+  @override
+  String get studentCurp => 'Student CURP';
+
+  @override
+  String get sex => 'Sex';
+
+  @override
+  String get sexMale => 'Male';
+
+  @override
+  String get sexFemale => 'Female';
+
+  @override
+  String get bloodType => 'Blood type';
+
+  @override
+  String get placeOfBirth => 'Place of birth';
+
+  @override
+  String get curpMustBe18Characters => 'CURP must be 18 characters';
+
+  @override
+  String get openMapSelector => 'Open map selector';
 }

@@ -620,6 +620,300 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Email: {email}'**
   String emailValue(String email);
+
+  /// No description provided for @studentEnrollment.
+  ///
+  /// In en, this message translates to:
+  /// **'Student enrollment'**
+  String get studentEnrollment;
+
+  /// No description provided for @editStudentEnrollment.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit student enrollment'**
+  String get editStudentEnrollment;
+
+  /// No description provided for @reviewSevenStepsBeforeSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Review all seven steps before saving.'**
+  String get reviewSevenStepsBeforeSaving;
+
+  /// No description provided for @completeSixStepsToCreateLevel4.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete the six steps to create a level 4 account.'**
+  String get completeSixStepsToCreateLevel4;
+
+  /// No description provided for @schoolData.
+  ///
+  /// In en, this message translates to:
+  /// **'School data'**
+  String get schoolData;
+
+  /// No description provided for @studentData.
+  ///
+  /// In en, this message translates to:
+  /// **'Student data'**
+  String get studentData;
+
+  /// No description provided for @studentContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Student contact'**
+  String get studentContact;
+
+  /// No description provided for @tutorData.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor data'**
+  String get tutorData;
+
+  /// No description provided for @tutorContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor contact'**
+  String get tutorContact;
+
+  /// No description provided for @additionalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional info'**
+  String get additionalInfo;
+
+  /// No description provided for @transferredSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Transferred subjects'**
+  String get transferredSubjects;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @disableUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable user'**
+  String get disableUser;
+
+  /// No description provided for @enableUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable user'**
+  String get enableUser;
+
+  /// No description provided for @studentAccountEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Student account enabled.'**
+  String get studentAccountEnabled;
+
+  /// No description provided for @studentAccountDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Student account disabled.'**
+  String get studentAccountDisabled;
+
+  /// No description provided for @completeRequiredFieldsBeforeSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete every required field before saving.'**
+  String get completeRequiredFieldsBeforeSaving;
+
+  /// No description provided for @studentSavedWithRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Student saved with registration {registration}.'**
+  String studentSavedWithRegistration(String registration);
+
+  /// No description provided for @registration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get registration;
+
+  /// No description provided for @semester.
+  ///
+  /// In en, this message translates to:
+  /// **'Semester'**
+  String get semester;
+
+  /// No description provided for @group.
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get group;
+
+  /// No description provided for @groupAssignedFromArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Group is assigned from the selected area.'**
+  String get groupAssignedFromArea;
+
+  /// No description provided for @area.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get area;
+
+  /// No description provided for @chooseAreaToAssignGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an area to assign the group.'**
+  String get chooseAreaToAssignGroup;
+
+  /// No description provided for @areaPhysics.
+  ///
+  /// In en, this message translates to:
+  /// **'Physics'**
+  String get areaPhysics;
+
+  /// No description provided for @areaBiological.
+  ///
+  /// In en, this message translates to:
+  /// **'Biological'**
+  String get areaBiological;
+
+  /// No description provided for @areaEconomics.
+  ///
+  /// In en, this message translates to:
+  /// **'Economics'**
+  String get areaEconomics;
+
+  /// No description provided for @areaHumanities.
+  ///
+  /// In en, this message translates to:
+  /// **'Humanities'**
+  String get areaHumanities;
+
+  /// No description provided for @medicalProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical provider'**
+  String get medicalProvider;
+
+  /// No description provided for @medicalProviderPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Private'**
+  String get medicalProviderPrivate;
+
+  /// No description provided for @medicalProviderMarineMilitary.
+  ///
+  /// In en, this message translates to:
+  /// **'Marine/Military'**
+  String get medicalProviderMarineMilitary;
+
+  /// No description provided for @selectEquipmentAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the ones you have access to'**
+  String get selectEquipmentAccess;
+
+  /// No description provided for @equipmentCellphone.
+  ///
+  /// In en, this message translates to:
+  /// **'Cellphone'**
+  String get equipmentCellphone;
+
+  /// No description provided for @equipmentTablet.
+  ///
+  /// In en, this message translates to:
+  /// **'Tablet'**
+  String get equipmentTablet;
+
+  /// No description provided for @equipmentComputer.
+  ///
+  /// In en, this message translates to:
+  /// **'Laptop/PC'**
+  String get equipmentComputer;
+
+  /// No description provided for @equipmentInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Internet'**
+  String get equipmentInternet;
+
+  /// No description provided for @equipmentNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get equipmentNone;
+
+  /// No description provided for @studentFatherSurname.
+  ///
+  /// In en, this message translates to:
+  /// **'Student father surname'**
+  String get studentFatherSurname;
+
+  /// No description provided for @studentMotherSurname.
+  ///
+  /// In en, this message translates to:
+  /// **'Student mother surname'**
+  String get studentMotherSurname;
+
+  /// No description provided for @studentName.
+  ///
+  /// In en, this message translates to:
+  /// **'Student name'**
+  String get studentName;
+
+  /// No description provided for @studentCurp.
+  ///
+  /// In en, this message translates to:
+  /// **'Student CURP'**
+  String get studentCurp;
+
+  /// No description provided for @sex.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex'**
+  String get sex;
+
+  /// No description provided for @sexMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get sexMale;
+
+  /// No description provided for @sexFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get sexFemale;
+
+  /// No description provided for @bloodType.
+  ///
+  /// In en, this message translates to:
+  /// **'Blood type'**
+  String get bloodType;
+
+  /// No description provided for @placeOfBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Place of birth'**
+  String get placeOfBirth;
+
+  /// No description provided for @curpMustBe18Characters.
+  ///
+  /// In en, this message translates to:
+  /// **'CURP must be 18 characters'**
+  String get curpMustBe18Characters;
+
+  /// No description provided for @openMapSelector.
+  ///
+  /// In en, this message translates to:
+  /// **'Open map selector'**
+  String get openMapSelector;
 }
 
 class _AppLocalizationsDelegate

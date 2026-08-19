@@ -91,5 +91,63 @@
       "registrationValue": "Matrícula: {registration}",
       "curpValue": "CURP: {curp}",
       "semesterGroupValue": "Semestre {semester} | Grupo {group}",
-      "emailValue": "Correo: {email}"
+      "emailValue": "Correo: {email}",
+      "studentEnrollment": "Inscripción del estudiante",
+      "editStudentEnrollment": "Editar registro del estudiante",
+      "reviewSevenStepsBeforeSaving": "Revisa tus datos antes de guardarlos.",
+      "completeSixStepsToCreateLevel4": "Completa los seis pasos para inscribirte.",
+      
+      "schoolData": "Datos escolares",
+      "studentData": "Datos del estudiante",
+      "studentContact": "Datos de contacto",
+      "tutorData": "Datos del tutor",
+      "tutorContact": "Datos de contacto del tutor",
+      "additionalInfo": "Información adicional",
+      "transferredSubjects": "Equivalencia de materias",
+      
+      "next": "Siguiente",
+      "back": "Atrás",
+      "disableUser": "Desactivar usuario",
+      "enableUser": "Activar usuario",
+      "studentAccountEnabled": "Cuenta del estudiante activada.",
+      "studentAccountDisabled": "Cuenta del estudiante desactivada.",
+      "completeRequiredFieldsBeforeSaving": "Llena todos los campos obligatorios antes de guardar.",
+      
+      "studentSavedWithRegistration": "Estudiante guardado, matrícula: {registration}.",
+      "registration": "Matrícula",
+      "semester": "Semestre",
+      "group": "Grupo",
+      "groupAssignedFromArea": "El grupo depende del área seleccionada.",
+      "area": "Área",
+      "chooseAreaToAssignGroup": "Selecciona un área.",
+      
+      "areaPhysics": "Físico-Matemáticas",
+      "areaBiological": "Químico-Biológicas",
+      "areaEconomics": "Económico-Administrativas",
+      "areaHumanities": "Humanidades y ciencias sociales",
+      
+      "medicalProvider": "Servicio médico",
+      "medicalProviderPrivate": "Particular",
+      "medicalProviderMarineMilitary": "Marina/Militar",
+      
+      "selectEquipmentAccess": "Selecciona los dispositivos a los que tienes acceso",
+      "equipmentCellphone": "Teléfono celular",
+      "equipmentTablet": "Tableta",
+      "equipmentComputer": "Computadora/Laptop",
+      "equipmentInternet": "Internet",
+      "equipmentNone": "Ninguno",
+      "studentFatherSurname": "Apellido paterno",
+      "studentMotherSurname": "Apellido materno",
+      "studentName": "Nombre(s)",
+      "studentCurp": "CURP",
+      
+      "sex": "Sexo",
+      "sexMale": "Masculino",
+      "sexFemale": "Femenino",
+      
+      "bloodType": "Tipo de sangre",
+      "placeOfBirth": "Lugar de nacimiento",
+      
+      "curpMustBe18Characters": "La CURP debe tener 18 caracteres",
+      "openMapSelector": "Abrir mapa"
     }

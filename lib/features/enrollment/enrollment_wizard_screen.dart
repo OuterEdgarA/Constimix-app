@@ -7,6 +7,7 @@ import 'package:latlong2/latlong.dart';
 import '../../core/data/mock_repository.dart';
 import '../../core/models/cycle_subject_assignment.dart';
 import '../../core/models/student_enrollment.dart';
+import '../../l10n/app_localizations.dart';
 import '../../core/services/address_suggestion_service.dart';
 import '../../core/services/phone_code_service.dart';
 import '../../shared/widgets/section_header.dart';
@@ -166,6 +167,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final content = Form(
       key: _formKey,
       child: ListView(
@@ -173,11 +175,11 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         children: [
           SectionHeader(
               title: widget.initialEnrollment == null
-                  ? 'Student enrollment'
-                  : 'Edit student enrollment',
+                  ? l10n.studentEnrollment
+                  : l10n.editStudentEnrollment,
               subtitle: _canManageTransferredSubjects
-                  ? 'Review all seven steps before saving.'
-                  : 'Complete the six steps to create a level 4 account.'),
+                  ? l10n.reviewSevenStepsBeforeSaving
+                  : l10n.completeSixStepsToCreateLevel4),
           const SizedBox(height: 16),
           Stepper(
             currentStep: _currentStep,
@@ -185,32 +187,32 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
             controlsBuilder: _buildControls,
             steps: [
               Step(
-                  title: const Text('School data'),
+                  title: Text(l10n.schoolData),
                   isActive: _currentStep == 0,
                   content: _schoolDataStep()),
               Step(
-                  title: const Text('Student data'),
+                  title: Text(l10n.studentData),
                   isActive: _currentStep == 1,
                   content: _studentDataStep()),
               Step(
-                  title: const Text('Student contact'),
+                  title: Text(l10n.studentContact),
                   isActive: _currentStep == 2,
                   content: _studentContactStep()),
               Step(
-                  title: const Text('Tutor data'),
+                  title: Text(l10n.tutorData),
                   isActive: _currentStep == 3,
                   content: _tutorDataStep()),
               Step(
-                  title: const Text('Tutor contact'),
+                  title: Text(l10n.tutorContact),
                   isActive: _currentStep == 4,
                   content: _tutorContactStep()),
               Step(
-                  title: const Text('Additional info'),
+                  title: Text(l10n.additionalInfo),
                   isActive: _currentStep == 5,
                   content: _additionalInfoStep()),
               if (_canManageTransferredSubjects)
                 Step(
-                  title: const Text('Transferred subjects'),
+                  title: Text(l10n.transferredSubjects),
                   isActive: _currentStep == 6,
                   content: _transferredSubjectsStep(),
                 ),
@@ -222,50 +224,77 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     if (!widget.standalone) return content;
     return Scaffold(
         appBar: AppBar(
-            title: Text(widget.initialEnrollment == null
-                ? 'Student sign up'
-                : 'Student data')),
-        body: SafeArea(child: content));
+            title: Text(
+              widget.initialEnrollment == null
+                ? l10n.studentSignUp
+                : l10n.studentData,
+            ),
+        ),
+        body: SafeArea(child: content),
+    );
   }
 
   Widget _buildControls(BuildContext context, ControlsDetails details) {
+    final l10n = AppLocalizations.of(context)!;
+  
     return Padding(
       padding: const EdgeInsets.only(top: 16),
-      child: Row(children: [
-        FilledButton.icon(
-          onPressed: _isLastStep
-              ? (_credentialsAcknowledged ? _saveEnrollment : null)
-              : _nextStep,
-          icon: Icon(_isLastStep ? Icons.save_outlined : Icons.arrow_forward),
-          label: Text(_isLastStep ? 'Save' : 'Next'),
-        ),
-        const SizedBox(width: 8),
-        TextButton(
-            onPressed: _currentStep == 0 ? null : _previousStep,
-            child: const Text('Back')),
-        if (widget.canManageActivation && widget.initialEnrollment != null) ...[
-          const SizedBox(width: 8),
-          OutlinedButton.icon(
-            onPressed: _toggleStudentActivation,
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          FilledButton.icon(
+            onPressed: _isLastStep
+                ? (_credentialsAcknowledged ? _saveEnrollment : null)
+                : _nextStep,
             icon: Icon(
-                _isActive ? Icons.person_off_outlined : Icons.person_add_alt),
-            label: Text(_isActive ? 'Disable user' : 'Enable user'),
+              _isLastStep ? Icons.save_outlined : Icons.arrow_forward,
+            ),
+            label: Text(
+              _isLastStep ? l10n.save : l10n.next,
+            ),
           ),
+          TextButton(
+            onPressed: _currentStep == 0 ? null : _previousStep,
+            child: Text(l10n.back),
+          ),
+          if (widget.canManageActivation &&
+              widget.initialEnrollment != null)
+            OutlinedButton.icon(
+              onPressed: _toggleStudentActivation,
+              icon: Icon(
+                _isActive
+                    ? Icons.person_off_outlined
+                    : Icons.person_add_alt,
+              ),
+              label: Text(
+                _isActive
+                    ? l10n.disableUser
+                    : l10n.enableUser,
+              ),
+            ),
         ],
-      ]),
+      ),
     );
   }
 
   Widget _schoolDataStep() {
+    final l10n = AppLocalizations.of(context)!;
     final groupOptions = _groupOptionsForSemester();
     if (!groupOptions.contains(_group)) _group = groupOptions.first;
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      _ReadOnlyField(label: 'Registration', value: _registration),
+      _ReadOnlyField(
+        label: l10n.registration,
+        value: _registration,
+      ),
       const SizedBox(height: 12),
       DropdownButtonFormField<int>(
         key: ValueKey('semester-$_semester'),
         initialValue: _semester,
-        decoration: const InputDecoration(labelText: 'Semester'),
+        decoration: InputDecoration(
+          labelText: l10n.semester,
+        ),
         items: [
           for (var semester = 1; semester <= 6; semester++)
             DropdownMenuItem(value: semester, child: Text('$semester'))
@@ -295,9 +324,9 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         ),
         initialValue: _isAdvancedSemester && _area == null ? null : _group,
         decoration: InputDecoration(
-          labelText: 'Group',
+          labelText: l10n.group,
           helperText: _isAdvancedSemester
-              ? 'Group is assigned from the selected area.'
+              ? l10n.groupAssignedFromArea
               : null,
         ),
         items: [
@@ -317,13 +346,16 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         DropdownButtonFormField<String>(
           key: ValueKey('area-$_semester-${_area ?? 'none'}'),
           initialValue: _area,
-          decoration: const InputDecoration(
-            labelText: 'Area',
-            helperText: 'Choose an area to assign the group.',
+          decoration: InputDecoration(
+            labelText: l10n.area,
+            helperText: l10n.chooseAreaToAssignGroup,
           ),
           items: [
             for (final area in _areas)
-              DropdownMenuItem(value: area, child: Text(area)),
+              DropdownMenuItem(
+                value: area,
+                child: Text(_areaLabel(l10n, area)),
+            ),
           ],
           onChanged: (value) {
             if (value == null) return;
@@ -338,10 +370,17 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
         initialValue: _medicalProvider,
-        decoration: const InputDecoration(labelText: 'Medical provider'),
+        decoration: InputDecoration(
+          labelText: l10n.medicalProvider,
+        ),
         items: [
           for (final provider in _medicalProviders)
-            DropdownMenuItem(value: provider, child: Text(provider))
+            DropdownMenuItem(
+              value: provider,
+              child: Text(
+                _medicalProviderLabel(l10n, provider),
+              ),
+            )
         ],
         onChanged: (value) => setState(() => _medicalProvider = value),
         validator: _requiredDropdown,
@@ -354,8 +393,10 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
               prefixIcon: Icon(Icons.medical_information_outlined)),
           validator: _requiredText),
       const SizedBox(height: 16),
-      Text('Select the ones you have access to',
-          style: Theme.of(context).textTheme.titleSmall),
+      Text(
+          l10n.selectEquipmentAccess,
+          style: Theme.of(context).textTheme.titleSmall,
+      ),
       const SizedBox(height: 8),
       _EquipmentPicker(
           hasCellphone: _hasCellphone,
@@ -368,47 +409,64 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   Widget _studentDataStep() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(children: [
       TextFormField(
           controller: _studentFatherSurnameController,
-          decoration:
-              const InputDecoration(labelText: 'Student father surname'),
+          decoration: InputDecoration(
+            labelText: l10n.studentFatherSurname,
+          ),
           textInputAction: TextInputAction.next,
-          validator: _requiredText),
+          validator: _requiredText,
+      ),
       const SizedBox(height: 12),
       TextFormField(
           controller: _studentMotherSurnameController,
-          decoration:
-              const InputDecoration(labelText: 'Student mother surname'),
+          decoration: InputDecoration(
+            labelText: l10n.studentMotherSurname,
+          ),
           textInputAction: TextInputAction.next,
           validator: _requiredText),
       const SizedBox(height: 12),
       TextFormField(
           controller: _studentNameController,
-          decoration: const InputDecoration(labelText: 'Student name'),
+          decoration: InputDecoration(
+            labelText: l10n.studentName,
+          ),
           textInputAction: TextInputAction.next,
           validator: _requiredText),
       const SizedBox(height: 12),
       TextFormField(
           controller: _studentCurpController,
-          decoration: const InputDecoration(labelText: 'Student CURP'),
+          decoration: InputDecoration(
+            labelText: l10n.studentCurp,
+            ),
           inputFormatters: [UpperCaseTextFormatter()],
           textCapitalization: TextCapitalization.characters,
-          validator: _curpValidator),
+          validator: _curpValidator,
+      ),
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
           initialValue: _genre,
-          decoration: const InputDecoration(labelText: 'Genre'),
+          decoration: InputDecoration(
+            labelText: l10n.sex,
+          ),
           items: [
             for (final genre in _genres)
-              DropdownMenuItem(value: genre, child: Text(genre))
+              DropdownMenuItem(
+                value: genre,
+                child: Text(_sexLabel(l10n, genre)),
+              ),
           ],
           onChanged: (value) => setState(() => _genre = value),
-          validator: _requiredDropdown),
+          validator: _requiredDropdown,
+      ),
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
           initialValue: _bloodType,
-          decoration: const InputDecoration(labelText: 'Blood type'),
+          decoration: InputDecoration(
+            labelText: l10n.bloodType,
+          ),
           items: [
             for (final bloodType in _bloodTypes)
               DropdownMenuItem(value: bloodType, child: Text(bloodType))
@@ -418,9 +476,10 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       const SizedBox(height: 12),
       _AutocompleteTextField(
           controller: _placeOfBirthController,
-          label: 'Place of birth',
+          label: l10n.placeOfBirth,
           addressSuggestionService: _addressSuggestionService,
-          validator: _requiredText),
+          validator: _requiredText,
+      ),
     ]);
   }
 
@@ -733,6 +792,35 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     };
   }
 
+  String _areaLabel(AppLocalizations l10n, String area) {
+    return switch (area) {
+      'Physics' => l10n.areaPhysics,
+      'Biological' => l10n.areaBiological,
+      'Economics' => l10n.areaEconomics,
+      'Humanities' => l10n.areaHumanities,
+      _ => area,
+    };
+  }
+
+  String _medicalProviderLabel(
+    AppLocalizations l10n,
+    String provider,
+  ) {
+    return switch (provider) {
+      'Private' => l10n.medicalProviderPrivate,
+      'Marine/Military' => l10n.medicalProviderMarineMilitary,
+      _ => provider,
+    };
+  }
+
+  String _sexLabel(AppLocalizations l10n, String value) {
+    return switch (value) {
+      'Male' => l10n.sexMale,
+      'Female' => l10n.sexFemale,
+      _ => value,
+    };
+  }
+
   void _nextStep() {
     if (_currentStep < _lastStepIndex) {
       setState(() => _currentStep += 1);
@@ -744,6 +832,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   void _saveEnrollment() {
+    final l10n = AppLocalizations.of(context)!;
     _syncTutorFromStudent();
     final hasEquipment = _hasCellphone ||
         _hasTablet ||
@@ -755,8 +844,13 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         !hasEquipment ||
         !_canReadAndWrite ||
         !_credentialsAcknowledged) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Complete every required field before saving.')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.completeRequiredFieldsBeforeSaving,
+          ),
+        ),
+      );
       return;
     }
 
@@ -808,8 +902,13 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       );
     }
     widget.onSaved?.call();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Student saved with registration $_registration.')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          l10n.studentSavedWithRegistration(_registration),
+        ),
+      ),
+    );
     if (widget.standalone) Navigator.of(context).pop();
   }
 
@@ -846,6 +945,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   void _toggleStudentActivation() {
+    final l10n = AppLocalizations.of(context)!;
     final updated = MockRepository.setStudentEnrollmentActive(
       _registration,
       !_isActive,
@@ -855,9 +955,12 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     widget.onSaved?.call();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-          content: Text(_isActive
-              ? 'Student account enabled.'
-              : 'Student account disabled.')),
+          content: Text(
+            _isActive
+              ? l10n.studentAccountEnabled
+              : l10n.studentAccountDisabled,
+          ),
+      ),
     );
   }
 
@@ -890,8 +993,15 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   String? _requiredText(String? value) =>
-      value == null || value.trim().isEmpty ? 'Required' : null;
-  String? _requiredDropdown<T>(T? value) => value == null ? 'Required' : null;
+      value == null || value.trim().isEmpty
+        ? AppLocalizations.of(context)!.requiredField
+        : null;
+
+  String? _requiredDropdown<T>(T? value) =>
+    value == null
+    ? AppLocalizations.of(context)!.requiredField
+    : null;
+  
   String? _emailValidator(String? value) {
     final text = value?.trim() ?? '';
     if (text.isEmpty) return 'Required';
@@ -900,9 +1010,15 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   String? _curpValidator(String? value) {
+    final l10n = AppLocalizations.of(context)!;
     final text = value?.trim().toUpperCase() ?? '';
-    if (text.isEmpty) return 'Required';
-    if (text.length != 18) return 'CURP must be 18 characters';
+    if (text.isEmpty) {
+      return l10n.requiredField;
+    }
+    if (text.length != 18) {
+      return l10n.curpMustBe18Characters;
+    }
+
     return null;
   }
 }
@@ -1039,9 +1155,10 @@ class _AutocompleteTextFieldState extends State<_AutocompleteTextField> {
           decoration: InputDecoration(
             labelText: widget.label,
             suffixIcon: IconButton(
-                tooltip: 'Open map selector',
+                tooltip: AppLocalizations.of(context)!.openMapSelector,
                 onPressed: widget.enabled ? _openMapSelector : null,
-                icon: const Icon(Icons.map_outlined)),
+                icon: const Icon(Icons.map_outlined),
+            ),
           ),
           validator: widget.validator,
         );
@@ -1127,31 +1244,32 @@ class _EquipmentPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(children: [
       CheckboxListTile(
           value: hasCellphone,
           onChanged: (value) => onChanged('cellphone', value ?? false),
-          title: const Text('Cellphone'),
+          title: Text(l10n.equipmentCellphone),
           controlAffinity: ListTileControlAffinity.leading),
       CheckboxListTile(
           value: hasTablet,
           onChanged: (value) => onChanged('tablet', value ?? false),
-          title: const Text('Tablet'),
+          title: Text(l10n.equipmentTablet),
           controlAffinity: ListTileControlAffinity.leading),
       CheckboxListTile(
           value: hasComputer,
           onChanged: (value) => onChanged('computer', value ?? false),
-          title: const Text('Laptop/PC'),
+          title: Text(l10n.equipmentComputer),
           controlAffinity: ListTileControlAffinity.leading),
       CheckboxListTile(
           value: hasInternet,
           onChanged: (value) => onChanged('internet', value ?? false),
-          title: const Text('Internet'),
+          title: Text(l10n.equipmentInternet),
           controlAffinity: ListTileControlAffinity.leading),
       CheckboxListTile(
           value: hasNoEquipment,
           onChanged: (value) => onChanged('none', value ?? false),
-          title: const Text('None'),
+          title: Text(l10n.equipmentNone),
           controlAffinity: ListTileControlAffinity.leading),
     ]);
   }
