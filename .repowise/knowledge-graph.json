@@ -268,10 +268,10 @@
       "filePath": ".claude/CLAUDE.md",
       "language": "markdown",
       "symbolCount": 0,
-      "lineCount": 144,
+      "lineCount": 159,
       "complexity": "moderate",
       "pagerank": 0.003631,
-      "communityId": 12,
+      "communityId": 13,
       "tags": [],
       "summary": "Repository instructions and context for AI coding agents.",
       "primaryOwner": "Edgar Vazquez"
@@ -285,12 +285,11 @@
       "lineCount": 5,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 13,
+      "communityId": 14,
       "tags": [
         "config"
       ],
-      "summary": "Configuration file: config.toml.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Configuration file: config.toml."
     },
     {
       "id": "file:.codex/hooks.json",
@@ -301,12 +300,11 @@
       "lineCount": 31,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 14,
+      "communityId": 15,
       "tags": [
         "config"
       ],
-      "summary": "Plugin lifecycle hook definitions.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Plugin lifecycle hook definitions."
     },
     {
       "id": "file:.mcp.json",
@@ -317,12 +315,11 @@
       "lineCount": 9,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 15,
+      "communityId": 16,
       "tags": [
         "config"
       ],
-      "summary": "Configuration file: .mcp.json.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Configuration file: .mcp.json."
     },
     {
       "id": "file:AGENTS.md",
@@ -330,10 +327,10 @@
       "filePath": "AGENTS.md",
       "language": "markdown",
       "symbolCount": 0,
-      "lineCount": 142,
+      "lineCount": 157,
       "complexity": "moderate",
       "pagerank": 0.003631,
-      "communityId": 16,
+      "communityId": 17,
       "tags": [],
       "summary": "Documentation: AGENTS.md.",
       "primaryOwner": "Edgar Vazquez"
@@ -347,10 +344,9 @@
       "lineCount": 26,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 17,
+      "communityId": 18,
       "tags": [],
-      "summary": "Project overview and entry point for new readers.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Project overview and entry point for new readers."
     },
     {
       "id": "file:analysis_options.yaml",
@@ -361,7 +357,7 @@
       "lineCount": 3,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 18,
+      "communityId": 19,
       "tags": [
         "config"
       ],
@@ -376,7 +372,7 @@
       "lineCount": 36,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 19,
+      "communityId": 20,
       "tags": [],
       "summary": "Application module build.gradle."
     },
@@ -389,7 +385,7 @@
       "lineCount": 3,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 10,
+      "communityId": 11,
       "tags": [],
       "summary": "Docs & Tooling module MainActivity defining MainActivity."
     },
@@ -402,7 +398,7 @@
       "lineCount": 14,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 20,
+      "communityId": 21,
       "tags": [],
       "summary": "Application module build.gradle (1 symbols)."
     },
@@ -415,7 +411,7 @@
       "lineCount": 19,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 21,
+      "communityId": 22,
       "tags": [],
       "summary": "Application module settings.gradle."
     },
@@ -428,10 +424,9 @@
       "lineCount": 108,
       "complexity": "moderate",
       "pagerank": 0.003631,
-      "communityId": 22,
+      "communityId": 23,
       "tags": [],
-      "summary": "Documentation: database_integration.md.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Documentation: database_integration.md."
     },
     {
       "id": "file:docs/localization_es_mx.md",
@@ -442,10 +437,9 @@
       "lineCount": 74,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 23,
+      "communityId": 24,
       "tags": [],
-      "summary": "Documentation: localization_es_mx.md.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Documentation: localization_es_mx.md."
     },
     {
       "id": "file:ios/Runner/AppDelegate.swift",
@@ -456,7 +450,7 @@
       "lineCount": 13,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 7,
+      "communityId": 8,
       "tags": [],
       "summary": "Application module AppDelegate defining AppDelegate, application, didInitializeImplicitFlutterEngine."
     },
@@ -469,7 +463,7 @@
       "lineCount": 66,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 25,
+      "communityId": 26,
       "tags": [
         "config"
       ],
@@ -484,7 +478,7 @@
       "lineCount": 10,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 26,
+      "communityId": 27,
       "tags": [
         "config"
       ],
@@ -499,7 +493,7 @@
       "lineCount": 8,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 27,
+      "communityId": 28,
       "tags": [],
       "summary": "Project overview and entry point for new readers."
     },
@@ -512,7 +506,7 @@
       "lineCount": 0,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 28,
+      "communityId": 29,
       "tags": [],
       "summary": "Application module Runner-Bridging-Header."
     },
@@ -525,7 +519,7 @@
       "lineCount": 2,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 7,
+      "communityId": 8,
       "tags": [],
       "summary": "Application module SceneDelegate defining SceneDelegate."
     },
@@ -538,7 +532,7 @@
       "lineCount": 7,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 7,
+      "communityId": 8,
       "tags": [
         "test"
       ],
@@ -553,12 +547,11 @@
       "lineCount": 4,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 29,
+      "communityId": 30,
       "tags": [
         "config"
       ],
-      "summary": "Configuration file: l10n.yaml.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Configuration file: l10n.yaml."
     },
     {
       "id": "file:lib/app/constimix_app.dart",
@@ -568,11 +561,10 @@
       "symbolCount": 4,
       "lineCount": 45,
       "complexity": "moderate",
-      "pagerank": 0.007927,
+      "pagerank": 0.007926,
       "communityId": 3,
       "tags": [],
-      "summary": "Service module constimix_app defining ConstiMixApp, createState, _ConstiMixAppState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module constimix_app defining ConstiMixApp, createState, _ConstiMixAppState."
     },
     {
       "id": "file:lib/app/theme.dart",
@@ -585,8 +577,7 @@
       "pagerank": 0.004782,
       "communityId": 3,
       "tags": [],
-      "summary": "Service module theme defining buildConstiMixTheme.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module theme defining buildConstiMixTheme."
     },
     {
       "id": "file:lib/core/data/mock_repository.dart",
@@ -596,7 +587,7 @@
       "symbolCount": 85,
       "lineCount": 1048,
       "complexity": "complex",
-      "pagerank": 0.020051,
+      "pagerank": 0.019993,
       "communityId": 0,
       "tags": [],
       "summary": "Data module mock_repository defining MockRepository, _activeEnrollmentStore, users.",
@@ -610,7 +601,7 @@
       "symbolCount": 2,
       "lineCount": 27,
       "complexity": "simple",
-      "pagerank": 0.007271,
+      "pagerank": 0.00726,
       "communityId": 0,
       "tags": [],
       "summary": "Data module academic_cycle defining AcademicDateRange, AcademicCycle."
@@ -623,7 +614,7 @@
       "symbolCount": 3,
       "lineCount": 61,
       "complexity": "simple",
-      "pagerank": 0.018758,
+      "pagerank": 0.01871,
       "communityId": 0,
       "tags": [],
       "summary": "Data module app_user defining AppUser, matchesSearch, copyWith."
@@ -636,11 +627,10 @@
       "symbolCount": 5,
       "lineCount": 37,
       "complexity": "moderate",
-      "pagerank": 0.006445,
+      "pagerank": 0.006437,
       "communityId": 0,
       "tags": [],
-      "summary": "Data module community_post defining PostStatus, CommunityPost, hasAttachment.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Data module community_post defining PostStatus, CommunityPost, hasAttachment."
     },
     {
       "id": "file:lib/core/models/cycle_subject_assignment.dart",
@@ -650,7 +640,7 @@
       "symbolCount": 3,
       "lineCount": 26,
       "complexity": "simple",
-      "pagerank": 0.009123,
+      "pagerank": 0.009113,
       "communityId": 0,
       "tags": [],
       "summary": "Data module cycle_subject_assignment defining CycleSubjectAssignment, usesLetterGrades, matchesSearch."
@@ -663,7 +653,7 @@
       "symbolCount": 1,
       "lineCount": 13,
       "complexity": "simple",
-      "pagerank": 0.005181,
+      "pagerank": 0.005176,
       "communityId": 0,
       "tags": [],
       "summary": "Data module enrollment_draft defining EnrollmentDraft."
@@ -677,7 +667,7 @@
       "lineCount": 15,
       "complexity": "moderate",
       "pagerank": 0.003631,
-      "communityId": 30,
+      "communityId": 31,
       "tags": [],
       "summary": "Data module grade_record defining GradeRecord, activityScore, examWeightedScore."
     },
@@ -689,11 +679,10 @@
       "symbolCount": 6,
       "lineCount": 30,
       "complexity": "moderate",
-      "pagerank": 0.006165,
+      "pagerank": 0.00616,
       "communityId": 0,
       "tags": [],
-      "summary": "Data module registry_tab_record defining RegistryStudentRecord, behaviorCount, behaviorStatus.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Data module registry_tab_record defining RegistryStudentRecord, behaviorCount, behaviorStatus."
     },
     {
       "id": "file:lib/core/models/schedule_item.dart",
@@ -703,7 +692,7 @@
       "symbolCount": 1,
       "lineCount": 10,
       "complexity": "simple",
-      "pagerank": 0.005181,
+      "pagerank": 0.005176,
       "communityId": 0,
       "tags": [],
       "summary": "Data module schedule_item defining ScheduleItem."
@@ -716,7 +705,7 @@
       "symbolCount": 2,
       "lineCount": 22,
       "complexity": "simple",
-      "pagerank": 0.007231,
+      "pagerank": 0.007225,
       "communityId": 0,
       "tags": [],
       "summary": "Data module school_subject defining SchoolSubject, matchesSearch."
@@ -729,7 +718,7 @@
       "symbolCount": 4,
       "lineCount": 110,
       "complexity": "moderate",
-      "pagerank": 0.007875,
+      "pagerank": 0.007863,
       "communityId": 0,
       "tags": [],
       "summary": "Data module student_enrollment defining StudentEnrollment, fullStudentName, copyWith."
@@ -742,7 +731,7 @@
       "symbolCount": 2,
       "lineCount": 17,
       "complexity": "simple",
-      "pagerank": 0.006413,
+      "pagerank": 0.006407,
       "communityId": 0,
       "tags": [],
       "summary": "Data module student_grade_entry defining StudentGradeEntry, key."
@@ -755,7 +744,7 @@
       "symbolCount": 9,
       "lineCount": 26,
       "complexity": "moderate",
-      "pagerank": 0.029633,
+      "pagerank": 0.029548,
       "communityId": 0,
       "tags": [],
       "summary": "Data module user_role defining UserRole, UserRoleDetails, clearanceLevel."
@@ -768,11 +757,10 @@
       "symbolCount": 9,
       "lineCount": 121,
       "complexity": "moderate",
-      "pagerank": 0.005328,
-      "communityId": 4,
+      "pagerank": 0.005327,
+      "communityId": 5,
       "tags": [],
-      "summary": "Service module address_suggestion_service defining AddressLocation, AddressSuggestionService, search.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module address_suggestion_service defining AddressLocation, AddressSuggestionService, search."
     },
     {
       "id": "file:lib/core/services/auth_service.dart",
@@ -782,11 +770,10 @@
       "symbolCount": 2,
       "lineCount": 22,
       "complexity": "simple",
-      "pagerank": 0.005543,
-      "communityId": 0,
+      "pagerank": 0.005542,
+      "communityId": 3,
       "tags": [],
-      "summary": "Service module auth_service defining AuthService, signIn.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module auth_service defining AuthService, signIn."
     },
     {
       "id": "file:lib/core/services/phone_code_service.dart",
@@ -796,8 +783,8 @@
       "symbolCount": 5,
       "lineCount": 58,
       "complexity": "moderate",
-      "pagerank": 0.004299,
-      "communityId": 4,
+      "pagerank": 0.004298,
+      "communityId": 5,
       "tags": [],
       "summary": "Service module phone_code_service defining PhoneCode, label, fullLabel."
     },
@@ -809,11 +796,10 @@
       "symbolCount": 4,
       "lineCount": 27,
       "complexity": "moderate",
-      "pagerank": 0.003946,
+      "pagerank": 0.003926,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module sync_queue defining PendingSyncItem, SyncQueue, pendingItems.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module sync_queue defining PendingSyncItem, SyncQueue, pendingItems."
     },
     {
       "id": "file:lib/features/academics/grades_screen.dart",
@@ -823,11 +809,10 @@
       "symbolCount": 82,
       "lineCount": 1294,
       "complexity": "complex",
-      "pagerank": 0.004773,
+      "pagerank": 0.004753,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module grades_screen defining _latestGradeForReport, _studentsForGradeReport, _gradeTextForReport.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module grades_screen defining _latestGradeForReport, _studentsForGradeReport, _gradeTextForReport."
     },
     {
       "id": "file:lib/features/academics/registry_screen.dart",
@@ -837,11 +822,10 @@
       "symbolCount": 24,
       "lineCount": 327,
       "complexity": "complex",
-      "pagerank": 0.004478,
+      "pagerank": 0.004476,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module registry_screen defining RegistryScreen, createState, _RegistryScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module registry_screen defining RegistryScreen, createState, _RegistryScreenState."
     },
     {
       "id": "file:lib/features/academics/schedule_screen.dart",
@@ -851,11 +835,10 @@
       "symbolCount": 55,
       "lineCount": 779,
       "complexity": "complex",
-      "pagerank": 0.004718,
+      "pagerank": 0.004698,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module schedule_screen defining _ScheduleView, ScheduleScreen, createState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module schedule_screen defining _ScheduleView, ScheduleScreen, createState."
     },
     {
       "id": "file:lib/features/admin/admin_hub_screen.dart",
@@ -865,11 +848,10 @@
       "symbolCount": 51,
       "lineCount": 968,
       "complexity": "complex",
-      "pagerank": 0.00446,
+      "pagerank": 0.00444,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module admin_hub_screen defining AdminHubScreen, createState, _AdminHubScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module admin_hub_screen defining AdminHubScreen, createState, _AdminHubScreenState."
     },
     {
       "id": "file:lib/features/admin/semester_admin_screen.dart",
@@ -879,11 +861,10 @@
       "symbolCount": 102,
       "lineCount": 1468,
       "complexity": "complex",
-      "pagerank": 0.005568,
+      "pagerank": 0.005546,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module semester_admin_screen defining SemesterAdminScreen, createState, _SemesterAdminScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module semester_admin_screen defining SemesterAdminScreen, createState, _SemesterAdminScreenState."
     },
     {
       "id": "file:lib/features/admin/subject_assignment_screen.dart",
@@ -893,11 +874,10 @@
       "symbolCount": 35,
       "lineCount": 470,
       "complexity": "complex",
-      "pagerank": 0.004447,
+      "pagerank": 0.004445,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module subject_assignment_screen defining SubjectAssignmentScreen, createState, _SubjectAssignmentScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module subject_assignment_screen defining SubjectAssignmentScreen, createState, _SubjectAssignmentScreenState."
     },
     {
       "id": "file:lib/features/auth/sign_in_screen.dart",
@@ -907,11 +887,10 @@
       "symbolCount": 7,
       "lineCount": 98,
       "complexity": "moderate",
-      "pagerank": 0.004474,
+      "pagerank": 0.004473,
       "communityId": 3,
       "tags": [],
-      "summary": "Service module sign_in_screen defining SignInScreen, createState, _SignInScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module sign_in_screen defining SignInScreen, createState, _SignInScreenState."
     },
     {
       "id": "file:lib/features/community/community_board_screen.dart",
@@ -921,21 +900,20 @@
       "symbolCount": 30,
       "lineCount": 465,
       "complexity": "complex",
-      "pagerank": 0.004563,
+      "pagerank": 0.004543,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module community_board_screen defining CommunityBoardScreen, createState, _CommunityBoardScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module community_board_screen defining CommunityBoardScreen, createState, _CommunityBoardScreenState."
     },
     {
       "id": "file:lib/features/dashboard/dashboard_shell.dart",
       "type": "file",
       "filePath": "lib/features/dashboard/dashboard_shell.dart",
       "language": "dart",
-      "symbolCount": 8,
-      "lineCount": 214,
+      "symbolCount": 9,
+      "lineCount": 219,
       "complexity": "moderate",
-      "pagerank": 0.005554,
+      "pagerank": 0.005553,
       "communityId": 0,
       "tags": [],
       "summary": "Service module dashboard_shell defining DashboardShell, createState, _DashboardShellState.",
@@ -949,11 +927,10 @@
       "symbolCount": 21,
       "lineCount": 358,
       "complexity": "complex",
-      "pagerank": 0.004563,
+      "pagerank": 0.004543,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module enrollment_table_screen defining _EnrollmentTableKind, EnrollmentTableScreen, createState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module enrollment_table_screen defining _EnrollmentTableKind, EnrollmentTableScreen, createState."
     },
     {
       "id": "file:lib/features/enrollment/enrollment_wizard_screen.dart",
@@ -963,11 +940,10 @@
       "symbolCount": 60,
       "lineCount": 1237,
       "complexity": "complex",
-      "pagerank": 0.007069,
-      "communityId": 4,
+      "pagerank": 0.007061,
+      "communityId": 5,
       "tags": [],
-      "summary": "Service module enrollment_wizard_screen defining EnrollmentWizardScreen, createState, _EnrollmentWizardScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module enrollment_wizard_screen defining EnrollmentWizardScreen, createState, _EnrollmentWizardScreenState."
     },
     {
       "id": "file:lib/features/profile/limited_profile_screen.dart",
@@ -977,21 +953,20 @@
       "symbolCount": 7,
       "lineCount": 126,
       "complexity": "moderate",
-      "pagerank": 0.004376,
+      "pagerank": 0.004355,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module limited_profile_screen defining LimitedProfileScreen, createState, _LimitedProfileScreenState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module limited_profile_screen defining LimitedProfileScreen, createState, _LimitedProfileScreenState."
     },
     {
       "id": "file:lib/l10n/app_localizations.dart",
       "type": "file",
       "filePath": "lib/l10n/app_localizations.dart",
       "language": "dart",
-      "symbolCount": 16,
-      "lineCount": 154,
+      "symbolCount": 25,
+      "lineCount": 185,
       "complexity": "complex",
-      "pagerank": 0.009727,
+      "pagerank": 0.010071,
       "communityId": 3,
       "tags": [],
       "summary": "Service module app_localizations defining AppLocalizations, of, _AppLocalizationsDelegate.",
@@ -1002,10 +977,10 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_en.dart",
       "language": "dart",
-      "symbolCount": 10,
-      "lineCount": 20,
-      "complexity": "moderate",
-      "pagerank": 0.005285,
+      "symbolCount": 19,
+      "lineCount": 32,
+      "complexity": "complex",
+      "pagerank": 0.005343,
       "communityId": 3,
       "tags": [],
       "summary": "Service module app_localizations_en defining AppLocalizationsEn.",
@@ -1016,10 +991,10 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_es.dart",
       "language": "dart",
-      "symbolCount": 20,
-      "lineCount": 39,
+      "symbolCount": 38,
+      "lineCount": 62,
       "complexity": "complex",
-      "pagerank": 0.005285,
+      "pagerank": 0.005343,
       "communityId": 3,
       "tags": [],
       "summary": "Service module app_localizations_es defining AppLocalizationsEs, AppLocalizationsEsMx.",
@@ -1048,7 +1023,7 @@
       "symbolCount": 2,
       "lineCount": 17,
       "complexity": "simple",
-      "pagerank": 0.003946,
+      "pagerank": 0.003926,
       "communityId": 0,
       "tags": [],
       "summary": "UI module role_badge defining RoleBadge, build."
@@ -1061,7 +1036,7 @@
       "symbolCount": 2,
       "lineCount": 22,
       "complexity": "simple",
-      "pagerank": 0.009327,
+      "pagerank": 0.009288,
       "communityId": 0,
       "tags": [],
       "summary": "UI module section_header defining SectionHeader, build."
@@ -1074,11 +1049,10 @@
       "symbolCount": 2,
       "lineCount": 34,
       "complexity": "simple",
-      "pagerank": 0.003946,
+      "pagerank": 0.003926,
       "communityId": 0,
       "tags": [],
-      "summary": "UI module status_tile defining StatusTile, build.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "UI module status_tile defining StatusTile, build."
     },
     {
       "id": "file:linux/runner/main.cc",
@@ -1089,7 +1063,7 @@
       "lineCount": 4,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 9,
+      "communityId": 10,
       "tags": [
         "entry_point"
       ],
@@ -1103,11 +1077,10 @@
       "symbolCount": 9,
       "lineCount": 140,
       "complexity": "moderate",
-      "pagerank": 0.033576,
-      "communityId": 9,
+      "pagerank": 0.033573,
+      "communityId": 10,
       "tags": [],
-      "summary": "Application module my_application defining _MyApplication, first_frame_cb, my_application_activate.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Application module my_application defining _MyApplication, first_frame_cb, my_application_activate."
     },
     {
       "id": "file:linux/runner/my_application.h",
@@ -1117,8 +1090,8 @@
       "symbolCount": 1,
       "lineCount": 11,
       "complexity": "simple",
-      "pagerank": 0.035269,
-      "communityId": 9,
+      "pagerank": 0.035266,
+      "communityId": 10,
       "tags": [],
       "summary": "Application module my_application (1 symbols)."
     },
@@ -1131,7 +1104,7 @@
       "lineCount": 8,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 6,
+      "communityId": 7,
       "tags": [],
       "summary": "Application module AppDelegate defining AppDelegate, applicationShouldTerminateAfterLastWindowClosed, applicationSupportsSecureRestorableState."
     },
@@ -1144,7 +1117,7 @@
       "lineCount": 33,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 31,
+      "communityId": 32,
       "tags": [
         "config"
       ],
@@ -1159,7 +1132,7 @@
       "lineCount": 10,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 6,
+      "communityId": 7,
       "tags": [],
       "summary": "Application module MainFlutterWindow defining MainFlutterWindow, awakeFromNib."
     },
@@ -1172,7 +1145,7 @@
       "lineCount": 7,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 6,
+      "communityId": 7,
       "tags": [
         "test"
       ],
@@ -1187,12 +1160,11 @@
       "lineCount": 11,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 32,
+      "communityId": 33,
       "tags": [
         "config"
       ],
-      "summary": "Configuration file: pubspec.yaml.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Configuration file: pubspec.yaml."
     },
     {
       "id": "file:test/address_suggestion_service_test.dart",
@@ -1203,12 +1175,11 @@
       "lineCount": 45,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 4,
+      "communityId": 5,
       "tags": [
         "test"
       ],
-      "summary": "Tests for address_suggestion_service.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for address_suggestion_service."
     },
     {
       "id": "file:test/admin_account_test.dart",
@@ -1223,8 +1194,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for admin_account.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for admin_account."
     },
     {
       "id": "file:test/community_board_test.dart",
@@ -1239,8 +1209,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for community_board.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for community_board."
     },
     {
       "id": "file:test/cycle_grading_test.dart",
@@ -1255,8 +1224,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for cycle_grading.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for cycle_grading."
     },
     {
       "id": "file:test/enrollment_filters_test.dart",
@@ -1271,8 +1239,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for enrollment_filters.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for enrollment_filters."
     },
     {
       "id": "file:test/grade_role_test.dart",
@@ -1287,8 +1254,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for grade_role.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for grade_role."
     },
     {
       "id": "file:test/home_screen_test.dart",
@@ -1303,8 +1269,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for home_screen.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for home_screen."
     },
     {
       "id": "file:test/registry_test.dart",
@@ -1319,8 +1284,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for registry.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for registry."
     },
     {
       "id": "file:test/role_access_test.dart",
@@ -1335,8 +1299,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for role_access.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for role_access."
     },
     {
       "id": "file:test/schedule_test.dart",
@@ -1351,8 +1314,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for schedule.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for schedule."
     },
     {
       "id": "file:test/semester_admin_test.dart",
@@ -1367,8 +1329,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for semester_admin.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for semester_admin."
     },
     {
       "id": "file:test/widget_test.dart",
@@ -1383,8 +1344,7 @@
       "tags": [
         "test"
       ],
-      "summary": "Tests for widget.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Tests for widget."
     },
     {
       "id": "file:web/index.html",
@@ -1395,12 +1355,11 @@
       "lineCount": 39,
       "complexity": "simple",
       "pagerank": 0.003631,
-      "communityId": 11,
+      "communityId": 12,
       "tags": [
         "barrel"
       ],
-      "summary": "Re-export barrel for web/.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Re-export barrel for web/."
     },
     {
       "id": "file:web/manifest.json",
@@ -1410,13 +1369,12 @@
       "symbolCount": 0,
       "lineCount": 24,
       "complexity": "simple",
-      "pagerank": 0.006718,
-      "communityId": 11,
+      "pagerank": 0.006717,
+      "communityId": 12,
       "tags": [
         "config"
       ],
-      "summary": "Configuration file: manifest.json.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Configuration file: manifest.json."
     },
     {
       "id": "file:windows/flutter/ephemeral/cpp_client_wrapper/binary_messenger_impl.h",
@@ -1426,7 +1384,7 @@
       "symbolCount": 6,
       "lineCount": 41,
       "complexity": "moderate",
-      "pagerank": 0.00642,
+      "pagerank": 0.006419,
       "communityId": 1,
       "tags": [],
       "summary": "Application module binary_messenger_impl defining BinaryMessengerImpl, BinaryMessengerImpl, ~BinaryMessengerImpl."
@@ -1440,7 +1398,7 @@
       "lineCount": 73,
       "complexity": "moderate",
       "pagerank": 0.004403,
-      "communityId": 1,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module byte_buffer_streams defining ByteBufferStreamReader, ByteBufferStreamReader, ReadByte."
     },
@@ -1452,7 +1410,7 @@
       "symbolCount": 20,
       "lineCount": 267,
       "complexity": "complex",
-      "pagerank": 0.006718,
+      "pagerank": 0.006717,
       "communityId": 1,
       "tags": [],
       "summary": "Application module core_implementations defining ForwardToHandler, BinaryMessengerImpl, ~BinaryMessengerImpl."
@@ -1491,7 +1449,7 @@
       "symbolCount": 6,
       "lineCount": 43,
       "complexity": "moderate",
-      "pagerank": 0.006346,
+      "pagerank": 0.006345,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_view_controller defining FlutterViewController, ~FlutterViewController, view_id."
@@ -1517,7 +1475,7 @@
       "symbolCount": 3,
       "lineCount": 48,
       "complexity": "simple",
-      "pagerank": 0.018832,
+      "pagerank": 0.01883,
       "communityId": 1,
       "tags": [],
       "summary": "Application module binary_messenger defining BinaryMessenger."
@@ -1531,7 +1489,7 @@
       "lineCount": 72,
       "complexity": "moderate",
       "pagerank": 0.010276,
-      "communityId": 1,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module byte_streams defining ByteStreamReader, ByteStreamReader, ReadInt32."
     },
@@ -1543,7 +1501,7 @@
       "symbolCount": 16,
       "lineCount": 164,
       "complexity": "complex",
-      "pagerank": 0.010437,
+      "pagerank": 0.010436,
       "communityId": 2,
       "tags": [],
       "summary": "Application module dart_project defining GpuPreference, UIThreadPolicy, AccessibilityMode."
@@ -1556,8 +1514,8 @@
       "symbolCount": 22,
       "lineCount": 291,
       "complexity": "complex",
-      "pagerank": 0.00896,
-      "communityId": 1,
+      "pagerank": 0.008959,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module encodable_value defining CustomEncodableValue, CustomEncodableValue, EncodableValue."
     },
@@ -1569,7 +1527,7 @@
       "symbolCount": 13,
       "lineCount": 73,
       "complexity": "moderate",
-      "pagerank": 0.008172,
+      "pagerank": 0.008171,
       "communityId": 1,
       "tags": [],
       "summary": "Application module engine_method_result defining ReplyManager, ReplyManager, ~ReplyManager."
@@ -1583,7 +1541,7 @@
       "lineCount": 190,
       "complexity": "moderate",
       "pagerank": 0.003631,
-      "communityId": 8,
+      "communityId": 9,
       "tags": [],
       "summary": "Application module event_channel defining EncodableValue, EventChannel, EventChannel."
     },
@@ -1595,8 +1553,8 @@
       "symbolCount": 12,
       "lineCount": 54,
       "complexity": "moderate",
-      "pagerank": 0.011001,
-      "communityId": 8,
+      "pagerank": 0.011,
+      "communityId": 9,
       "tags": [],
       "summary": "Application module event_sink defining EncodableValue, EventSink, EventSink."
     },
@@ -1609,7 +1567,7 @@
       "lineCount": 73,
       "complexity": "moderate",
       "pagerank": 0.005946,
-      "communityId": 8,
+      "communityId": 9,
       "tags": [],
       "summary": "Application module event_stream_handler defining EncodableValue, StreamHandlerError, StreamHandlerError."
     },
@@ -1622,7 +1580,7 @@
       "lineCount": 66,
       "complexity": "moderate",
       "pagerank": 0.003631,
-      "communityId": 8,
+      "communityId": 9,
       "tags": [],
       "summary": "Application module event_stream_handler_functions defining EncodableValue, StreamHandlerFunctions, StreamHandlerFunctions."
     },
@@ -1634,8 +1592,8 @@
       "symbolCount": 7,
       "lineCount": 137,
       "complexity": "moderate",
-      "pagerank": 0.007218,
-      "communityId": 2,
+      "pagerank": 0.007217,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module flutter_engine defining FlutterEngine, FlutterEngine, ~FlutterEngine."
     },
@@ -1647,7 +1605,7 @@
       "symbolCount": 6,
       "lineCount": 36,
       "complexity": "moderate",
-      "pagerank": 0.007732,
+      "pagerank": 0.007731,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_view defining FlutterView, FlutterView, FlutterView."
@@ -1674,7 +1632,7 @@
       "lineCount": 57,
       "complexity": "moderate",
       "pagerank": 0.006124,
-      "communityId": 1,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module message_codec defining MessageCodec, MessageCodec, MessageCodec."
     },
@@ -1699,7 +1657,7 @@
       "symbolCount": 12,
       "lineCount": 148,
       "complexity": "moderate",
-      "pagerank": 0.005391,
+      "pagerank": 0.00539,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_channel defining EncodableValue, MethodChannel, MethodChannel."
@@ -1712,7 +1670,7 @@
       "symbolCount": 12,
       "lineCount": 109,
       "complexity": "moderate",
-      "pagerank": 0.007889,
+      "pagerank": 0.007888,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_codec defining MethodCodec, MethodCodec, MethodCodec."
@@ -1725,7 +1683,7 @@
       "symbolCount": 12,
       "lineCount": 71,
       "complexity": "moderate",
-      "pagerank": 0.01315,
+      "pagerank": 0.013149,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_result defining EncodableValue, MethodResult, MethodResult."
@@ -1751,7 +1709,7 @@
       "symbolCount": 14,
       "lineCount": 120,
       "complexity": "moderate",
-      "pagerank": 0.007326,
+      "pagerank": 0.007325,
       "communityId": 1,
       "tags": [],
       "summary": "Application module plugin_registrar defining Plugin, PluginRegistrar, PluginRegistrar."
@@ -1778,7 +1736,7 @@
       "lineCount": 30,
       "complexity": "moderate",
       "pagerank": 0.005165,
-      "communityId": 2,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module plugin_registry defining PluginRegistry, PluginRegistry, PluginRegistry."
     },
@@ -1790,8 +1748,8 @@
       "symbolCount": 8,
       "lineCount": 73,
       "complexity": "moderate",
-      "pagerank": 0.006829,
-      "communityId": 1,
+      "pagerank": 0.006828,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module standard_codec_serializer defining StandardCodecSerializer, ~StandardCodecSerializer, StandardCodecSerializer."
     },
@@ -1804,7 +1762,7 @@
       "lineCount": 52,
       "complexity": "moderate",
       "pagerank": 0.004403,
-      "communityId": 1,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module standard_message_codec defining StandardMessageCodec, ~StandardMessageCodec, StandardMessageCodec."
     },
@@ -1817,7 +1775,7 @@
       "lineCount": 67,
       "complexity": "moderate",
       "pagerank": 0.005545,
-      "communityId": 1,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module standard_method_codec defining StandardMethodCodec, ~StandardMethodCodec, StandardMethodCodec."
     },
@@ -1829,7 +1787,7 @@
       "symbolCount": 8,
       "lineCount": 108,
       "complexity": "moderate",
-      "pagerank": 0.011327,
+      "pagerank": 0.011326,
       "communityId": 1,
       "tags": [],
       "summary": "Application module texture_registrar defining PixelBufferTexture, PixelBufferTexture, GpuSurfaceTexture."
@@ -1856,7 +1814,7 @@
       "lineCount": 386,
       "complexity": "complex",
       "pagerank": 0.003631,
-      "communityId": 1,
+      "communityId": 4,
       "tags": [],
       "summary": "Application module standard_codec defining EncodedType, EncodedTypeForValue, StandardCodecSerializer."
     },
@@ -1868,7 +1826,7 @@
       "symbolCount": 6,
       "lineCount": 38,
       "complexity": "moderate",
-      "pagerank": 0.005391,
+      "pagerank": 0.00539,
       "communityId": 1,
       "tags": [],
       "summary": "Application module texture_registrar_impl defining TextureRegistrarImpl, TextureRegistrarImpl, ~TextureRegistrarImpl."
@@ -1881,8 +1839,8 @@
       "symbolCount": 5,
       "lineCount": 20,
       "complexity": "moderate",
-      "pagerank": 0.016036,
-      "communityId": 5,
+      "pagerank": 0.016035,
+      "communityId": 6,
       "tags": [],
       "summary": "Application module flutter_export (5 symbols)."
     },
@@ -1894,8 +1852,8 @@
       "symbolCount": 12,
       "lineCount": 130,
       "complexity": "moderate",
-      "pagerank": 0.006355,
-      "communityId": 5,
+      "pagerank": 0.006354,
+      "communityId": 6,
       "tags": [],
       "summary": "Application module flutter_messenger defining FlutterDesktopMessenger, _FlutterPlatformMessageResponseHandle, FlutterDesktopMessageResponseHandle."
     },
@@ -1907,8 +1865,8 @@
       "symbolCount": 3,
       "lineCount": 40,
       "complexity": "simple",
-      "pagerank": 0.004952,
-      "communityId": 5,
+      "pagerank": 0.004951,
+      "communityId": 6,
       "tags": [],
       "summary": "Application module flutter_plugin_registrar defining FlutterDesktopPluginRegistrar, FlutterDesktopPluginRegistrarSetDestructionHandler."
     },
@@ -1921,7 +1879,7 @@
       "lineCount": 183,
       "complexity": "moderate",
       "pagerank": 0.005034,
-      "communityId": 5,
+      "communityId": 6,
       "tags": [],
       "summary": "Application module flutter_texture_registrar defining FlutterDesktopTextureRegistrar, FlutterDesktopTextureRegistrar, FlutterDesktopTextureType."
     },
@@ -1934,7 +1892,7 @@
       "lineCount": 379,
       "complexity": "complex",
       "pagerank": 0.00466,
-      "communityId": 5,
+      "communityId": 6,
       "tags": [],
       "summary": "Application module flutter_windows defining FlutterDesktopViewController, FlutterDesktopViewController, FlutterDesktopView."
     },
@@ -1946,7 +1904,7 @@
       "symbolCount": 5,
       "lineCount": 54,
       "complexity": "moderate",
-      "pagerank": 0.005574,
+      "pagerank": 0.005573,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_window defining FlutterWindow, ~FlutterWindow, OnCreate."
@@ -1959,7 +1917,7 @@
       "symbolCount": 4,
       "lineCount": 24,
       "complexity": "moderate",
-      "pagerank": 0.009141,
+      "pagerank": 0.00914,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_window defining FlutterWindow, FlutterWindow, ~FlutterWindow."
@@ -1977,8 +1935,7 @@
       "tags": [
         "entry_point"
       ],
-      "summary": "Application module main defining wWinMain.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Application module main defining wWinMain."
     },
     {
       "id": "file:windows/runner/resource.h",
@@ -1988,7 +1945,7 @@
       "symbolCount": 5,
       "lineCount": 11,
       "complexity": "moderate",
-      "pagerank": 0.009201,
+      "pagerank": 0.0092,
       "communityId": 2,
       "tags": [],
       "summary": "Application module resource (5 symbols)."
@@ -2001,7 +1958,7 @@
       "symbolCount": 3,
       "lineCount": 55,
       "complexity": "simple",
-      "pagerank": 0.026513,
+      "pagerank": 0.026511,
       "communityId": 2,
       "tags": [],
       "summary": "Application module utils defining CreateAndAttachConsole, GetCommandLineArguments, Utf8FromUtf16."
@@ -2014,7 +1971,7 @@
       "symbolCount": 4,
       "lineCount": 17,
       "complexity": "moderate",
-      "pagerank": 0.026936,
+      "pagerank": 0.026934,
       "communityId": 2,
       "tags": [],
       "summary": "Application module utils defining CreateAndAttachConsole, Utf8FromUtf16, GetCommandLineArguments."
@@ -2027,7 +1984,7 @@
       "symbolCount": 21,
       "lineCount": 220,
       "complexity": "complex",
-      "pagerank": 0.013104,
+      "pagerank": 0.013103,
       "communityId": 2,
       "tags": [],
       "summary": "Application module win32_window defining Scale, EnableFullDpiSupportIfAvailable, WindowClassRegistrar."
@@ -2040,7 +1997,7 @@
       "symbolCount": 8,
       "lineCount": 90,
       "complexity": "moderate",
-      "pagerank": 0.011143,
+      "pagerank": 0.011142,
       "communityId": 2,
       "tags": [],
       "summary": "Application module win32_window defining Win32Window, Point, Point."
@@ -2955,6 +2912,69 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:navAdmin",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "navAdmin",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:navBoard",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "navBoard",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:navEnroll",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "navEnroll",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:navGrades",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "navGrades",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:navHome",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "navHome",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:navProfile",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "navProfile",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:navSchedule",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "navSchedule",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:of",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3004,6 +3024,24 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "studentSignUp",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:useDarkMode",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "useDarkMode",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:useLightMode",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "useLightMode",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -5796,6 +5834,13 @@
     },
     {
       "source": "file:lib/features/dashboard/dashboard_shell.dart",
+      "target": "file:lib/l10n/app_localizations.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/dashboard/dashboard_shell.dart",
       "target": "file:lib/shared/widgets/role_badge.dart",
       "type": "imports",
       "direction": "forward",
@@ -6048,6 +6093,55 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:navAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:navBoard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:navEnroll",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:navGrades",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:navHome",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:navProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:navSchedule",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:of",
       "type": "contains",
       "direction": "forward",
@@ -6090,6 +6184,20 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:useDarkMode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:useLightMode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:usernameOrCurp",
       "type": "contains",
       "direction": "forward",
@@ -6125,6 +6233,55 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:navAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:navBoard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:navEnroll",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:navGrades",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:navHome",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:navProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:navSchedule",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:of",
       "type": "contains",
       "direction": "forward",
@@ -6154,6 +6311,20 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:studentSignUp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:useDarkMode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:useLightMode",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0

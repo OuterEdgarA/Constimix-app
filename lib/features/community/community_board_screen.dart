@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../core/data/mock_repository.dart';
 import '../../core/models/app_user.dart';
 import '../../core/models/community_post.dart';
@@ -42,20 +43,21 @@ class _CommunityBoardScreenState extends State<CommunityBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final posts = MockRepository.posts(widget.currentUser);
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         SectionHeader(
-          title: 'Community board',
+          title: l10n.communityBoardTitle,
           subtitle: widget.currentUser.role.canPublishWithoutApproval
-              ? 'Published community updates'
-              : 'Your posts are reviewed before publication',
+              ? l10n.communityPublishedUpdates
+              : l10n.communityPostsReviewed,
           trailing: FilledButton.icon(
             onPressed: () => _openEditor(),
             icon: const Icon(Icons.add),
-            label: const Text('Post'),
+            label: Text(l10n.communityPost),
           ),
         ),
         if (widget.currentUser.role.canReviewPosts) ...[
@@ -64,15 +66,19 @@ class _CommunityBoardScreenState extends State<CommunityBoardScreen> {
             onPressed: _openPendingBoard,
             icon: const Icon(Icons.rate_review_outlined),
             label: Text(
-              'Pending review (${MockRepository.pendingCommunityPosts().length})',
+              l10n.pendingReviewCount(
+                MockRepository.pendingCommunityPosts().length,
+              ),
             ),
           ),
         ],
         const SizedBox(height: 16),
         if (posts.isEmpty)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 36),
-            child: Center(child: Text('No published posts.')),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 36),
+            child: Center(
+              child: Text(l10n.noPublishedPosts),
+            ),
           ),
         for (final post in posts) ...[
           _PostCard(
@@ -154,27 +160,28 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
   }
 
   Future<void> _addAttachment() async {
+    final l10n = AppLocalizations.of(context)!;
     final controller = TextEditingController(text: _attachmentPath);
     final path = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Add file'),
+        title: Text(l10n.addFile),
         content: TextField(
           controller: controller,
           autofocus: true,
-          decoration: const InputDecoration(
-            labelText: 'File path or image URL',
-            hintText: r'C:\Documents\announcement.pdf',
+          decoration: InputDecoration(
+            labelText: l10n.filePathOrImageUrl,
+            hintText: r'C:\Documentos\anuncios.pdf',
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.of(context).pop(controller.text.trim()),
-            child: const Text('Add'),
+            child: Text(l10n.add),
           ),
         ],
       ),
@@ -184,7 +191,8 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
     final normalized = path.toLowerCase().split('?').first;
     if (_videoExtensions.any(normalized.endsWith)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Video attachments are not supported.')),
+        SnackBar(
+          content: Text(l10n.videoAttachmentsUnsupported)),
       );
       return;
     }
@@ -222,11 +230,15 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final publishesNow = widget.currentUser.role.canPublishWithoutApproval;
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: Text(widget.initialPost == null ? 'Post editor' : 'Edit post'),
+        title: Text(widget.initialPost == null
+         ? 
+         l10n.postEditor : l10n.editPost,
+         ),
       ),
       body: Form(
         key: _formKey,
@@ -237,22 +249,22 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
               spacing: 4,
               children: [
                 IconButton(
-                  tooltip: 'Header',
+                  tooltip: l10n.header,
                   onPressed: _headerFocus.requestFocus,
                   icon: const Icon(Icons.title),
                 ),
                 IconButton(
-                  tooltip: 'Body',
+                  tooltip: l10n.body,
                   onPressed: _bodyFocus.requestFocus,
                   icon: const Icon(Icons.notes),
                 ),
                 IconButton(
-                  tooltip: 'Link',
+                  tooltip: l10n.link,
                   onPressed: _linkFocus.requestFocus,
                   icon: const Icon(Icons.link),
                 ),
                 IconButton(
-                  tooltip: 'Attach file',
+                  tooltip: l10n.attachFile,
                   onPressed: _addAttachment,
                   icon: const Icon(Icons.attach_file),
                 ),
@@ -262,9 +274,13 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
             TextFormField(
               controller: _headerController,
               focusNode: _headerFocus,
-              decoration: const InputDecoration(labelText: 'Header'),
+              decoration: InputDecoration(
+                labelText: l10n.header,
+                ),
               validator: (value) =>
-                  value == null || value.trim().isEmpty ? 'Required' : null,
+                  value == null || value.trim().isEmpty
+                   ? l10n.requiredField
+                   : null,
             ),
             const SizedBox(height: 12),
             TextFormField(
@@ -272,18 +288,20 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
               focusNode: _bodyFocus,
               minLines: 5,
               maxLines: 10,
-              decoration: const InputDecoration(labelText: 'Body'),
+              decoration: InputDecoration(
+                labelText: l10n.body,
+                ),
               validator: (value) =>
-                  value == null || value.trim().isEmpty ? 'Required' : null,
+                  value == null || value.trim().isEmpty ? l10n.requiredField : null,
             ),
             const SizedBox(height: 12),
             TextFormField(
               controller: _linkController,
               focusNode: _linkFocus,
               keyboardType: TextInputType.url,
-              decoration: const InputDecoration(
-                labelText: 'Link (optional)',
-                prefixIcon: Icon(Icons.link),
+              decoration: InputDecoration(
+                labelText: l10n.linkOptional,
+                prefixIcon: const Icon(Icons.link),
               ),
             ),
             if (_attachmentPath.isNotEmpty) ...[
@@ -301,7 +319,7 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 trailing: IconButton(
-                  tooltip: 'Remove attachment',
+                  tooltip: l10n.removeAttachment,
                   onPressed: () => setState(() {
                     _attachmentPath = '';
                     _attachmentName = '';
@@ -319,11 +337,11 @@ class _PostEditorScreenState extends State<_PostEditorScreen> {
               label: Text(
                 widget.initialPost == null
                     ? publishesNow
-                        ? 'Publish post'
-                        : 'Submit for approval'
+                        ? l10n.publishPost
+                        : l10n.submitForApproval
                     : publishesNow
-                        ? 'Save changes'
-                        : 'Submit changes for approval',
+                        ? l10n.saveChanges
+                        : l10n.submitChangesForApproval,
               ),
             ),
           ],
@@ -367,19 +385,22 @@ class _PendingPostsScreenState extends State<_PendingPostsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final posts = MockRepository.pendingCommunityPosts();
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Pending community posts'),
+        title: Text(l10n.pendingCommunityPosts),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           if (posts.isEmpty)
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 36),
-              child: Center(child: Text('No posts awaiting review.')),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 36),
+              child: Center(
+                child: Text(l10n.noPostsAwaitingReview),
+              ),
             ),
           for (final post in posts) ...[
             _PostCard(
@@ -389,12 +410,12 @@ class _PendingPostsScreenState extends State<_PendingPostsScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    tooltip: 'Reject',
+                    tooltip: l10n.reject,
                     onPressed: () => _reject(post),
                     icon: const Icon(Icons.close),
                   ),
                   IconButton(
-                    tooltip: 'Approve',
+                    tooltip: l10n.approve,
                     onPressed: () => _approve(post),
                     icon: const Icon(Icons.check),
                   ),
@@ -422,6 +443,8 @@ class _PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -438,7 +461,7 @@ class _PostCard extends StatelessWidget {
                 ),
                 if (onEdit != null)
                   IconButton(
-                    tooltip: 'Edit post',
+                    tooltip: l10n.editPost,
                     onPressed: onEdit,
                     icon: const Icon(Icons.edit_outlined),
                   ),
@@ -469,7 +492,7 @@ class _PostCard extends StatelessWidget {
                   icon: const Icon(Icons.download_outlined),
                   label: Text(
                     post.attachmentName.isEmpty
-                        ? 'Download file'
+                        ? l10n.downloadFile
                         : post.attachmentName,
                   ),
                 ),
@@ -497,6 +520,7 @@ class _PostImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final image = _imageForPath(path);
     return GestureDetector(
       onTap: () => showDialog<void>(
@@ -517,7 +541,7 @@ class _PostImage extends StatelessWidget {
                 top: 12,
                 right: 12,
                 child: IconButton.filled(
-                  tooltip: 'Close image',
+                  tooltip: l10n.closeImage,
                   onPressed: () => Navigator.of(context).pop(),
                   icon: const Icon(Icons.close),
                 ),
@@ -540,10 +564,14 @@ Widget _imageForPath(String path) {
     Object error,
     StackTrace? stackTrace,
   ) =>
-      const SizedBox(
+      SizedBox(
         width: 250,
         height: 120,
-        child: Center(child: Text('Image unavailable')),
+        child: Center(
+          child: Text(
+            AppLocalizations.of(context)!.imageUnavailable,
+          ),
+        ),
       );
   if (path.startsWith('http://') || path.startsWith('https://')) {
     return Image.network(path, fit: BoxFit.contain, errorBuilder: error);
@@ -560,7 +588,11 @@ Future<void> _copyLink(BuildContext context, String link) async {
   await Clipboard.setData(ClipboardData(text: link));
   if (!context.mounted) return;
   ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text('Link copied.')),
+    SnackBar(
+      content: Text(
+        AppLocalizations.of(context)!.linkCopied,
+        ),
+        ),
   );
 }
 
@@ -573,7 +605,11 @@ Future<void> _downloadAttachment(
     await Clipboard.setData(ClipboardData(text: path));
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Download link copied.')),
+      SnackBar
+      (content: Text(
+        AppLocalizations.of(context)!.downloadLinkCopied,
+        ),
+      ),
     );
     return;
   }
@@ -581,8 +617,11 @@ Future<void> _downloadAttachment(
   if (!await source.exists()) {
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-          content: Text('The attached file is no longer available.')),
+      SnackBar(
+        content: Text(
+          AppLocalizations.of(context)!.attachedFileUnavailable,
+          ),
+      ),
     );
     return;
   }
@@ -599,6 +638,11 @@ Future<void> _downloadAttachment(
   await source.copy(destination.path);
   if (!context.mounted) return;
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text('Saved to ${destination.path}')),
+    SnackBar(content: Text(
+      AppLocalizations.of(context)!.savedTo(
+        destination.path,
+        ),
+      ),
+    ),
   );
 }

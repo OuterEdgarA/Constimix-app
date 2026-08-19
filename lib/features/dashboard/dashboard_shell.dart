@@ -126,6 +126,7 @@ class _DashboardShellState extends State<DashboardShell> {
       ),
       body: selected.builder(context),
       bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
           setState(() => _selectedIndex = index);
@@ -151,9 +152,17 @@ class _HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final role = user.role;
+    final roleLabel = switch(role) {
+      UserRole.level1Admin => l10n.roleSystemAdmin,
+      UserRole.level2SemesterAdmin => l10n.roleSemesterAdmin,
+      UserRole.level3Teacher => l10n.roleTeacher,
+      UserRole.level4Student => l10n.roleStudent,
+    };
+
     final cycle = MockRepository.activeCycle;
-    final welcomeName = [user.fatherSurname, user.name]
+    final welcomeName = [user.name]
         .where((part) => part.trim().isNotEmpty)
         .join(' ');
 
@@ -162,8 +171,8 @@ class _HomeScreen extends StatelessWidget {
       children: [
         SectionHeader(
           title:
-              'Welcome, ${welcomeName.isEmpty ? user.displayName : welcomeName}',
-          subtitle: 'Your school overview',
+              l10n.welcomeUser(user.name),
+          subtitle: l10n.homeDashboardSubtitle,
           trailing: RoleBadge(role: role),
         ),
         const SizedBox(height: 16),
@@ -176,32 +185,35 @@ class _HomeScreen extends StatelessWidget {
         StatusTile(
           icon: Icons.cloud_off_outlined,
           value: '${syncQueue.totalPendingCount}',
-          label: 'Pending offline sync items',
+          label: l10n.pendingOfflineSyncItems,
           onTap: () => _showPendingSync(context),
         ),
         const SizedBox(height: 8),
         StatusTile(
           icon: Icons.security_outlined,
-          value: 'Level ${role.clearanceLevel}',
+          value: l10n.accessLevel(role.clearanceLevel),
           label: role.label,
           color: Theme.of(context).colorScheme.secondary,
         ),
         const SizedBox(height: 16),
-        const SectionHeader(title: 'Available tools'),
+        SectionHeader(
+          title: l10n.dynamicContent,
+          subtitle: l10n.dynamicContentSubtitle,
+          ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
-            const Chip(label: Text('Community board')),
-            const Chip(label: Text('Schedule')),
-            const Chip(label: Text('Grades')),
-            if (role.canManageEnrollment) const Chip(label: Text('Enrollment')),
+            Chip(label: Text(l10n.featureCommunityBoard)),
+            Chip(label: Text(l10n.navSchedule)),
+            Chip(label: Text(l10n.navGrades)),
+            if (role.canManageEnrollment) Chip(label: Text(l10n.featureEnrollment)),
             if (role.canGrade &&
                 (role != UserRole.level3Teacher ||
                     MockRepository.gradingPeriodActive))
-              const Chip(label: Text('Grading tool')),
-            if (role == UserRole.level1Admin) const Chip(label: Text('Admin')),
+                    Chip(label: Text(l10n.featureGradingTool)),
+            if (role == UserRole.level1Admin) Chip(label: Text(l10n.navAdmin)),
           ],
         ),
       ],

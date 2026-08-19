@@ -17,5 +17,94 @@
       "navProfile": "Profile",
       "navAdmin": "Admin",
       "useLightMode": "Use light mode",
-      "useDarkMode": "Use dark mode"
+      "useDarkMode": "Use dark mode",
+      "welcomeUser": "Welcome, {userName}",
+      "@welcomeUser": {
+        "description": "Welcome message shown on the home screen",
+        "placeholders": {
+          "userName": {
+            "type": "String"
+          }
+        }
+      },
+      "homeDashboardSubtitle": "Mobile-first dashboard with role-aware features.",
+      "pendingOfflineSyncItems": "Pending offline sync items",
+      "accessLevel": "Level {level}",
+      "@accessLevel": {
+        "description": "User access level",
+        "placeholders": {
+          "level": {
+            "type": "int"
+          }
+        }
+      },
+      "dynamicContent": "Dynamic content",
+      "dynamicContentSubtitle": "Visible modules are filtered by clearance level.",
+      "featureCommunityBoard": "Community board",
+      "featureEnrollment": "Enrollment",
+      "featureGradingTool": "Grading tool",
+      "roleSystemAdmin": "System admin",
+      "roleSemesterAdmin": "Semester admin",
+      "roleTeacher": "Teacher",
+      "roleStudent": "Student",
+      "clearanceLevel": "Clearance level {level}",
+      "@clearanceLevel": {
+        "description": "Tooltip describing the user's clearance level",
+        "placeholders": {
+          "level": {
+            "type": "int"
+          }
+        }
+      },
+      "communityBoardTitle": "Community board",
+      "communityPublishedUpdates": "Published community updates",
+      "communityPostsReviewed": "Your posts are reviewed before publication",
+      "communityPost": "Post",
+      "pendingReviewCount": "Pending review ({count})",
+      "@pendingReviewCount": {
+        "placeholders": {
+          "count": {
+            "type": "int"
+          }
+        }
+      },
+      "noPublishedPosts": "No published posts.",
+      
+      "postEditor": "Post editor",
+      "editPost": "Edit post",
+      "addFile": "Add file",
+      "filePathOrImageUrl": "File path or image URL",
+      "add": "Add",
+      "videoAttachmentsUnsupported": "Video attachments are not supported.",
+      "header": "Header",
+      "body": "Body",
+      "link": "Link",
+      "attachFile": "Attach file",
+      "requiredField": "Required",
+      "linkOptional": "Link (optional)",
+      "removeAttachment": "Remove attachment",
+      "publishPost": "Publish post",
+      "submitForApproval": "Submit for approval",
+      "saveChanges": "Save changes",
+      "submitChangesForApproval": "Submit changes for approval",
+      
+      "pendingCommunityPosts": "Pending community posts",
+      "noPostsAwaitingReview": "No posts awaiting review.",
+      "reject": "Reject",
+      "approve": "Approve",
+      
+      "downloadFile": "Download file",
+      "closeImage": "Close image",
+      "imageUnavailable": "Image unavailable",
+      "linkCopied": "Link copied.",
+      "downloadLinkCopied": "Download link copied.",
+      "attachedFileUnavailable": "The attached file is no longer available.",
+      "savedTo": "Saved to {path}",
+      "@savedTo": {
+        "placeholders": {
+          "path": {
+            "type": "String"
+          }
+        }
+      }
     }
