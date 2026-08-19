@@ -106,5 +106,62 @@
             "type": "String"
           }
         }
+      },
+      "enrollmentSubtitle": "Review current and past level 4 student enrollments.",
+      "selectEnrollmentTable": "Select your table",
+      "currentEnrollment": "Current Enrollment",
+      "pastEnrollment": "Past Enrollment",
+      "enrollmentCycle": "Enrollment cycle",
+      "selectCycle": "Select cycle",
+      "semesterFilter": "Apply a semester filter",
+      "groupFilter": "Apply a group filter",
+      "customSearch": "Custom search",
+      "students": "Students",
+      
+      "closeSuggestions": "Close suggestions",
+      "clearSearch": "Clear search",
+      "searchStudents": "Search students",
+      "noMatches": "No matches",
+      "openStudentData": "Open student data",
+      "noStudentsToShow": "No students to show",
+      "close": "Close",
+      
+      "registrationValue": "Registration: {registration}",
+      "@registrationValue": {
+        "placeholders": {
+          "registration": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "curpValue": "CURP: {curp}",
+      "@curpValue": {
+        "placeholders": {
+          "curp": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "semesterGroupValue": "Semester {semester} | Group {group}",
+      "@semesterGroupValue": {
+        "placeholders": {
+          "semester": {
+            "type": "int"
+          },
+          "group": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "emailValue": "Email: {email}",
+      "@emailValue": {
+        "placeholders": {
+          "email": {
+            "type": "String"
+          }
+        }
       }
     }

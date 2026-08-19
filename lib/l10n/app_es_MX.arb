@@ -68,5 +68,28 @@
       "linkCopied": "Enlace copiado.",
       "downloadLinkCopied": "Enlace de descarga copiado.",
       "attachedFileUnavailable": "El archivo adjunto ya no está disponible.",
-      "savedTo": "Guardado en {path}"
+      "savedTo": "Guardado en {path}",
+      "enrollmentSubtitle": "Consulta la matrícula actual y anteriores.",
+      "selectEnrollmentTable": "Selecciona la tabla",
+      "currentEnrollment": "Actual",
+      "pastEnrollment": "Anteriores",
+      "enrollmentCycle": "Ciclo escolar",
+      "selectCycle": "Selecciona un ciclo",
+      "semesterFilter": "Filtro por semestre",
+      "groupFilter": "Filtro por grupo",
+      "customSearch": "Búsqueda",
+      "students": "Estudiantes",
+      
+      "closeSuggestions": "Cerrar sugerencias",
+      "clearSearch": "Limpiar búsqueda",
+      "searchStudents": "Buscar estudiantes",
+      "noMatches": "Sin coincidencias",
+      "openStudentData": "Abrir datos del estudiante",
+      "noStudentsToShow": "No hay estudiantes para mostrar",
+      "close": "Cerrar",
+      
+      "registrationValue": "Matrícula: {registration}",
+      "curpValue": "CURP: {curp}",
+      "semesterGroupValue": "Semestre {semester} | Grupo {group}",
+      "emailValue": "Correo: {email}"
     }

@@ -220,6 +220,78 @@ class AppLocalizationsEs extends AppLocalizations {
   String savedTo(String path) {
     return 'Saved to $path';
   }
+
+  @override
+  String get enrollmentSubtitle =>
+      'Review current and past level 4 student enrollments.';
+
+  @override
+  String get selectEnrollmentTable => 'Select your table';
+
+  @override
+  String get currentEnrollment => 'Current Enrollment';
+
+  @override
+  String get pastEnrollment => 'Past Enrollment';
+
+  @override
+  String get enrollmentCycle => 'Enrollment cycle';
+
+  @override
+  String get selectCycle => 'Select cycle';
+
+  @override
+  String get semesterFilter => 'Apply a semester filter';
+
+  @override
+  String get groupFilter => 'Apply a group filter';
+
+  @override
+  String get customSearch => 'Custom search';
+
+  @override
+  String get students => 'Students';
+
+  @override
+  String get closeSuggestions => 'Close suggestions';
+
+  @override
+  String get clearSearch => 'Clear search';
+
+  @override
+  String get searchStudents => 'Search students';
+
+  @override
+  String get noMatches => 'No matches';
+
+  @override
+  String get openStudentData => 'Open student data';
+
+  @override
+  String get noStudentsToShow => 'No students to show';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String registrationValue(String registration) {
+    return 'Registration: $registration';
+  }
+
+  @override
+  String curpValue(String curp) {
+    return 'CURP: $curp';
+  }
+
+  @override
+  String semesterGroupValue(int semester, String group) {
+    return 'Semester $semester | Group $group';
+  }
+
+  @override
+  String emailValue(String email) {
+    return 'Email: $email';
+  }
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -436,5 +508,76 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   @override
   String savedTo(String path) {
     return 'Guardado en $path';
+  }
+
+  @override
+  String get enrollmentSubtitle => 'Consulta la matrícula actual y anteriores.';
+
+  @override
+  String get selectEnrollmentTable => 'Selecciona la tabla';
+
+  @override
+  String get currentEnrollment => 'Actual';
+
+  @override
+  String get pastEnrollment => 'Anteriores';
+
+  @override
+  String get enrollmentCycle => 'Ciclo escolar';
+
+  @override
+  String get selectCycle => 'Selecciona un ciclo';
+
+  @override
+  String get semesterFilter => 'Filtro por semestre';
+
+  @override
+  String get groupFilter => 'Filtro por grupo';
+
+  @override
+  String get customSearch => 'Búsqueda';
+
+  @override
+  String get students => 'Estudiantes';
+
+  @override
+  String get closeSuggestions => 'Cerrar sugerencias';
+
+  @override
+  String get clearSearch => 'Limpiar búsqueda';
+
+  @override
+  String get searchStudents => 'Buscar estudiantes';
+
+  @override
+  String get noMatches => 'Sin coincidencias';
+
+  @override
+  String get openStudentData => 'Abrir datos del estudiante';
+
+  @override
+  String get noStudentsToShow => 'No hay estudiantes para mostrar';
+
+  @override
+  String get close => 'Cerrar';
+
+  @override
+  String registrationValue(String registration) {
+    return 'Matrícula: $registration';
+  }
+
+  @override
+  String curpValue(String curp) {
+    return 'CURP: $curp';
+  }
+
+  @override
+  String semesterGroupValue(int semester, String group) {
+    return 'Semestre $semester | Grupo $group';
+  }
+
+  @override
+  String emailValue(String email) {
+    return 'Correo: $email';
   }
 }

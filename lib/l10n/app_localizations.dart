@@ -494,6 +494,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saved to {path}'**
   String savedTo(String path);
+
+  /// No description provided for @enrollmentSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review current and past level 4 student enrollments.'**
+  String get enrollmentSubtitle;
+
+  /// No description provided for @selectEnrollmentTable.
+  ///
+  /// In en, this message translates to:
+  /// **'Select your table'**
+  String get selectEnrollmentTable;
+
+  /// No description provided for @currentEnrollment.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Enrollment'**
+  String get currentEnrollment;
+
+  /// No description provided for @pastEnrollment.
+  ///
+  /// In en, this message translates to:
+  /// **'Past Enrollment'**
+  String get pastEnrollment;
+
+  /// No description provided for @enrollmentCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enrollment cycle'**
+  String get enrollmentCycle;
+
+  /// No description provided for @selectCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select cycle'**
+  String get selectCycle;
+
+  /// No description provided for @semesterFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply a semester filter'**
+  String get semesterFilter;
+
+  /// No description provided for @groupFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply a group filter'**
+  String get groupFilter;
+
+  /// No description provided for @customSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom search'**
+  String get customSearch;
+
+  /// No description provided for @students.
+  ///
+  /// In en, this message translates to:
+  /// **'Students'**
+  String get students;
+
+  /// No description provided for @closeSuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Close suggestions'**
+  String get closeSuggestions;
+
+  /// No description provided for @clearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get clearSearch;
+
+  /// No description provided for @searchStudents.
+  ///
+  /// In en, this message translates to:
+  /// **'Search students'**
+  String get searchStudents;
+
+  /// No description provided for @noMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get noMatches;
+
+  /// No description provided for @openStudentData.
+  ///
+  /// In en, this message translates to:
+  /// **'Open student data'**
+  String get openStudentData;
+
+  /// No description provided for @noStudentsToShow.
+  ///
+  /// In en, this message translates to:
+  /// **'No students to show'**
+  String get noStudentsToShow;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @registrationValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration: {registration}'**
+  String registrationValue(String registration);
+
+  /// No description provided for @curpValue.
+  ///
+  /// In en, this message translates to:
+  /// **'CURP: {curp}'**
+  String curpValue(String curp);
+
+  /// No description provided for @semesterGroupValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Semester {semester} | Group {group}'**
+  String semesterGroupValue(int semester, String group);
+
+  /// No description provided for @emailValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Email: {email}'**
+  String emailValue(String email);
 }
 
 class _AppLocalizationsDelegate
