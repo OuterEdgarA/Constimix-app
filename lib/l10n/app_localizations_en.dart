@@ -602,4 +602,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String selectedPointCoordinates(String latitude, String longitude) {
     return 'Selected point $latitude, $longitude';
   }
+
+  @override
+  String get subjectsPassedAtAnotherInstitution =>
+      'Subjects passed at another institution';
+
+  @override
+  String get transferredSubjectsGradeExplanation =>
+      'Selected subjects receive a final grade of 10 and remain editable in the grading tool.';
+
+  @override
+  String get noSubjectsAvailableForSemester =>
+      'No subjects are available for this semester.';
+
+  @override
+  String semesterValue(int semester) {
+    return 'Semester $semester';
+  }
 }

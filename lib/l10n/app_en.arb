@@ -314,5 +314,18 @@
             "type": "String"
           }
         }
+      },
+
+      "subjectsPassedAtAnotherInstitution": "Subjects passed at another institution",
+      "transferredSubjectsGradeExplanation": "Selected subjects receive a final grade of 10 and remain editable in the grading tool.",
+      "noSubjectsAvailableForSemester": "No subjects are available for this semester.",
+      
+      "semesterValue": "Semester {semester}",
+      "@semesterValue": {
+        "placeholders": {
+          "semester": {
+            "type": "int"
+          }
+        }
       }
     }

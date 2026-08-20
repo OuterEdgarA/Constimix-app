@@ -732,30 +732,35 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   Widget _transferredSubjectsStep() {
+    final l10n = AppLocalizations.of(context)!;
     final subjects = _transferableSubjects;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Subjects passed at another institution',
+          l10n.subjectsPassedAtAnotherInstitution,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 6),
-        const Text(
-          'Selected subjects receive a final grade of 10 and remain editable in the grading tool.',
+        Text(
+          l10n.transferredSubjectsGradeExplanation,
         ),
         const SizedBox(height: 12),
         if (subjects.isEmpty)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 18),
-            child: Text('No subjects are available for this semester.'),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 18),
+            child: Text(
+              l10n.noSubjectsAvailableForSemester,
+            ),
           )
         else
           for (final subject in subjects)
             CheckboxListTile(
               value: _transferredSubjectIds.contains(subject.subjectId),
               title: Text(subject.subjectName),
-              subtitle: Text('Semester ${subject.semester}'),
+              subtitle: Text(
+                l10n.semesterValue(subject.semester),
+              ),
               controlAffinity: ListTileControlAffinity.trailing,
               onChanged: (selected) => setState(() {
                 if (selected ?? false) {

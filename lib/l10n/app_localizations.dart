@@ -1208,6 +1208,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Selected point {latitude}, {longitude}'**
   String selectedPointCoordinates(String latitude, String longitude);
+
+  /// No description provided for @subjectsPassedAtAnotherInstitution.
+  ///
+  /// In en, this message translates to:
+  /// **'Subjects passed at another institution'**
+  String get subjectsPassedAtAnotherInstitution;
+
+  /// No description provided for @transferredSubjectsGradeExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected subjects receive a final grade of 10 and remain editable in the grading tool.'**
+  String get transferredSubjectsGradeExplanation;
+
+  /// No description provided for @noSubjectsAvailableForSemester.
+  ///
+  /// In en, this message translates to:
+  /// **'No subjects are available for this semester.'**
+  String get noSubjectsAvailableForSemester;
+
+  /// No description provided for @semesterValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Semester {semester}'**
+  String semesterValue(int semester);
 }
 
 class _AppLocalizationsDelegate

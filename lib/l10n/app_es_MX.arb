@@ -210,5 +210,11 @@
       "addressCouldNotBeResolved": "No se pudo obtener la dirección.",
       "locationSearchFailed": "No se pudo completar la búsqueda de ubicación.",
       
-      "selectedPointCoordinates": "Punto seleccionado {latitude}, {longitude}"
+      "selectedPointCoordinates": "Punto seleccionado {latitude}, {longitude}",
+
+      "subjectsPassedAtAnotherInstitution": "Materias aprobadas en otra institución",
+      "transferredSubjectsGradeExplanation": "Las materias seleccionadas recibirán una calificación final de 10 y podrán editarse posteriormente.",
+      "noSubjectsAvailableForSemester": "No hay materias disponibles para este semestre.",
+      
+      "semesterValue": "Semestre {semester}"
     }

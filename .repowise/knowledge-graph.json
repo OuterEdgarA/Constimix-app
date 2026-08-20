@@ -268,7 +268,7 @@
       "filePath": ".claude/CLAUDE.md",
       "language": "markdown",
       "symbolCount": 0,
-      "lineCount": 161,
+      "lineCount": 164,
       "complexity": "moderate",
       "pagerank": 0.003621,
       "communityId": 11,
@@ -327,7 +327,7 @@
       "filePath": "AGENTS.md",
       "language": "markdown",
       "symbolCount": 0,
-      "lineCount": 159,
+      "lineCount": 162,
       "complexity": "moderate",
       "pagerank": 0.003621,
       "communityId": 15,
@@ -935,8 +935,8 @@
       "type": "file",
       "filePath": "lib/features/enrollment/enrollment_wizard_screen.dart",
       "language": "dart",
-      "symbolCount": 63,
-      "lineCount": 1291,
+      "symbolCount": 66,
+      "lineCount": 1355,
       "complexity": "complex",
       "pagerank": 0.006949,
       "communityId": 0,
@@ -962,8 +962,8 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations.dart",
       "language": "dart",
-      "symbolCount": 143,
-      "lineCount": 657,
+      "symbolCount": 192,
+      "lineCount": 856,
       "complexity": "complex",
       "pagerank": 0.013315,
       "communityId": 3,
@@ -976,8 +976,8 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_en.dart",
       "language": "dart",
-      "symbolCount": 137,
-      "lineCount": 232,
+      "symbolCount": 186,
+      "lineCount": 317,
       "complexity": "complex",
       "pagerank": 0.005884,
       "communityId": 3,
@@ -990,8 +990,8 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_es.dart",
       "language": "dart",
-      "symbolCount": 274,
-      "lineCount": 471,
+      "symbolCount": 372,
+      "lineCount": 644,
       "complexity": "complex",
       "pagerank": 0.005884,
       "communityId": 3,
@@ -2848,10 +2848,82 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:ableToReadAndWrite",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "ableToReadAndWrite",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:academicBachelor",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "academicBachelor",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:academicDoctorate",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "academicDoctorate",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:academicHighSchool",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "academicHighSchool",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:academicMaster",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "academicMaster",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:academicPrimary",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "academicPrimary",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:academicSecondary",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "academicSecondary",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:accessLevel",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "accessLevel",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:acknowledgeL4Credentials",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "acknowledgeL4Credentials",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -2879,6 +2951,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "additionalInfo",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:addressCouldNotBeResolved",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "addressCouldNotBeResolved",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3001,10 +3082,73 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:cellphoneNumber",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "cellphoneNumber",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:centerOnXalapa",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "centerOnXalapa",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:chooseAreaToAssignGroup",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "chooseAreaToAssignGroup",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:civilFreeUnion",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "civilFreeUnion",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:civilMarried",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "civilMarried",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:civilSingle",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "civilSingle",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:civilStatus",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "civilStatus",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:civilWidowed",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "civilWidowed",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3109,6 +3253,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:copyField",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "copyField",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:curpMustBe18Characters",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3208,6 +3361,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:email",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "email",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:emailValue",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3239,6 +3401,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "enrollmentSubtitle",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:enterValidEmail",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "enterValidEmail",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3311,6 +3482,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "featureGradingTool",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:fieldCopied",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "fieldCopied",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3406,6 +3586,33 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:l4AccountCredentials",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "l4AccountCredentials",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:l4CredentialsExplanation",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "l4CredentialsExplanation",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:lastAcademicLevel",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "lastAcademicLevel",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:link",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3437,6 +3644,24 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "load",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:locationSearchFailed",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "locationSearchFailed",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:locationServiceUnavailable",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "locationServiceUnavailable",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3559,6 +3784,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:noMatchingLocationFound",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "noMatchingLocationFound",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:noPostsAwaitingReview",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3586,6 +3820,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:occupation",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "occupation",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:of",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3599,6 +3842,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "openMapSelector",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:openStreetMapSelector",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "openStreetMapSelector",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3676,6 +3928,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:privateDomicile",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "privateDomicile",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:publishPost",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3707,6 +3968,69 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "reject",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:relationAuntUncle",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "relationAuntUncle",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:relationCloseFriend",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "relationCloseFriend",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:relationCousin",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "relationCousin",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:relationFather",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "relationFather",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:relationMother",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "relationMother",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:relationMyself",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "relationMyself",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:relationToStudent",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "relationToStudent",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3775,6 +4099,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:sameDomicileAsStudent",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "sameDomicileAsStudent",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:save",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3811,6 +4144,33 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:schoolEmail",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "schoolEmail",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:search",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "search",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:searchLocation",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "searchLocation",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:searchStudents",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3842,6 +4202,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "selectEquipmentAccess",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:selectedPointCoordinates",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "selectedPointCoordinates",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -4054,6 +4423,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:tutorCellphoneNumber",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorCellphoneNumber",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:tutorContact",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -4063,10 +4441,64 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:tutorCurp",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorCurp",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:tutorData",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "tutorData",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:tutorEmail",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorEmail",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:tutorFatherSurname",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorFatherSurname",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:tutorMotherSurname",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorMotherSurname",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:tutorName",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorName",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:tutorPrivateDomicile",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorPrivateDomicile",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -4085,6 +4517,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "useLightMode",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:useThisLocation",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "useThisLocation",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -7126,7 +7567,63 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:ableToReadAndWrite",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:academicBachelor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:academicDoctorate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:academicHighSchool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:academicMaster",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:academicPrimary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:academicSecondary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:accessLevel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:acknowledgeL4Credentials",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7148,6 +7645,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:additionalInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:addressCouldNotBeResolved",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7245,7 +7749,56 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:cellphoneNumber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:centerOnXalapa",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:chooseAreaToAssignGroup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:civilFreeUnion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:civilMarried",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:civilSingle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:civilStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:civilWidowed",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7329,6 +7882,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:copyField",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:curpMustBe18Characters",
       "type": "contains",
       "direction": "forward",
@@ -7406,6 +7966,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:email",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:emailValue",
       "type": "contains",
       "direction": "forward",
@@ -7428,6 +7995,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:enrollmentSubtitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:enterValidEmail",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7484,6 +8058,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:featureGradingTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:fieldCopied",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7560,6 +8141,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:l4AccountCredentials",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:l4CredentialsExplanation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:lastAcademicLevel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:link",
       "type": "contains",
       "direction": "forward",
@@ -7582,6 +8184,20 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:load",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:locationSearchFailed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:locationServiceUnavailable",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7679,6 +8295,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:noMatchingLocationFound",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:noPostsAwaitingReview",
       "type": "contains",
       "direction": "forward",
@@ -7700,6 +8323,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:occupation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:of",
       "type": "contains",
       "direction": "forward",
@@ -7708,6 +8338,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:openMapSelector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:openStreetMapSelector",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7770,6 +8407,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:privateDomicile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:publishPost",
       "type": "contains",
       "direction": "forward",
@@ -7792,6 +8436,55 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:reject",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:relationAuntUncle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:relationCloseFriend",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:relationCousin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:relationFather",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:relationMother",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:relationMyself",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:relationToStudent",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7847,6 +8540,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:sameDomicileAsStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:save",
       "type": "contains",
       "direction": "forward",
@@ -7875,6 +8575,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:schoolEmail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:searchLocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:searchStudents",
       "type": "contains",
       "direction": "forward",
@@ -7897,6 +8618,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:selectEquipmentAccess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:selectedPointCoordinates",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8064,6 +8792,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorCellphoneNumber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:tutorContact",
       "type": "contains",
       "direction": "forward",
@@ -8071,7 +8806,49 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorCurp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:tutorData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorEmail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorFatherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorMotherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorPrivateDomicile",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8086,6 +8863,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:useLightMode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:useThisLocation",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8113,7 +8897,63 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:ableToReadAndWrite",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:academicBachelor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:academicDoctorate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:academicHighSchool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:academicMaster",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:academicPrimary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:academicSecondary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:accessLevel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:acknowledgeL4Credentials",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8135,6 +8975,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:additionalInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:addressCouldNotBeResolved",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8232,7 +9079,56 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:cellphoneNumber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:centerOnXalapa",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:chooseAreaToAssignGroup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:civilFreeUnion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:civilMarried",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:civilSingle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:civilStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:civilWidowed",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8316,6 +9212,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:copyField",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:curpMustBe18Characters",
       "type": "contains",
       "direction": "forward",
@@ -8393,6 +9296,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:email",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:emailValue",
       "type": "contains",
       "direction": "forward",
@@ -8415,6 +9325,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:enrollmentSubtitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:enterValidEmail",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8471,6 +9388,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:featureGradingTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:fieldCopied",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8540,6 +9464,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:l4AccountCredentials",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:l4CredentialsExplanation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:lastAcademicLevel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:link",
       "type": "contains",
       "direction": "forward",
@@ -8555,6 +9500,20 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:linkOptional",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:locationSearchFailed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:locationServiceUnavailable",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8645,6 +9604,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:noMatchingLocationFound",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:noPostsAwaitingReview",
       "type": "contains",
       "direction": "forward",
@@ -8666,6 +9632,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:occupation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:of",
       "type": "contains",
       "direction": "forward",
@@ -8674,6 +9647,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:openMapSelector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:openStreetMapSelector",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8736,6 +9716,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:privateDomicile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:publishPost",
       "type": "contains",
       "direction": "forward",
@@ -8758,6 +9745,55 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:reject",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:relationAuntUncle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:relationCloseFriend",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:relationCousin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:relationFather",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:relationMother",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:relationMyself",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:relationToStudent",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -8813,6 +9849,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:sameDomicileAsStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:save",
       "type": "contains",
       "direction": "forward",
@@ -8841,6 +9884,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:schoolEmail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:searchLocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:searchStudents",
       "type": "contains",
       "direction": "forward",
@@ -8863,6 +9927,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:selectEquipmentAccess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:selectedPointCoordinates",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -9023,6 +10094,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorCellphoneNumber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:tutorContact",
       "type": "contains",
       "direction": "forward",
@@ -9030,7 +10108,49 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorCurp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:tutorData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorEmail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorFatherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorMotherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorPrivateDomicile",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -9045,6 +10165,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:useLightMode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:useThisLocation",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
