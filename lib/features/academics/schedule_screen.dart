@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../core/data/mock_repository.dart';
 import '../../core/models/academic_cycle.dart';
 import '../../core/models/app_user.dart';
@@ -106,6 +107,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final clock = _clock;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -113,21 +115,23 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SectionHeader(
-            title: 'Schedule',
+            title: l10n.navSchedule,
             subtitle: _isStudent
-                ? 'Semester ${widget.currentUser.semester ?? 1} schedule'
-                : 'Academic activities by semester',
+                ? l10n.studentSemesterSchedule(
+                    widget.currentUser.semester ?? 1,
+                  )
+                : l10n.academicActivitiesBySemester,
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  tooltip: 'Override date and time',
+                  tooltip: l10n.overrideDateAndTime,
                   onPressed: _showClockOverride,
                   icon: const Icon(Icons.edit_calendar_outlined),
                 ),
                 if (_overrideClock != null)
                   IconButton(
-                    tooltip: 'Use current CST',
+                    tooltip: l10n.useCurrentCst,
                     onPressed: _resetClockOverride,
                     icon: const Icon(Icons.restore_outlined),
                   ),
@@ -136,22 +140,23 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ),
           const SizedBox(height: 12),
           _ReadOnlyField(
-            label: 'Current active cycle',
-            value: MockRepository.activeCycle?.name ?? 'No active cycle',
+            label: l10n.currentActiveCycle,
+            value: MockRepository.activeCycle?.name ??
+                l10n.noActiveCycle,
           ),
           const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
                 child: _ReadOnlyField(
-                  label: 'Current date (CST)',
+                  label: l10n.currentDateCst,
                   value: _formatDate(clock),
                 ),
               ),
               const SizedBox(width: 10),
               Expanded(
                 child: _ReadOnlyField(
-                  label: 'Current hour (CST)',
+                  label: l10n.currentHourCst,
                   value: _formatTime(clock),
                 ),
               ),
@@ -159,16 +164,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ),
           const SizedBox(height: 12),
           SegmentedButton<_ScheduleView>(
-            segments: const [
+            segments: [
               ButtonSegment(
                 value: _ScheduleView.timeline,
-                icon: Icon(Icons.view_timeline_outlined),
-                label: Text('Timeline'),
+                icon: const Icon(Icons.view_timeline_outlined),
+                label: Text(l10n.timeline),
               ),
               ButtonSegment(
                 value: _ScheduleView.calendar,
-                icon: Icon(Icons.calendar_month_outlined),
-                label: Text('Calendar'),
+                icon: const Icon(Icons.calendar_month_outlined),
+                label: Text(l10n.calendar),
               ),
             ],
             selected: {_view},
@@ -195,13 +200,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   Widget _semesterFilterGroup() {
+    final l10n = AppLocalizations.of(context)!;
     final allSelected = _semesterFilters.length == 6;
     return Wrap(
       spacing: 7,
       runSpacing: 7,
       children: [
         FilterChip(
-          label: const Text('All'),
+          label: Text(l10n.all),
           selected: allSelected,
           onSelected: (_) => setState(() {
             if (allSelected) {
@@ -228,9 +234,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   Widget _timelineView(DateTime date) {
+    final l10n = AppLocalizations.of(context)!;
     final assignments = _assignmentsForDate(date);
+  
     if (assignments.isEmpty) {
-      return const Center(child: Text('No activities for today.'));
+      return Center(
+        child: Text(l10n.noActivitiesToday),
+      );
     }
     final semesters = _visibleSemesters.toList()..sort();
     return NotificationListener<UserScrollNotification>(
@@ -269,6 +279,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   Widget _calendarView() {
+    final l10n = AppLocalizations.of(context)!;
+    final materialL10n = MaterialLocalizations.of(context);
     final assignments = _assignmentsForDate(_calendarDate);
     return ListView(
       padding: const EdgeInsets.only(bottom: 24),
@@ -282,17 +294,19 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           onDateSelected: (value) => setState(() => _calendarDate = value),
         ),
         const SizedBox(height: 10),
-        const _CalendarLegend(),
+        _CalendarLegend(),
         const Divider(height: 28),
         Text(
-          _formatDate(_calendarDate),
+          materialL10n.formatFullDate(_calendarDate),
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 8),
         if (assignments.isEmpty)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 28),
-            child: Center(child: Text('No activities for this date.')),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 28),
+            child: Center(
+              child: Text(l10n.noActivitiesForDate),
+              ),
           )
         else ...[
           for (final assignment in assignments) ...[
@@ -303,7 +317,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             ),
             const SizedBox(height: 8),
           ],
-          const _CalendarRecess(color: _recessColor),
+          _CalendarRecess(color: _recessColor),
         ],
       ],
     );
@@ -403,8 +417,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     required String timeRange,
     required List<CycleSubjectAssignment> assignments,
   }) {
+    final l10n = AppLocalizations.of(context)!;
     final activeGroups = MockRepository.availableGroupsForSemester(semester);
-    if (activeGroups.isEmpty) return 'No active groups';
+    if (activeGroups.isEmpty) {
+      return l10n.noActiveGroups;
+    }
     return activeGroups.map((group) {
       final matches = assignments.where(
         (assignment) =>
@@ -412,10 +429,15 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             assignment.group == group &&
             assignment.timeRange == timeRange,
       );
-      if (matches.isEmpty) return 'Group $group: No class assigned';
+      if (matches.isEmpty) {
+        return l10n.groupNoClassAssigned(group);
+      }
       return matches.map((assignment) {
-        return 'Group $group: ${assignment.subjectName} - '
-            '${_teacherShortName(assignment)}';
+        return l10n.groupSubjectTeacher(
+          group,
+          assignment.subjectName,
+          _teacherShortName(assignment),
+        );
       }).join('\n');
     }).join('\n');
   }
@@ -471,19 +493,21 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   Future<void> _showClockOverride() async {
+    final l10n = AppLocalizations.of(context)!;
+
     var selectedDate = _clock;
     var selectedTime = TimeOfDay.fromDateTime(_clock);
     final result = await showDialog<DateTime>(
       context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          title: const Text('Override schedule clock'),
+          title: Text(l10n.overrideScheduleClock),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
                 leading: const Icon(Icons.event_outlined),
-                title: const Text('Date'),
+                title: Text(l10n.date),
                 subtitle: Text(_formatDate(selectedDate)),
                 onTap: () async {
                   final selected = await showDatePicker(
@@ -499,7 +523,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.schedule_outlined),
-                title: const Text('Hour'),
+                title: Text(l10n.hour),
                 subtitle: Text(_formatTimeOfDay(selectedTime)),
                 onTap: () async {
                   final selected = await showTimePicker(
@@ -516,7 +540,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Cancel'),
+              child: Text(l10n.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(dialogContext).pop(
@@ -528,7 +552,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   selectedTime.minute,
                 ),
               ),
-              child: const Text('Apply'),
+              child: Text(l10n.apply),
             ),
           ],
         ),
@@ -649,6 +673,8 @@ class _SemesterLane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Container(
       height: 38,
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -659,8 +685,13 @@ class _SemesterLane extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         activityCount == 0
-            ? 'Semester $semester'
-            : 'Semester $semester - $activityCount ${activityCount == 1 ? 'activity' : 'activities'}',
+            ? l10n.semesterValue(semester)
+            : activityCount == 1
+                ? l10n.semesterActivity(semester)
+                : l10n.semesterActivities(
+                    semester,
+                    activityCount,
+                  ),
         style: TextStyle(
           color: activityCount == 0 ? Colors.black87 : Colors.white,
           fontWeight: FontWeight.w600,
@@ -677,6 +708,8 @@ class _RecessPeriod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+   
     return Container(
       height: 54,
       margin: const EdgeInsets.only(bottom: 10),
@@ -686,9 +719,12 @@ class _RecessPeriod extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       alignment: Alignment.centerLeft,
-      child: const Text(
-        '11:00 - 11:20  Recess',
-        style: TextStyle(fontWeight: FontWeight.w700, color: Colors.black87),
+      child: Text(
+        '11:00 - 11:20  ${l10n.recess}',
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+          color: Colors.black87,
+        ),
       ),
     );
   }
@@ -705,13 +741,16 @@ class _CalendarDayMarkers {
   final bool testDay;
   final bool schoolDay;
 
-  String get description {
+  String description(AppLocalizations l10n) {
     final values = <String>[
-      if (periodRelevant) 'Current period',
-      if (testDay) 'Test application',
-      if (schoolDay) 'School day',
+      if (periodRelevant) l10n.currentPeriod,
+      if (testDay) l10n.testApplication,
+      if (schoolDay) l10n.schoolDay,
     ];
-    return values.isEmpty ? 'No academic activities' : values.join(', ');
+  
+    return values.isEmpty
+        ? l10n.noAcademicActivities
+        : values.join(', ');
   }
 }
 
@@ -725,21 +764,6 @@ class _ScheduleCalendar extends StatelessWidget {
     required this.onDateSelected,
   });
 
-  static const _monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  static const _weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   static const _outline = Color(0xFF173B68);
   static const _period = Color(0xFF3B7597);
   static const _test = Color(0xFFFF8F00);
@@ -755,6 +779,7 @@ class _ScheduleCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final materialL10n = MaterialLocalizations.of(context);
     final first = DateTime(month.year, month.month);
     final offset = first.weekday % 7;
     final days = DateUtils.getDaysInMonth(month.year, month.month);
@@ -772,7 +797,7 @@ class _ScheduleCalendar extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  tooltip: 'Previous month',
+                  tooltip: materialL10n.previousMonthTooltip,
                   onPressed: () => onMonthChanged(
                     DateTime(month.year, month.month - 1),
                   ),
@@ -780,13 +805,13 @@ class _ScheduleCalendar extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    '${_monthNames[month.month - 1]} ${month.year}',
+                    materialL10n.formatMonthYear(month),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Next month',
+                  tooltip: materialL10n.nextMonthTooltip,
                   onPressed: () => onMonthChanged(
                     DateTime(month.year, month.month + 1),
                   ),
@@ -796,7 +821,7 @@ class _ScheduleCalendar extends StatelessWidget {
             ),
             Row(
               children: [
-                for (final weekday in _weekdays)
+                for (final weekday in materialL10n.narrowWeekdays)
                   Expanded(
                     child: Center(
                       child: Text(
@@ -830,6 +855,7 @@ class _ScheduleCalendar extends StatelessWidget {
   }
 
   Widget _dayCell(BuildContext context, DateTime date) {
+    final l10n = AppLocalizations.of(context)!;
     final markers = markersForDate(date);
     final overlaps = markers.schoolDay && markers.testDay;
     final inMonth = date.month == month.month;
@@ -855,7 +881,7 @@ class _ScheduleCalendar extends StatelessWidget {
                   alpha: 0.45,
                 );
     return Tooltip(
-      message: markers.description,
+      message: markers.description(l10n),
       child: InkWell(
         key: ValueKey(
           'calendar-day-${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
@@ -896,14 +922,28 @@ class _CalendarLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Wrap(
+    final l10n = AppLocalizations.of(context)!;
+
+    return Wrap(
       spacing: 12,
       runSpacing: 7,
       children: [
-        _LegendItem(color: Color(0xFF3B7597), label: 'Current period'),
-        _LegendItem(color: Color(0xFFFF8F00), label: 'Tests'),
-        _LegendItem(color: Color(0xFF276F27), label: 'School day'),
-        _LegendItem(color: Color(0xFFBD4444), label: 'Overlap'),
+        _LegendItem(
+          color: const Color(0xFF3B7597),
+          label: l10n.currentPeriod,
+        ),
+        _LegendItem(
+          color: const Color(0xFFFF8F00),
+          label: l10n.tests,
+        ),
+        _LegendItem(
+          color: const Color(0xFF276F27),
+          label: l10n.schoolDay,
+        ),
+        _LegendItem(
+          color: const Color(0xFFBD4444),
+          label: l10n.overlap,
+        ),
       ],
     );
   }
@@ -948,6 +988,8 @@ class _CalendarActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -964,7 +1006,12 @@ class _CalendarActivity extends StatelessWidget {
           ),
           const SizedBox(height: 3),
           Text(
-              '${assignment.timeRange} | Semester ${assignment.semester}${assignment.group}'),
+            '${assignment.timeRange} | '
+            '${l10n.scheduleSemesterGroup(
+              assignment.semester,
+              assignment.group,
+            )}',
+          ),
           Text(teacher),
         ],
       ),
@@ -979,15 +1026,18 @@ class _CalendarRecess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(6),
       ),
-      child: const Text(
-        '11:00 - 11:20  Recess',
-        style: TextStyle(fontWeight: FontWeight.w700),
+      child: Text(
+        '11:00 - 11:20  ${l10n.recess}',
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }

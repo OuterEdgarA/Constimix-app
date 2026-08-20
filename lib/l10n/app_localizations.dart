@@ -1232,6 +1232,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Semester {semester}'**
   String semesterValue(int semester);
+
+  /// No description provided for @studentSemesterSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Semester {semester} schedule'**
+  String studentSemesterSchedule(int semester);
+
+  /// No description provided for @academicActivitiesBySemester.
+  ///
+  /// In en, this message translates to:
+  /// **'Academic activities by semester'**
+  String get academicActivitiesBySemester;
+
+  /// No description provided for @overrideDateAndTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Override date and time'**
+  String get overrideDateAndTime;
+
+  /// No description provided for @useCurrentCst.
+  ///
+  /// In en, this message translates to:
+  /// **'Use current CST'**
+  String get useCurrentCst;
+
+  /// No description provided for @currentActiveCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Current active cycle'**
+  String get currentActiveCycle;
+
+  /// No description provided for @noActiveCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'No active cycle'**
+  String get noActiveCycle;
+
+  /// No description provided for @currentDateCst.
+  ///
+  /// In en, this message translates to:
+  /// **'Current date (CST)'**
+  String get currentDateCst;
+
+  /// No description provided for @currentHourCst.
+  ///
+  /// In en, this message translates to:
+  /// **'Current hour (CST)'**
+  String get currentHourCst;
+
+  /// No description provided for @timeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get timeline;
+
+  /// No description provided for @calendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get calendar;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @noActivitiesToday.
+  ///
+  /// In en, this message translates to:
+  /// **'No activities for today.'**
+  String get noActivitiesToday;
+
+  /// No description provided for @recess.
+  ///
+  /// In en, this message translates to:
+  /// **'Recess'**
+  String get recess;
+
+  /// No description provided for @noActiveGroups.
+  ///
+  /// In en, this message translates to:
+  /// **'No active groups'**
+  String get noActiveGroups;
+
+  /// No description provided for @groupNoClassAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Group {group}: No class assigned'**
+  String groupNoClassAssigned(String group);
+
+  /// No description provided for @groupSubjectTeacher.
+  ///
+  /// In en, this message translates to:
+  /// **'Group {group}: {subject} - {teacher}'**
+  String groupSubjectTeacher(String group, String subject, String teacher);
+
+  /// No description provided for @semesterActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Semester {semester} - 1 activity'**
+  String semesterActivity(int semester);
+
+  /// No description provided for @semesterActivities.
+  ///
+  /// In en, this message translates to:
+  /// **'Semester {semester} - {count} activities'**
+  String semesterActivities(int semester, int count);
+
+  /// No description provided for @overrideScheduleClock.
+  ///
+  /// In en, this message translates to:
+  /// **'Override schedule clock'**
+  String get overrideScheduleClock;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @hour.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour'**
+  String get hour;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @noActivitiesForDate.
+  ///
+  /// In en, this message translates to:
+  /// **'No activities for this date.'**
+  String get noActivitiesForDate;
+
+  /// No description provided for @currentPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Current period'**
+  String get currentPeriod;
+
+  /// No description provided for @testApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'Test application'**
+  String get testApplication;
+
+  /// No description provided for @schoolDay.
+  ///
+  /// In en, this message translates to:
+  /// **'School day'**
+  String get schoolDay;
+
+  /// No description provided for @noAcademicActivities.
+  ///
+  /// In en, this message translates to:
+  /// **'No academic activities'**
+  String get noAcademicActivities;
+
+  /// No description provided for @tests.
+  ///
+  /// In en, this message translates to:
+  /// **'Tests'**
+  String get tests;
+
+  /// No description provided for @overlap.
+  ///
+  /// In en, this message translates to:
+  /// **'Overlap'**
+  String get overlap;
+
+  /// No description provided for @scheduleSemesterGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Semester {semester}{group}'**
+  String scheduleSemesterGroup(int semester, String group);
 }
 
 class _AppLocalizationsDelegate

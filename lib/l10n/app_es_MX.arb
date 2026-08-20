@@ -216,5 +216,46 @@
       "transferredSubjectsGradeExplanation": "Las materias seleccionadas recibirán una calificación final de 10 y podrán editarse posteriormente.",
       "noSubjectsAvailableForSemester": "No hay materias disponibles para este semestre.",
       
-      "semesterValue": "Semestre {semester}"
+      "semesterValue": "Semestre {semester}",
+
+      "studentSemesterSchedule": "Horario del semestre {semester}",
+      "academicActivitiesBySemester": "Actividades académicas por semestre",
+      "overrideDateAndTime": "Cambiar fecha y hora",
+      "useCurrentCst": "Usar hora actual (CST)",
+      
+      "currentActiveCycle": "Ciclo escolar activo",
+      "noActiveCycle": "No hay un ciclo escolar activo",
+      "currentDateCst": "Fecha actual (CST)",
+      "currentHourCst": "Hora actual (CST)",
+      
+      "timeline": "Horario",
+      "calendar": "Calendario",
+      "all": "Todos",
+      
+      "noActivitiesToday": "No hay actividades para hoy.",
+      "recess": "Receso",
+      
+      "noActiveGroups": "No hay grupos activos",
+      "groupNoClassAssigned": "Grupo {group}: Sin clase asignada",
+      "groupSubjectTeacher": "Grupo {group}: {subject} - {teacher}",
+      
+      "semesterActivity": "Semestre {semester} - 1 actividad",
+      "semesterActivities": "Semestre {semester} - {count} actividades",
+      
+      "overrideScheduleClock": "Cambiar fecha y hora del horario",
+      "date": "Fecha",
+      "hour": "Hora",
+      "apply": "Aplicar",
+
+      "noActivitiesForDate": "No hay actividades para esta fecha.",
+      
+      "currentPeriod": "Periodo vigente",
+      "testApplication": "Aplicación de exámenes",
+      "schoolDay": "Día de clases",
+      "noAcademicActivities": "Sin actividades académicas",
+      
+      "tests": "Exámenes",
+      "overlap": "Clases y exámenes",
+      
+      "scheduleSemesterGroup": "Semestre {semester}{group}"
     }

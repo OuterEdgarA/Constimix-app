@@ -619,4 +619,106 @@ class AppLocalizationsEn extends AppLocalizations {
   String semesterValue(int semester) {
     return 'Semester $semester';
   }
+
+  @override
+  String studentSemesterSchedule(int semester) {
+    return 'Semester $semester schedule';
+  }
+
+  @override
+  String get academicActivitiesBySemester => 'Academic activities by semester';
+
+  @override
+  String get overrideDateAndTime => 'Override date and time';
+
+  @override
+  String get useCurrentCst => 'Use current CST';
+
+  @override
+  String get currentActiveCycle => 'Current active cycle';
+
+  @override
+  String get noActiveCycle => 'No active cycle';
+
+  @override
+  String get currentDateCst => 'Current date (CST)';
+
+  @override
+  String get currentHourCst => 'Current hour (CST)';
+
+  @override
+  String get timeline => 'Timeline';
+
+  @override
+  String get calendar => 'Calendar';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get noActivitiesToday => 'No activities for today.';
+
+  @override
+  String get recess => 'Recess';
+
+  @override
+  String get noActiveGroups => 'No active groups';
+
+  @override
+  String groupNoClassAssigned(String group) {
+    return 'Group $group: No class assigned';
+  }
+
+  @override
+  String groupSubjectTeacher(String group, String subject, String teacher) {
+    return 'Group $group: $subject - $teacher';
+  }
+
+  @override
+  String semesterActivity(int semester) {
+    return 'Semester $semester - 1 activity';
+  }
+
+  @override
+  String semesterActivities(int semester, int count) {
+    return 'Semester $semester - $count activities';
+  }
+
+  @override
+  String get overrideScheduleClock => 'Override schedule clock';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get hour => 'Hour';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get noActivitiesForDate => 'No activities for this date.';
+
+  @override
+  String get currentPeriod => 'Current period';
+
+  @override
+  String get testApplication => 'Test application';
+
+  @override
+  String get schoolDay => 'School day';
+
+  @override
+  String get noAcademicActivities => 'No academic activities';
+
+  @override
+  String get tests => 'Tests';
+
+  @override
+  String get overlap => 'Overlap';
+
+  @override
+  String scheduleSemesterGroup(int semester, String group) {
+    return 'Semester $semester$group';
+  }
 }

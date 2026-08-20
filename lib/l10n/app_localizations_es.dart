@@ -619,6 +619,108 @@ class AppLocalizationsEs extends AppLocalizations {
   String semesterValue(int semester) {
     return 'Semester $semester';
   }
+
+  @override
+  String studentSemesterSchedule(int semester) {
+    return 'Semester $semester schedule';
+  }
+
+  @override
+  String get academicActivitiesBySemester => 'Academic activities by semester';
+
+  @override
+  String get overrideDateAndTime => 'Override date and time';
+
+  @override
+  String get useCurrentCst => 'Use current CST';
+
+  @override
+  String get currentActiveCycle => 'Current active cycle';
+
+  @override
+  String get noActiveCycle => 'No active cycle';
+
+  @override
+  String get currentDateCst => 'Current date (CST)';
+
+  @override
+  String get currentHourCst => 'Current hour (CST)';
+
+  @override
+  String get timeline => 'Timeline';
+
+  @override
+  String get calendar => 'Calendar';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get noActivitiesToday => 'No activities for today.';
+
+  @override
+  String get recess => 'Recess';
+
+  @override
+  String get noActiveGroups => 'No active groups';
+
+  @override
+  String groupNoClassAssigned(String group) {
+    return 'Group $group: No class assigned';
+  }
+
+  @override
+  String groupSubjectTeacher(String group, String subject, String teacher) {
+    return 'Group $group: $subject - $teacher';
+  }
+
+  @override
+  String semesterActivity(int semester) {
+    return 'Semester $semester - 1 activity';
+  }
+
+  @override
+  String semesterActivities(int semester, int count) {
+    return 'Semester $semester - $count activities';
+  }
+
+  @override
+  String get overrideScheduleClock => 'Override schedule clock';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get hour => 'Hour';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get noActivitiesForDate => 'No activities for this date.';
+
+  @override
+  String get currentPeriod => 'Current period';
+
+  @override
+  String get testApplication => 'Test application';
+
+  @override
+  String get schoolDay => 'School day';
+
+  @override
+  String get noAcademicActivities => 'No academic activities';
+
+  @override
+  String get tests => 'Tests';
+
+  @override
+  String get overlap => 'Overlap';
+
+  @override
+  String scheduleSemesterGroup(int semester, String group) {
+    return 'Semester $semester$group';
+  }
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -1234,5 +1336,108 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   @override
   String semesterValue(int semester) {
     return 'Semestre $semester';
+  }
+
+  @override
+  String studentSemesterSchedule(int semester) {
+    return 'Horario del semestre $semester';
+  }
+
+  @override
+  String get academicActivitiesBySemester =>
+      'Actividades académicas por semestre';
+
+  @override
+  String get overrideDateAndTime => 'Cambiar fecha y hora';
+
+  @override
+  String get useCurrentCst => 'Usar hora actual (CST)';
+
+  @override
+  String get currentActiveCycle => 'Ciclo escolar activo';
+
+  @override
+  String get noActiveCycle => 'No hay un ciclo escolar activo';
+
+  @override
+  String get currentDateCst => 'Fecha actual (CST)';
+
+  @override
+  String get currentHourCst => 'Hora actual (CST)';
+
+  @override
+  String get timeline => 'Horario';
+
+  @override
+  String get calendar => 'Calendario';
+
+  @override
+  String get all => 'Todos';
+
+  @override
+  String get noActivitiesToday => 'No hay actividades para hoy.';
+
+  @override
+  String get recess => 'Receso';
+
+  @override
+  String get noActiveGroups => 'No hay grupos activos';
+
+  @override
+  String groupNoClassAssigned(String group) {
+    return 'Grupo $group: Sin clase asignada';
+  }
+
+  @override
+  String groupSubjectTeacher(String group, String subject, String teacher) {
+    return 'Grupo $group: $subject - $teacher';
+  }
+
+  @override
+  String semesterActivity(int semester) {
+    return 'Semestre $semester - 1 actividad';
+  }
+
+  @override
+  String semesterActivities(int semester, int count) {
+    return 'Semestre $semester - $count actividades';
+  }
+
+  @override
+  String get overrideScheduleClock => 'Cambiar fecha y hora del horario';
+
+  @override
+  String get date => 'Fecha';
+
+  @override
+  String get hour => 'Hora';
+
+  @override
+  String get apply => 'Aplicar';
+
+  @override
+  String get noActivitiesForDate => 'No hay actividades para esta fecha.';
+
+  @override
+  String get currentPeriod => 'Periodo vigente';
+
+  @override
+  String get testApplication => 'Aplicación de exámenes';
+
+  @override
+  String get schoolDay => 'Día de clases';
+
+  @override
+  String get noAcademicActivities => 'Sin actividades académicas';
+
+  @override
+  String get tests => 'Exámenes';
+
+  @override
+  String get overlap => 'Clases y exámenes';
+
+  @override
+  String scheduleSemesterGroup(int semester, String group) {
+    return 'Semestre $semester$group';
   }
 }

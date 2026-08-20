@@ -327,5 +327,103 @@
             "type": "int"
           }
         }
+      },
+
+      "studentSemesterSchedule": "Semester {semester} schedule",
+      "@studentSemesterSchedule": {
+        "placeholders": {
+          "semester": {
+            "type": "int"
+          }
+        }
+      },
+      
+      "academicActivitiesBySemester": "Academic activities by semester",
+      "overrideDateAndTime": "Override date and time",
+      "useCurrentCst": "Use current CST",
+      
+      "currentActiveCycle": "Current active cycle",
+      "noActiveCycle": "No active cycle",
+      "currentDateCst": "Current date (CST)",
+      "currentHourCst": "Current hour (CST)",
+      
+      "timeline": "Timeline",
+      "calendar": "Calendar",
+      "all": "All",
+      
+      "noActivitiesToday": "No activities for today.",
+      "recess": "Recess",
+      
+      "noActiveGroups": "No active groups",
+      "groupNoClassAssigned": "Group {group}: No class assigned",
+      "@groupNoClassAssigned": {
+        "placeholders": {
+          "group": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "groupSubjectTeacher": "Group {group}: {subject} - {teacher}",
+      "@groupSubjectTeacher": {
+        "placeholders": {
+          "group": {
+            "type": "String"
+          },
+          "subject": {
+            "type": "String"
+          },
+          "teacher": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "semesterActivity": "Semester {semester} - 1 activity",
+      "@semesterActivity": {
+        "placeholders": {
+          "semester": {
+            "type": "int"
+          }
+        }
+      },
+      
+      "semesterActivities": "Semester {semester} - {count} activities",
+      "@semesterActivities": {
+        "placeholders": {
+          "semester": {
+            "type": "int"
+          },
+          "count": {
+            "type": "int"
+          }
+        }
+      },
+      
+      "overrideScheduleClock": "Override schedule clock",
+      "date": "Date",
+      "hour": "Hour",
+      "apply": "Apply",
+
+      "noActivitiesForDate": "No activities for this date.",
+      
+      "currentPeriod": "Current period",
+      "testApplication": "Test application",
+      "schoolDay": "School day",
+      "noAcademicActivities": "No academic activities",
+      
+      "tests": "Tests",
+      "overlap": "Overlap",
+      
+      "scheduleSemesterGroup": "Semester {semester}{group}",
+      "@scheduleSemesterGroup": {
+        "placeholders": {
+          "semester": {
+            "type": "int"
+          },
+          "group": {
+            "type": "String"
+          }
+        }
       }
     }

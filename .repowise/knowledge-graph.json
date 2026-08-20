@@ -936,7 +936,7 @@
       "filePath": "lib/features/enrollment/enrollment_wizard_screen.dart",
       "language": "dart",
       "symbolCount": 66,
-      "lineCount": 1355,
+      "lineCount": 1356,
       "complexity": "complex",
       "pagerank": 0.006949,
       "communityId": 0,
@@ -962,8 +962,8 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations.dart",
       "language": "dart",
-      "symbolCount": 192,
-      "lineCount": 856,
+      "symbolCount": 196,
+      "lineCount": 878,
       "complexity": "complex",
       "pagerank": 0.013315,
       "communityId": 3,
@@ -976,8 +976,8 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_en.dart",
       "language": "dart",
-      "symbolCount": 186,
-      "lineCount": 317,
+      "symbolCount": 190,
+      "lineCount": 329,
       "complexity": "complex",
       "pagerank": 0.005884,
       "communityId": 3,
@@ -990,8 +990,8 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_es.dart",
       "language": "dart",
-      "symbolCount": 372,
-      "lineCount": 644,
+      "symbolCount": 380,
+      "lineCount": 668,
       "complexity": "complex",
       "pagerank": 0.005884,
       "communityId": 3,
@@ -3820,6 +3820,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:noSubjectsAvailableForSemester",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "noSubjectsAvailableForSemester",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:occupation",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -4243,6 +4252,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:semesterValue",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "semesterValue",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:sex",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -4396,6 +4414,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:subjectsPassedAtAnotherInstitution",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "subjectsPassedAtAnotherInstitution",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:submitChangesForApproval",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -4418,6 +4445,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "transferredSubjects",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:transferredSubjectsGradeExplanation",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "transferredSubjectsGradeExplanation",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -8323,6 +8359,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:noSubjectsAvailableForSemester",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:occupation",
       "type": "contains",
       "direction": "forward",
@@ -8652,6 +8695,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:semesterValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:sex",
       "type": "contains",
       "direction": "forward",
@@ -8771,6 +8821,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:subjectsPassedAtAnotherInstitution",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:submitChangesForApproval",
       "type": "contains",
       "direction": "forward",
@@ -8786,6 +8843,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:transferredSubjects",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:transferredSubjectsGradeExplanation",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -9632,6 +9696,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:noSubjectsAvailableForSemester",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:occupation",
       "type": "contains",
       "direction": "forward",
@@ -9961,6 +10032,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:semesterValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:sex",
       "type": "contains",
       "direction": "forward",
@@ -10073,6 +10151,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:subjectsPassedAtAnotherInstitution",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:submitChangesForApproval",
       "type": "contains",
       "direction": "forward",
@@ -10088,6 +10173,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:transferredSubjects",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:transferredSubjectsGradeExplanation",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
