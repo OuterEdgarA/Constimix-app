@@ -445,4 +445,161 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get openMapSelector => 'Open map selector';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get schoolEmail => 'School email';
+
+  @override
+  String get cellphoneNumber => 'Cellphone number';
+
+  @override
+  String get privateDomicile => 'Private domicile';
+
+  @override
+  String get enterValidEmail => 'Enter a valid email';
+
+  @override
+  String get relationToStudent => 'Relation to student';
+
+  @override
+  String get relationMother => 'Mother';
+
+  @override
+  String get relationFather => 'Father';
+
+  @override
+  String get relationCousin => 'Cousin';
+
+  @override
+  String get relationAuntUncle => 'Aunt/Uncle';
+
+  @override
+  String get relationCloseFriend => 'Close friend';
+
+  @override
+  String get relationMyself => 'Myself';
+
+  @override
+  String get tutorFatherSurname => 'Tutor father surname';
+
+  @override
+  String get tutorMotherSurname => 'Tutor mother surname';
+
+  @override
+  String get tutorName => 'Tutor name';
+
+  @override
+  String get tutorCurp => 'Tutor CURP';
+
+  @override
+  String get occupation => 'Occupation';
+
+  @override
+  String get tutorCellphoneNumber => 'Tutor cellphone number';
+
+  @override
+  String get tutorEmail => 'Tutor email';
+
+  @override
+  String get sameDomicileAsStudent => 'Same domicile as student';
+
+  @override
+  String get tutorPrivateDomicile => 'Tutor private domicile';
+
+  @override
+  String get lastAcademicLevel => 'Last academic level';
+
+  @override
+  String get academicPrimary => 'Primary';
+
+  @override
+  String get academicSecondary => 'Secondary';
+
+  @override
+  String get academicHighSchool => 'High school';
+
+  @override
+  String get academicBachelor => 'Bachelor\'s degree';
+
+  @override
+  String get academicMaster => 'Master\'s degree';
+
+  @override
+  String get academicDoctorate => 'Doctorate';
+
+  @override
+  String get civilStatus => 'Civil status';
+
+  @override
+  String get civilSingle => 'Single';
+
+  @override
+  String get civilMarried => 'Married';
+
+  @override
+  String get civilWidowed => 'Widowed';
+
+  @override
+  String get civilFreeUnion => 'Free union';
+
+  @override
+  String get ableToReadAndWrite => 'Able to read and write';
+
+  @override
+  String get l4AccountCredentials => 'L4 account credentials';
+
+  @override
+  String get acknowledgeL4Credentials =>
+      'I acknowledge these L4 account credentials';
+
+  @override
+  String get l4CredentialsExplanation =>
+      'CURP is the username; registration is the password.';
+
+  @override
+  String copyField(String field) {
+    return 'Copy $field';
+  }
+
+  @override
+  String fieldCopied(String field) {
+    return '$field copied.';
+  }
+
+  @override
+  String get openStreetMapSelector => 'OpenStreetMap selector';
+
+  @override
+  String get searchLocation => 'Search location';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get centerOnXalapa => 'Center on Xalapa';
+
+  @override
+  String get useThisLocation => 'Use this location';
+
+  @override
+  String get noMatchingLocationFound => 'No matching location was found.';
+
+  @override
+  String get locationServiceUnavailable =>
+      'The location service is unavailable.';
+
+  @override
+  String get addressCouldNotBeResolved => 'The address could not be resolved.';
+
+  @override
+  String get locationSearchFailed =>
+      'The location search could not be completed.';
+
+  @override
+  String selectedPointCoordinates(String latitude, String longitude) {
+    return 'Selected point $latitude, $longitude';
+  }
 }

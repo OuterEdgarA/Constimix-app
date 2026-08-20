@@ -149,5 +149,66 @@
       "placeOfBirth": "Lugar de nacimiento",
       
       "curpMustBe18Characters": "La CURP debe tener 18 caracteres",
-      "openMapSelector": "Abrir mapa"
+      "openMapSelector": "Abrir mapa",
+      "email": "Correo electrónico",
+      "schoolEmail": "Correo institucional",
+      "cellphoneNumber": "Número de celular",
+      "privateDomicile": "Domicilio",
+      "enterValidEmail": "Ingresa un correo electrónico válido",
+
+      "relationToStudent": "Parentesco",
+      "relationMother": "Madre",
+      "relationFather": "Padre",
+      "relationCousin": "Primo o prima",
+      "relationAuntUncle": "Tío o tía",
+      "relationCloseFriend": "Amistad cercana",
+      "relationMyself": "Yo",
+      
+      "tutorFatherSurname": "Apellido paterno del tutor",
+      "tutorMotherSurname": "Apellido materno del tutor",
+      "tutorName": "Nombre(s) del tutor",
+      "tutorCurp": "CURP del tutor",
+      "occupation": "Ocupación",
+
+      "tutorCellphoneNumber": "Número de celular del tutor",
+      "tutorEmail": "Correo electrónico del tutor",
+      "sameDomicileAsStudent": "Mismo domicilio que el estudiante",
+      "tutorPrivateDomicile": "Domicilio del tutor",
+
+      "lastAcademicLevel": "Último grado académico",
+      
+      "academicPrimary": "Primaria",
+      "academicSecondary": "Secundaria",
+      "academicHighSchool": "Bachillerato",
+      "academicBachelor": "Licenciatura",
+      "academicMaster": "Maestría",
+      "academicDoctorate": "Doctorado",
+      
+      "civilStatus": "Estado civil",
+      "civilSingle": "Soltero(a)",
+      "civilMarried": "Casado(a)",
+      "civilWidowed": "Viudo(a)",
+      "civilFreeUnion": "Unión libre",
+      
+      "ableToReadAndWrite": "Sabe leer y escribir",
+      
+      "l4AccountCredentials": "Credenciales de la cuenta",
+      "acknowledgeL4Credentials": "Confirmo que he recibido estas credenciales",
+      "l4CredentialsExplanation": "La CURP es usuario y matrícula es contraseña.",
+      
+      "copyField": "Copiar {field}",
+      "fieldCopied": "Se copió {field}.",
+
+      "openStreetMapSelector": "Selector de OpenStreetMap",
+      "searchLocation": "Buscar ubicación",
+      "search": "Buscar",
+      "centerOnXalapa": "Centrar en Xalapa",
+      "useThisLocation": "Usar esta ubicación",
+      
+      "noMatchingLocationFound": "No se encontró una ubicación coincidente.",
+      "locationServiceUnavailable": "El servicio de ubicación no está disponible.",
+      "addressCouldNotBeResolved": "No se pudo obtener la dirección.",
+      "locationSearchFailed": "No se pudo completar la búsqueda de ubicación.",
+      
+      "selectedPointCoordinates": "Punto seleccionado {latitude}, {longitude}"
     }

@@ -484,22 +484,27 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   Widget _studentContactStep() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(children: [
       TextFormField(
           controller: _studentEmailController,
-          decoration: const InputDecoration(labelText: 'Email'),
+          decoration: InputDecoration(
+            labelText: l10n.email,
+            ),
           keyboardType: TextInputType.emailAddress,
           validator: _emailValidator),
       const SizedBox(height: 12),
       TextFormField(
           controller: _schoolEmailController,
-          decoration: const InputDecoration(labelText: 'School email'),
+          decoration: InputDecoration(
+            labelText: l10n.schoolEmail,
+            ),
           keyboardType: TextInputType.emailAddress),
       const SizedBox(height: 12),
       _PhoneField(
           lada: _studentLada,
           controller: _studentCellphoneController,
-          label: 'Cellphone number',
+          label: l10n.cellphoneNumber,
           phoneCodes: _phoneCodeService.codes,
           onLadaChanged: (value) => setState(() {
                 _studentLada = value;
@@ -509,21 +514,28 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       const SizedBox(height: 12),
       _AutocompleteTextField(
           controller: _studentDomicileController,
-          label: 'Private domicile',
+          label: l10n.privateDomicile,
           addressSuggestionService: _addressSuggestionService,
           validator: _requiredText),
     ]);
   }
 
   Widget _tutorDataStep() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(children: [
       DropdownButtonFormField<String>(
         key: ValueKey('relation-$_tutorRelation'),
         initialValue: _tutorRelation,
-        decoration: const InputDecoration(labelText: 'Relation to student'),
+        decoration: InputDecoration(labelText: l10n.relationToStudent,
+        ),
         items: [
           for (final relation in _tutorRelations)
-            DropdownMenuItem(value: relation, child: Text(relation))
+            DropdownMenuItem(
+              value: relation,
+              child: Text(
+                _tutorRelationLabel(l10n, relation),
+              ),
+            )
         ],
         onChanged: (value) {
           final wasTutorMyself = _isTutorMyself;
@@ -543,52 +555,65 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       TextFormField(
           controller: _tutorFatherSurnameController,
           enabled: !_isTutorMyself,
-          decoration: const InputDecoration(labelText: 'Tutor father surname'),
+          decoration: InputDecoration(
+            labelText: l10n.tutorFatherSurname,
+          ),
           validator: _requiredText),
       const SizedBox(height: 12),
       TextFormField(
           controller: _tutorMotherSurnameController,
           enabled: !_isTutorMyself,
-          decoration: const InputDecoration(labelText: 'Tutor mother surname'),
+          decoration: InputDecoration(
+            labelText: l10n.tutorMotherSurname,
+          ),
           validator: _requiredText),
       const SizedBox(height: 12),
       TextFormField(
           controller: _tutorNameController,
           enabled: !_isTutorMyself,
-          decoration: const InputDecoration(labelText: 'Tutor name'),
+          decoration: InputDecoration(
+            labelText: l10n.tutorName,
+          ),
           validator: _requiredText),
       const SizedBox(height: 12),
       TextFormField(
           controller: _tutorCurpController,
           enabled: !_isTutorMyself,
-          decoration: const InputDecoration(labelText: 'Tutor CURP'),
+          decoration: InputDecoration(
+            labelText: l10n.tutorCurp,
+          ),
           inputFormatters: [UpperCaseTextFormatter()],
           textCapitalization: TextCapitalization.characters,
           validator: _curpValidator),
       const SizedBox(height: 12),
       TextFormField(
           controller: _tutorOccupationController,
-          decoration: const InputDecoration(labelText: 'Occupation'),
+          decoration: InputDecoration(
+            labelText: l10n.occupation,
+          ),
           validator: _requiredText),
     ]);
   }
 
   Widget _tutorContactStep() {
+    final l10n = AppLocalizations.of(context)!;
     final domicileLocked = _isTutorMyself || _sameTutorAddress;
     return Column(children: [
       _PhoneField(
           lada: _tutorLada,
           controller: _tutorCellphoneController,
           enabled: !_isTutorMyself,
-          label: 'Tutor cellphone number',
+          label: l10n.tutorCellphoneNumber,
           phoneCodes: _phoneCodeService.codes,
-          onLadaChanged: (value) => setState(() => _tutorLada = value),
-          validator: _requiredText),
+          onLadaChanged: (value) => 
+          setState(() => _tutorLada = value),
+          validator: _requiredText,
+          ),
       const SizedBox(height: 12),
       TextFormField(
           controller: _tutorEmailController,
           enabled: !_isTutorMyself,
-          decoration: const InputDecoration(labelText: 'Tutor email'),
+          decoration: InputDecoration(labelText: l10n.tutorEmail),
           keyboardType: TextInputType.emailAddress,
           validator: _emailValidator),
       if (!_isTutorMyself) ...[
@@ -599,11 +624,12 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
             setState(() {
               _sameTutorAddress = value ?? false;
               if (_sameTutorAddress) {
-                _tutorDomicileController.text = _studentDomicileController.text;
+                _tutorDomicileController.text = 
+                  _studentDomicileController.text;
               }
             });
           },
-          title: const Text('Same domicile as student'),
+          title: Text(l10n.sameDomicileAsStudent),
           controlAffinity: ListTileControlAffinity.leading,
         ),
       ],
@@ -611,43 +637,63 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       _AutocompleteTextField(
           controller: _tutorDomicileController,
           enabled: !domicileLocked,
-          label: 'Tutor private domicile',
+          label: l10n.tutorPrivateDomicile,
           addressSuggestionService: _addressSuggestionService,
           validator: _requiredText),
     ]);
   }
 
   Widget _additionalInfoStep() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(children: [
       DropdownButtonFormField<String>(
           initialValue: _lastAcademicLevel,
-          decoration: const InputDecoration(labelText: 'Last academic level'),
+          decoration: InputDecoration(
+            labelText: l10n.lastAcademicLevel,
+          ),
           items: [
             for (final level in _academicLevels)
-              DropdownMenuItem(value: level, child: Text(level))
+              DropdownMenuItem(
+                value: level, 
+                child: Text(
+                  _academicLevelLabel(l10n, level),
+                ),
+              ),
           ],
-          onChanged: (value) => setState(() => _lastAcademicLevel = value),
-          validator: _requiredDropdown),
+          onChanged: (value) => 
+            setState(() => _lastAcademicLevel = value),
+          validator: _requiredDropdown,
+      ),
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
           initialValue: _civilStatus,
-          decoration: const InputDecoration(labelText: 'Civil status'),
+          decoration: InputDecoration(
+            labelText: l10n.civilStatus,
+          ),
           items: [
             for (final status in _civilStatuses)
-              DropdownMenuItem(value: status, child: Text(status))
+              DropdownMenuItem(
+                value: status,
+                 child: Text(
+                  _civilStatusLabel(l10n, status),
+                  ),
+              ),
           ],
-          onChanged: (value) => setState(() => _civilStatus = value),
-          validator: _requiredDropdown),
+          onChanged: (value) => 
+            setState(() => _civilStatus = value),
+          validator: _requiredDropdown
+          ),
       const SizedBox(height: 8),
       CheckboxListTile(
           value: _canReadAndWrite,
           onChanged: (value) =>
               setState(() => _canReadAndWrite = value ?? false),
-          title: const Text('Able to read and write'),
-          controlAffinity: ListTileControlAffinity.leading),
+          title: Text(l10n.ableToReadAndWrite),
+          controlAffinity: ListTileControlAffinity.leading
+          ),
       const Divider(height: 28),
       Text(
-        'L4 account credentials',
+        l10n.l4AccountCredentials,
         style: Theme.of(context).textTheme.titleMedium,
       ),
       const SizedBox(height: 12),
@@ -661,9 +707,12 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
       ),
       const SizedBox(height: 12),
       _CredentialField(
-        label: 'Registration',
+        label: l10n.registration,
         value: _registration,
-        onCopy: () => _copyCredential('Registration', _registration),
+        onCopy: () => _copyCredential(
+          l10n.registration,
+          _registration,
+        ),
       ),
       const SizedBox(height: 8),
       CheckboxListTile(
@@ -671,9 +720,12 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         onChanged: (value) => setState(
           () => _credentialsAcknowledged = value ?? false,
         ),
-        title: const Text('I acknowledge these L4 account credentials'),
-        subtitle:
-            const Text('CURP is the username; registration is the password.'),
+        title: Text(
+          l10n.acknowledgeL4Credentials,
+        ),
+        subtitle: Text(
+          l10n.l4CredentialsExplanation,
+        ),
         controlAffinity: ListTileControlAffinity.leading,
       ),
     ]);
@@ -821,6 +873,49 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     };
   }
 
+  String _tutorRelationLabel(
+    AppLocalizations l10n,
+    String relation,
+  ) {
+    return switch (relation) {
+      'Mother' => l10n.relationMother,
+      'Father' => l10n.relationFather,
+      'Cousin' => l10n.relationCousin,
+      'Aunt/Uncle' => l10n.relationAuntUncle,
+      'Close friend' => l10n.relationCloseFriend,
+      'Myself' => l10n.relationMyself,
+      _ => relation,
+    };
+  }
+
+  String _academicLevelLabel(
+    AppLocalizations l10n,
+    String level,
+  ) {
+    return switch (level) {
+      'Primaria' => l10n.academicPrimary,
+      'Secundaria' => l10n.academicSecondary,
+      'Bachillerato' => l10n.academicHighSchool,
+      'Licenciatura' => l10n.academicBachelor,
+      'Maestria' => l10n.academicMaster,
+      'Doctorado' => l10n.academicDoctorate,
+      _ => level,
+    };
+  }
+
+  String _civilStatusLabel(
+    AppLocalizations l10n,
+    String status,
+  ) {
+    return switch (status) {
+      'Single' => l10n.civilSingle,
+      'Married' => l10n.civilMarried,
+      'Widowed' => l10n.civilWidowed,
+      'Free Union' => l10n.civilFreeUnion,
+      _ => status,
+    };
+  }
+
   void _nextStep() {
     if (_currentStep < _lastStepIndex) {
       setState(() => _currentStep += 1);
@@ -913,9 +1008,18 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
   }
 
   void _copyCredential(String label, String value) {
-    Clipboard.setData(ClipboardData(text: value));
+    final l10n = AppLocalizations.of(context)!;
+
+    Clipboard.setData(
+      ClipboardData(text: value),
+    );
+    
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('$label copied.')),
+      SnackBar(
+        content: Text(
+          l10n.fieldCopied(label),
+        ),
+      ),
     );
   }
 
@@ -1003,9 +1107,14 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
     : null;
   
   String? _emailValidator(String? value) {
+    final l10n = AppLocalizations.of(context)!;
     final text = value?.trim() ?? '';
-    if (text.isEmpty) return 'Required';
-    if (!text.contains('@')) return 'Enter a valid email';
+    if (text.isEmpty){ 
+      return l10n.requiredField;
+    } 
+    if (!text.contains('@')){
+      return l10n.enterValidEmail;
+    } 
     return null;
   }
 
@@ -1036,6 +1145,7 @@ class _CredentialField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return TextFormField(
       key: ValueKey('credential-$label-$value'),
       initialValue: value,
@@ -1043,7 +1153,7 @@ class _CredentialField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         suffixIcon: IconButton(
-          tooltip: 'Copy $label',
+          tooltip: l10n.copyField(label),
           onPressed: value.isEmpty ? null : onCopy,
           icon: const Icon(Icons.copy_outlined),
         ),
@@ -1200,8 +1310,11 @@ class _AutocompleteTextFieldState extends State<_AutocompleteTextField> {
               children: [
                 Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                    child: Text('OpenStreetMap selector',
-                        style: Theme.of(context).textTheme.titleLarge)),
+                    child: Text(
+                      AppLocalizations.of(context)!.openStreetMapSelector,
+                        style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                ),
                 _OpenStreetMapPicker(
                     addressService: widget.addressSuggestionService,
                     onSelected: (location) {
@@ -1318,6 +1431,7 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -1337,9 +1451,9 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
                   Expanded(
                     child: TextField(
                       controller: _searchController,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Search location',
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: l10n.searchLocation,
                       ),
                       textInputAction: TextInputAction.search,
                       onSubmitted: (_) => _searchLocation(),
@@ -1347,13 +1461,13 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filledTonal(
-                    tooltip: 'Search',
+                    tooltip: l10n.search,
                     onPressed: _isLoading ? null : _searchLocation,
                     icon: const Icon(Icons.search),
                   ),
                   const SizedBox(width: 8),
                   IconButton.filledTonal(
-                    tooltip: 'Center on Xalapa',
+                    tooltip: l10n.centerOnXalapa,
                     onPressed: _centerOnXalapa,
                     icon: const Icon(Icons.my_location),
                   ),
@@ -1446,7 +1560,7 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
                     ? null
                     : () => widget.onSelected(_selectedAddress),
                 icon: const Icon(Icons.add_location_alt_outlined),
-                label: const Text('Use this location'),
+                label: Text(l10n.useThisLocation),
               ),
             ],
           ),
@@ -1456,6 +1570,7 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
   }
 
   Future<void> _searchLocation() async {
+    final l10n = AppLocalizations.of(context)!;
     final query = _searchController.text.trim();
     if (query.isEmpty) return;
     setState(() {
@@ -1466,7 +1581,7 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
       final result = await widget.addressService.searchLocation(query);
       if (!mounted) return;
       if (result == null) {
-        setState(() => _lookupError = 'No matching location was found.');
+        setState(() => _lookupError = l10n.noMatchingLocationFound);
         return;
       }
       final point = LatLng(result.latitude, result.longitude);
@@ -1475,11 +1590,15 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
         _selectedAddress = result.displayName;
       });
       _mapController.move(point, 16);
-    } on AddressLookupException catch (error) {
-      if (mounted) setState(() => _lookupError = error.message);
+    } on AddressLookupException {
+      if (mounted) {
+        setState(
+          () => _lookupError = l10n.locationSearchFailed,
+          );
+      } 
     } on Exception {
       if (mounted) {
-        setState(() => _lookupError = 'The location service is unavailable.');
+        setState(() => _lookupError = l10n.locationServiceUnavailable);
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -1487,10 +1606,13 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
   }
 
   Future<void> _selectPoint(LatLng point) async {
+    final l10n = AppLocalizations.of(context)!;
     setState(() {
       _selectedPoint = point;
-      _selectedAddress = 'Selected point ${point.latitude.toStringAsFixed(5)}, '
-          '${point.longitude.toStringAsFixed(5)}';
+      _selectedAddress = l10n.selectedPointCoordinates(
+        point.latitude.toStringAsFixed(5),
+        point.longitude.toStringAsFixed(5),
+        );
       _isLoading = true;
       _lookupError = null;
     });
@@ -1503,11 +1625,19 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
       if (result != null) {
         setState(() => _selectedAddress = result.displayName);
       }
-    } on AddressLookupException catch (error) {
-      if (mounted) setState(() => _lookupError = error.message);
+    } on AddressLookupException {
+      if (mounted) {
+        setState(
+          () => _lookupError =
+          l10n.addressCouldNotBeResolved,
+        );
+      }       
     } on Exception {
       if (mounted) {
-        setState(() => _lookupError = 'The address could not be resolved.');
+        setState(
+          () => _lookupError =
+          l10n.addressCouldNotBeResolved,
+        );
       }
     } finally {
       if (mounted && point == _selectedPoint) {
@@ -1520,7 +1650,7 @@ class _OpenStreetMapPickerState extends State<_OpenStreetMapPicker> {
     setState(() {
       _searchController.text = 'xalapa';
       _selectedPoint = _xalapa;
-      _selectedAddress = 'Xalapa-Enriquez, Xalapa, Veracruz, Mexico';
+      _selectedAddress = 'Xalapa-Enríquez, Xalapa, Veracruz, México';
       _lookupError = null;
     });
     _mapController.move(_xalapa, 16);

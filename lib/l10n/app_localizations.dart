@@ -914,6 +914,300 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open map selector'**
   String get openMapSelector;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @schoolEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'School email'**
+  String get schoolEmail;
+
+  /// No description provided for @cellphoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Cellphone number'**
+  String get cellphoneNumber;
+
+  /// No description provided for @privateDomicile.
+  ///
+  /// In en, this message translates to:
+  /// **'Private domicile'**
+  String get privateDomicile;
+
+  /// No description provided for @enterValidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get enterValidEmail;
+
+  /// No description provided for @relationToStudent.
+  ///
+  /// In en, this message translates to:
+  /// **'Relation to student'**
+  String get relationToStudent;
+
+  /// No description provided for @relationMother.
+  ///
+  /// In en, this message translates to:
+  /// **'Mother'**
+  String get relationMother;
+
+  /// No description provided for @relationFather.
+  ///
+  /// In en, this message translates to:
+  /// **'Father'**
+  String get relationFather;
+
+  /// No description provided for @relationCousin.
+  ///
+  /// In en, this message translates to:
+  /// **'Cousin'**
+  String get relationCousin;
+
+  /// No description provided for @relationAuntUncle.
+  ///
+  /// In en, this message translates to:
+  /// **'Aunt/Uncle'**
+  String get relationAuntUncle;
+
+  /// No description provided for @relationCloseFriend.
+  ///
+  /// In en, this message translates to:
+  /// **'Close friend'**
+  String get relationCloseFriend;
+
+  /// No description provided for @relationMyself.
+  ///
+  /// In en, this message translates to:
+  /// **'Myself'**
+  String get relationMyself;
+
+  /// No description provided for @tutorFatherSurname.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor father surname'**
+  String get tutorFatherSurname;
+
+  /// No description provided for @tutorMotherSurname.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor mother surname'**
+  String get tutorMotherSurname;
+
+  /// No description provided for @tutorName.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor name'**
+  String get tutorName;
+
+  /// No description provided for @tutorCurp.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor CURP'**
+  String get tutorCurp;
+
+  /// No description provided for @occupation.
+  ///
+  /// In en, this message translates to:
+  /// **'Occupation'**
+  String get occupation;
+
+  /// No description provided for @tutorCellphoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor cellphone number'**
+  String get tutorCellphoneNumber;
+
+  /// No description provided for @tutorEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor email'**
+  String get tutorEmail;
+
+  /// No description provided for @sameDomicileAsStudent.
+  ///
+  /// In en, this message translates to:
+  /// **'Same domicile as student'**
+  String get sameDomicileAsStudent;
+
+  /// No description provided for @tutorPrivateDomicile.
+  ///
+  /// In en, this message translates to:
+  /// **'Tutor private domicile'**
+  String get tutorPrivateDomicile;
+
+  /// No description provided for @lastAcademicLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Last academic level'**
+  String get lastAcademicLevel;
+
+  /// No description provided for @academicPrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary'**
+  String get academicPrimary;
+
+  /// No description provided for @academicSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get academicSecondary;
+
+  /// No description provided for @academicHighSchool.
+  ///
+  /// In en, this message translates to:
+  /// **'High school'**
+  String get academicHighSchool;
+
+  /// No description provided for @academicBachelor.
+  ///
+  /// In en, this message translates to:
+  /// **'Bachelor\'s degree'**
+  String get academicBachelor;
+
+  /// No description provided for @academicMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Master\'s degree'**
+  String get academicMaster;
+
+  /// No description provided for @academicDoctorate.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctorate'**
+  String get academicDoctorate;
+
+  /// No description provided for @civilStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Civil status'**
+  String get civilStatus;
+
+  /// No description provided for @civilSingle.
+  ///
+  /// In en, this message translates to:
+  /// **'Single'**
+  String get civilSingle;
+
+  /// No description provided for @civilMarried.
+  ///
+  /// In en, this message translates to:
+  /// **'Married'**
+  String get civilMarried;
+
+  /// No description provided for @civilWidowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Widowed'**
+  String get civilWidowed;
+
+  /// No description provided for @civilFreeUnion.
+  ///
+  /// In en, this message translates to:
+  /// **'Free union'**
+  String get civilFreeUnion;
+
+  /// No description provided for @ableToReadAndWrite.
+  ///
+  /// In en, this message translates to:
+  /// **'Able to read and write'**
+  String get ableToReadAndWrite;
+
+  /// No description provided for @l4AccountCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'L4 account credentials'**
+  String get l4AccountCredentials;
+
+  /// No description provided for @acknowledgeL4Credentials.
+  ///
+  /// In en, this message translates to:
+  /// **'I acknowledge these L4 account credentials'**
+  String get acknowledgeL4Credentials;
+
+  /// No description provided for @l4CredentialsExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'CURP is the username; registration is the password.'**
+  String get l4CredentialsExplanation;
+
+  /// No description provided for @copyField.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy {field}'**
+  String copyField(String field);
+
+  /// No description provided for @fieldCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'{field} copied.'**
+  String fieldCopied(String field);
+
+  /// No description provided for @openStreetMapSelector.
+  ///
+  /// In en, this message translates to:
+  /// **'OpenStreetMap selector'**
+  String get openStreetMapSelector;
+
+  /// No description provided for @searchLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Search location'**
+  String get searchLocation;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @centerOnXalapa.
+  ///
+  /// In en, this message translates to:
+  /// **'Center on Xalapa'**
+  String get centerOnXalapa;
+
+  /// No description provided for @useThisLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this location'**
+  String get useThisLocation;
+
+  /// No description provided for @noMatchingLocationFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching location was found.'**
+  String get noMatchingLocationFound;
+
+  /// No description provided for @locationServiceUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'The location service is unavailable.'**
+  String get locationServiceUnavailable;
+
+  /// No description provided for @addressCouldNotBeResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'The address could not be resolved.'**
+  String get addressCouldNotBeResolved;
+
+  /// No description provided for @locationSearchFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The location search could not be completed.'**
+  String get locationSearchFailed;
+
+  /// No description provided for @selectedPointCoordinates.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected point {latitude}, {longitude}'**
+  String selectedPointCoordinates(String latitude, String longitude);
 }
 
 class _AppLocalizationsDelegate

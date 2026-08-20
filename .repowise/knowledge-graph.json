@@ -268,10 +268,10 @@
       "filePath": ".claude/CLAUDE.md",
       "language": "markdown",
       "symbolCount": 0,
-      "lineCount": 159,
+      "lineCount": 161,
       "complexity": "moderate",
-      "pagerank": 0.003623,
-      "communityId": 12,
+      "pagerank": 0.003621,
+      "communityId": 11,
       "tags": [],
       "summary": "Repository instructions and context for AI coding agents.",
       "primaryOwner": "Edgar Vazquez"
@@ -284,8 +284,8 @@
       "symbolCount": 0,
       "lineCount": 5,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 13,
+      "pagerank": 0.003621,
+      "communityId": 12,
       "tags": [
         "config"
       ],
@@ -299,8 +299,8 @@
       "symbolCount": 0,
       "lineCount": 31,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 14,
+      "pagerank": 0.003621,
+      "communityId": 13,
       "tags": [
         "config"
       ],
@@ -314,8 +314,8 @@
       "symbolCount": 0,
       "lineCount": 9,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 15,
+      "pagerank": 0.003621,
+      "communityId": 14,
       "tags": [
         "config"
       ],
@@ -327,10 +327,10 @@
       "filePath": "AGENTS.md",
       "language": "markdown",
       "symbolCount": 0,
-      "lineCount": 157,
+      "lineCount": 159,
       "complexity": "moderate",
-      "pagerank": 0.003623,
-      "communityId": 16,
+      "pagerank": 0.003621,
+      "communityId": 15,
       "tags": [],
       "summary": "Documentation: AGENTS.md.",
       "primaryOwner": "Edgar Vazquez"
@@ -343,8 +343,8 @@
       "symbolCount": 0,
       "lineCount": 26,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 17,
+      "pagerank": 0.003621,
+      "communityId": 16,
       "tags": [],
       "summary": "Project overview and entry point for new readers."
     },
@@ -356,8 +356,8 @@
       "symbolCount": 0,
       "lineCount": 3,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 18,
+      "pagerank": 0.003621,
+      "communityId": 17,
       "tags": [
         "config"
       ],
@@ -371,8 +371,8 @@
       "symbolCount": 0,
       "lineCount": 36,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 19,
+      "pagerank": 0.003621,
+      "communityId": 18,
       "tags": [],
       "summary": "Application module build.gradle."
     },
@@ -384,8 +384,8 @@
       "symbolCount": 1,
       "lineCount": 3,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 9,
+      "pagerank": 0.003621,
+      "communityId": 8,
       "tags": [],
       "summary": "Docs & Tooling module MainActivity defining MainActivity."
     },
@@ -397,8 +397,8 @@
       "symbolCount": 1,
       "lineCount": 14,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 20,
+      "pagerank": 0.003621,
+      "communityId": 19,
       "tags": [],
       "summary": "Application module build.gradle (1 symbols)."
     },
@@ -410,8 +410,8 @@
       "symbolCount": 0,
       "lineCount": 19,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 21,
+      "pagerank": 0.003621,
+      "communityId": 20,
       "tags": [],
       "summary": "Application module settings.gradle."
     },
@@ -423,8 +423,8 @@
       "symbolCount": 0,
       "lineCount": 108,
       "complexity": "moderate",
-      "pagerank": 0.003623,
-      "communityId": 22,
+      "pagerank": 0.003621,
+      "communityId": 21,
       "tags": [],
       "summary": "Documentation: database_integration.md."
     },
@@ -436,8 +436,8 @@
       "symbolCount": 0,
       "lineCount": 74,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 23,
+      "pagerank": 0.003621,
+      "communityId": 22,
       "tags": [],
       "summary": "Documentation: localization_es_mx.md."
     },
@@ -449,7 +449,7 @@
       "symbolCount": 3,
       "lineCount": 13,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 6,
       "tags": [],
       "summary": "Application module AppDelegate defining AppDelegate, application, didInitializeImplicitFlutterEngine."
@@ -462,8 +462,8 @@
       "symbolCount": 0,
       "lineCount": 66,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 25,
+      "pagerank": 0.003621,
+      "communityId": 24,
       "tags": [
         "config"
       ],
@@ -477,8 +477,8 @@
       "symbolCount": 0,
       "lineCount": 10,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 26,
+      "pagerank": 0.003621,
+      "communityId": 25,
       "tags": [
         "config"
       ],
@@ -492,8 +492,8 @@
       "symbolCount": 0,
       "lineCount": 8,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 27,
+      "pagerank": 0.003621,
+      "communityId": 26,
       "tags": [],
       "summary": "Project overview and entry point for new readers."
     },
@@ -505,8 +505,8 @@
       "symbolCount": 0,
       "lineCount": 0,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 28,
+      "pagerank": 0.003621,
+      "communityId": 27,
       "tags": [],
       "summary": "Application module Runner-Bridging-Header."
     },
@@ -518,7 +518,7 @@
       "symbolCount": 1,
       "lineCount": 2,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 6,
       "tags": [],
       "summary": "Application module SceneDelegate defining SceneDelegate."
@@ -531,7 +531,7 @@
       "symbolCount": 2,
       "lineCount": 7,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 6,
       "tags": [
         "test"
@@ -546,8 +546,8 @@
       "symbolCount": 0,
       "lineCount": 4,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 29,
+      "pagerank": 0.003621,
+      "communityId": 28,
       "tags": [
         "config"
       ],
@@ -561,7 +561,7 @@
       "symbolCount": 4,
       "lineCount": 45,
       "complexity": "moderate",
-      "pagerank": 0.007908,
+      "pagerank": 0.007904,
       "communityId": 3,
       "tags": [],
       "summary": "Service module constimix_app defining ConstiMixApp, createState, _ConstiMixAppState."
@@ -574,7 +574,7 @@
       "symbolCount": 1,
       "lineCount": 52,
       "complexity": "simple",
-      "pagerank": 0.004771,
+      "pagerank": 0.004768,
       "communityId": 3,
       "tags": [],
       "summary": "Service module theme defining buildConstiMixTheme."
@@ -587,7 +587,7 @@
       "symbolCount": 85,
       "lineCount": 1048,
       "complexity": "complex",
-      "pagerank": 0.019756,
+      "pagerank": 0.019678,
       "communityId": 0,
       "tags": [],
       "summary": "Data module mock_repository defining MockRepository, _activeEnrollmentStore, users."
@@ -600,7 +600,7 @@
       "symbolCount": 2,
       "lineCount": 27,
       "complexity": "simple",
-      "pagerank": 0.007136,
+      "pagerank": 0.007127,
       "communityId": 0,
       "tags": [],
       "summary": "Data module academic_cycle defining AcademicDateRange, AcademicCycle."
@@ -613,7 +613,7 @@
       "symbolCount": 3,
       "lineCount": 61,
       "complexity": "simple",
-      "pagerank": 0.018471,
+      "pagerank": 0.01845,
       "communityId": 0,
       "tags": [],
       "summary": "Data module app_user defining AppUser, matchesSearch, copyWith."
@@ -626,7 +626,7 @@
       "symbolCount": 5,
       "lineCount": 37,
       "complexity": "moderate",
-      "pagerank": 0.006316,
+      "pagerank": 0.006307,
       "communityId": 0,
       "tags": [],
       "summary": "Data module community_post defining PostStatus, CommunityPost, hasAttachment."
@@ -639,7 +639,7 @@
       "symbolCount": 3,
       "lineCount": 26,
       "complexity": "simple",
-      "pagerank": 0.009069,
+      "pagerank": 0.008993,
       "communityId": 0,
       "tags": [],
       "summary": "Data module cycle_subject_assignment defining CycleSubjectAssignment, usesLetterGrades, matchesSearch."
@@ -652,7 +652,7 @@
       "symbolCount": 1,
       "lineCount": 13,
       "complexity": "simple",
-      "pagerank": 0.005149,
+      "pagerank": 0.005141,
       "communityId": 0,
       "tags": [],
       "summary": "Data module enrollment_draft defining EnrollmentDraft."
@@ -665,8 +665,8 @@
       "symbolCount": 4,
       "lineCount": 15,
       "complexity": "moderate",
-      "pagerank": 0.003623,
-      "communityId": 30,
+      "pagerank": 0.003621,
+      "communityId": 29,
       "tags": [],
       "summary": "Data module grade_record defining GradeRecord, activityScore, examWeightedScore."
     },
@@ -678,7 +678,7 @@
       "symbolCount": 6,
       "lineCount": 30,
       "complexity": "moderate",
-      "pagerank": 0.006132,
+      "pagerank": 0.006123,
       "communityId": 0,
       "tags": [],
       "summary": "Data module registry_tab_record defining RegistryStudentRecord, behaviorCount, behaviorStatus."
@@ -691,7 +691,7 @@
       "symbolCount": 1,
       "lineCount": 10,
       "complexity": "simple",
-      "pagerank": 0.005149,
+      "pagerank": 0.005141,
       "communityId": 0,
       "tags": [],
       "summary": "Data module schedule_item defining ScheduleItem."
@@ -704,7 +704,7 @@
       "symbolCount": 2,
       "lineCount": 22,
       "complexity": "simple",
-      "pagerank": 0.007193,
+      "pagerank": 0.007184,
       "communityId": 0,
       "tags": [],
       "summary": "Data module school_subject defining SchoolSubject, matchesSearch."
@@ -717,7 +717,7 @@
       "symbolCount": 4,
       "lineCount": 110,
       "complexity": "moderate",
-      "pagerank": 0.00773,
+      "pagerank": 0.007654,
       "communityId": 0,
       "tags": [],
       "summary": "Data module student_enrollment defining StudentEnrollment, fullStudentName, copyWith."
@@ -730,7 +730,7 @@
       "symbolCount": 2,
       "lineCount": 17,
       "complexity": "simple",
-      "pagerank": 0.006377,
+      "pagerank": 0.006368,
       "communityId": 0,
       "tags": [],
       "summary": "Data module student_grade_entry defining StudentGradeEntry, key."
@@ -743,7 +743,7 @@
       "symbolCount": 9,
       "lineCount": 26,
       "complexity": "moderate",
-      "pagerank": 0.028652,
+      "pagerank": 0.028621,
       "communityId": 0,
       "tags": [],
       "summary": "Data module user_role defining UserRole, UserRoleDetails, clearanceLevel."
@@ -756,8 +756,8 @@
       "symbolCount": 9,
       "lineCount": 121,
       "complexity": "moderate",
-      "pagerank": 0.005306,
-      "communityId": 10,
+      "pagerank": 0.005237,
+      "communityId": 9,
       "tags": [],
       "summary": "Service module address_suggestion_service defining AddressLocation, AddressSuggestionService, search."
     },
@@ -769,7 +769,7 @@
       "symbolCount": 2,
       "lineCount": 22,
       "complexity": "simple",
-      "pagerank": 0.00553,
+      "pagerank": 0.005526,
       "communityId": 3,
       "tags": [],
       "summary": "Service module auth_service defining AuthService, signIn."
@@ -782,7 +782,7 @@
       "symbolCount": 5,
       "lineCount": 58,
       "complexity": "moderate",
-      "pagerank": 0.004279,
+      "pagerank": 0.004211,
       "communityId": 0,
       "tags": [],
       "summary": "Service module phone_code_service defining PhoneCode, label, fullLabel."
@@ -795,7 +795,7 @@
       "symbolCount": 4,
       "lineCount": 27,
       "complexity": "moderate",
-      "pagerank": 0.003917,
+      "pagerank": 0.003915,
       "communityId": 0,
       "tags": [],
       "summary": "Service module sync_queue defining PendingSyncItem, SyncQueue, pendingItems."
@@ -808,7 +808,7 @@
       "symbolCount": 82,
       "lineCount": 1294,
       "complexity": "complex",
-      "pagerank": 0.004742,
+      "pagerank": 0.004739,
       "communityId": 0,
       "tags": [],
       "summary": "Service module grades_screen defining _latestGradeForReport, _studentsForGradeReport, _gradeTextForReport."
@@ -821,7 +821,7 @@
       "symbolCount": 24,
       "lineCount": 327,
       "complexity": "complex",
-      "pagerank": 0.004466,
+      "pagerank": 0.004463,
       "communityId": 0,
       "tags": [],
       "summary": "Service module registry_screen defining RegistryScreen, createState, _RegistryScreenState."
@@ -834,7 +834,7 @@
       "symbolCount": 55,
       "lineCount": 779,
       "complexity": "complex",
-      "pagerank": 0.004687,
+      "pagerank": 0.004684,
       "communityId": 0,
       "tags": [],
       "summary": "Service module schedule_screen defining _ScheduleView, ScheduleScreen, createState."
@@ -847,7 +847,7 @@
       "symbolCount": 51,
       "lineCount": 968,
       "complexity": "complex",
-      "pagerank": 0.00443,
+      "pagerank": 0.004428,
       "communityId": 0,
       "tags": [],
       "summary": "Service module admin_hub_screen defining AdminHubScreen, createState, _AdminHubScreenState."
@@ -860,7 +860,7 @@
       "symbolCount": 102,
       "lineCount": 1468,
       "complexity": "complex",
-      "pagerank": 0.005533,
+      "pagerank": 0.00553,
       "communityId": 0,
       "tags": [],
       "summary": "Service module semester_admin_screen defining SemesterAdminScreen, createState, _SemesterAdminScreenState."
@@ -873,7 +873,7 @@
       "symbolCount": 35,
       "lineCount": 470,
       "complexity": "complex",
-      "pagerank": 0.004435,
+      "pagerank": 0.004433,
       "communityId": 0,
       "tags": [],
       "summary": "Service module subject_assignment_screen defining SubjectAssignmentScreen, createState, _SubjectAssignmentScreenState."
@@ -886,7 +886,7 @@
       "symbolCount": 7,
       "lineCount": 98,
       "complexity": "moderate",
-      "pagerank": 0.004463,
+      "pagerank": 0.00446,
       "communityId": 3,
       "tags": [],
       "summary": "Service module sign_in_screen defining SignInScreen, createState, _SignInScreenState."
@@ -899,7 +899,7 @@
       "symbolCount": 30,
       "lineCount": 486,
       "complexity": "complex",
-      "pagerank": 0.004533,
+      "pagerank": 0.00453,
       "communityId": 0,
       "tags": [],
       "summary": "Service module community_board_screen defining CommunityBoardScreen, createState, _CommunityBoardScreenState."
@@ -912,7 +912,7 @@
       "symbolCount": 9,
       "lineCount": 229,
       "complexity": "moderate",
-      "pagerank": 0.005541,
+      "pagerank": 0.005537,
       "communityId": 0,
       "tags": [],
       "summary": "Service module dashboard_shell defining DashboardShell, createState, _DashboardShellState."
@@ -925,24 +925,24 @@
       "symbolCount": 21,
       "lineCount": 370,
       "complexity": "complex",
-      "pagerank": 0.004533,
+      "pagerank": 0.00453,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module enrollment_table_screen defining _EnrollmentTableKind, EnrollmentTableScreen, createState.",
-      "primaryOwner": "Edgar Vazquez"
+      "summary": "Service module enrollment_table_screen defining _EnrollmentTableKind, EnrollmentTableScreen, createState."
     },
     {
       "id": "file:lib/features/enrollment/enrollment_wizard_screen.dart",
       "type": "file",
       "filePath": "lib/features/enrollment/enrollment_wizard_screen.dart",
       "language": "dart",
-      "symbolCount": 60,
-      "lineCount": 1237,
+      "symbolCount": 63,
+      "lineCount": 1291,
       "complexity": "complex",
-      "pagerank": 0.006953,
+      "pagerank": 0.006949,
       "communityId": 0,
       "tags": [],
-      "summary": "Service module enrollment_wizard_screen defining EnrollmentWizardScreen, createState, _EnrollmentWizardScreenState."
+      "summary": "Service module enrollment_wizard_screen defining EnrollmentWizardScreen, createState, _EnrollmentWizardScreenState.",
+      "primaryOwner": "Edgar Vazquez"
     },
     {
       "id": "file:lib/features/profile/limited_profile_screen.dart",
@@ -952,7 +952,7 @@
       "symbolCount": 7,
       "lineCount": 126,
       "complexity": "moderate",
-      "pagerank": 0.004345,
+      "pagerank": 0.004342,
       "communityId": 0,
       "tags": [],
       "summary": "Service module limited_profile_screen defining LimitedProfileScreen, createState, _LimitedProfileScreenState."
@@ -962,10 +962,10 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations.dart",
       "language": "dart",
-      "symbolCount": 94,
-      "lineCount": 461,
+      "symbolCount": 143,
+      "lineCount": 657,
       "complexity": "complex",
-      "pagerank": 0.012632,
+      "pagerank": 0.013315,
       "communityId": 3,
       "tags": [],
       "summary": "Service module app_localizations defining AppLocalizations, of, _AppLocalizationsDelegate.",
@@ -976,10 +976,10 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_en.dart",
       "language": "dart",
-      "symbolCount": 88,
-      "lineCount": 151,
+      "symbolCount": 137,
+      "lineCount": 232,
       "complexity": "complex",
-      "pagerank": 0.00577,
+      "pagerank": 0.005884,
       "communityId": 3,
       "tags": [],
       "summary": "Service module app_localizations_en defining AppLocalizationsEn.",
@@ -990,10 +990,10 @@
       "type": "file",
       "filePath": "lib/l10n/app_localizations_es.dart",
       "language": "dart",
-      "symbolCount": 176,
-      "lineCount": 304,
+      "symbolCount": 274,
+      "lineCount": 471,
       "complexity": "complex",
-      "pagerank": 0.00577,
+      "pagerank": 0.005884,
       "communityId": 3,
       "tags": [],
       "summary": "Service module app_localizations_es defining AppLocalizationsEs, AppLocalizationsEsMx.",
@@ -1007,7 +1007,7 @@
       "symbolCount": 1,
       "lineCount": 3,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 3,
       "tags": [
         "entry_point"
@@ -1022,7 +1022,7 @@
       "symbolCount": 2,
       "lineCount": 26,
       "complexity": "simple",
-      "pagerank": 0.003917,
+      "pagerank": 0.003915,
       "communityId": 0,
       "tags": [],
       "summary": "UI module role_badge defining RoleBadge, build."
@@ -1035,7 +1035,7 @@
       "symbolCount": 2,
       "lineCount": 22,
       "complexity": "simple",
-      "pagerank": 0.009074,
+      "pagerank": 0.009003,
       "communityId": 0,
       "tags": [],
       "summary": "UI module section_header defining SectionHeader, build."
@@ -1048,7 +1048,7 @@
       "symbolCount": 2,
       "lineCount": 34,
       "complexity": "simple",
-      "pagerank": 0.003917,
+      "pagerank": 0.003915,
       "communityId": 0,
       "tags": [],
       "summary": "UI module status_tile defining StatusTile, build."
@@ -1061,8 +1061,8 @@
       "symbolCount": 1,
       "lineCount": 4,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 8,
+      "pagerank": 0.003621,
+      "communityId": 7,
       "tags": [
         "entry_point"
       ],
@@ -1076,8 +1076,8 @@
       "symbolCount": 9,
       "lineCount": 140,
       "complexity": "moderate",
-      "pagerank": 0.033496,
-      "communityId": 8,
+      "pagerank": 0.033476,
+      "communityId": 7,
       "tags": [],
       "summary": "Application module my_application defining _MyApplication, first_frame_cb, my_application_activate."
     },
@@ -1089,8 +1089,8 @@
       "symbolCount": 1,
       "lineCount": 11,
       "complexity": "simple",
-      "pagerank": 0.035186,
-      "communityId": 8,
+      "pagerank": 0.035165,
+      "communityId": 7,
       "tags": [],
       "summary": "Application module my_application (1 symbols)."
     },
@@ -1102,7 +1102,7 @@
       "symbolCount": 3,
       "lineCount": 8,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 5,
       "tags": [],
       "summary": "Application module AppDelegate defining AppDelegate, applicationShouldTerminateAfterLastWindowClosed, applicationSupportsSecureRestorableState."
@@ -1115,8 +1115,8 @@
       "symbolCount": 0,
       "lineCount": 33,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 31,
+      "pagerank": 0.003621,
+      "communityId": 30,
       "tags": [
         "config"
       ],
@@ -1130,7 +1130,7 @@
       "symbolCount": 2,
       "lineCount": 10,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 5,
       "tags": [],
       "summary": "Application module MainFlutterWindow defining MainFlutterWindow, awakeFromNib."
@@ -1143,7 +1143,7 @@
       "symbolCount": 2,
       "lineCount": 7,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 5,
       "tags": [
         "test"
@@ -1158,8 +1158,8 @@
       "symbolCount": 0,
       "lineCount": 11,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 32,
+      "pagerank": 0.003621,
+      "communityId": 31,
       "tags": [
         "config"
       ],
@@ -1173,8 +1173,8 @@
       "symbolCount": 1,
       "lineCount": 45,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 10,
+      "pagerank": 0.003621,
+      "communityId": 9,
       "tags": [
         "test"
       ],
@@ -1188,7 +1188,7 @@
       "symbolCount": 1,
       "lineCount": 108,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1203,7 +1203,7 @@
       "symbolCount": 1,
       "lineCount": 119,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1218,7 +1218,7 @@
       "symbolCount": 1,
       "lineCount": 236,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1233,7 +1233,7 @@
       "symbolCount": 1,
       "lineCount": 135,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1248,7 +1248,7 @@
       "symbolCount": 1,
       "lineCount": 220,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1263,7 +1263,7 @@
       "symbolCount": 1,
       "lineCount": 25,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1278,7 +1278,7 @@
       "symbolCount": 1,
       "lineCount": 246,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1293,7 +1293,7 @@
       "symbolCount": 1,
       "lineCount": 157,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1308,7 +1308,7 @@
       "symbolCount": 1,
       "lineCount": 159,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1323,7 +1323,7 @@
       "symbolCount": 1,
       "lineCount": 358,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 0,
       "tags": [
         "test"
@@ -1338,7 +1338,7 @@
       "symbolCount": 1,
       "lineCount": 18,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 3,
       "tags": [
         "test"
@@ -1353,8 +1353,8 @@
       "symbolCount": 0,
       "lineCount": 39,
       "complexity": "simple",
-      "pagerank": 0.003623,
-      "communityId": 11,
+      "pagerank": 0.003621,
+      "communityId": 10,
       "tags": [
         "barrel"
       ],
@@ -1368,8 +1368,8 @@
       "symbolCount": 0,
       "lineCount": 24,
       "complexity": "simple",
-      "pagerank": 0.006702,
-      "communityId": 11,
+      "pagerank": 0.006698,
+      "communityId": 10,
       "tags": [
         "config"
       ],
@@ -1383,7 +1383,7 @@
       "symbolCount": 6,
       "lineCount": 41,
       "complexity": "moderate",
-      "pagerank": 0.006405,
+      "pagerank": 0.006401,
       "communityId": 1,
       "tags": [],
       "summary": "Application module binary_messenger_impl defining BinaryMessengerImpl, BinaryMessengerImpl, ~BinaryMessengerImpl."
@@ -1396,7 +1396,7 @@
       "symbolCount": 12,
       "lineCount": 73,
       "complexity": "moderate",
-      "pagerank": 0.004393,
+      "pagerank": 0.00439,
       "communityId": 1,
       "tags": [],
       "summary": "Application module byte_buffer_streams defining ByteBufferStreamReader, ByteBufferStreamReader, ReadByte."
@@ -1409,7 +1409,7 @@
       "symbolCount": 20,
       "lineCount": 267,
       "complexity": "complex",
-      "pagerank": 0.006702,
+      "pagerank": 0.006698,
       "communityId": 1,
       "tags": [],
       "summary": "Application module core_implementations defining ForwardToHandler, BinaryMessengerImpl, ~BinaryMessengerImpl."
@@ -1422,7 +1422,7 @@
       "symbolCount": 0,
       "lineCount": 13,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 1,
       "tags": [],
       "summary": "Application module engine_method_result."
@@ -1435,7 +1435,7 @@
       "symbolCount": 12,
       "lineCount": 104,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 1,
       "tags": [],
       "summary": "Application module flutter_engine defining FlutterEngine, ~FlutterEngine, Run."
@@ -1448,7 +1448,7 @@
       "symbolCount": 6,
       "lineCount": 43,
       "complexity": "moderate",
-      "pagerank": 0.006331,
+      "pagerank": 0.006327,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_view_controller defining FlutterViewController, ~FlutterViewController, view_id."
@@ -1461,7 +1461,7 @@
       "symbolCount": 17,
       "lineCount": 146,
       "complexity": "complex",
-      "pagerank": 0.004385,
+      "pagerank": 0.004382,
       "communityId": 1,
       "tags": [],
       "summary": "Application module basic_message_channel defining ResizeChannel, SetChannelWarnsOnOverflow, EncodableValue."
@@ -1474,7 +1474,7 @@
       "symbolCount": 3,
       "lineCount": 48,
       "complexity": "simple",
-      "pagerank": 0.018787,
+      "pagerank": 0.018776,
       "communityId": 1,
       "tags": [],
       "summary": "Application module binary_messenger defining BinaryMessenger."
@@ -1487,7 +1487,7 @@
       "symbolCount": 12,
       "lineCount": 72,
       "complexity": "moderate",
-      "pagerank": 0.010252,
+      "pagerank": 0.010246,
       "communityId": 1,
       "tags": [],
       "summary": "Application module byte_streams defining ByteStreamReader, ByteStreamReader, ReadInt32."
@@ -1500,7 +1500,7 @@
       "symbolCount": 16,
       "lineCount": 164,
       "complexity": "complex",
-      "pagerank": 0.010412,
+      "pagerank": 0.010406,
       "communityId": 2,
       "tags": [],
       "summary": "Application module dart_project defining GpuPreference, UIThreadPolicy, AccessibilityMode."
@@ -1513,7 +1513,7 @@
       "symbolCount": 22,
       "lineCount": 291,
       "complexity": "complex",
-      "pagerank": 0.008939,
+      "pagerank": 0.008933,
       "communityId": 1,
       "tags": [],
       "summary": "Application module encodable_value defining CustomEncodableValue, CustomEncodableValue, EncodableValue."
@@ -1526,7 +1526,7 @@
       "symbolCount": 13,
       "lineCount": 73,
       "complexity": "moderate",
-      "pagerank": 0.008152,
+      "pagerank": 0.008147,
       "communityId": 1,
       "tags": [],
       "summary": "Application module engine_method_result defining ReplyManager, ReplyManager, ~ReplyManager."
@@ -1539,8 +1539,8 @@
       "symbolCount": 14,
       "lineCount": 190,
       "complexity": "moderate",
-      "pagerank": 0.003623,
-      "communityId": 7,
+      "pagerank": 0.003621,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module event_channel defining EncodableValue, EventChannel, EventChannel."
     },
@@ -1552,8 +1552,8 @@
       "symbolCount": 12,
       "lineCount": 54,
       "complexity": "moderate",
-      "pagerank": 0.010975,
-      "communityId": 7,
+      "pagerank": 0.010968,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module event_sink defining EncodableValue, EventSink, EventSink."
     },
@@ -1565,8 +1565,8 @@
       "symbolCount": 12,
       "lineCount": 73,
       "complexity": "moderate",
-      "pagerank": 0.005932,
-      "communityId": 7,
+      "pagerank": 0.005929,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module event_stream_handler defining EncodableValue, StreamHandlerError, StreamHandlerError."
     },
@@ -1578,8 +1578,8 @@
       "symbolCount": 11,
       "lineCount": 66,
       "complexity": "moderate",
-      "pagerank": 0.003623,
-      "communityId": 7,
+      "pagerank": 0.003621,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module event_stream_handler_functions defining EncodableValue, StreamHandlerFunctions, StreamHandlerFunctions."
     },
@@ -1591,7 +1591,7 @@
       "symbolCount": 7,
       "lineCount": 137,
       "complexity": "moderate",
-      "pagerank": 0.0072,
+      "pagerank": 0.007196,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_engine defining FlutterEngine, FlutterEngine, ~FlutterEngine."
@@ -1604,8 +1604,8 @@
       "symbolCount": 6,
       "lineCount": 36,
       "complexity": "moderate",
-      "pagerank": 0.007714,
-      "communityId": 2,
+      "pagerank": 0.007709,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module flutter_view defining FlutterView, FlutterView, FlutterView."
     },
@@ -1617,7 +1617,7 @@
       "symbolCount": 6,
       "lineCount": 67,
       "complexity": "moderate",
-      "pagerank": 0.009004,
+      "pagerank": 0.008999,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_view_controller defining FlutterViewController, FlutterViewController, ~FlutterViewController."
@@ -1630,7 +1630,7 @@
       "symbolCount": 9,
       "lineCount": 57,
       "complexity": "moderate",
-      "pagerank": 0.00611,
+      "pagerank": 0.006106,
       "communityId": 1,
       "tags": [],
       "summary": "Application module message_codec defining MessageCodec, MessageCodec, MessageCodec."
@@ -1643,7 +1643,7 @@
       "symbolCount": 7,
       "lineCount": 35,
       "complexity": "moderate",
-      "pagerank": 0.008905,
+      "pagerank": 0.0089,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_call defining EncodableValue, MethodCall, MethodCall."
@@ -1656,7 +1656,7 @@
       "symbolCount": 12,
       "lineCount": 148,
       "complexity": "moderate",
-      "pagerank": 0.005378,
+      "pagerank": 0.005375,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_channel defining EncodableValue, MethodChannel, MethodChannel."
@@ -1669,7 +1669,7 @@
       "symbolCount": 12,
       "lineCount": 109,
       "complexity": "moderate",
-      "pagerank": 0.00787,
+      "pagerank": 0.007865,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_codec defining MethodCodec, MethodCodec, MethodCodec."
@@ -1682,7 +1682,7 @@
       "symbolCount": 12,
       "lineCount": 71,
       "complexity": "moderate",
-      "pagerank": 0.013119,
+      "pagerank": 0.013111,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_result defining EncodableValue, MethodResult, MethodResult."
@@ -1695,7 +1695,7 @@
       "symbolCount": 13,
       "lineCount": 70,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 1,
       "tags": [],
       "summary": "Application module method_result_functions defining EncodableValue, MethodResultFunctions, MethodResultFunctions."
@@ -1708,7 +1708,7 @@
       "symbolCount": 14,
       "lineCount": 120,
       "complexity": "moderate",
-      "pagerank": 0.007309,
+      "pagerank": 0.007304,
       "communityId": 1,
       "tags": [],
       "summary": "Application module plugin_registrar defining Plugin, PluginRegistrar, PluginRegistrar."
@@ -1721,8 +1721,8 @@
       "symbolCount": 11,
       "lineCount": 148,
       "complexity": "moderate",
-      "pagerank": 0.003623,
-      "communityId": 2,
+      "pagerank": 0.003621,
+      "communityId": 1,
       "tags": [],
       "summary": "Application module plugin_registrar_windows defining PluginRegistrarWindows, PluginRegistrarWindows, PluginRegistrarWindows."
     },
@@ -1734,7 +1734,7 @@
       "symbolCount": 5,
       "lineCount": 30,
       "complexity": "moderate",
-      "pagerank": 0.005153,
+      "pagerank": 0.00515,
       "communityId": 2,
       "tags": [],
       "summary": "Application module plugin_registry defining PluginRegistry, PluginRegistry, PluginRegistry."
@@ -1747,7 +1747,7 @@
       "symbolCount": 8,
       "lineCount": 73,
       "complexity": "moderate",
-      "pagerank": 0.006813,
+      "pagerank": 0.006809,
       "communityId": 1,
       "tags": [],
       "summary": "Application module standard_codec_serializer defining StandardCodecSerializer, ~StandardCodecSerializer, StandardCodecSerializer."
@@ -1760,7 +1760,7 @@
       "symbolCount": 6,
       "lineCount": 52,
       "complexity": "moderate",
-      "pagerank": 0.004393,
+      "pagerank": 0.00439,
       "communityId": 1,
       "tags": [],
       "summary": "Application module standard_message_codec defining StandardMessageCodec, ~StandardMessageCodec, StandardMessageCodec."
@@ -1773,7 +1773,7 @@
       "symbolCount": 6,
       "lineCount": 67,
       "complexity": "moderate",
-      "pagerank": 0.005532,
+      "pagerank": 0.005529,
       "communityId": 1,
       "tags": [],
       "summary": "Application module standard_method_codec defining StandardMethodCodec, ~StandardMethodCodec, StandardMethodCodec."
@@ -1786,7 +1786,7 @@
       "symbolCount": 8,
       "lineCount": 108,
       "complexity": "moderate",
-      "pagerank": 0.011301,
+      "pagerank": 0.011294,
       "communityId": 1,
       "tags": [],
       "summary": "Application module texture_registrar defining PixelBufferTexture, PixelBufferTexture, GpuSurfaceTexture."
@@ -1799,7 +1799,7 @@
       "symbolCount": 7,
       "lineCount": 44,
       "complexity": "moderate",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 1,
       "tags": [],
       "summary": "Application module plugin_registrar defining PluginRegistrar, ~PluginRegistrar, AddPlugin."
@@ -1812,7 +1812,7 @@
       "symbolCount": 23,
       "lineCount": 386,
       "complexity": "complex",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 1,
       "tags": [],
       "summary": "Application module standard_codec defining EncodedType, EncodedTypeForValue, StandardCodecSerializer."
@@ -1825,7 +1825,7 @@
       "symbolCount": 6,
       "lineCount": 38,
       "complexity": "moderate",
-      "pagerank": 0.005378,
+      "pagerank": 0.005375,
       "communityId": 1,
       "tags": [],
       "summary": "Application module texture_registrar_impl defining TextureRegistrarImpl, TextureRegistrarImpl, ~TextureRegistrarImpl."
@@ -1838,7 +1838,7 @@
       "symbolCount": 5,
       "lineCount": 20,
       "complexity": "moderate",
-      "pagerank": 0.015998,
+      "pagerank": 0.015989,
       "communityId": 4,
       "tags": [],
       "summary": "Application module flutter_export (5 symbols)."
@@ -1851,7 +1851,7 @@
       "symbolCount": 12,
       "lineCount": 130,
       "complexity": "moderate",
-      "pagerank": 0.00634,
+      "pagerank": 0.006336,
       "communityId": 4,
       "tags": [],
       "summary": "Application module flutter_messenger defining FlutterDesktopMessenger, _FlutterPlatformMessageResponseHandle, FlutterDesktopMessageResponseHandle."
@@ -1864,7 +1864,7 @@
       "symbolCount": 3,
       "lineCount": 40,
       "complexity": "simple",
-      "pagerank": 0.00494,
+      "pagerank": 0.004937,
       "communityId": 4,
       "tags": [],
       "summary": "Application module flutter_plugin_registrar defining FlutterDesktopPluginRegistrar, FlutterDesktopPluginRegistrarSetDestructionHandler."
@@ -1877,7 +1877,7 @@
       "symbolCount": 14,
       "lineCount": 183,
       "complexity": "moderate",
-      "pagerank": 0.005022,
+      "pagerank": 0.005019,
       "communityId": 4,
       "tags": [],
       "summary": "Application module flutter_texture_registrar defining FlutterDesktopTextureRegistrar, FlutterDesktopTextureRegistrar, FlutterDesktopTextureType."
@@ -1890,7 +1890,7 @@
       "symbolCount": 27,
       "lineCount": 379,
       "complexity": "complex",
-      "pagerank": 0.004649,
+      "pagerank": 0.004646,
       "communityId": 4,
       "tags": [],
       "summary": "Application module flutter_windows defining FlutterDesktopViewController, FlutterDesktopViewController, FlutterDesktopView."
@@ -1903,7 +1903,7 @@
       "symbolCount": 5,
       "lineCount": 54,
       "complexity": "moderate",
-      "pagerank": 0.005561,
+      "pagerank": 0.005557,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_window defining FlutterWindow, ~FlutterWindow, OnCreate."
@@ -1916,7 +1916,7 @@
       "symbolCount": 4,
       "lineCount": 24,
       "complexity": "moderate",
-      "pagerank": 0.009119,
+      "pagerank": 0.009114,
       "communityId": 2,
       "tags": [],
       "summary": "Application module flutter_window defining FlutterWindow, FlutterWindow, ~FlutterWindow."
@@ -1929,7 +1929,7 @@
       "symbolCount": 1,
       "lineCount": 32,
       "complexity": "simple",
-      "pagerank": 0.003623,
+      "pagerank": 0.003621,
       "communityId": 2,
       "tags": [
         "entry_point"
@@ -1944,7 +1944,7 @@
       "symbolCount": 5,
       "lineCount": 11,
       "complexity": "moderate",
-      "pagerank": 0.009179,
+      "pagerank": 0.009174,
       "communityId": 2,
       "tags": [],
       "summary": "Application module resource (5 symbols)."
@@ -1957,7 +1957,7 @@
       "symbolCount": 3,
       "lineCount": 55,
       "complexity": "simple",
-      "pagerank": 0.02645,
+      "pagerank": 0.026434,
       "communityId": 2,
       "tags": [],
       "summary": "Application module utils defining CreateAndAttachConsole, GetCommandLineArguments, Utf8FromUtf16."
@@ -1970,7 +1970,7 @@
       "symbolCount": 4,
       "lineCount": 17,
       "complexity": "moderate",
-      "pagerank": 0.026873,
+      "pagerank": 0.026856,
       "communityId": 2,
       "tags": [],
       "summary": "Application module utils defining CreateAndAttachConsole, Utf8FromUtf16, GetCommandLineArguments."
@@ -1983,7 +1983,7 @@
       "symbolCount": 21,
       "lineCount": 220,
       "complexity": "complex",
-      "pagerank": 0.013073,
+      "pagerank": 0.013065,
       "communityId": 2,
       "tags": [],
       "summary": "Application module win32_window defining Scale, EnableFullDpiSupportIfAvailable, WindowClassRegistrar."
@@ -1996,7 +1996,7 @@
       "symbolCount": 8,
       "lineCount": 90,
       "complexity": "moderate",
-      "pagerank": 0.011117,
+      "pagerank": 0.01111,
       "communityId": 2,
       "tags": [],
       "summary": "Application module win32_window defining Win32Window, Point, Point."
@@ -2875,6 +2875,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:additionalInfo",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "additionalInfo",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:appTitle",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -2888,6 +2897,51 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "approve",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:area",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "area",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:areaBiological",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "areaBiological",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:areaEconomics",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "areaEconomics",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:areaHumanities",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "areaHumanities",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:areaPhysics",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "areaPhysics",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -2911,6 +2965,24 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:back",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "back",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:bloodType",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "bloodType",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:body",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -2924,6 +2996,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "cancel",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:chooseAreaToAssignGroup",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "chooseAreaToAssignGroup",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3010,6 +3091,33 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:completeRequiredFieldsBeforeSaving",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "completeRequiredFieldsBeforeSaving",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:completeSixStepsToCreateLevel4",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "completeSixStepsToCreateLevel4",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:curpMustBe18Characters",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "curpMustBe18Characters",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:curpValue",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3032,6 +3140,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "customSearch",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:disableUser",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "disableUser",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3082,10 +3199,28 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:editStudentEnrollment",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "editStudentEnrollment",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:emailValue",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "emailValue",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:enableUser",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "enableUser",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3104,6 +3239,51 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "enrollmentSubtitle",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:equipmentCellphone",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "equipmentCellphone",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:equipmentComputer",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "equipmentComputer",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:equipmentInternet",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "equipmentInternet",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:equipmentNone",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "equipmentNone",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:equipmentTablet",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "equipmentTablet",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3149,6 +3329,24 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "gradesTitle",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:group",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "group",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:groupAssignedFromArea",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "groupAssignedFromArea",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3253,6 +3451,33 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:medicalProvider",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "medicalProvider",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:medicalProviderMarineMilitary",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "medicalProviderMarineMilitary",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:medicalProviderPrivate",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "medicalProviderPrivate",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:navAdmin",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3316,6 +3541,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:next",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "next",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:noMatches",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3356,6 +3590,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "of",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:openMapSelector",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "openMapSelector",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3415,6 +3658,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:placeOfBirth",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "placeOfBirth",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:postEditor",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3428,6 +3680,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "publishPost",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:registration",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "registration",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3464,6 +3725,15 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "requiredField",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:reviewSevenStepsBeforeSaving",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "reviewSevenStepsBeforeSaving",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3532,6 +3802,15 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:schoolData",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "schoolData",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:searchStudents",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3559,6 +3838,24 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:selectEquipmentAccess",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "selectEquipmentAccess",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:semester",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "semester",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:semesterFilter",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3577,6 +3874,33 @@
       "summary": ""
     },
     {
+      "id": "function:lib/l10n/app_localizations.dart:sex",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "sex",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:sexFemale",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "sexFemale",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:sexMale",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "sexMale",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
       "id": "function:lib/l10n/app_localizations.dart:shouldReload",
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
@@ -3590,6 +3914,96 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "signIn",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentAccountDisabled",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentAccountDisabled",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentAccountEnabled",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentAccountEnabled",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentContact",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentContact",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentCurp",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentCurp",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentData",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentData",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentEnrollment",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentEnrollment",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentFatherSurname",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentFatherSurname",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentMotherSurname",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentMotherSurname",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentName",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentName",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:studentSavedWithRegistration",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "studentSavedWithRegistration",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -3626,6 +4040,33 @@
       "type": "function",
       "filePath": "lib/l10n/app_localizations.dart",
       "name": "submitForApproval",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:transferredSubjects",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "transferredSubjects",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:tutorContact",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorContact",
+      "language": "dart",
+      "tags": [],
+      "summary": ""
+    },
+    {
+      "id": "function:lib/l10n/app_localizations.dart:tutorData",
+      "type": "function",
+      "filePath": "lib/l10n/app_localizations.dart",
+      "name": "tutorData",
       "language": "dart",
       "tags": [],
       "summary": ""
@@ -6594,6 +7035,13 @@
     },
     {
       "source": "file:lib/features/enrollment/enrollment_wizard_screen.dart",
+      "target": "file:lib/l10n/app_localizations.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/enrollment/enrollment_wizard_screen.dart",
       "target": "file:lib/shared/widgets/section_header.dart",
       "type": "imports",
       "direction": "forward",
@@ -6699,6 +7147,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:additionalInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:appTitle",
       "type": "contains",
       "direction": "forward",
@@ -6707,6 +7162,41 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:approve",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:area",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:areaBiological",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:areaEconomics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:areaHumanities",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:areaPhysics",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -6727,6 +7217,20 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:back",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:bloodType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:body",
       "type": "contains",
       "direction": "forward",
@@ -6735,6 +7239,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:cancel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:chooseAreaToAssignGroup",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -6804,6 +7315,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:completeRequiredFieldsBeforeSaving",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:completeSixStepsToCreateLevel4",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:curpMustBe18Characters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:curpValue",
       "type": "contains",
       "direction": "forward",
@@ -6819,6 +7351,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:customSearch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:disableUser",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -6860,7 +7399,21 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:editStudentEnrollment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:emailValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:enableUser",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -6875,6 +7428,41 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:enrollmentSubtitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentCellphone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentComputer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentInternet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentNone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentTablet",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -6910,6 +7498,20 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:gradesTitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:group",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:groupAssignedFromArea",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -6993,6 +7595,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:medicalProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:medicalProviderMarineMilitary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:medicalProviderPrivate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:navAdmin",
       "type": "contains",
       "direction": "forward",
@@ -7042,6 +7665,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:next",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:noMatches",
       "type": "contains",
       "direction": "forward",
@@ -7071,6 +7701,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:of",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:openMapSelector",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7119,6 +7756,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:placeOfBirth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:postEditor",
       "type": "contains",
       "direction": "forward",
@@ -7127,6 +7771,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:publishPost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:registration",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7155,6 +7806,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:requiredField",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:reviewSevenStepsBeforeSaving",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7210,6 +7868,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:schoolData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:searchStudents",
       "type": "contains",
       "direction": "forward",
@@ -7231,6 +7896,20 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:selectEquipmentAccess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:semester",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:semesterFilter",
       "type": "contains",
       "direction": "forward",
@@ -7245,6 +7924,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:sex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:sexFemale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:sexMale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:shouldReload",
       "type": "contains",
       "direction": "forward",
@@ -7253,6 +7953,76 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:signIn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentAccountDisabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentAccountEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentContact",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentCurp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentEnrollment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentFatherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentMotherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:studentSavedWithRegistration",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7281,6 +8051,27 @@
     {
       "source": "file:lib/l10n/app_localizations.dart",
       "target": "function:lib/l10n/app_localizations.dart:submitForApproval",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:transferredSubjects",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorContact",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart",
+      "target": "function:lib/l10n/app_localizations.dart:tutorData",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7343,6 +8134,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:additionalInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:appTitle",
       "type": "contains",
       "direction": "forward",
@@ -7351,6 +8149,41 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:approve",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:area",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:areaBiological",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:areaEconomics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:areaHumanities",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:areaPhysics",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7371,6 +8204,20 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:back",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:bloodType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:body",
       "type": "contains",
       "direction": "forward",
@@ -7379,6 +8226,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:cancel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:chooseAreaToAssignGroup",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7448,6 +8302,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:completeRequiredFieldsBeforeSaving",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:completeSixStepsToCreateLevel4",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:curpMustBe18Characters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:curpValue",
       "type": "contains",
       "direction": "forward",
@@ -7463,6 +8338,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:customSearch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:disableUser",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7504,7 +8386,21 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:editStudentEnrollment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:emailValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:enableUser",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7519,6 +8415,41 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:enrollmentSubtitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentCellphone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentComputer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentInternet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentNone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:equipmentTablet",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7554,6 +8485,20 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:gradesTitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:group",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:groupAssignedFromArea",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7616,6 +8561,27 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:medicalProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:medicalProviderMarineMilitary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:medicalProviderPrivate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:navAdmin",
       "type": "contains",
       "direction": "forward",
@@ -7665,6 +8631,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:next",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:noMatches",
       "type": "contains",
       "direction": "forward",
@@ -7694,6 +8667,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:of",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:openMapSelector",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7742,6 +8722,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:placeOfBirth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:postEditor",
       "type": "contains",
       "direction": "forward",
@@ -7750,6 +8737,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:publishPost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:registration",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7778,6 +8772,13 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:requiredField",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:reviewSevenStepsBeforeSaving",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7833,6 +8834,13 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:schoolData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:searchStudents",
       "type": "contains",
       "direction": "forward",
@@ -7854,6 +8862,20 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:selectEquipmentAccess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:semester",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:semesterFilter",
       "type": "contains",
       "direction": "forward",
@@ -7868,7 +8890,98 @@
     },
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:sex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:sexFemale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:sexMale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:signIn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentAccountDisabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentAccountEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentContact",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentCurp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentEnrollment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentFatherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentMotherSurname",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:studentSavedWithRegistration",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0
@@ -7897,6 +9010,27 @@
     {
       "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
       "target": "function:lib/l10n/app_localizations.dart:submitForApproval",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:transferredSubjects",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorContact",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/l10n/app_localizations.dart::AppLocalizations",
+      "target": "function:lib/l10n/app_localizations.dart:tutorData",
       "type": "contains",
       "direction": "forward",
       "weight": 1.0

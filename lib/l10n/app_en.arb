@@ -228,5 +228,91 @@
       "placeOfBirth": "Place of birth",
       
       "curpMustBe18Characters": "CURP must be 18 characters",
-      "openMapSelector": "Open map selector"  
+      "openMapSelector": "Open map selector",
+      "email": "Email",
+      "schoolEmail": "School email",
+      "cellphoneNumber": "Cellphone number",
+      "privateDomicile": "Private domicile",
+      "enterValidEmail": "Enter a valid email",
+      
+      "relationToStudent": "Relation to student",
+      "relationMother": "Mother",
+      "relationFather": "Father",
+      "relationCousin": "Cousin",
+      "relationAuntUncle": "Aunt/Uncle",
+      "relationCloseFriend": "Close friend",
+      "relationMyself": "Myself",
+      
+      "tutorFatherSurname": "Tutor father surname",
+      "tutorMotherSurname": "Tutor mother surname",
+      "tutorName": "Tutor name",
+      "tutorCurp": "Tutor CURP",
+      "occupation": "Occupation",
+
+      "tutorCellphoneNumber": "Tutor cellphone number",
+      "tutorEmail": "Tutor email",
+      "sameDomicileAsStudent": "Same domicile as student",
+      "tutorPrivateDomicile": "Tutor private domicile",
+
+      "lastAcademicLevel": "Last academic level",
+      
+      "academicPrimary": "Primary",
+      "academicSecondary": "Secondary",
+      "academicHighSchool": "High school",
+      "academicBachelor": "Bachelor's degree",
+      "academicMaster": "Master's degree",
+      "academicDoctorate": "Doctorate",
+      
+      "civilStatus": "Civil status",
+      "civilSingle": "Single",
+      "civilMarried": "Married",
+      "civilWidowed": "Widowed",
+      "civilFreeUnion": "Free union",
+      
+      "ableToReadAndWrite": "Able to read and write",
+      
+      "l4AccountCredentials": "L4 account credentials",
+      "acknowledgeL4Credentials": "I acknowledge these L4 account credentials",
+      "l4CredentialsExplanation": "CURP is the username; registration is the password.",
+      
+      "copyField": "Copy {field}",
+      "@copyField": {
+        "placeholders": {
+          "field": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "fieldCopied": "{field} copied.",
+      "@fieldCopied": {
+        "placeholders": {
+          "field": {
+            "type": "String"
+          }
+        }
+      },
+
+      "openStreetMapSelector": "OpenStreetMap selector",
+      "searchLocation": "Search location",
+      "search": "Search",
+      "centerOnXalapa": "Center on Xalapa",
+      "useThisLocation": "Use this location",
+      
+      "noMatchingLocationFound": "No matching location was found.",
+      "locationServiceUnavailable": "The location service is unavailable.",
+      "addressCouldNotBeResolved": "The address could not be resolved.",
+      "locationSearchFailed": "The location search could not be completed.",
+      
+      "selectedPointCoordinates": "Selected point {latitude}, {longitude}",
+      "@selectedPointCoordinates": {
+        "placeholders": {
+          "latitude": {
+            "type": "String"
+          },
+          "longitude": {
+            "type": "String"
+          }
+        }
+      }
     }
