@@ -425,5 +425,81 @@
             "type": "String"
           }
         }
-      }
+      },
+
+      "yourGradedSubjects": "Your graded subjects",
+      "yourAssignedSubjects": "Your assigned subjects",
+      "cycleSubjectAssignments": "Cycle subject assignments",
+      
+      "downloadGradedSubjectPdfs": "Download graded subject PDFs",
+      
+      "graded": "Graded",
+      "pending": "Pending",
+      "notGraded": "Not graded",
+      
+      "searchSubjects": "Search subjects",
+      "subjects": "Subjects",
+      "pendingSubjects": "Pending subjects",
+      
+      "noPendingSubjects": "No pending subjects",
+      "noGradedSubjects": "No graded subjects",
+      "noAssignedSubjects": "No assigned subjects",
+      
+      "gradeAction": "Grade",
+      "viewAction": "View",
+      "registry": "Behavior log",
+      
+      "pendingStage": "Pending {stage}",
+      "@pendingStage": {
+        "placeholders": {
+          "stage": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "noGradedSubjectsToDownload": "No graded subjects to download.",
+      
+      "pdfSavedTo": "PDF saved to {path}",
+      "@pdfSavedTo": {
+        "placeholders": {
+          "path": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "couldNotSavePdf": "Could not save PDF: {error}",
+      "@couldNotSavePdf": {
+        "placeholders": {
+          "error": {
+            "type": "String"
+          }
+        }
+      },
+
+      "subjectGradeReport": "Subject grade report",
+      "downloadPdf": "Download PDF",
+      "noStudentsInReport": "No students in this report",
+      
+      "student": "Student",
+      "grade": "Grade",
+      "status": "Status",
+      "passed": "Passed",
+      
+      "constimixGradeReport": "GRADE REPORT",
+      
+      "pageOf": "Page {page} of {total}",
+      "@pageOf": {
+        "placeholders": {
+          "page": {
+            "type": "int"
+          },
+          "total": {
+            "type": "int"
+          }
+        }
+      },
+      
+      "noGradedSubjectsAvailable": "No graded subjects are available."
     }

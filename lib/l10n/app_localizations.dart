@@ -1412,6 +1412,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Semester {semester}{group}'**
   String scheduleSemesterGroup(int semester, String group);
+
+  /// No description provided for @yourGradedSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Your graded subjects'**
+  String get yourGradedSubjects;
+
+  /// No description provided for @yourAssignedSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Your assigned subjects'**
+  String get yourAssignedSubjects;
+
+  /// No description provided for @cycleSubjectAssignments.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle subject assignments'**
+  String get cycleSubjectAssignments;
+
+  /// No description provided for @downloadGradedSubjectPdfs.
+  ///
+  /// In en, this message translates to:
+  /// **'Download graded subject PDFs'**
+  String get downloadGradedSubjectPdfs;
+
+  /// No description provided for @graded.
+  ///
+  /// In en, this message translates to:
+  /// **'Graded'**
+  String get graded;
+
+  /// No description provided for @pending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pending;
+
+  /// No description provided for @notGraded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not graded'**
+  String get notGraded;
+
+  /// No description provided for @searchSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Search subjects'**
+  String get searchSubjects;
+
+  /// No description provided for @subjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Subjects'**
+  String get subjects;
+
+  /// No description provided for @pendingSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending subjects'**
+  String get pendingSubjects;
+
+  /// No description provided for @noPendingSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending subjects'**
+  String get noPendingSubjects;
+
+  /// No description provided for @noGradedSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'No graded subjects'**
+  String get noGradedSubjects;
+
+  /// No description provided for @noAssignedSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'No assigned subjects'**
+  String get noAssignedSubjects;
+
+  /// No description provided for @gradeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Grade'**
+  String get gradeAction;
+
+  /// No description provided for @viewAction.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get viewAction;
+
+  /// No description provided for @registry.
+  ///
+  /// In en, this message translates to:
+  /// **'Behavior log'**
+  String get registry;
+
+  /// No description provided for @pendingStage.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending {stage}'**
+  String pendingStage(String stage);
+
+  /// No description provided for @noGradedSubjectsToDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'No graded subjects to download.'**
+  String get noGradedSubjectsToDownload;
+
+  /// No description provided for @pdfSavedTo.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF saved to {path}'**
+  String pdfSavedTo(String path);
+
+  /// No description provided for @couldNotSavePdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save PDF: {error}'**
+  String couldNotSavePdf(String error);
+
+  /// No description provided for @subjectGradeReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject grade report'**
+  String get subjectGradeReport;
+
+  /// No description provided for @downloadPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Download PDF'**
+  String get downloadPdf;
+
+  /// No description provided for @noStudentsInReport.
+  ///
+  /// In en, this message translates to:
+  /// **'No students in this report'**
+  String get noStudentsInReport;
+
+  /// No description provided for @student.
+  ///
+  /// In en, this message translates to:
+  /// **'Student'**
+  String get student;
+
+  /// No description provided for @grade.
+  ///
+  /// In en, this message translates to:
+  /// **'Grade'**
+  String get grade;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @passed.
+  ///
+  /// In en, this message translates to:
+  /// **'Passed'**
+  String get passed;
+
+  /// No description provided for @constimixGradeReport.
+  ///
+  /// In en, this message translates to:
+  /// **'GRADE REPORT'**
+  String get constimixGradeReport;
+
+  /// No description provided for @pageOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page} of {total}'**
+  String pageOf(int page, int total);
+
+  /// No description provided for @noGradedSubjectsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No graded subjects are available.'**
+  String get noGradedSubjectsAvailable;
 }
 
 class _AppLocalizationsDelegate

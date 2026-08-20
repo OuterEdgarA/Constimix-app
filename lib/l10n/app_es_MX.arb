@@ -257,5 +257,49 @@
       "tests": "Exámenes",
       "overlap": "Clases y exámenes",
       
-      "scheduleSemesterGroup": "Semestre {semester}{group}"
+      "scheduleSemesterGroup": "Semestre {semester}{group}",
+
+      "yourGradedSubjects": "Tus materias calificadas",
+      "yourAssignedSubjects": "Tus materias asignadas",
+      "cycleSubjectAssignments": "Materias asignadas del ciclo escolar",
+      
+      "downloadGradedSubjectPdfs": "Descargar actas de calificaciones",
+      
+      "graded": "Calificadas",
+      "pending": "Pendientes",
+      "notGraded": "Sin calificar",
+      
+      "searchSubjects": "Buscar materias",
+      "subjects": "Materias",
+      "pendingSubjects": "Materias pendientes",
+      
+      "noPendingSubjects": "No hay materias pendientes",
+      "noGradedSubjects": "No hay materias calificadas",
+      "noAssignedSubjects": "No hay materias asignadas",
+      
+      "gradeAction": "Calificar",
+      "viewAction": "Ver",
+      "registry": "Bitácora",
+      
+      "pendingStage": "Pendiente {stage}",
+      
+      "noGradedSubjectsToDownload": "No hay materias calificadas para descargar.",
+      
+      "pdfSavedTo": "PDF guardado en {path}",
+      "couldNotSavePdf": "No se pudo guardar el PDF: {error}",
+
+      "subjectGradeReport": "Reporte de calificaciones de la materia",
+      "downloadPdf": "Descargar PDF",
+      "noStudentsInReport": "No hay estudiantes en este reporte",
+      
+      "student": "Estudiante",
+      "grade": "Calificación",
+      "status": "Estado",
+      "passed": "Aprobado",
+      
+      "constimixGradeReport": "REPORTE DE CALIFICACIONES",
+      
+      "pageOf": "Página {page} de {total}",
+      
+      "noGradedSubjectsAvailable": "No hay materias calificadas disponibles."
     }

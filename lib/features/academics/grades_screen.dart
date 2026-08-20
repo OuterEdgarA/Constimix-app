@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../../l10n/app_localizations.dart';
 import '../../core/data/mock_repository.dart';
 import '../../core/models/app_user.dart';
 import '../../core/models/cycle_subject_assignment.dart';
@@ -44,27 +45,44 @@ List<StudentEnrollment> _studentsForGradeReport(
 }
 
 String _gradeTextForReport(
+  AppLocalizations l10n,
   CycleSubjectAssignment assignment,
   StudentEnrollment student,
 ) {
-  final latest = _latestGradeForReport(assignment, student.registration);
+  final latest = _latestGradeForReport(
+    assignment,
+    student.registration,
+  );
+  
   return latest == null
-      ? 'Not graded'
-      : _displayGrade(latest.finalGrade, assignment.usesLetterGrades);
+      ? l10n.notGraded
+      : _displayGrade(
+        latest.finalGrade,
+        assignment.usesLetterGrades,
+      );
 }
 
 String _statusTextForReport(
+  AppLocalizations l10n,
   CycleSubjectAssignment assignment,
   StudentEnrollment student,
 ) {
-  if (_latestGradeForReport(assignment, student.registration) == null) {
-    return 'Not graded';
+  if (_latestGradeForReport(
+    assignment,
+    student.registration,
+    ) == 
+    null) {
+    return l10n.notGraded;
   }
+
   final pending = MockRepository.pendingSubjectStage(
     assignment: assignment,
     registration: student.registration,
   );
-  return pending == null ? 'Passed' : 'Pending $pending';
+
+  return pending == null
+  ? l10n.passed
+  : l10n.pendingStage(pending);
 }
 
 pw.Widget _pdfCell(
@@ -91,9 +109,11 @@ pw.Widget _pdfCell(
 Future<Uint8List> buildGradePdfReport({
   required List<CycleSubjectAssignment> assignments,
   required AppUser currentUser,
+  required AppLocalizations l10n,
 }) async {
   final document = pw.Document();
-  final cycleName = MockRepository.activeCycle?.name ?? 'No active cycle';
+  final cycleName = 
+    MockRepository.activeCycle?.name ?? l10n.noActiveCycle;
   document.addPage(
     pw.MultiPage(
       pageFormat: PdfPageFormat.a4,
@@ -112,7 +132,7 @@ Future<Uint8List> buildGradePdfReport({
           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
           children: [
             pw.Text(
-              'CONSTIMIX GRADE REPORT',
+              l10n.constimixGradeReport,
               style: pw.TextStyle(
                 color: PdfColor.fromHex('458CAD'),
                 fontWeight: pw.FontWeight.bold,
@@ -138,7 +158,10 @@ Future<Uint8List> buildGradePdfReport({
           children: [
             pw.Text(currentUser.displayName),
             pw.Text(
-              'Page ${context.pageNumber} of ${context.pagesCount}',
+              l10n.pageOf(
+                context.pageNumber,
+                context.pagesCount,
+              ),
             ),
           ],
         ),
@@ -147,7 +170,9 @@ Future<Uint8List> buildGradePdfReport({
         if (assignments.isEmpty)
           pw.Padding(
             padding: const pw.EdgeInsets.only(top: 24),
-            child: pw.Text('No graded subjects are available.'),
+            child: pw.Text(
+              l10n.noGradedSubjectsAvailable,
+            ),
           ),
         for (final assignment in assignments) ...[
           pw.SizedBox(height: 14),
@@ -160,9 +185,13 @@ Future<Uint8List> buildGradePdfReport({
           ),
           pw.SizedBox(height: 3),
           pw.Text(
-            'Semester ${assignment.semester} | Group ${assignment.group} | '
-            '${assignment.teacherName}',
-            style: const pw.TextStyle(fontSize: 9),
+            '${l10n.semesterGroupValue(
+              assignment.semester,
+              assignment.group,
+            )} | ${assignment.teacherName}',
+            style: const pw.TextStyle(
+              fontSize: 9,
+            ),
           ),
           pw.SizedBox(height: 8),
           pw.Table(
@@ -176,10 +205,10 @@ Future<Uint8List> buildGradePdfReport({
             children: [
               pw.TableRow(
                 children: [
-                  _pdfCell('Student', header: true),
-                  _pdfCell('Registration', header: true),
-                  _pdfCell('Grade', header: true),
-                  _pdfCell('Status', header: true),
+                  _pdfCell(l10n.student, header: true),
+                  _pdfCell(l10n.registration, header: true),
+                  _pdfCell(l10n.grade, header: true),
+                  _pdfCell(l10n.status, header: true),
                 ],
               ),
               for (final student
@@ -189,10 +218,20 @@ Future<Uint8List> buildGradePdfReport({
                     _pdfCell(student.fullStudentName),
                     _pdfCell(student.registration),
                     _pdfCell(
-                      _gradeTextForReport(assignment, student),
+                      _gradeTextForReport(
+                        l10n,
+                        assignment,
+                        student,
+                      ),
                       alignment: pw.Alignment.center,
                     ),
-                    _pdfCell(_statusTextForReport(assignment, student)),
+                    _pdfCell(
+                      _statusTextForReport(
+                        l10n,
+                        assignment,
+                        student,
+                      ),
+                    ),
                   ],
                 ),
             ],
@@ -236,7 +275,11 @@ Future<String> saveGradePdfReport(
   final timestamp = DateTime.now().millisecondsSinceEpoch;
   final file = File(
     '${destination.path}${Platform.pathSeparator}'
-    '${safeName.isEmpty ? 'grade_report' : safeName}_$timestamp.pdf',
+    '${
+      safeName.isEmpty
+      ? 'reporte_calificaciones'
+      : safeName
+    }_$timestamp.pdf',
   );
   await file.writeAsBytes(bytes, flush: true);
   return file.path;
@@ -319,20 +362,23 @@ class _GradesScreenState extends State<GradesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     final cycleName =
-        MockRepository.activeCycle?.name.toUpperCase() ?? 'NO CYCLE SELECTED';
+        MockRepository.activeCycle?.name.toUpperCase() ??
+        l10n.noActiveCycle.toUpperCase();
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         SectionHeader(
-          title: 'Grades',
+          title: l10n.gradesTitle,
           subtitle: _isStudent
-              ? 'Your graded subjects'
+              ? l10n.yourGradedSubjects
               : _isTeacher
-                  ? 'Your assigned subjects'
-                  : 'Cycle subject assignments',
+                  ? l10n.yourAssignedSubjects
+                  : l10n.cycleSubjectAssignments,
           trailing: IconButton(
-            tooltip: 'Download graded subject PDFs',
+            tooltip: l10n.downloadGradedSubjectPdfs,
             onPressed: _showPdfNotice,
             icon: const Icon(Icons.picture_as_pdf_outlined),
           ),
@@ -342,22 +388,24 @@ class _GradesScreenState extends State<GradesScreen> {
           key: ValueKey(cycleName),
           initialValue: cycleName,
           readOnly: true,
-          decoration: const InputDecoration(labelText: 'Current active cycle'),
+          decoration: InputDecoration(
+            labelText: l10n.currentActiveCycle,
+          ),
         ),
         if (_isStudent) ...[
           const SizedBox(height: 16),
           SegmentedButton<_L4GradeView>(
             showSelectedIcon: false,
-            segments: const [
+            segments: [
               ButtonSegment(
                 value: _L4GradeView.subjects,
-                label: Text('Graded'),
-                icon: Icon(Icons.fact_check_outlined),
+                label: Text(l10n.graded),
+                icon: const Icon(Icons.fact_check_outlined),
               ),
               ButtonSegment(
                 value: _L4GradeView.pending,
-                label: Text('Pending'),
-                icon: Icon(Icons.pending_actions_outlined),
+                label: Text(l10n.pending),
+                icon: const Icon(Icons.pending_actions_outlined),
               ),
             ],
             selected: {_l4View},
@@ -368,7 +416,10 @@ class _GradesScreenState extends State<GradesScreen> {
         ],
         if (!_isIsolated) ...[
           const SizedBox(height: 16),
-          Text('Semester', style: Theme.of(context).textTheme.labelLarge),
+          Text(
+            l10n.semester,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
           const SizedBox(height: 8),
           _MultiFilterChips<int>(
             values: const [1, 2, 3, 4, 5, 6],
@@ -381,7 +432,10 @@ class _GradesScreenState extends State<GradesScreen> {
             }),
           ),
           const SizedBox(height: 14),
-          Text('Group', style: Theme.of(context).textTheme.labelLarge),
+          Text(
+            l10n.group,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
           const SizedBox(height: 8),
           _MultiFilterChips<String>(
             values: const ['A', 'B', 'C', 'D'],
@@ -396,10 +450,10 @@ class _GradesScreenState extends State<GradesScreen> {
             controller: _searchController,
             onChanged: (_) => setState(() => _showSuggestions = true),
             decoration: InputDecoration(
-              labelText: 'Search subjects',
+              labelText: l10n.searchSubjects,
               prefixIcon: const Icon(Icons.search),
               suffixIcon: IconButton(
-                tooltip: 'Clear search',
+                tooltip: l10n.clearSearch,
                 onPressed: () => setState(() {
                   _searchController.clear();
                   _showSuggestions = false;
@@ -414,9 +468,9 @@ class _GradesScreenState extends State<GradesScreen> {
               elevation: 3,
               borderRadius: BorderRadius.circular(8),
               child: _suggestions.isEmpty
-                  ? const Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Text('No matches'),
+                  ? Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(l10n.noMatches),
                     )
                   : Column(
                       children: [
@@ -438,20 +492,22 @@ class _GradesScreenState extends State<GradesScreen> {
         const SizedBox(height: 20),
         Text(
           _isStudent && _l4View == _L4GradeView.pending
-              ? 'Pending subjects'
-              : 'Subjects',
+              ? l10n.pendingSubjects
+              : l10n.subjects,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(height: 10),
         if (MockRepository.activeCycle == null)
-          const _EmptyState(message: 'No active cycle')
+          _EmptyState(
+            message: l10n.noActiveCycle,
+          )
         else if (_visibleAssignments.isEmpty)
           _EmptyState(
             message: _isStudent && _l4View == _L4GradeView.pending
-                ? 'No pending subjects'
+                ? l10n.noPendingSubjects
                 : _isStudent
-                    ? 'No graded subjects'
-                    : 'No assigned subjects',
+                    ? l10n.noGradedSubjects
+                    : l10n.noAssignedSubjects,
           )
         else
           for (final assignment in _visibleAssignments) ...[
@@ -466,7 +522,8 @@ class _GradesScreenState extends State<GradesScreen> {
                       registration: widget.currentUser.registration!,
                     )
                   : null,
-              primaryLabel: _showsGradeAction ? 'Grade' : 'View',
+              primaryLabel: 
+                _showsGradeAction ? l10n.gradeAction : l10n.viewAction,
               primaryIcon: _showsGradeAction
                   ? Icons.edit_note_outlined
                   : Icons.picture_as_pdf_outlined,
@@ -520,6 +577,7 @@ class _GradesScreenState extends State<GradesScreen> {
   }
 
   Future<void> _showPdfNotice() async {
+    final l10n = AppLocalizations.of(context)!;
     final reportable = _isStudent
         ? _assignments
             .where(
@@ -534,7 +592,11 @@ class _GradesScreenState extends State<GradesScreen> {
             .toList(growable: false);
     if (reportable.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No graded subjects to download.')),
+        SnackBar(
+          content: Text(
+            l10n.noGradedSubjectsToDownload,
+            ),
+        )
       );
       return;
     }
@@ -542,19 +604,28 @@ class _GradesScreenState extends State<GradesScreen> {
       final bytes = await buildGradePdfReport(
         assignments: reportable,
         currentUser: widget.currentUser,
+        l10n: l10n,
       );
       final path = await saveGradePdfReport(
         bytes,
-        baseName: 'constimix_grade_report',
+        baseName: 'reporte_calificaciones',
       );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('PDF saved to $path')),
+        SnackBar(
+          content: Text(
+            l10n.pdfSavedTo(path),
+          ),
+        )
       );
     } on FileSystemException catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not save PDF: ${error.message}')),
+        SnackBar(
+          content: Text(
+            l10n.couldNotSavePdf(error.message),
+          ),
+        )
       );
     }
   }
@@ -569,38 +640,56 @@ class _SubjectGradeReportScreen extends StatelessWidget {
   final CycleSubjectAssignment assignment;
   final AppUser currentUser;
 
-  Future<void> _download(BuildContext context) async {
+  Future<void> _download(
+    BuildContext context,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+
     try {
       final bytes = await buildGradePdfReport(
         assignments: [assignment],
         currentUser: currentUser,
+        l10n: l10n,
       );
       final path = await saveGradePdfReport(
         bytes,
-        baseName: '${assignment.subjectName}_grade_report',
+        baseName: 
+          '${assignment.subjectName}_reporte_calificaciones',
       );
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('PDF saved to $path')),
+        SnackBar(
+          content: Text(
+            l10n.pdfSavedTo(path),
+          ),
+        ),
       );
     } on FileSystemException catch (error) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not save PDF: ${error.message}')),
+        SnackBar(
+          content: Text(
+            l10n.couldNotSavePdf(
+              error.message,
+            ),
+          ),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final students = _studentsForGradeReport(assignment, currentUser);
+    final l10n = AppLocalizations.of(context)!;
+    final students =
+      _studentsForGradeReport(assignment, currentUser);
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Subject PDF'),
+        title: Text(l10n.subjectGradeReport),
         actions: [
           IconButton(
-            tooltip: 'Download PDF',
+            tooltip: l10n.downloadPdf,
             onPressed: () => _download(context),
             icon: const Icon(Icons.download_outlined),
           ),
@@ -622,13 +711,18 @@ class _SubjectGradeReportScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Semester ${assignment.semester} | Group ${assignment.group}',
+            l10n.semesterGroupValue(
+              assignment.semester,
+              assignment.group,
+            ),
             textAlign: TextAlign.center,
           ),
           Text(assignment.teacherName, textAlign: TextAlign.center),
           const Divider(height: 28),
           if (students.isEmpty)
-            const _EmptyState(message: 'No students in this report')
+            _EmptyState(
+              message: l10n.noStudentsInReport,
+            )
           else
             for (final student in students) ...[
               _GradeReportRow(
@@ -654,6 +748,8 @@ class _GradeReportRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     final latest = _latestGradeForReport(assignment, student.registration);
     final pending = MockRepository.pendingSubjectStage(
       assignment: assignment,
@@ -674,14 +770,17 @@ class _GradeReportRow extends StatelessWidget {
         children: [
           Text(
             latest == null
-                ? 'Not graded'
+                ? l10n.notGraded
                 : _displayGrade(
                     latest.finalGrade,
                     assignment.usesLetterGrades,
                   ),
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          if (pending != null) Text('Pending: $pending'),
+          if (pending != null)
+            Text(
+              l10n.pendingStage(pending),
+            ),
         ],
       ),
     );
@@ -739,6 +838,8 @@ class _SubjectAssignmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Card(
       margin: EdgeInsets.zero,
       child: Padding(
@@ -759,7 +860,12 @@ class _SubjectAssignmentCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(assignment.teacherName),
-            Text('Semester ${assignment.semester} | Group ${assignment.group}'),
+            Text(
+              l10n.semesterGroupValue(
+                assignment.semester,
+                assignment.group,
+              ),
+            ),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -775,7 +881,7 @@ class _SubjectAssignmentCard extends StatelessWidget {
                   child: OutlinedButton.icon(
                     onPressed: onRegistry,
                     icon: const Icon(Icons.table_chart_outlined),
-                    label: const Text('Registry'),
+                    label: Text(l10n.registry),
                   ),
                 ),
               ],
@@ -798,6 +904,7 @@ class _GradingStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isPending = pendingStage != null;
     final background = isPending
         ? const Color(0xFFFFE2A8)
@@ -817,10 +924,10 @@ class _GradingStatus extends StatelessWidget {
       ),
       child: Text(
         isPending
-            ? 'Pending $pendingStage'
+            ? l10n.pendingStage(pendingStage!)
             : graded
-                ? 'Graded'
-                : 'Not graded',
+                ? l10n.graded
+                : l10n.notGraded,
         style: TextStyle(
           color: foreground,
           fontWeight: FontWeight.w600,

@@ -721,4 +721,102 @@ class AppLocalizationsEn extends AppLocalizations {
   String scheduleSemesterGroup(int semester, String group) {
     return 'Semester $semester$group';
   }
+
+  @override
+  String get yourGradedSubjects => 'Your graded subjects';
+
+  @override
+  String get yourAssignedSubjects => 'Your assigned subjects';
+
+  @override
+  String get cycleSubjectAssignments => 'Cycle subject assignments';
+
+  @override
+  String get downloadGradedSubjectPdfs => 'Download graded subject PDFs';
+
+  @override
+  String get graded => 'Graded';
+
+  @override
+  String get pending => 'Pending';
+
+  @override
+  String get notGraded => 'Not graded';
+
+  @override
+  String get searchSubjects => 'Search subjects';
+
+  @override
+  String get subjects => 'Subjects';
+
+  @override
+  String get pendingSubjects => 'Pending subjects';
+
+  @override
+  String get noPendingSubjects => 'No pending subjects';
+
+  @override
+  String get noGradedSubjects => 'No graded subjects';
+
+  @override
+  String get noAssignedSubjects => 'No assigned subjects';
+
+  @override
+  String get gradeAction => 'Grade';
+
+  @override
+  String get viewAction => 'View';
+
+  @override
+  String get registry => 'Behavior log';
+
+  @override
+  String pendingStage(String stage) {
+    return 'Pending $stage';
+  }
+
+  @override
+  String get noGradedSubjectsToDownload => 'No graded subjects to download.';
+
+  @override
+  String pdfSavedTo(String path) {
+    return 'PDF saved to $path';
+  }
+
+  @override
+  String couldNotSavePdf(String error) {
+    return 'Could not save PDF: $error';
+  }
+
+  @override
+  String get subjectGradeReport => 'Subject grade report';
+
+  @override
+  String get downloadPdf => 'Download PDF';
+
+  @override
+  String get noStudentsInReport => 'No students in this report';
+
+  @override
+  String get student => 'Student';
+
+  @override
+  String get grade => 'Grade';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get passed => 'Passed';
+
+  @override
+  String get constimixGradeReport => 'GRADE REPORT';
+
+  @override
+  String pageOf(int page, int total) {
+    return 'Page $page of $total';
+  }
+
+  @override
+  String get noGradedSubjectsAvailable => 'No graded subjects are available.';
 }

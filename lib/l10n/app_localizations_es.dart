@@ -721,6 +721,104 @@ class AppLocalizationsEs extends AppLocalizations {
   String scheduleSemesterGroup(int semester, String group) {
     return 'Semester $semester$group';
   }
+
+  @override
+  String get yourGradedSubjects => 'Your graded subjects';
+
+  @override
+  String get yourAssignedSubjects => 'Your assigned subjects';
+
+  @override
+  String get cycleSubjectAssignments => 'Cycle subject assignments';
+
+  @override
+  String get downloadGradedSubjectPdfs => 'Download graded subject PDFs';
+
+  @override
+  String get graded => 'Graded';
+
+  @override
+  String get pending => 'Pending';
+
+  @override
+  String get notGraded => 'Not graded';
+
+  @override
+  String get searchSubjects => 'Search subjects';
+
+  @override
+  String get subjects => 'Subjects';
+
+  @override
+  String get pendingSubjects => 'Pending subjects';
+
+  @override
+  String get noPendingSubjects => 'No pending subjects';
+
+  @override
+  String get noGradedSubjects => 'No graded subjects';
+
+  @override
+  String get noAssignedSubjects => 'No assigned subjects';
+
+  @override
+  String get gradeAction => 'Grade';
+
+  @override
+  String get viewAction => 'View';
+
+  @override
+  String get registry => 'Behavior log';
+
+  @override
+  String pendingStage(String stage) {
+    return 'Pending $stage';
+  }
+
+  @override
+  String get noGradedSubjectsToDownload => 'No graded subjects to download.';
+
+  @override
+  String pdfSavedTo(String path) {
+    return 'PDF saved to $path';
+  }
+
+  @override
+  String couldNotSavePdf(String error) {
+    return 'Could not save PDF: $error';
+  }
+
+  @override
+  String get subjectGradeReport => 'Subject grade report';
+
+  @override
+  String get downloadPdf => 'Download PDF';
+
+  @override
+  String get noStudentsInReport => 'No students in this report';
+
+  @override
+  String get student => 'Student';
+
+  @override
+  String get grade => 'Grade';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get passed => 'Passed';
+
+  @override
+  String get constimixGradeReport => 'GRADE REPORT';
+
+  @override
+  String pageOf(int page, int total) {
+    return 'Page $page of $total';
+  }
+
+  @override
+  String get noGradedSubjectsAvailable => 'No graded subjects are available.';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -1440,4 +1538,104 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   String scheduleSemesterGroup(int semester, String group) {
     return 'Semestre $semester$group';
   }
+
+  @override
+  String get yourGradedSubjects => 'Tus materias calificadas';
+
+  @override
+  String get yourAssignedSubjects => 'Tus materias asignadas';
+
+  @override
+  String get cycleSubjectAssignments => 'Materias asignadas del ciclo escolar';
+
+  @override
+  String get downloadGradedSubjectPdfs => 'Descargar actas de calificaciones';
+
+  @override
+  String get graded => 'Calificadas';
+
+  @override
+  String get pending => 'Pendientes';
+
+  @override
+  String get notGraded => 'Sin calificar';
+
+  @override
+  String get searchSubjects => 'Buscar materias';
+
+  @override
+  String get subjects => 'Materias';
+
+  @override
+  String get pendingSubjects => 'Materias pendientes';
+
+  @override
+  String get noPendingSubjects => 'No hay materias pendientes';
+
+  @override
+  String get noGradedSubjects => 'No hay materias calificadas';
+
+  @override
+  String get noAssignedSubjects => 'No hay materias asignadas';
+
+  @override
+  String get gradeAction => 'Calificar';
+
+  @override
+  String get viewAction => 'Ver';
+
+  @override
+  String get registry => 'Bitácora';
+
+  @override
+  String pendingStage(String stage) {
+    return 'Pendiente $stage';
+  }
+
+  @override
+  String get noGradedSubjectsToDownload =>
+      'No hay materias calificadas para descargar.';
+
+  @override
+  String pdfSavedTo(String path) {
+    return 'PDF guardado en $path';
+  }
+
+  @override
+  String couldNotSavePdf(String error) {
+    return 'No se pudo guardar el PDF: $error';
+  }
+
+  @override
+  String get subjectGradeReport => 'Reporte de calificaciones de la materia';
+
+  @override
+  String get downloadPdf => 'Descargar PDF';
+
+  @override
+  String get noStudentsInReport => 'No hay estudiantes en este reporte';
+
+  @override
+  String get student => 'Estudiante';
+
+  @override
+  String get grade => 'Calificación';
+
+  @override
+  String get status => 'Estado';
+
+  @override
+  String get passed => 'Aprobado';
+
+  @override
+  String get constimixGradeReport => 'REPORTE DE CALIFICACIONES CONSTIMIX';
+
+  @override
+  String pageOf(int page, int total) {
+    return 'Página $page de $total';
+  }
+
+  @override
+  String get noGradedSubjectsAvailable =>
+      'No hay materias calificadas disponibles.';
 }

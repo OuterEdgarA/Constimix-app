@@ -3,6 +3,7 @@ import 'package:constimix_app/core/models/student_grade_entry.dart';
 import 'package:constimix_app/core/models/user_role.dart';
 import 'package:constimix_app/features/academics/grades_screen.dart';
 import 'package:constimix_app/features/enrollment/enrollment_wizard_screen.dart';
+import 'package:constimix_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -48,6 +49,7 @@ void main() {
     final bytes = await buildGradePdfReport(
       assignments: [assignment],
       currentUser: user,
+      l10n: lookupAppLocalizations(const Locale('en')),
     );
 
     expect(String.fromCharCodes(bytes.take(4)), '%PDF');
