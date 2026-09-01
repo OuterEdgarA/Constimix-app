@@ -691,6 +691,12 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
           title: Text(l10n.ableToReadAndWrite),
           controlAffinity: ListTileControlAffinity.leading
           ),
+      if (!_canManageTransferredSubjects) ..._accountCredentialsFields(l10n),
+    ]);
+  }
+
+  List<Widget> _accountCredentialsFields(AppLocalizations l10n) {
+    return [
       const Divider(height: 28),
       Text(
         l10n.l4AccountCredentials,
@@ -728,7 +734,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
         ),
         controlAffinity: ListTileControlAffinity.leading,
       ),
-    ]);
+    ];
   }
 
   Widget _transferredSubjectsStep() {
@@ -770,6 +776,7 @@ class _EnrollmentWizardScreenState extends State<EnrollmentWizardScreen> {
                 }
               }),
             ),
+        ..._accountCredentialsFields(l10n),
       ],
     );
   }

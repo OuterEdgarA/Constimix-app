@@ -301,5 +301,62 @@
       
       "pageOf": "Página {page} de {total}",
       
-      "noGradedSubjectsAvailable": "No hay materias calificadas disponibles."
+      "noGradedSubjectsAvailable": "No hay materias calificadas disponibles.",
+      "gradingTool": "Herramienta de evaluación",
+      "subjectData": "Datos de la materia",
+      "evaluationData": "Datos de evaluación",
+      "grading": "Calificación",
+      
+      "assignedTeacher": "Docente",
+      "subjectName": "Materia",
+      
+      "evaluationType": "Tipo de evaluación",
+      "finalEvaluation": "Evaluación final",
+      
+      "activitiesCount": "Número de actividades",
+      "enterZeroOrPositive": "Ingresa cero o un valor positivo.",
+      "customizeGradePercentage": "Personalizar evaluación",
+      "activitiesPercentage": "Valor de actividades",
+      "testPercentage": "Valor del examen",
+      "percentagesMustAddToTen": "Las valuaciones deben sumar 10.",
+      
+      "currentTotal": "Total actual: {total}",
+      
+      "showTable": "Mostrar tabla",
+      "noStudentsInView": "No hay estudiantes",
+      
+      "saveGrades": "Guardar calificaciones",
+      "downloadGradePdfTable": "Descargar tabla de calificaciones en PDF",
+      
+      "ungradedStudents": "Estudiantes con calificación incompleta",
+      "oneStudentIncompleteGrade": "1 estudiante no tiene una calificación válida completa.",
+      "studentsIncompleteGrades": "{count} estudiantes no tienen una calificación válida completa.",
+      
+      "keepGrading": "Seguir calificando",
+      "continueSaving": "Continuar y guardar",
+      
+      "gradesSaved": "Calificaciones guardadas.",
+      "offlineGradesSaved": "El borrador sin conexión se guardó y quedó pendiente de sincronización.",
+      "gradePdfDisplayOnly": "La exportación de la tabla de calificaciones en PDF es solo demostrativa.",
+      
+      "absences": "Faltas",
+      "submittedActivities": "Actividades entregadas",
+      
+      "maximumValue": "Máximo {maximum}",
+      
+      "testGrade": "Calificación del examen",
+      "useValueZeroToTen": "Usa un valor de 0 a 10.",
+      "finalGrade": "Calificación final",
+      "details": "Detalles",
+      "gradeDetails": "Detalle de la calificación",
+      
+      "activitiesNotConfiguredCalculation": "Actividades: no hay actividades configuradas = 0.00",
+      
+      "activitiesCalculation": "Actividades: {submitted} × {weight} / {total} = {result}",
+      
+      "testCalculation": "Examen: {test} × {weight} / 10 = {result}",
+      
+      "finalGradeCalculation": "Final: {activities} + {test} = {finalGrade} ({displayGrade})",
+      
+      "ok": "Aceptar"
     }

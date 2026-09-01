@@ -500,6 +500,107 @@
           }
         }
       },
+      "noGradedSubjectsAvailable": "No graded subjects are available.",
+      "gradingTool": "Grading tool",
+      "subjectData": "Subject data",
+      "evaluationData": "Evaluation data",
+      "grading": "Grading",
       
-      "noGradedSubjectsAvailable": "No graded subjects are available."
+      "assignedTeacher": "Assigned teacher",
+      "subjectName": "Subject name",
+      
+      "evaluationType": "Evaluation type",
+      "finalEvaluation": "Final evaluation",
+      
+      "activitiesCount": "Activities count",
+      "enterZeroOrPositive": "Enter zero or a positive value.",
+      "customizeGradePercentage": "Customize grade weighting",
+      "activitiesPercentage": "Activities weighting",
+      "testPercentage": "Test weighting",
+      "percentagesMustAddToTen": "The weightings must add up to 10.",
+      
+      "currentTotal": "Current total: {total}",
+      "@currentTotal": {
+        "placeholders": {
+          "total": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "showTable": "Show table",
+      "noStudentsInView": "No students in this view",
+      
+      "saveGrades": "Save grades",
+      "downloadGradePdfTable": "Download grade PDF table",
+      
+      "ungradedStudents": "Students without complete grades",
+      "oneStudentIncompleteGrade": "1 student does not have a complete valid grade.",
+      
+      "studentsIncompleteGrades": "{count} students do not have complete valid grades.",
+      "@studentsIncompleteGrades": {
+        "placeholders": {
+          "count": {
+            "type": "int"
+          }
+        }
+      },
+      
+      "keepGrading": "Keep grading",
+      "continueSaving": "Continue saving",
+      
+      "gradesSaved": "Grades saved.",
+      "offlineGradesSaved": "Offline draft saved and queued for upload.",
+      "gradePdfDisplayOnly": "Grade PDF table export is display only.",
+      
+      "absences": "Absences",
+      "submittedActivities": "Submitted activities",
+      
+      "maximumValue": "Maximum {maximum}",
+      "@maximumValue": {
+        "placeholders": {
+          "maximum": {
+            "type": "String"
+          }
+        }
+      },
+      
+      "testGrade": "Test grade",
+      "useValueZeroToTen": "Use a value from 0 to 10.",
+      "finalGrade": "Final grade",
+      "details": "Details",
+      "gradeDetails": "Grade details",
+      
+      "activitiesNotConfiguredCalculation": "Activities: no activities configured = 0.00",
+      
+      "activitiesCalculation": "Activities: {submitted} × {weight} / {total} = {result}",
+      "@activitiesCalculation": {
+        "placeholders": {
+          "submitted": { "type": "String" },
+          "weight": { "type": "String" },
+          "total": { "type": "String" },
+          "result": { "type": "String" }
+        }
+      },
+      
+      "testCalculation": "Test: {test} × {weight} / 10 = {result}",
+      "@testCalculation": {
+        "placeholders": {
+          "test": { "type": "String" },
+          "weight": { "type": "String" },
+          "result": { "type": "String" }
+        }
+      },
+      
+      "finalGradeCalculation": "Final: {activities} + {test} = {finalGrade} ({displayGrade})",
+      "@finalGradeCalculation": {
+        "placeholders": {
+          "activities": { "type": "String" },
+          "test": { "type": "String" },
+          "finalGrade": { "type": "String" },
+          "displayGrade": { "type": "String" }
+        }
+      },
+      
+      "ok": "OK"
     }

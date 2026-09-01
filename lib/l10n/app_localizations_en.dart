@@ -819,4 +819,140 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noGradedSubjectsAvailable => 'No graded subjects are available.';
+
+  @override
+  String get gradingTool => 'Grading tool';
+
+  @override
+  String get subjectData => 'Subject data';
+
+  @override
+  String get evaluationData => 'Evaluation data';
+
+  @override
+  String get grading => 'Grading';
+
+  @override
+  String get assignedTeacher => 'Assigned teacher';
+
+  @override
+  String get subjectName => 'Subject name';
+
+  @override
+  String get evaluationType => 'Evaluation type';
+
+  @override
+  String get finalEvaluation => 'Final evaluation';
+
+  @override
+  String get activitiesCount => 'Activities count';
+
+  @override
+  String get enterZeroOrPositive => 'Enter zero or a positive value.';
+
+  @override
+  String get customizeGradePercentage => 'Customize grade weighting';
+
+  @override
+  String get activitiesPercentage => 'Activities weighting';
+
+  @override
+  String get testPercentage => 'Test weighting';
+
+  @override
+  String get percentagesMustAddToTen => 'The weightings must add up to 10.';
+
+  @override
+  String currentTotal(String total) {
+    return 'Current total: $total';
+  }
+
+  @override
+  String get showTable => 'Show table';
+
+  @override
+  String get noStudentsInView => 'No students in this view';
+
+  @override
+  String get saveGrades => 'Save grades';
+
+  @override
+  String get downloadGradePdfTable => 'Download grade PDF table';
+
+  @override
+  String get ungradedStudents => 'Students without complete grades';
+
+  @override
+  String get oneStudentIncompleteGrade =>
+      '1 student does not have a complete valid grade.';
+
+  @override
+  String studentsIncompleteGrades(int count) {
+    return '$count students do not have complete valid grades.';
+  }
+
+  @override
+  String get keepGrading => 'Keep grading';
+
+  @override
+  String get continueSaving => 'Continue saving';
+
+  @override
+  String get gradesSaved => 'Grades saved.';
+
+  @override
+  String get offlineGradesSaved => 'Offline draft saved and queued for upload.';
+
+  @override
+  String get gradePdfDisplayOnly => 'Grade PDF table export is display only.';
+
+  @override
+  String get absences => 'Absences';
+
+  @override
+  String get submittedActivities => 'Submitted activities';
+
+  @override
+  String maximumValue(String maximum) {
+    return 'Maximum $maximum';
+  }
+
+  @override
+  String get testGrade => 'Test grade';
+
+  @override
+  String get useValueZeroToTen => 'Use a value from 0 to 10.';
+
+  @override
+  String get finalGrade => 'Final grade';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get gradeDetails => 'Grade details';
+
+  @override
+  String get activitiesNotConfiguredCalculation =>
+      'Activities: no activities configured = 0.00';
+
+  @override
+  String activitiesCalculation(
+      String submitted, String weight, String total, String result) {
+    return 'Activities: $submitted × $weight / $total = $result';
+  }
+
+  @override
+  String testCalculation(String test, String weight, String result) {
+    return 'Test: $test × $weight / 10 = $result';
+  }
+
+  @override
+  String finalGradeCalculation(
+      String activities, String test, String finalGrade, String displayGrade) {
+    return 'Final: $activities + $test = $finalGrade ($displayGrade)';
+  }
+
+  @override
+  String get ok => 'OK';
 }

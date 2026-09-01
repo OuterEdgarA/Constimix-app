@@ -958,6 +958,16 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
     'TS',
   ];
 
+  String _evaluationTypeLabel(
+    AppLocalizations l10n,
+    String type,
+  ) {
+    return switch (type) {
+      'Final evaluation' => l10n.finalEvaluation,
+      _ => type,
+    };
+  }
+
   int _step = 0;
   String _evaluationType = _evaluationTypes.first;
   DateTime _evaluationDate = DateTime.now();
@@ -1061,10 +1071,11 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Grading tool'),
+        title: Text(l10n.gradingTool),
       ),
       body: Stepper(
         currentStep: _step,
@@ -1074,19 +1085,19 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
         controlsBuilder: (_, __) => const SizedBox.shrink(),
         steps: [
           Step(
-            title: const Text('Subject data'),
+            title: Text(l10n.subjectData),
             isActive: _step >= 0,
             state: _step > 0 ? StepState.complete : StepState.indexed,
             content: _subjectDataStep(),
           ),
           Step(
-            title: const Text('Evaluation data'),
+            title: Text(l10n.evaluationData),
             isActive: _step >= 1,
             state: _step > 1 ? StepState.complete : StepState.indexed,
             content: _evaluationDataStep(),
           ),
           Step(
-            title: const Text('Grading'),
+            title: Text(l10n.grading),
             isActive: _step >= 2,
             content: _gradingStep(),
           ),
@@ -1096,24 +1107,34 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
   }
 
   Widget _subjectDataStep() {
+    final l10n = AppLocalizations.of(context)!;
+
     final cycle =
-        MockRepository.activeCycle?.name.toUpperCase() ?? 'NO CYCLE SELECTED';
+        MockRepository.activeCycle?.name.toUpperCase() ??
+         l10n.noActiveCycle.toUpperCase();
     return Column(
       children: [
         _ReadOnlyValue(
-            label: 'Semester', value: '${widget.assignment.semester}'),
-        const SizedBox(height: 10),
-        _ReadOnlyValue(label: 'Group', value: widget.assignment.group),
-        const SizedBox(height: 10),
-        _ReadOnlyValue(label: 'Current active cycle', value: cycle),
+            label: l10n.semester,
+            value: '${widget.assignment.semester}'),
         const SizedBox(height: 10),
         _ReadOnlyValue(
-          label: 'Assigned teacher',
+          label: l10n.group,
+          value: widget.assignment.group,
+        ),
+        const SizedBox(height: 10),
+        _ReadOnlyValue(
+          label: l10n.currentActiveCycle,
+          value: cycle,
+        ),
+        const SizedBox(height: 10),
+        _ReadOnlyValue(
+          label: l10n.assignedTeacher,
           value: widget.assignment.teacherName,
         ),
         const SizedBox(height: 10),
         _ReadOnlyValue(
-          label: 'Subject name',
+          label: l10n.subjectName,
           value: widget.assignment.subjectName,
         ),
         const SizedBox(height: 16),
@@ -1122,7 +1143,7 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
           child: FilledButton.icon(
             onPressed: () => setState(() => _step = 1),
             icon: const Icon(Icons.arrow_forward),
-            label: const Text('Next'),
+            label: Text(l10n.next),
           ),
         ),
       ],
@@ -1130,6 +1151,7 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
   }
 
   Widget _evaluationDataStep() {
+    final l10n = AppLocalizations.of(context)!;
     final sum = _activitiesPercentage + _testPercentage;
     return Column(
       children: [
@@ -1141,10 +1163,17 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
         const SizedBox(height: 12),
         DropdownButtonFormField<String>(
           initialValue: _evaluationType,
-          decoration: const InputDecoration(labelText: 'Evaluation type'),
+          decoration: InputDecoration(
+            labelText: l10n.evaluationType,
+          ),
           items: [
             for (final type in _evaluationTypes)
-              DropdownMenuItem(value: type, child: Text(type)),
+              DropdownMenuItem(
+                value: type,
+                child: Text(
+                  _evaluationTypeLabel(l10n, type),
+                ),
+              ),
           ],
           onChanged: (value) {
             if (value == null) return;
@@ -1160,16 +1189,18 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           inputFormatters: const [_DecimalInputFormatter()],
           decoration: InputDecoration(
-            labelText: 'Activities count',
+            labelText: l10n.activitiesCount,
             errorText:
-                _activitiesCount < 0 ? 'Enter zero or a positive value.' : null,
+                _activitiesCount < 0
+                 ? l10n.enterZeroOrPositive
+                 : null,
           ),
         ),
         const SizedBox(height: 8),
         CheckboxListTile(
           contentPadding: EdgeInsets.zero,
           value: _customizePercentages,
-          title: const Text('Customize grade percentage'),
+          title: Text(l10n.customizeGradePercentage),
           onChanged: (value) => setState(() {
             _customizePercentages = value ?? false;
             if (_activitiesCount == 0) {
@@ -1189,9 +1220,9 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
                       const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: const [_DecimalInputFormatter()],
                   decoration: InputDecoration(
-                    labelText: 'Activities percentage',
+                    labelText: l10n.activitiesPercentage,
                     errorText: !_percentagesValid
-                        ? 'Percentages must add to 10.'
+                        ? l10n.percentagesMustAddToTen
                         : null,
                   ),
                 ),
@@ -1204,10 +1235,12 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
                       const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: const [_DecimalInputFormatter()],
                   decoration: InputDecoration(
-                    labelText: 'Test percentage',
+                    labelText: l10n.testPercentage,
                     errorText: !_percentagesValid
-                        ? 'Current total: ${sum.toStringAsFixed(1)}'
-                        : null,
+                        ? l10n.currentTotal(
+                          sum.toStringAsFixed(1),
+                        )
+                      : null,
                   ),
                 ),
               ),
@@ -1220,13 +1253,13 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
             TextButton.icon(
               onPressed: () => setState(() => _step = 0),
               icon: const Icon(Icons.arrow_back),
-              label: const Text('Back'),
+              label: Text(l10n.back),
             ),
             const Spacer(),
             FilledButton.icon(
               onPressed: _percentagesValid ? _showTable : null,
               icon: const Icon(Icons.table_rows_outlined),
-              label: const Text('Show table'),
+              label: Text(l10n.showTable),
             ),
           ],
         ),
@@ -1235,23 +1268,25 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
   }
 
   Widget _gradingStep() {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SegmentedButton<_StudentGradeFilter>(
           showSelectedIcon: false,
-          segments: const [
+          segments: [
             ButtonSegment(
               value: _StudentGradeFilter.graded,
-              label: Text('Graded'),
+              label: Text(l10n.graded),
             ),
             ButtonSegment(
               value: _StudentGradeFilter.ungraded,
-              label: Text('Not graded'),
+              label: Text(l10n.notGraded),
             ),
             ButtonSegment(
               value: _StudentGradeFilter.all,
-              label: Text('All'),
+              label: Text(l10n.all),
             ),
           ],
           selected: {_studentFilter},
@@ -1261,7 +1296,7 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
         ),
         const SizedBox(height: 12),
         if (_visibleStudents.isEmpty)
-          const _EmptyState(message: 'No students in this view')
+          _EmptyState(message: l10n.noStudentsInView)
         else
           ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 520),
@@ -1291,13 +1326,13 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
           ),
           onPressed: _saveGrades,
           icon: const Icon(Icons.save_outlined),
-          label: const Text('Save grades'),
+          label: Text(l10n.saveGrades),
         ),
         const SizedBox(height: 8),
         OutlinedButton.icon(
           onPressed: _showPdfNotice,
           icon: const Icon(Icons.picture_as_pdf_outlined),
-          label: const Text('Download grade PDF table'),
+          label: Text(l10n.downloadGradePdfTable),
         ),
       ],
     );
@@ -1360,24 +1395,28 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
   }
 
   Future<void> _saveGrades() async {
+    final l10n = AppLocalizations.of(context)!;
+
     final ungraded =
         _students.where((student) => !_isInputValid(student)).length;
     if (ungraded > 0) {
       final continueSaving = await showDialog<bool>(
         context: context,
         builder: (dialogContext) => AlertDialog(
-          title: const Text('Ungraded students'),
+          title: Text(l10n.ungradedStudents),
           content: Text(
-            '$ungraded students do not have complete valid grades.',
+            ungraded == 1
+              ? l10n.oneStudentIncompleteGrade
+              : l10n.studentsIncompleteGrades(ungraded),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(false),
-              child: const Text('Keep grading'),
+              child: Text(l10n.keepGrading),
             ),
             FilledButton(
               onPressed: () => Navigator.of(dialogContext).pop(true),
-              child: const Text('Continue saving'),
+              child: Text(l10n.continueSaving),
             ),
           ],
         ),
@@ -1421,16 +1460,22 @@ class _GradingToolScreenState extends State<GradingToolScreen> {
       SnackBar(
         content: Text(
           uploaded
-              ? 'Grades saved.'
-              : 'Offline draft saved and queued for upload.',
+              ? l10n.gradesSaved
+              : l10n.offlineGradesSaved
         ),
       ),
     );
   }
 
   void _showPdfNotice() {
+    final l10n = AppLocalizations.of(context)!;
+
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Grade PDF table export is display only.')),
+      SnackBar(
+        content: Text(
+          l10n.gradePdfDisplayOnly,
+        ),
+      ),
     );
   }
 }
@@ -1465,7 +1510,10 @@ class _StudentGradeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final submitted = double.tryParse(inputs.activities.text);
+    final l10n = AppLocalizations.of(context)!;
+    
+    final submitted =
+     double.tryParse(inputs.activities.text);
     final test = double.tryParse(inputs.test.text);
     final activityInvalid =
         submitted != null && (submitted < 0 || submitted > activitiesCount);
@@ -1489,7 +1537,9 @@ class _StudentGradeCard extends StatelessWidget {
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: (_) => onChanged(),
-              decoration: const InputDecoration(labelText: 'Absences'),
+              decoration: InputDecoration(
+                labelText: l10n.absences,
+              ),
             ),
             const SizedBox(height: 10),
             TextField(
@@ -1499,9 +1549,13 @@ class _StudentGradeCard extends StatelessWidget {
               inputFormatters: const [_DecimalInputFormatter()],
               onChanged: (_) => onChanged(),
               decoration: InputDecoration(
-                labelText: 'Submitted activities',
+                labelText: l10n.submittedActivities,
                 errorText: activityInvalid
-                    ? 'Maximum ${math.max(0, activitiesCount)}'
+                    ? l10n.maximumValue(
+                      _trimDouble(
+                        math.max(0, activitiesCount).toDouble(),
+                      ),
+                    )
                     : null,
               ),
             ),
@@ -1513,8 +1567,8 @@ class _StudentGradeCard extends StatelessWidget {
               inputFormatters: const [_DecimalInputFormatter()],
               onChanged: (_) => onChanged(),
               decoration: InputDecoration(
-                labelText: 'Test grade',
-                errorText: testInvalid ? 'Use a value from 0 to 10.' : null,
+                labelText: l10n.testGrade,
+                errorText: testInvalid ? l10n.useValueZeroToTen : null,
               ),
             ),
             const SizedBox(height: 10),
@@ -1522,7 +1576,9 @@ class _StudentGradeCard extends StatelessWidget {
               key: ValueKey('${student.registration}-$displayedGrade'),
               initialValue: displayedGrade,
               readOnly: true,
-              decoration: const InputDecoration(labelText: 'Final grade'),
+              decoration: InputDecoration(
+                labelText: l10n.finalGrade,
+              ),
             ),
             const SizedBox(height: 8),
             Align(
@@ -1530,7 +1586,7 @@ class _StudentGradeCard extends StatelessWidget {
               child: TextButton.icon(
                 onPressed: () => _showDetails(context),
                 icon: const Icon(Icons.calculate_outlined),
-                label: const Text('Details'),
+                label: Text(l10n.details),
               ),
             ),
           ],
@@ -1540,12 +1596,14 @@ class _StudentGradeCard extends StatelessWidget {
   }
 
   Future<void> _showDetails(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     final total = math.max(0, activitiesCount);
     final mapped = _displayGrade(_finalGrade, usesLetterGrades);
     return showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Grade details'),
+        title: Text(l10n.gradeDetails),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1553,23 +1611,30 @@ class _StudentGradeCard extends StatelessWidget {
             children: [
               Text(
                 total == 0
-                    ? 'Activities: no activities configured = 0.00'
-                    : 'Activities: ${_trimDouble(_submitted)} x '
-                        '${_trimDouble(activitiesPercentage)} / '
-                        '${_trimDouble(total.toDouble())} = '
-                        '${_activityGrade.toStringAsFixed(2)}',
+                    ? l10n.activitiesNotConfiguredCalculation
+                    : l10n.activitiesCalculation(
+                      _trimDouble(_submitted),
+                      _trimDouble(activitiesPercentage),
+                      _trimDouble(total.toDouble()),
+                      _activityGrade.toStringAsFixed(2),
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Test: ${_trimDouble(_test)} x '
-                '${_trimDouble(testPercentage)} / 10 = '
-                '${_testGrade.toStringAsFixed(2)}',
+                l10n.testCalculation(
+                  _trimDouble(_test),
+                  _trimDouble(testPercentage),
+                  _testGrade.toStringAsFixed(2),
+                ),
               ),
               const Divider(height: 24),
               Text(
-                'Final: ${_activityGrade.toStringAsFixed(2)} + '
-                '${_testGrade.toStringAsFixed(2)} = '
-                '${_finalGrade.toStringAsFixed(2)} ($mapped)',
+                l10n.finalGradeCalculation(
+                  _activityGrade.toStringAsFixed(2),
+                  _testGrade.toStringAsFixed(2),
+                  _finalGrade.toStringAsFixed(2),
+                  mapped,
+                ),
               ),
             ],
           ),
@@ -1577,7 +1642,7 @@ class _StudentGradeCard extends StatelessWidget {
         actions: [
           FilledButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('OK'),
+            child: Text(l10n.ok),
           ),
         ],
       ),

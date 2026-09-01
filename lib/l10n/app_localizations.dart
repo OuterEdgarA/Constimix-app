@@ -1592,6 +1592,248 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No graded subjects are available.'**
   String get noGradedSubjectsAvailable;
+
+  /// No description provided for @gradingTool.
+  ///
+  /// In en, this message translates to:
+  /// **'Grading tool'**
+  String get gradingTool;
+
+  /// No description provided for @subjectData.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject data'**
+  String get subjectData;
+
+  /// No description provided for @evaluationData.
+  ///
+  /// In en, this message translates to:
+  /// **'Evaluation data'**
+  String get evaluationData;
+
+  /// No description provided for @grading.
+  ///
+  /// In en, this message translates to:
+  /// **'Grading'**
+  String get grading;
+
+  /// No description provided for @assignedTeacher.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned teacher'**
+  String get assignedTeacher;
+
+  /// No description provided for @subjectName.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject name'**
+  String get subjectName;
+
+  /// No description provided for @evaluationType.
+  ///
+  /// In en, this message translates to:
+  /// **'Evaluation type'**
+  String get evaluationType;
+
+  /// No description provided for @finalEvaluation.
+  ///
+  /// In en, this message translates to:
+  /// **'Final evaluation'**
+  String get finalEvaluation;
+
+  /// No description provided for @activitiesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Activities count'**
+  String get activitiesCount;
+
+  /// No description provided for @enterZeroOrPositive.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter zero or a positive value.'**
+  String get enterZeroOrPositive;
+
+  /// No description provided for @customizeGradePercentage.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize grade weighting'**
+  String get customizeGradePercentage;
+
+  /// No description provided for @activitiesPercentage.
+  ///
+  /// In en, this message translates to:
+  /// **'Activities weighting'**
+  String get activitiesPercentage;
+
+  /// No description provided for @testPercentage.
+  ///
+  /// In en, this message translates to:
+  /// **'Test weighting'**
+  String get testPercentage;
+
+  /// No description provided for @percentagesMustAddToTen.
+  ///
+  /// In en, this message translates to:
+  /// **'The weightings must add up to 10.'**
+  String get percentagesMustAddToTen;
+
+  /// No description provided for @currentTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Current total: {total}'**
+  String currentTotal(String total);
+
+  /// No description provided for @showTable.
+  ///
+  /// In en, this message translates to:
+  /// **'Show table'**
+  String get showTable;
+
+  /// No description provided for @noStudentsInView.
+  ///
+  /// In en, this message translates to:
+  /// **'No students in this view'**
+  String get noStudentsInView;
+
+  /// No description provided for @saveGrades.
+  ///
+  /// In en, this message translates to:
+  /// **'Save grades'**
+  String get saveGrades;
+
+  /// No description provided for @downloadGradePdfTable.
+  ///
+  /// In en, this message translates to:
+  /// **'Download grade PDF table'**
+  String get downloadGradePdfTable;
+
+  /// No description provided for @ungradedStudents.
+  ///
+  /// In en, this message translates to:
+  /// **'Students without complete grades'**
+  String get ungradedStudents;
+
+  /// No description provided for @oneStudentIncompleteGrade.
+  ///
+  /// In en, this message translates to:
+  /// **'1 student does not have a complete valid grade.'**
+  String get oneStudentIncompleteGrade;
+
+  /// No description provided for @studentsIncompleteGrades.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} students do not have complete valid grades.'**
+  String studentsIncompleteGrades(int count);
+
+  /// No description provided for @keepGrading.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep grading'**
+  String get keepGrading;
+
+  /// No description provided for @continueSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue saving'**
+  String get continueSaving;
+
+  /// No description provided for @gradesSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Grades saved.'**
+  String get gradesSaved;
+
+  /// No description provided for @offlineGradesSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline draft saved and queued for upload.'**
+  String get offlineGradesSaved;
+
+  /// No description provided for @gradePdfDisplayOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Grade PDF table export is display only.'**
+  String get gradePdfDisplayOnly;
+
+  /// No description provided for @absences.
+  ///
+  /// In en, this message translates to:
+  /// **'Absences'**
+  String get absences;
+
+  /// No description provided for @submittedActivities.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted activities'**
+  String get submittedActivities;
+
+  /// No description provided for @maximumValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum {maximum}'**
+  String maximumValue(String maximum);
+
+  /// No description provided for @testGrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Test grade'**
+  String get testGrade;
+
+  /// No description provided for @useValueZeroToTen.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a value from 0 to 10.'**
+  String get useValueZeroToTen;
+
+  /// No description provided for @finalGrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Final grade'**
+  String get finalGrade;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @gradeDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Grade details'**
+  String get gradeDetails;
+
+  /// No description provided for @activitiesNotConfiguredCalculation.
+  ///
+  /// In en, this message translates to:
+  /// **'Activities: no activities configured = 0.00'**
+  String get activitiesNotConfiguredCalculation;
+
+  /// No description provided for @activitiesCalculation.
+  ///
+  /// In en, this message translates to:
+  /// **'Activities: {submitted} × {weight} / {total} = {result}'**
+  String activitiesCalculation(
+      String submitted, String weight, String total, String result);
+
+  /// No description provided for @testCalculation.
+  ///
+  /// In en, this message translates to:
+  /// **'Test: {test} × {weight} / 10 = {result}'**
+  String testCalculation(String test, String weight, String result);
+
+  /// No description provided for @finalGradeCalculation.
+  ///
+  /// In en, this message translates to:
+  /// **'Final: {activities} + {test} = {finalGrade} ({displayGrade})'**
+  String finalGradeCalculation(
+      String activities, String test, String finalGrade, String displayGrade);
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
 }
 
 class _AppLocalizationsDelegate

@@ -819,6 +819,142 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get noGradedSubjectsAvailable => 'No graded subjects are available.';
+
+  @override
+  String get gradingTool => 'Grading tool';
+
+  @override
+  String get subjectData => 'Subject data';
+
+  @override
+  String get evaluationData => 'Evaluation data';
+
+  @override
+  String get grading => 'Grading';
+
+  @override
+  String get assignedTeacher => 'Assigned teacher';
+
+  @override
+  String get subjectName => 'Subject name';
+
+  @override
+  String get evaluationType => 'Evaluation type';
+
+  @override
+  String get finalEvaluation => 'Final evaluation';
+
+  @override
+  String get activitiesCount => 'Activities count';
+
+  @override
+  String get enterZeroOrPositive => 'Enter zero or a positive value.';
+
+  @override
+  String get customizeGradePercentage => 'Customize grade weighting';
+
+  @override
+  String get activitiesPercentage => 'Activities weighting';
+
+  @override
+  String get testPercentage => 'Test weighting';
+
+  @override
+  String get percentagesMustAddToTen => 'The weightings must add up to 10.';
+
+  @override
+  String currentTotal(String total) {
+    return 'Current total: $total';
+  }
+
+  @override
+  String get showTable => 'Show table';
+
+  @override
+  String get noStudentsInView => 'No students in this view';
+
+  @override
+  String get saveGrades => 'Save grades';
+
+  @override
+  String get downloadGradePdfTable => 'Download grade PDF table';
+
+  @override
+  String get ungradedStudents => 'Students without complete grades';
+
+  @override
+  String get oneStudentIncompleteGrade =>
+      '1 student does not have a complete valid grade.';
+
+  @override
+  String studentsIncompleteGrades(int count) {
+    return '$count students do not have complete valid grades.';
+  }
+
+  @override
+  String get keepGrading => 'Keep grading';
+
+  @override
+  String get continueSaving => 'Continue saving';
+
+  @override
+  String get gradesSaved => 'Grades saved.';
+
+  @override
+  String get offlineGradesSaved => 'Offline draft saved and queued for upload.';
+
+  @override
+  String get gradePdfDisplayOnly => 'Grade PDF table export is display only.';
+
+  @override
+  String get absences => 'Absences';
+
+  @override
+  String get submittedActivities => 'Submitted activities';
+
+  @override
+  String maximumValue(String maximum) {
+    return 'Maximum $maximum';
+  }
+
+  @override
+  String get testGrade => 'Test grade';
+
+  @override
+  String get useValueZeroToTen => 'Use a value from 0 to 10.';
+
+  @override
+  String get finalGrade => 'Final grade';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get gradeDetails => 'Grade details';
+
+  @override
+  String get activitiesNotConfiguredCalculation =>
+      'Activities: no activities configured = 0.00';
+
+  @override
+  String activitiesCalculation(
+      String submitted, String weight, String total, String result) {
+    return 'Activities: $submitted × $weight / $total = $result';
+  }
+
+  @override
+  String testCalculation(String test, String weight, String result) {
+    return 'Test: $test × $weight / 10 = $result';
+  }
+
+  @override
+  String finalGradeCalculation(
+      String activities, String test, String finalGrade, String displayGrade) {
+    return 'Final: $activities + $test = $finalGrade ($displayGrade)';
+  }
+
+  @override
+  String get ok => 'OK';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -1628,7 +1764,7 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   String get passed => 'Aprobado';
 
   @override
-  String get constimixGradeReport => 'REPORTE DE CALIFICACIONES CONSTIMIX';
+  String get constimixGradeReport => 'REPORTE DE CALIFICACIONES';
 
   @override
   String pageOf(int page, int total) {
@@ -1638,4 +1774,143 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   @override
   String get noGradedSubjectsAvailable =>
       'No hay materias calificadas disponibles.';
+
+  @override
+  String get gradingTool => 'Herramienta de evaluación';
+
+  @override
+  String get subjectData => 'Datos de la materia';
+
+  @override
+  String get evaluationData => 'Datos de evaluación';
+
+  @override
+  String get grading => 'Calificación';
+
+  @override
+  String get assignedTeacher => 'Docente';
+
+  @override
+  String get subjectName => 'Materia';
+
+  @override
+  String get evaluationType => 'Tipo de evaluación';
+
+  @override
+  String get finalEvaluation => 'Evaluación final';
+
+  @override
+  String get activitiesCount => 'Número de actividades';
+
+  @override
+  String get enterZeroOrPositive => 'Ingresa cero o un valor positivo.';
+
+  @override
+  String get customizeGradePercentage => 'Personalizar evaluación';
+
+  @override
+  String get activitiesPercentage => 'Valor de actividades';
+
+  @override
+  String get testPercentage => 'Valor del examen';
+
+  @override
+  String get percentagesMustAddToTen => 'Las valuaciones deben sumar 10.';
+
+  @override
+  String currentTotal(String total) {
+    return 'Total actual: $total';
+  }
+
+  @override
+  String get showTable => 'Mostrar tabla';
+
+  @override
+  String get noStudentsInView => 'No hay estudiantes';
+
+  @override
+  String get saveGrades => 'Guardar calificaciones';
+
+  @override
+  String get downloadGradePdfTable =>
+      'Descargar tabla de calificaciones en PDF';
+
+  @override
+  String get ungradedStudents => 'Estudiantes con calificación incompleta';
+
+  @override
+  String get oneStudentIncompleteGrade =>
+      '1 estudiante no tiene una calificación válida completa.';
+
+  @override
+  String studentsIncompleteGrades(int count) {
+    return '$count estudiantes no tienen una calificación válida completa.';
+  }
+
+  @override
+  String get keepGrading => 'Seguir calificando';
+
+  @override
+  String get continueSaving => 'Continuar y guardar';
+
+  @override
+  String get gradesSaved => 'Calificaciones guardadas.';
+
+  @override
+  String get offlineGradesSaved =>
+      'El borrador sin conexión se guardó y quedó pendiente de sincronización.';
+
+  @override
+  String get gradePdfDisplayOnly =>
+      'La exportación de la tabla de calificaciones en PDF es solo demostrativa.';
+
+  @override
+  String get absences => 'Faltas';
+
+  @override
+  String get submittedActivities => 'Actividades entregadas';
+
+  @override
+  String maximumValue(String maximum) {
+    return 'Máximo $maximum';
+  }
+
+  @override
+  String get testGrade => 'Calificación del examen';
+
+  @override
+  String get useValueZeroToTen => 'Usa un valor de 0 a 10.';
+
+  @override
+  String get finalGrade => 'Calificación final';
+
+  @override
+  String get details => 'Detalles';
+
+  @override
+  String get gradeDetails => 'Detalle de la calificación';
+
+  @override
+  String get activitiesNotConfiguredCalculation =>
+      'Actividades: no hay actividades configuradas = 0.00';
+
+  @override
+  String activitiesCalculation(
+      String submitted, String weight, String total, String result) {
+    return 'Actividades: $submitted × $weight / $total = $result';
+  }
+
+  @override
+  String testCalculation(String test, String weight, String result) {
+    return 'Examen: $test × $weight / 10 = $result';
+  }
+
+  @override
+  String finalGradeCalculation(
+      String activities, String test, String finalGrade, String displayGrade) {
+    return 'Final: $activities + $test = $finalGrade ($displayGrade)';
+  }
+
+  @override
+  String get ok => 'Aceptar';
 }
